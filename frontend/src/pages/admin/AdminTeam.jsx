@@ -5,6 +5,15 @@ import { toast } from 'react-toastify';
 import AdminLayout from '../../components/admin/AdminLayout';
 
 const AdminTeam = () => {
+  const availableSkills = [
+    'React', 'Vue.js', 'Angular', 'Node.js', 'Express.js', 'Python', 'Django', 'Flask',
+    'JavaScript', 'TypeScript', 'HTML', 'CSS', 'Tailwind CSS', 'Bootstrap', 'SASS',
+    'MongoDB', 'MySQL', 'PostgreSQL', 'Firebase', 'AWS', 'Azure', 'Docker', 'Kubernetes',
+    'Git', 'GitHub', 'GitLab', 'Figma', 'Adobe XD', 'Photoshop', 'Illustrator',
+    'UI/UX Design', 'Graphic Design', 'Web Design', 'Mobile Design', 'Prototyping',
+    'User Research', 'Wireframing', 'Testing', 'DevOps', 'CI/CD', 'Linux', 'Windows'
+  ];
+
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -15,7 +24,7 @@ const AdminTeam = () => {
     role: '',
     bio: '',
     avatar: '',
-    skills: '',
+    skills: [],
     social: {
       linkedin: '',
       github: '',
@@ -96,7 +105,7 @@ const AdminTeam = () => {
     try {
       const memberData = {
         ...form,
-        skills: form.skills.split(',').map(s => s.trim())
+        skills: form.skills
       };
 
       if (editingMember) {
@@ -122,7 +131,7 @@ const AdminTeam = () => {
       role: member.role,
       bio: member.bio,
       avatar: member.avatar,
-      skills: member.skills.join(', '),
+      skills: member.skills || [],
       social: member.social,
       order: member.order
     });
@@ -151,7 +160,7 @@ const AdminTeam = () => {
       role: '',
       bio: '',
       avatar: '',
-      skills: '',
+      skills: [],
       social: {
         linkedin: '',
         github: '',
@@ -305,14 +314,38 @@ const AdminTeam = () => {
                   required
                 />
 
-                <input
-                  type="text"
-                  placeholder="Skills (comma separated)"
-                  value={form.skills}
-                  onChange={(e) => setForm({...form, skills: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
+                {/* Skills Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Skills</label>
+                  <div className="border rounded-lg p-3 max-h-40 overflow-y-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {availableSkills.map((skill) => {
+                        const isSelected = form.skills.includes(skill);
+                        return (
+                          <button
+                            key={skill}
+                            type="button"
+                            onClick={() => {
+                              if (isSelected) {
+                                setForm({...form, skills: form.skills.filter(s => s !== skill)});
+                              } else {
+                                setForm({...form, skills: [...form.skills, skill]});
+                              }
+                            }}
+                            className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                              isSelected
+                                ? 'bg-indigo-600 text-white'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                          >
+                            {skill}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Click skills to select/deselect. Selected: {form.skills.length}</p>
+                </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
@@ -331,13 +364,17 @@ const AdminTeam = () => {
                   />
                 </div>
 
-                <input
-                  type="number"
-                  placeholder="Display Order"
-                  value={form.order}
-                  onChange={(e) => setForm({...form, order: parseInt(e.target.value) || 0})}
-                  className="w-full px-3 py-2 border rounded-lg"
-                />
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Display Order</label>
+                  <input
+                    type="number"
+                    placeholder="Display order (lower numbers appear first)"
+                    value={form.order}
+                    onChange={(e) => setForm({...form, order: parseInt(e.target.value) || 0})}
+                    className="w-full px-3 py-2 border rounded-lg"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Lower numbers appear first (e.g., 1, 2, 3...)</p>
+                </div>
 
                 <div className="flex gap-4">
                   <button
