@@ -13,6 +13,7 @@ const APIResponse = require('../utils/APIResponse')
 const { adminAuth } = require('../middleware/auth')
 const multer = require('multer')
 
+router.get('/settings', settingsController.getSettings)
 // Apply admin auth to all routes
 router.use(adminAuth)
 
@@ -111,7 +112,7 @@ router.put('/projects/:id', uploadService.getUploadMiddleware(), projectControll
 router.delete('/projects/:id', projectController.deleteProject)
 
 // Settings routes
-router.get('/settings', settingsController.getSettings)
+
 router.put('/settings', settingsController.updateSettings)
 
 // Upload route for immediate image uploads

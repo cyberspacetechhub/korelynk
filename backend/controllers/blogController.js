@@ -40,7 +40,7 @@ const createBlog = async (req, res) => {
         APIResponse.success(res, blog, 'Blog created successfully', 201);
     } catch (error) {
         console.error('Error creating blog:', error);
-        APIResponse.error(res, 'Failed to create blog', 500);
+        APIResponse.error(res, error.message || 'Failed to create blog', 500);
     }
 };
 

@@ -27,7 +27,11 @@ router.post('/', adminAuth, async (req, res) => {
         APIResponse.success(res, category, 'Category created successfully', 201);
     } catch (error) {
         console.error('Error creating category:', error);
-        APIResponse.error(res, 'Failed to create category', 500);
+        if (error.code === 11000) {
+            APIResponse.error(res, 'Category name already exists', 400);
+        } else {
+            APIResponse.error(res, error.message || 'Failed to create category', 500);
+        }
     }
 });
 
