@@ -61,6 +61,8 @@ app.use('/api/services', require('./routes/services'))
 app.use('/api/testimonials', require('./routes/testimonials'))
 app.use('/api/feedback', require('./routes/feedback'))
 app.use('/api/team', require('./routes/team'))
+app.use('/api/blog', require('./routes/blog'))
+app.use('/api/categories', require('./routes/category'))
 
 // Admin routes (protected)
 app.use('/api/admin', require('./routes/admin'))

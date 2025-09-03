@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X } from 'lucide-react';
+import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag } from 'lucide-react';
 
 const AdminAside = ({ isOpen, onClose }) => {
   const sidebarRef = useRef(null);
@@ -9,6 +9,8 @@ const AdminAside = ({ isOpen, onClose }) => {
     { path: '/admin', icon: TrendingUp, label: 'Overview', exact: true },
     { path: '/admin/contacts', icon: MessageSquare, label: 'Contacts' },
     { path: '/admin/projects', icon: FolderOpen, label: 'Projects' },
+    { path: '/admin/blog', icon: BookOpen, label: 'Blog' },
+    { path: '/admin/categories', icon: Tag, label: 'Categories' },
     { path: '/admin/feedback', icon: Star, label: 'Feedback' },
     { path: '/admin/team', icon: Users, label: 'Team' },
     { path: '/admin/newsletter', icon: Mail, label: 'Newsletter' },

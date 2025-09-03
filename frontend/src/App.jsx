@@ -15,6 +15,9 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import Feedback from './components/home/Feedback';
+import Blog from './pages/Blog';
+import BlogDetail from './pages/BlogDetail';
+import Careers from './pages/Careers';
 import AdminLogin from './pages/AdminLogin';
 
 // Admin Pages
@@ -25,6 +28,9 @@ import AdminSettings from './pages/admin/AdminSettings';
 import AdminNewsletter from './pages/admin/AdminNewsletter';
 import AdminTeam from './pages/admin/AdminTeam';
 import AdminFeedback from './pages/admin/AdminFeedback';
+import AdminBlog from './pages/admin/AdminBlog';
+import AdminCategories from './pages/admin/AdminCategories';
+import AdminBlogForm from './pages/admin/AdminBlogForm';
 
 // Auth
 import { AuthProvider } from './context/AuthContext';
@@ -111,6 +117,33 @@ function App() {
               <Footer />
             </div>
           } />
+          <Route path="/blog" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">
+                <Blog />
+              </main>
+              <Footer />
+            </div>
+          } />
+          <Route path="/blog/:slug" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">
+                <BlogDetail />
+              </main>
+              <Footer />
+            </div>
+          } />
+          <Route path="/careers" element={
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">
+                <Careers />
+              </main>
+              <Footer />
+            </div>
+          } />
           
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -147,6 +180,26 @@ function App() {
             <Route path="/admin/feedback" element={
               <ProtectedRoute>
                 <AdminFeedback />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog" element={
+              <ProtectedRoute>
+                <AdminBlog />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog/new" element={
+              <ProtectedRoute>
+                <AdminBlogForm />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blog/edit/:id" element={
+              <ProtectedRoute>
+                <AdminBlogForm />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/categories" element={
+              <ProtectedRoute>
+                <AdminCategories />
               </ProtectedRoute>
             } />
           </Route>
