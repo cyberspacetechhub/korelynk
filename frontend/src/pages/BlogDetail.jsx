@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Calendar, User, Eye, Tag, MessageCircle } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Calendar, User, Eye, Tag, MessageCircle, ArrowLeft } from 'lucide-react';
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
+import ShareButton from '../components/ShareButton';
+import SEOHead from '../components/SEOHead';
 
 const BlogDetail = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [commentForm, setCommentForm] = useState({
@@ -78,9 +81,30 @@ const BlogDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
-      <div className="container mx-auto px-6">
-        <article className="max-w-4xl mx-auto">
+    <>
+      <SEOHead 
+        title={blog.title}
+        description={blog.excerpt || blog.title}
+        image={blog.featuredImage}
+        url={`/blog/${blog.slug}`}
+        author={blog.author?.fullname}
+        publishedTime={blog.publishedAt}
+        tags={blog.tags}
+      />
+      <div className="min-h-screen bg-gray-50 py-16">
+        <div className="container mx-auto px-6">
+          <article className="max-w-4xl mx-auto">
+          {/* Navigation */}
+          <div className="mb-6">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              Back to previous page
+            </button>
+          </div>
+          
           {/* Header */}
           <header className="mb-8">
             {blog.category && (
@@ -112,6 +136,18 @@ const BlogDetail = () => {
               <div className="flex items-center">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 {blog.comments?.length || 0} comments
+              </div>
+            </div>
+            
+            <div className="mb-6">
+              <div className="flex items-center gap-4">
+                <span className="text-sm text-gray-600">Share this article:</span>
+                <ShareButton 
+                  url={window.location.href}
+                  title={blog.title}
+                  description={blog.excerpt || blog.title}
+                  image={blog.featuredImage}
+                />
               </div>
             </div>
 
@@ -219,9 +255,10 @@ const BlogDetail = () => {
               ))}
             </div>
           </div>
-        </article>
+          </article>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 const Newsletter = require('../models/Newsletter');
 const emailService = require('../services/emailService');
 const APIResponse = require('../utils/APIResponse');
+const { createNotification } = require('../services/notificationService');
 
 // Subscribe to newsletter
 const subscribe = async (req, res) => {
@@ -33,7 +34,16 @@ const subscribe = async (req, res) => {
       name: name || ''
     });
 
-    await subscription.save();
+    const savedSubscription = await subscription.save();
+    
+    // Create notification
+    await createNotification(
+      'New Newsletter Subscriber',
+      `${name || email} subscribed to the newsletter`,
+      'newsletter',
+      savedSubscription._id,
+      'low'
+    );
     
     // Send welcome email
     try {
@@ -42,7 +52,7 @@ const subscribe = async (req, res) => {
       console.error('Failed to send welcome email:', emailError);
     }
     
-    return APIResponse.success(res, subscription, 'Successfully subscribed to newsletter!', 201);
+    return APIResponse.success(res, savedSubscription, 'Successfully subscribed to newsletter!', 201);
 
   } catch (error) {
     console.error('Newsletter subscription error:', error);

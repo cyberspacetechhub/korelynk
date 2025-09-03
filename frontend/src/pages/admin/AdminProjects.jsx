@@ -2,9 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Upload, Image } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
-import AdminLayout from '../../components/admin/AdminLayout';
+
+import DeleteModal from '../../components/admin/DeleteModal';
 
 const AdminProjects = () => {
+  const availableTechnologies = [
+    'React', 'Vue.js', 'Angular', 'Next.js', 'Nuxt.js', 'Svelte',
+    'Node.js', 'Express.js', 'Python', 'Django', 'Flask', 'FastAPI',
+    'JavaScript', 'TypeScript', 'HTML', 'CSS', 'Tailwind CSS', 'Bootstrap', 'SASS',
+    'MongoDB', 'MySQL', 'PostgreSQL', 'Firebase', 'Supabase', 'Redis',
+    'AWS', 'Azure', 'Google Cloud', 'Vercel', 'Netlify', 'Docker', 'Kubernetes',
+    'Git', 'GitHub', 'GitLab', 'Figma', 'Adobe XD', 'Photoshop',
+    'React Native', 'Flutter', 'Swift', 'Kotlin', 'Ionic',
+    'GraphQL', 'REST API', 'Socket.io', 'WebRTC', 'PWA',
+    'Stripe', 'PayPal', 'Shopify', 'WooCommerce', 'Magento'
+  ];
+
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -14,7 +27,7 @@ const AdminProjects = () => {
     category: 'web',
     description: '',
     image: '',
-    technologies: '',
+    technologies: [],
     liveUrl: '',
     githubUrl: '',
     featured: false
@@ -22,6 +35,7 @@ const AdminProjects = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
   const [imageUploading, setImageUploading] = useState(false);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, project: null, loading: false });
 
   useEffect(() => {
     fetchProjects();
@@ -49,7 +63,7 @@ const AdminProjects = () => {
         category: form.category,
         description: form.description,
         image: form.image,
-        technologies: form.technologies.split(',').map(t => t.trim()),
+        technologies: form.technologies,
         liveUrl: form.liveUrl,
         githubUrl: form.githubUrl,
         featured: form.featured
@@ -82,7 +96,7 @@ const AdminProjects = () => {
       category: 'web',
       description: '',
       image: '',
-      technologies: '',
+      technologies: [],
       liveUrl: '',
       githubUrl: '',
       featured: false
@@ -124,7 +138,7 @@ const AdminProjects = () => {
       category: project.category,
       description: project.description,
       image: project.image,
-      technologies: project.technologies.join(', '),
+      technologies: project.technologies || [],
       liveUrl: project.liveUrl,
       githubUrl: project.githubUrl,
       featured: project.featured
@@ -134,32 +148,38 @@ const AdminProjects = () => {
     setShowForm(true);
   };
 
-  const handleDelete = async (projectId) => {
-    if (window.confirm('Are you sure you want to delete this project?')) {
-      try {
-        await axios.delete(`/admin/projects/${projectId}`);
-        toast.success('Project deleted successfully');
-        fetchProjects();
-      } catch (error) {
-        console.error('Error deleting project:', error);
-        toast.error('Failed to delete project');
-      }
+  const handleDeleteClick = (project) => {
+    setDeleteModal({ isOpen: true, project, loading: false });
+  };
+
+  const handleDeleteConfirm = async () => {
+    setDeleteModal(prev => ({ ...prev, loading: true }));
+    try {
+      await axios.delete(`/admin/projects/${deleteModal.project._id}`);
+      toast.success('Project deleted successfully');
+      setDeleteModal({ isOpen: false, project: null, loading: false });
+      fetchProjects();
+    } catch (error) {
+      console.error('Error deleting project:', error);
+      toast.error('Failed to delete project');
+      setDeleteModal(prev => ({ ...prev, loading: false }));
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModal({ isOpen: false, project: null, loading: false });
   };
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
     );
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Projects</h2>
@@ -206,7 +226,7 @@ const AdminProjects = () => {
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => handleDelete(project._id)}
+                      onClick={() => handleDeleteClick(project)}
                       className="text-red-600 hover:text-red-800"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -308,14 +328,38 @@ const AdminProjects = () => {
                     </div>
                   </div>
                 </div>
-                <input
-                  type="text"
-                  placeholder="Technologies (comma separated)"
-                  value={form.technologies}
-                  onChange={(e) => setForm({...form, technologies: e.target.value})}
-                  className="w-full px-3 py-2 border rounded-lg"
-                  required
-                />
+                {/* Technologies Selection */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Technologies</label>
+                  <div className="border rounded-lg p-3 max-h-40 overflow-y-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {availableTechnologies.map((tech) => {
+                        const isSelected = form.technologies.includes(tech);
+                        return (
+                          <button
+                            key={tech}
+                            type="button"
+                            onClick={() => {
+                              if (isSelected) {
+                                setForm({...form, technologies: form.technologies.filter(t => t !== tech)});
+                              } else {
+                                setForm({...form, technologies: [...form.technologies, tech]});
+                              }
+                            }}
+                            className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                              isSelected
+                                ? 'bg-indigo-600 text-white'
+                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                            }`}
+                          >
+                            {tech}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Click technologies to select/deselect. Selected: {form.technologies.length}</p>
+                </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <input
                     type="url"
@@ -357,8 +401,17 @@ const AdminProjects = () => {
             </div>
           </div>
         )}
-      </div>
-    </AdminLayout>
+      
+      <DeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Project"
+        message="Are you sure you want to delete this project? This action cannot be undone."
+        itemName={deleteModal.project?.title}
+        loading={deleteModal.loading}
+      />
+    </div>
   );
 };
 

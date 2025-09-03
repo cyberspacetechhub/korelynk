@@ -1,5 +1,8 @@
 const Blog = require('../models/Blog');
 const Category = require('../models/Category');
+const Newsletter = require('../models/Newsletter');
+const emailService = require('./emailService');
+const { createNotification } = require('./notificationService');
 
 class BlogService {
     async getAllBlogs(filters = {}, pagination = {}) {
@@ -98,21 +101,47 @@ class BlogService {
         });
         
         await blog.save();
-        return blog.populate('author', 'fullname email').populate('category', 'name slug color');
+        await blog.populate('author', 'fullname email');
+        await blog.populate('category', 'name slug color');
+        const populatedBlog = blog;
+        
+        // Send newsletter emails and create notification if blog is published
+        if (blogData.status === 'published') {
+            this.sendNewsletterNotification(populatedBlog);
+            await createNotification(
+                'New Blog Published',
+                `"${blogData.title}" has been published`,
+                'blog',
+                populatedBlog._id,
+                'medium'
+            );
+        }
+        
+        return populatedBlog;
     }
 
     async updateBlog(blogId, updateData) {
+        const originalBlog = await Blog.findById(blogId);
+        
         if (updateData.title) {
             updateData.slug = this.generateSlug(updateData.title);
         }
         
-        if (updateData.status === 'published' && !updateData.publishedAt) {
+        const wasPublished = originalBlog?.status === 'published';
+        const isNowPublished = updateData.status === 'published';
+        
+        if (isNowPublished && !updateData.publishedAt) {
             updateData.publishedAt = new Date();
         }
         
         const blog = await Blog.findByIdAndUpdate(blogId, updateData, { new: true })
             .populate('author', 'fullname email')
             .populate('category', 'name slug color');
+        
+        // Send newsletter emails if blog is newly published
+        if (!wasPublished && isNowPublished) {
+            this.sendNewsletterNotification(blog);
+        }
             
         return blog;
     }
@@ -141,6 +170,18 @@ class BlogService {
         return await Blog.findById(blogId)
             .populate('author', 'fullname email')
             .populate('category', 'name slug color');
+    }
+
+    async sendNewsletterNotification(blog) {
+        try {
+            const activeSubscribers = await Newsletter.find({ status: 'active' });
+            if (activeSubscribers.length > 0) {
+                await emailService.sendNewBlogNotification(blog, activeSubscribers);
+                console.log(`Newsletter sent to ${activeSubscribers.length} subscribers for blog: ${blog.title}`);
+            }
+        } catch (error) {
+            console.error('Error sending newsletter notification:', error);
+        }
     }
 
     generateSlug(title) {

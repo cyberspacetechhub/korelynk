@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Upload, User } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
-import AdminLayout from '../../components/admin/AdminLayout';
+
+import DeleteModal from '../../components/admin/DeleteModal';
 
 const AdminTeam = () => {
   const availableSkills = [
@@ -34,6 +35,7 @@ const AdminTeam = () => {
     },
     order: 0
   });
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, member: null, loading: false });
 
   useEffect(() => {
     fetchTeamMembers();
@@ -138,17 +140,26 @@ const AdminTeam = () => {
     setShowForm(true);
   };
 
-  const handleDelete = async (memberId) => {
-    if (window.confirm('Are you sure you want to delete this team member?')) {
-      try {
-        await axios.delete(`/admin/team/${memberId}`);
-        toast.success('Team member deleted successfully');
-        fetchTeamMembers();
-      } catch (error) {
-        console.error('Error deleting team member:', error);
-        toast.error('Failed to delete team member');
-      }
+  const handleDeleteClick = (member) => {
+    setDeleteModal({ isOpen: true, member, loading: false });
+  };
+
+  const handleDeleteConfirm = async () => {
+    setDeleteModal(prev => ({ ...prev, loading: true }));
+    try {
+      await axios.delete(`/admin/team/${deleteModal.member._id}`);
+      toast.success('Team member deleted successfully');
+      setDeleteModal({ isOpen: false, member: null, loading: false });
+      fetchTeamMembers();
+    } catch (error) {
+      console.error('Error deleting team member:', error);
+      toast.error('Failed to delete team member');
+      setDeleteModal(prev => ({ ...prev, loading: false }));
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModal({ isOpen: false, member: null, loading: false });
   };
 
   const resetForm = () => {
@@ -174,17 +185,14 @@ const AdminTeam = () => {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
     );
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div className="flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Team Members</h2>
@@ -232,7 +240,7 @@ const AdminTeam = () => {
                     <Edit className="w-4 h-4" />
                   </button>
                   <button
-                    onClick={() => handleDelete(member._id)}
+                    onClick={() => handleDeleteClick(member)}
                     className="text-red-600 hover:text-red-800"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -395,8 +403,17 @@ const AdminTeam = () => {
             </div>
           </div>
         )}
-      </div>
-    </AdminLayout>
+      
+      <DeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Team Member"
+        message="Are you sure you want to delete this team member? This action cannot be undone."
+        itemName={deleteModal.member?.name}
+        loading={deleteModal.loading}
+      />
+    </div>
   );
 };
 

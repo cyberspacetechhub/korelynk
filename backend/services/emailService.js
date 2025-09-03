@@ -72,6 +72,38 @@ class EmailService {
 
     return await this.transporter.sendMail(welcomeEmail)
   }
+
+  async sendNewBlogNotification(blog, subscribers) {
+    if (!subscribers || subscribers.length === 0) return
+
+    const blogUrl = `${process.env.FRONTEND_URL}/blog/${blog.slug}`
+    const unsubscribeUrl = `${process.env.FRONTEND_URL}/newsletter/unsubscribe`
+
+    const emailPromises = subscribers.map(subscriber => {
+      const emailContent = {
+        from: process.env.EMAIL_USER,
+        to: subscriber.email,
+        subject: `New Blog Post: ${blog.title}`,
+        html: `
+          <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+            <h2 style="color: #4f46e5;">New Blog Post Published!</h2>
+            <h3>${blog.title}</h3>
+            ${blog.featuredImage ? `<img src="${blog.featuredImage}" alt="${blog.title}" style="max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0;">` : ''}
+            <p>${blog.excerpt || blog.content?.substring(0, 200) + '...' || ''}</p>
+            <a href="${blogUrl}" style="display: inline-block; background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 16px 0;">Read Full Article</a>
+            <hr style="margin: 32px 0; border: none; border-top: 1px solid #e5e7eb;">
+            <p style="font-size: 12px; color: #6b7280;">
+              You're receiving this because you subscribed to our newsletter.<br>
+              <a href="${unsubscribeUrl}?email=${subscriber.email}" style="color: #6b7280;">Unsubscribe</a>
+            </p>
+          </div>
+        `
+      }
+      return this.transporter.sendMail(emailContent)
+    })
+
+    return await Promise.allSettled(emailPromises)
+  }
 }
 
 module.exports = new EmailService()

@@ -6,6 +6,7 @@ const settingsController = require('../controllers/settingsController')
 const teamController = require('../controllers/teamController')
 const uploadService = require('../services/uploadService')
 const { getAllFeedback, updateFeedbackStatus } = require('../controllers/feedbackController')
+const { updateProfile } = require('../controllers/authController')
 const Newsletter = require('../models/Newsletter')
 const Project = require('../models/Project')
 const Feedback = require('../models/Feedback')
@@ -60,6 +61,22 @@ router.get('/contacts', async (req, res) => {
   } catch (error) {
     console.error('Error fetching contacts:', error)
     APIResponse.error(res, 'Failed to fetch contacts', 500, 'FETCH_ERROR')
+  }
+})
+
+// GET /api/admin/contacts/:id - Get single contact details
+router.get('/contacts/:id', async (req, res) => {
+  try {
+    const contact = await contactService.getContactById(req.params.id)
+    
+    if (!contact) {
+      return APIResponse.error(res, 'Contact not found', 404, 'CONTACT_NOT_FOUND')
+    }
+    
+    APIResponse.success(res, contact, 'Contact retrieved successfully')
+  } catch (error) {
+    console.error('Error fetching contact:', error)
+    APIResponse.error(res, 'Failed to fetch contact', 500, 'FETCH_ERROR')
   }
 })
 
@@ -157,5 +174,8 @@ router.delete('/team/:id', teamController.deleteTeamMember)
 // Feedback routes
 router.get('/feedback', getAllFeedback)
 router.put('/feedback/:id', updateFeedbackStatus)
+
+// Profile routes
+router.put('/profile', updateProfile)
 
 module.exports = router

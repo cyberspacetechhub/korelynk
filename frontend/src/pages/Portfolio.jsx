@@ -145,21 +145,21 @@ const Portfolio = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-20 bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="flex items-center justify-center min-h-screen pt-20 bg-gray-50">
+        <div className="w-12 h-12 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+      <section className="py-20 text-white bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
+        <div className="container px-6 mx-auto text-center">
+          <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
             Our Portfolio
           </h1>
-          <p className="text-xl lg:text-2xl text-indigo-100 max-w-3xl mx-auto">
+          <p className="max-w-3xl mx-auto text-xl text-indigo-100 lg:text-2xl">
             Showcasing our best work and successful projects across various industries
           </p>
         </div>
@@ -167,9 +167,9 @@ const Portfolio = () => {
 
       {/* Featured Projects */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900">
               Featured Projects
             </h2>
             <p className="text-xl text-gray-600">
@@ -177,28 +177,28 @@ const Portfolio = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid gap-8 lg:grid-cols-3">
             {featuredProjects.map((project) => (
               <div key={project._id || project.id} className="group hover-lift">
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="overflow-hidden bg-white shadow-lg rounded-xl">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover w-full h-64 transition-transform duration-300 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/50 to-transparent group-hover:opacity-100">
+                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
                         <a
                           href={project.liveUrl}
-                          className="bg-white text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
                           title="View Live"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
                         <a
                           href={project.githubUrl}
-                          className="bg-white text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
                           title="View Code"
                         >
                           <Github className="w-4 h-4" />
@@ -207,17 +207,17 @@ const Portfolio = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="mb-3 text-xl font-bold text-gray-900">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">
+                    <p className="mb-4 text-gray-600 line-clamp-3">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech, idx) => (
                         <span
                           key={idx}
-                          className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm"
+                          className="px-3 py-1 text-sm text-indigo-800 bg-indigo-100 rounded-full"
                         >
                           {tech}
                         </span>
@@ -233,12 +233,12 @@ const Portfolio = () => {
 
       {/* All Projects with Filter */}
       <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900">
               All Projects
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="mb-8 text-xl text-gray-600">
               Browse through our complete portfolio
             </p>
 
@@ -262,28 +262,28 @@ const Portfolio = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.map((project) => (
               <div key={project._id || project.id} className="group hover-lift">
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="overflow-hidden bg-white shadow-lg rounded-xl">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover w-full h-48 transition-transform duration-300 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/50 to-transparent group-hover:opacity-100">
+                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
                         <a
                           href={project.liveUrl}
-                          className="bg-white text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
                           title="View Live"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </a>
                         <a
                           href={project.githubUrl}
-                          className="bg-white text-gray-900 p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
                           title="View Code"
                         >
                           <Github className="w-4 h-4" />
@@ -297,25 +297,25 @@ const Portfolio = () => {
                         {project.title}
                       </h3>
                       {project.featured && (
-                        <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">
+                        <span className="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-100 rounded-full">
                           Featured
                         </span>
                       )}
                     </div>
-                    <p className="text-gray-600 mb-4 text-sm line-clamp-3">
+                    <p className="mb-4 text-sm text-gray-600 line-clamp-3">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 3).map((tech, idx) => (
                         <span
                           key={idx}
-                          className="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs"
+                          className="px-2 py-1 text-xs text-indigo-800 bg-indigo-100 rounded-full"
                         >
                           {tech}
                         </span>
                       ))}
                       {project.technologies.length > 3 && (
-                        <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-full text-xs">
+                        <span className="px-2 py-1 text-xs text-gray-600 bg-gray-100 rounded-full">
                           +{project.technologies.length - 3} more
                         </span>
                       )}
@@ -327,8 +327,8 @@ const Portfolio = () => {
           </div>
 
           {filteredProjects.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
+            <div className="py-12 text-center">
+              <p className="text-lg text-gray-500">
                 No projects found in this category.
               </p>
             </div>
@@ -337,23 +337,23 @@ const Portfolio = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-indigo-600 text-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+      <section className="py-20 text-white bg-indigo-600">
+        <div className="container px-6 mx-auto">
+          <div className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
             <div>
-              <div className="text-4xl lg:text-5xl font-bold mb-2">50+</div>
+              <div className="mb-2 text-4xl font-bold lg:text-5xl">50+</div>
               <div className="text-indigo-200">Projects Completed</div>
             </div>
             <div>
-              <div className="text-4xl lg:text-5xl font-bold mb-2">30+</div>
+              <div className="mb-2 text-4xl font-bold lg:text-5xl">30+</div>
               <div className="text-indigo-200">Happy Clients</div>
             </div>
             <div>
-              <div className="text-4xl lg:text-5xl font-bold mb-2">15+</div>
+              <div className="mb-2 text-4xl font-bold lg:text-5xl">15+</div>
               <div className="text-indigo-200">Technologies</div>
             </div>
             <div>
-              <div className="text-4xl lg:text-5xl font-bold mb-2">99%</div>
+              <div className="mb-2 text-4xl font-bold lg:text-5xl">99%</div>
               <div className="text-indigo-200">Success Rate</div>
             </div>
           </div>
@@ -361,17 +361,17 @@ const Portfolio = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">
+      <section className="py-20 text-white bg-gradient-to-r from-purple-600 to-pink-600">
+        <div className="container px-6 mx-auto text-center">
+          <h2 className="mb-6 text-4xl font-bold">
             Ready to Start Your Project?
           </h2>
-          <p className="text-xl mb-8 text-purple-100 max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto mb-8 text-xl text-purple-100">
             Let's create something amazing together. Contact us to discuss your project requirements.
           </p>
-          <button className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300 inline-flex items-center text-lg">
+          <button className="inline-flex items-center px-8 py-4 text-lg font-semibold text-purple-600 transition-all duration-300 bg-white rounded-lg hover:bg-purple-50">
             Start Your Project
-            <ArrowRight className="ml-2 w-5 h-5" />
+            <ArrowRight className="w-5 h-5 ml-2" />
           </button>
         </div>
       </section>

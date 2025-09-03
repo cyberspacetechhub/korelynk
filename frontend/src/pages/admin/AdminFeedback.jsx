@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Star, CheckCircle, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';
-import AdminLayout from '../../components/admin/AdminLayout';
+
 
 const AdminFeedback = () => {
   const [statusFilter, setStatusFilter] = useState('all');
@@ -43,19 +43,16 @@ const AdminFeedback = () => {
 
   if (isLoading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center py-12">
-          <div className="w-8 h-8 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex items-center justify-center py-12">
+        <div className="w-8 h-8 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
+      </div>
     );
   }
 
   const feedback = feedbackData?.feedback || [];
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Feedback Management</h2>
@@ -177,8 +174,7 @@ const AdminFeedback = () => {
             </div>
           )}
         </div>
-      </div>
-    </AdminLayout>
+    </div>
   );
 };
 

@@ -127,13 +127,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser);
+  };
+
   const value = {
     isAuthenticated,
     user,
     login,
     logout,
     loading,
-    refreshAccessToken
+    refreshAccessToken,
+    updateUser
   };
 
   return (

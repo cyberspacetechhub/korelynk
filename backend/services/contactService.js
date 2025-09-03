@@ -1,4 +1,5 @@
 const Contact = require('../models/Contact')
+const { createNotification } = require('./notificationService')
 
 class ContactService {
   async getAllContacts(page = 1, limit = 10) {
@@ -18,7 +19,18 @@ class ContactService {
 
   async createContact(contactData) {
     const contact = new Contact(contactData)
-    return await contact.save()
+    const savedContact = await contact.save()
+    
+    // Create notification
+    await createNotification(
+      'New Contact Message',
+      `${contactData.name} sent a message: ${contactData.subject}`,
+      'contact',
+      savedContact._id,
+      'high'
+    )
+    
+    return savedContact
   }
 
   async updateContactStatus(id, status) {
@@ -35,6 +47,10 @@ class ContactService {
 
   async getContactStats() {
     return await Contact.countDocuments()
+  }
+
+  async getContactById(id) {
+    return await Contact.findById(id)
   }
 }
 

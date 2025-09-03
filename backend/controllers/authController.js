@@ -186,10 +186,65 @@ const logout = async (req, res) => {
   }
 }
 
+// Update profile
+const updateProfile = async (req, res) => {
+  try {
+    const { fullname, email, phone, address, currentPassword, newPassword } = req.body
+    const userId = req.user.id
+
+    const user = await User.findById(userId)
+    if (!user) {
+      return APIResponse.error(res, 'User not found', 404, 'USER_NOT_FOUND')
+    }
+
+    // If changing password, verify current password
+    if (newPassword) {
+      if (!currentPassword) {
+        return APIResponse.error(res, 'Current password is required', 400, 'CURRENT_PASSWORD_REQUIRED')
+      }
+      
+      const isCurrentPasswordValid = await user.comparePassword(currentPassword)
+      if (!isCurrentPasswordValid) {
+        return APIResponse.error(res, 'Current password is incorrect', 400, 'INVALID_CURRENT_PASSWORD')
+      }
+      
+      user.password = newPassword
+    }
+
+    // Update other fields
+    if (fullname) user.fullname = fullname
+    if (email) user.email = email
+    if (phone !== undefined) user.phone = phone
+    if (address !== undefined) user.address = address
+
+    await user.save()
+
+    // Return updated user without password
+    const updatedUser = await User.findById(userId).select('-password')
+    
+    APIResponse.success(res, {
+      id: updatedUser._id,
+      fullname: updatedUser.fullname,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      address: updatedUser.address,
+      role: updatedUser.role,
+      permissions: updatedUser.permissions || []
+    }, 'Profile updated successfully')
+  } catch (error) {
+    console.error('Update profile error:', error)
+    if (error.code === 11000) {
+      return APIResponse.error(res, 'Email already exists', 400, 'EMAIL_EXISTS')
+    }
+    APIResponse.error(res, 'Failed to update profile', 500, 'UPDATE_PROFILE_ERROR')
+  }
+}
+
 module.exports = {
   login,
   registerAdmin,
   getCurrentUser,
   refreshToken,
-  logout
+  logout,
+  updateProfile
 }

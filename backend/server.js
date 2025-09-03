@@ -66,6 +66,7 @@ app.use('/api/categories', require('./routes/category'))
 
 // Admin routes (protected)
 app.use('/api/admin', require('./routes/admin'))
+app.use('/api/notifications', require('./routes/notifications'))
 
 // Handle 404 for undefined routes
 app.all('*', (req, res) => {

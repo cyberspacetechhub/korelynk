@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X, Code2, Globe } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 
 const Header = () => {
@@ -8,11 +8,14 @@ const Header = () => {
   const location = useLocation();
   const { settings } = useSettings();
 
+
+
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Feedback', href: '/feedback' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -55,6 +58,9 @@ const Header = () => {
                 {item.name}
               </Link>
             ))}
+            
+
+            
             <Link
               to="/contact"
               className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
@@ -92,6 +98,9 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+
+              
               <Link
                 to="/contact"
                 onClick={() => setIsMenuOpen(false)}

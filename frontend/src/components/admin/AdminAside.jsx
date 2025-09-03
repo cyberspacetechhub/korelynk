@@ -1,20 +1,40 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag } from 'lucide-react';
+import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers } from 'lucide-react';
 
 const AdminAside = ({ isOpen, onClose }) => {
   const sidebarRef = useRef(null);
 
-  const navItems = [
-    { path: '/admin', icon: TrendingUp, label: 'Overview', exact: true },
-    { path: '/admin/contacts', icon: MessageSquare, label: 'Contacts' },
-    { path: '/admin/projects', icon: FolderOpen, label: 'Projects' },
-    { path: '/admin/blog', icon: BookOpen, label: 'Blog' },
-    { path: '/admin/categories', icon: Tag, label: 'Categories' },
-    { path: '/admin/feedback', icon: Star, label: 'Feedback' },
-    { path: '/admin/team', icon: Users, label: 'Team' },
-    { path: '/admin/newsletter', icon: Mail, label: 'Newsletter' },
-    { path: '/admin/settings', icon: Settings, label: 'Settings' }
+  const navSections = [
+    {
+      title: 'Dashboard',
+      items: [
+        { path: '/admin', icon: BarChart3, label: 'Overview', exact: true }
+      ]
+    },
+    {
+      title: 'Content Management',
+      items: [
+        { path: '/admin/blog', icon: BookOpen, label: 'Blog Posts' },
+        { path: '/admin/categories', icon: Tag, label: 'Categories' },
+        { path: '/admin/projects', icon: Layers, label: 'Projects' }
+      ]
+    },
+    {
+      title: 'User Management',
+      items: [
+        { path: '/admin/contacts', icon: MessageSquare, label: 'Contacts' },
+        { path: '/admin/feedback', icon: Star, label: 'Reviews' },
+        { path: '/admin/team', icon: Users, label: 'Team Members' },
+        { path: '/admin/newsletter', icon: Mail, label: 'Newsletter' }
+      ]
+    },
+    {
+      title: 'System',
+      items: [
+        { path: '/admin/settings', icon: Settings, label: 'Settings' }
+      ]
+    }
   ];
 
   useEffect(() => {
@@ -32,49 +52,76 @@ const AdminAside = ({ isOpen, onClose }) => {
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={onClose} />
+        <div className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 lg:hidden" onClick={onClose} />
       )}
       
       {/* Sidebar */}
       <aside 
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-50 w-64 bg-white shadow-lg border-r border-gray-200 min-h-screen transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto ${
+        className={`fixed top-0 left-0 z-50 w-72 bg-white shadow-2xl border-r border-gray-100 h-screen flex flex-col transform transition-all duration-300 ease-out lg:translate-x-0 lg:static lg:z-auto lg:shadow-none ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        {/* Mobile close button */}
-        <div className="flex justify-end p-4 lg:hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <BarChart3 className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900">Admin Panel</h2>
+              <p className="text-xs text-gray-500">Management Dashboard</p>
+            </div>
+          </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-md text-gray-600 hover:bg-gray-100"
+            className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors lg:hidden"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
         </div>
         
-        <nav className="p-4">
-          <ul className="space-y-2">
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <NavLink
-                  to={item.path}
-                  end={item.exact}
-                  onClick={() => onClose()}
-                  className={({ isActive }) =>
-                    `flex items-center px-4 py-3 rounded-lg transition-colors ${
-                      isActive
-                        ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600'
-                    }`
-                  }
-                >
-                  <item.icon className="w-5 h-5 mr-3" />
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+        {/* Navigation */}
+        <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full">
+          {navSections.map((section, sectionIndex) => (
+            <div key={sectionIndex}>
+              <h3 className="px-3 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                {section.title}
+              </h3>
+              <ul className="space-y-1">
+                {section.items.map((item) => (
+                  <li key={item.path}>
+                    <NavLink
+                      to={item.path}
+                      end={item.exact}
+                      onClick={() => onClose()}
+                      className={({ isActive }) =>
+                        `group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
+                          isActive
+                            ? 'bg-gradient-to-r from-indigo-50 to-purple-50 text-indigo-700 shadow-sm border-l-4 border-indigo-500'
+                            : 'text-gray-700 hover:bg-gray-50 hover:text-indigo-600'
+                        }`
+                      }
+                    >
+                      <item.icon className={`w-5 h-5 mr-3 transition-colors ${
+                        'group-hover:text-indigo-500'
+                      }`} />
+                      <span className="truncate">{item.label}</span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
+        
+        {/* Footer */}
+        <div className="px-6 py-4 border-t border-gray-100">
+          <div className="flex items-center space-x-3 text-sm text-gray-500">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span>System Online</span>
+          </div>
+        </div>
       </aside>
     </>
   );

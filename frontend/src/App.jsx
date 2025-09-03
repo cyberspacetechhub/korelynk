@@ -2,11 +2,12 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Layout Components
-import Header from './components/home/Header';
-import Footer from './components/home/Footer';
+import MainLayout from './layouts/MainLayout';
+import AdminLayout from './layouts/AdminLayout';
 
 // Pages
 import Home from './components/home/Home';
@@ -18,6 +19,7 @@ import Feedback from './components/home/Feedback';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Careers from './pages/Careers';
+import Unsubscribe from './pages/Unsubscribe';
 import AdminLogin from './pages/AdminLogin';
 
 // Admin Pages
@@ -31,6 +33,9 @@ import AdminFeedback from './pages/admin/AdminFeedback';
 import AdminBlog from './pages/admin/AdminBlog';
 import AdminCategories from './pages/admin/AdminCategories';
 import AdminBlogForm from './pages/admin/AdminBlogForm';
+import AdminBlogDetails from './pages/admin/AdminBlogDetails';
+import AdminProfile from './pages/admin/AdminProfile';
+import AdminContactDetails from './pages/admin/AdminContactDetails';
 
 // Auth
 import { AuthProvider } from './context/AuthContext';
@@ -54,154 +59,47 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <SettingsProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <SettingsProvider>
           <DynamicFavicon />
           <ScrollToTop />
           <ScrollToTopButton />
           <Routes>
           <Route element={<PersistLogin />}>
           {/* Public Routes */}
-          <Route path="/" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Home />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/about" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <About />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/services" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Services />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/portfolio" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Portfolio />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/contact" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Contact />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/feedback" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Feedback />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/blog" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Blog />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/blog/:slug" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <BlogDetail />
-              </main>
-              <Footer />
-            </div>
-          } />
-          <Route path="/careers" element={
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-grow">
-                <Careers />
-              </main>
-              <Footer />
-            </div>
-          } />
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="services" element={<Services />} />
+            <Route path="portfolio" element={<Portfolio />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="feedback" element={<Feedback />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogDetail />} />
+            <Route path="careers" element={<Careers />} />
+          </Route>
+          <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
           
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminOverview />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/contacts" element={
-              <ProtectedRoute>
-                <AdminContacts />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/projects" element={
-              <ProtectedRoute>
-                <AdminProjects />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/newsletter" element={
-              <ProtectedRoute>
-                <AdminNewsletter />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/settings" element={
-              <ProtectedRoute>
-                <AdminSettings />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/team" element={
-              <ProtectedRoute>
-                <AdminTeam />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/feedback" element={
-              <ProtectedRoute>
-                <AdminFeedback />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/blog" element={
-              <ProtectedRoute>
-                <AdminBlog />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/blog/new" element={
-              <ProtectedRoute>
-                <AdminBlogForm />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/blog/edit/:id" element={
-              <ProtectedRoute>
-                <AdminBlogForm />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/categories" element={
-              <ProtectedRoute>
-                <AdminCategories />
-              </ProtectedRoute>
-            } />
+            <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+              <Route index element={<AdminOverview />} />
+              <Route path="contacts" element={<AdminContacts />} />
+              <Route path="contacts/:id" element={<AdminContactDetails />} />
+              <Route path="projects" element={<AdminProjects />} />
+              <Route path="newsletter" element={<AdminNewsletter />} />
+              <Route path="settings" element={<AdminSettings />} />
+              <Route path="team" element={<AdminTeam />} />
+              <Route path="feedback" element={<AdminFeedback />} />
+              <Route path="blog" element={<AdminBlog />} />
+              <Route path="blog/new" element={<AdminBlogForm />} />
+              <Route path="blog/:id" element={<AdminBlogDetails />} />
+              <Route path="blog/edit/:id" element={<AdminBlogForm />} />
+              <Route path="categories" element={<AdminCategories />} />
+              <Route path="profile" element={<AdminProfile />} />
+            </Route>
           </Route>
         </Routes>
         <ToastContainer
@@ -216,9 +114,10 @@ function App() {
           pauseOnHover
           theme="light"
         />
-        </SettingsProvider>
-      </AuthProvider>
-    </QueryClientProvider>
+          </SettingsProvider>
+        </AuthProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 

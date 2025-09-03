@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Settings, Upload, Save, Image, Globe, Mail, Phone, MapPin } from 'lucide-react';
-import AdminLayout from '../../components/admin/AdminLayout';
+
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
 
@@ -186,17 +186,14 @@ const AdminSettings = () => {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+      </div>
     );
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Settings</h2>
           <p className="text-gray-600">Manage your application settings</p>
@@ -437,8 +434,7 @@ const AdminSettings = () => {
             </button>
           </div>
         </form>
-      </div>
-    </AdminLayout>
+    </div>
   );
 };
 

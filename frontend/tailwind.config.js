@@ -9,6 +9,8 @@ export default {
       auto: 'auto',
     }),
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+  ],
 }
 

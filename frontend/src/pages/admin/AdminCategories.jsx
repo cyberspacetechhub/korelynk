@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Tag } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
-import AdminLayout from '../../components/admin/AdminLayout';
+
+import DeleteModal from '../../components/admin/DeleteModal';
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -14,6 +15,7 @@ const AdminCategories = () => {
     description: '',
     color: '#6366f1'
   });
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, category: null, loading: false });
 
   useEffect(() => {
     fetchCategories();
@@ -61,17 +63,26 @@ const AdminCategories = () => {
     setShowForm(true);
   };
 
-  const handleDelete = async (categoryId) => {
-    if (window.confirm('Are you sure you want to delete this category?')) {
-      try {
-        await axios.delete(`/categories/${categoryId}`);
-        toast.success('Category deleted successfully');
-        fetchCategories();
-      } catch (error) {
-        console.error('Error deleting category:', error);
-        toast.error('Failed to delete category');
-      }
+  const handleDeleteClick = (category) => {
+    setDeleteModal({ isOpen: true, category, loading: false });
+  };
+
+  const handleDeleteConfirm = async () => {
+    setDeleteModal(prev => ({ ...prev, loading: true }));
+    try {
+      await axios.delete(`/categories/${deleteModal.category._id}`);
+      toast.success('Category deleted successfully');
+      setDeleteModal({ isOpen: false, category: null, loading: false });
+      fetchCategories();
+    } catch (error) {
+      console.error('Error deleting category:', error);
+      toast.error('Failed to delete category');
+      setDeleteModal(prev => ({ ...prev, loading: false }));
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModal({ isOpen: false, category: null, loading: false });
   };
 
   const resetForm = () => {
@@ -86,18 +97,16 @@ const AdminCategories = () => {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
     );
   }
 
   return (
-    <AdminLayout>
+    <>
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Categories</h2>
             <p className="text-gray-600">Manage blog categories</p>
@@ -130,7 +139,7 @@ const AdminCategories = () => {
                     <Edit className="w-4 h-4" />
                   </button>
                   <button
-                    onClick={() => handleDelete(category._id)}
+                    onClick={() => handleDeleteClick(category)}
                     className="text-red-600 hover:text-red-800"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -208,7 +217,17 @@ const AdminCategories = () => {
           </div>
         )}
       </div>
-    </AdminLayout>
+      
+      <DeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Category"
+        message="Are you sure you want to delete this category? This action cannot be undone."
+        itemName={deleteModal.category?.name}
+        loading={deleteModal.loading}
+      />
+    </>
   );
 };
 

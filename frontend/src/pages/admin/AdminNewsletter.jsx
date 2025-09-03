@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Users, Download, Trash2, Search, Filter } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
-import AdminLayout from '../../components/admin/AdminLayout';
+
+import DeleteModal from '../../components/admin/DeleteModal';
 
 const AdminNewsletter = () => {
   const [subscribers, setSubscribers] = useState([]);
@@ -14,6 +15,7 @@ const AdminNewsletter = () => {
     pages: 1,
     total: 0
   });
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, subscriber: null, loading: false });
 
   useEffect(() => {
     fetchSubscribers();
@@ -34,17 +36,26 @@ const AdminNewsletter = () => {
     }
   };
 
-  const handleDelete = async (subscriberId) => {
-    if (window.confirm('Are you sure you want to delete this subscriber?')) {
-      try {
-        await axios.delete(`/admin/newsletter/${subscriberId}`);
-        toast.success('Subscriber deleted successfully');
-        fetchSubscribers();
-      } catch (error) {
-        console.error('Error deleting subscriber:', error);
-        toast.error('Failed to delete subscriber');
-      }
+  const handleDeleteClick = (subscriber) => {
+    setDeleteModal({ isOpen: true, subscriber, loading: false });
+  };
+
+  const handleDeleteConfirm = async () => {
+    setDeleteModal(prev => ({ ...prev, loading: true }));
+    try {
+      await axios.delete(`/admin/newsletter/${deleteModal.subscriber._id}`);
+      toast.success('Subscriber deleted successfully');
+      setDeleteModal({ isOpen: false, subscriber: null, loading: false });
+      fetchSubscribers();
+    } catch (error) {
+      console.error('Error deleting subscriber:', error);
+      toast.error('Failed to delete subscriber');
+      setDeleteModal(prev => ({ ...prev, loading: false }));
     }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModal({ isOpen: false, subscriber: null, loading: false });
   };
 
   const handleStatusChange = async (subscriberId, newStatus) => {
@@ -95,34 +106,31 @@ const AdminNewsletter = () => {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
     );
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         {/* Header */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Newsletter Subscribers</h2>
-            <p className="text-gray-600">Manage your newsletter subscribers</p>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Newsletter Subscribers</h2>
+            <p className="text-sm sm:text-base text-gray-600">Manage your newsletter subscribers</p>
           </div>
           <button
             onClick={exportSubscribers}
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center"
+            className="bg-green-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-green-700 flex items-center justify-center sm:justify-start"
           >
-            <Download className="w-4 h-4 mr-2" />
-            Export CSV
+            <Download className="w-4 h-4 sm:mr-2" />
+            <span className="hidden sm:inline">Export CSV</span>
           </button>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center">
               <Users className="w-8 h-8 text-blue-600" />
@@ -189,20 +197,20 @@ const AdminNewsletter = () => {
 
         {/* Subscribers Table */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
+          <div className="max-w-full overflow-x-auto">
+            <table className="w-full table-auto">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
                     Subscriber
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase lg:table-cell">
                     Subscribed Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase sm:px-6">
                     Actions
                   </th>
                 </tr>
@@ -210,32 +218,35 @@ const AdminNewsletter = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredSubscribers.map((subscriber) => (
                   <tr key={subscriber._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
+                    <td className="px-2 py-4 sm:px-6">
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium text-gray-900 truncate">
                           {subscriber.name || 'Anonymous'}
                         </div>
-                        <div className="text-sm text-gray-500">{subscriber.email}</div>
+                        <div className="text-xs sm:text-sm text-gray-500 truncate">{subscriber.email}</div>
+                        <div className="text-xs text-gray-400 lg:hidden">
+                          {new Date(subscriber.createdAt).toLocaleDateString()}
+                        </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-2 py-4 sm:px-6">
                       <select
                         value={subscriber.status}
                         onChange={(e) => handleStatusChange(subscriber._id, e.target.value)}
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(subscriber.status)} border-0 focus:ring-2 focus:ring-indigo-500`}
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(subscriber.status)} border-0 focus:ring-2 focus:ring-indigo-500 min-w-0`}
                       >
                         <option value="active">Active</option>
                         <option value="unsubscribed">Unsubscribed</option>
                         <option value="pending">Pending</option>
                       </select>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="hidden px-6 py-4 text-sm text-gray-500 lg:table-cell whitespace-nowrap">
                       {new Date(subscriber.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-2 py-4 text-right sm:px-6">
                       <button
-                        onClick={() => handleDelete(subscriber._id)}
-                        className="text-red-600 hover:text-red-900"
+                        onClick={() => handleDeleteClick(subscriber)}
+                        className="p-1 text-red-600 hover:text-red-900"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -293,8 +304,17 @@ const AdminNewsletter = () => {
             </div>
           )}
         </div>
-      </div>
-    </AdminLayout>
+      
+      <DeleteModal
+        isOpen={deleteModal.isOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title="Delete Subscriber"
+        message="Are you sure you want to delete this subscriber? This action cannot be undone."
+        itemName={deleteModal.subscriber?.email}
+        loading={deleteModal.loading}
+      />
+    </div>
   );
 };
 

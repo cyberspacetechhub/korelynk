@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle, Navigation, Loader } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axios from '../api/axios';
 import { useSettings } from '../context/SettingsContext';
@@ -16,6 +16,9 @@ const Contact = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState(null);
 
   const services = [
     'Web Development',
@@ -33,6 +36,65 @@ const Contact = () => {
     '$25,000 - $50,000',
     '$50,000+'
   ];
+
+  // Company location using settings address
+  const companyLocation = {
+    address: settings.address || 'New York, NY'
+  };
+
+  const getUserLocation = () => {
+    setLocationLoading(true);
+    setLocationError(null);
+
+    if (!navigator.geolocation) {
+      setLocationError('Geolocation is not supported by this browser.');
+      setLocationLoading(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        setLocationLoading(false);
+        toast.success('Location detected successfully!');
+      },
+      (error) => {
+        let errorMessage = 'Unable to retrieve your location.';
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = 'Location access denied by user.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information is unavailable.';
+            break;
+          case error.TIMEOUT:
+            errorMessage = 'Location request timed out.';
+            break;
+        }
+        setLocationError(errorMessage);
+        setLocationLoading(false);
+        toast.error(errorMessage);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 600000
+      }
+    );
+  };
+
+  const getDirections = () => {
+    if (userLocation) {
+      const directionsUrl = `https://www.google.com/maps/dir/${userLocation.lat},${userLocation.lng}/${encodeURIComponent(companyLocation.address)}`;
+      window.open(directionsUrl, '_blank');
+    } else {
+      const directionsUrl = `https://www.google.com/maps/dir//${encodeURIComponent(companyLocation.address)}`;
+      window.open(directionsUrl, '_blank');
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -116,14 +178,14 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen ">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+      <section className="py-20 text-white bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
+        <div className="container px-6 mx-auto text-center">
+          <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
             Get In Touch
           </h1>
-          <p className="text-xl lg:text-2xl text-indigo-100 max-w-3xl mx-auto">
+          <p className="max-w-3xl mx-auto text-xl text-indigo-100 lg:text-2xl">
             Ready to start your project? Let's discuss how we can help bring your vision to life
           </p>
         </div>
@@ -131,21 +193,21 @@ const Contact = () => {
 
       {/* Contact Form & Info */}
       <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12">
+        <div className="container px-6 mx-auto">
+          <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Form */}
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            <div className="p-8 bg-white shadow-lg rounded-2xl">
+              <h2 className="mb-6 text-3xl font-bold text-gray-900">
                 Send us a message
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="mb-8 text-gray-600">
                 Fill out the form below and we'll get back to you within 24 hours.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-700">
                       Full Name *
                     </label>
                     <input
@@ -155,12 +217,12 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                       placeholder="John Doe"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
                       Email Address *
                     </label>
                     <input
@@ -170,15 +232,15 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                       placeholder="john@example.com"
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-700">
                       Phone Number
                     </label>
                     <input
@@ -187,12 +249,12 @@ const Contact = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                       placeholder="+1 (555) 123-4567"
                     />
                   </div>
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="company" className="block mb-2 text-sm font-medium text-gray-700">
                       Company Name
                     </label>
                     <input
@@ -201,15 +263,15 @@ const Contact = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                       placeholder="Your Company"
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="service" className="block mb-2 text-sm font-medium text-gray-700">
                       Service Interested In
                     </label>
                     <select
@@ -217,7 +279,7 @@ const Contact = () => {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     >
                       <option value="">Select a service</option>
                       {services.map((service, index) => (
@@ -228,7 +290,7 @@ const Contact = () => {
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="budget" className="block mb-2 text-sm font-medium text-gray-700">
                       Project Budget
                     </label>
                     <select
@@ -236,7 +298,7 @@ const Contact = () => {
                       name="budget"
                       value={formData.budget}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors"
+                      className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     >
                       <option value="">Select budget range</option>
                       {budgetRanges.map((range, index) => (
@@ -249,7 +311,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-700">
                     Project Details *
                   </label>
                   <textarea
@@ -259,7 +321,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-colors resize-none"
+                    className="w-full px-4 py-3 transition-colors border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     placeholder="Tell us about your project requirements, goals, and any specific features you need..."
                   />
                 </div>
@@ -267,17 +329,17 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-indigo-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="flex items-center justify-center w-full px-6 py-4 font-semibold text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      <div className="w-5 h-5 mr-2 border-b-2 border-white rounded-full animate-spin"></div>
                       Sending...
                     </>
                   ) : (
                     <>
                       Send Message
-                      <Send className="ml-2 w-5 h-5" />
+                      <Send className="w-5 h-5 ml-2" />
                     </>
                   )}
                 </button>
@@ -287,29 +349,29 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                <h2 className="mb-6 text-3xl font-bold text-gray-900">
                   Contact Information
                 </h2>
-                <p className="text-gray-600 mb-8">
+                <p className="mb-8 text-gray-600">
                   We're here to help and answer any question you might have. We look forward to hearing from you.
                 </p>
               </div>
 
               <div className="grid gap-6">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover-lift">
+                  <div key={index} className="p-6 bg-white shadow-lg rounded-xl hover-lift">
                     <div className="flex items-start">
-                      <div className="text-indigo-600 mr-4 mt-1">
+                      <div className="mt-1 mr-4 text-indigo-600">
                         {info.icon}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                        <h3 className="mb-1 text-lg font-semibold text-gray-900">
                           {info.title}
                         </h3>
-                        <p className="text-indigo-600 font-medium mb-1">
+                        <p className="mb-1 font-medium text-indigo-600">
                           {info.details}
                         </p>
-                        <p className="text-gray-600 text-sm">
+                        <p className="text-sm text-gray-600">
                           {info.description}
                         </p>
                       </div>
@@ -318,16 +380,65 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Our Location
-                </h3>
-                <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-                  <div className="text-center text-gray-500">
-                    <MapPin className="w-12 h-12 mx-auto mb-2" />
-                    <p>Interactive Map Coming Soon</p>
+              {/* Interactive Map */}
+              <div className="p-6 bg-white shadow-lg rounded-xl">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    Our Location
+                  </h3>
+                  <button
+                    onClick={getUserLocation}
+                    disabled={locationLoading}
+                    className="flex items-center px-3 py-2 text-sm font-medium text-indigo-600 transition-colors border border-indigo-600 rounded-lg hover:bg-indigo-50 disabled:opacity-50"
+                  >
+                    {locationLoading ? (
+                      <Loader className="w-4 h-4 mr-2 animate-spin" />
+                    ) : (
+                      <Navigation className="w-4 h-4 mr-2" />
+                    )}
+                    {locationLoading ? 'Detecting...' : 'Get My Location'}
+                  </button>
+                </div>
+                
+                {locationError && (
+                  <div className="flex items-center p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                    <AlertCircle className="w-4 h-4 mr-2" />
+                    {locationError}
                   </div>
+                )}
+                
+                {userLocation && (
+                  <div className="flex items-center p-3 mb-4 text-sm text-green-700 bg-green-100 rounded-lg">
+                    <CheckCircle className="w-4 h-4 mr-2" />
+                    Location detected! You can now get directions.
+                  </div>
+                )}
+                
+                <div className="relative h-64 mb-4 overflow-hidden bg-gray-100 rounded-lg">
+                  <iframe
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(companyLocation.address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    title="Company Location"
+                  />
+                </div>
+                
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <button
+                    onClick={getDirections}
+                    className="flex items-center justify-center px-4 py-2 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
+                  >
+                    <Navigation className="w-4 h-4 mr-2" />
+                    Get Directions
+                  </button>
+                  <button
+                    onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(companyLocation.address)}`, '_blank')}
+                    className="flex items-center justify-center px-4 py-2 font-medium text-indigo-600 transition-colors border border-indigo-600 rounded-lg hover:bg-indigo-50"
+                  >
+                    <MapPin className="w-4 h-4 mr-2" />
+                    View on Google Maps
+                  </button>
                 </div>
               </div>
             </div>
@@ -337,9 +448,9 @@ const Contact = () => {
 
       {/* FAQ Section */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900">
               Frequently Asked Questions
             </h2>
             <p className="text-xl text-gray-600">
@@ -349,12 +460,12 @@ const Contact = () => {
 
           <div className="max-w-4xl mx-auto space-y-6">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                  <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+              <div key={index} className="p-6 bg-gray-50 rounded-xl">
+                <h3 className="flex items-center mb-3 text-lg font-semibold text-gray-900">
+                  <CheckCircle className="w-5 h-5 mr-3 text-green-500" />
                   {faq.question}
                 </h3>
-                <p className="text-gray-600 ml-8">
+                <p className="ml-8 text-gray-600">
                   {faq.answer}
                 </p>
               </div>
@@ -364,19 +475,19 @@ const Contact = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">
+      <section className="py-20 text-white bg-gradient-to-r from-indigo-600 to-purple-600">
+        <div className="container px-6 mx-auto text-center">
+          <h2 className="mb-6 text-4xl font-bold">
             Ready to Get Started?
           </h2>
-          <p className="text-xl mb-8 text-indigo-100 max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto mb-8 text-xl text-indigo-100">
             Join over 50+ satisfied clients who have transformed their business with our solutions
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <button className="px-8 py-4 font-semibold text-indigo-600 transition-all duration-300 bg-white rounded-lg hover:bg-indigo-50">
               Schedule Free Consultation
             </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-all duration-300">
+            <button className="px-8 py-4 font-semibold text-white transition-all duration-300 border-2 border-white rounded-lg hover:bg-white hover:text-indigo-600">
               View Our Work
             </button>
           </div>

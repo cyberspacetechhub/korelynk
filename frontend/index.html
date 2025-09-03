@@ -26,6 +26,40 @@
     <!-- <meta name="description" content="Modern learning management system for students - track progress, manage classes, and achieve your learning goals." />
     <meta name="keywords" content="learning, education, student, courses, progress, certificates" />
     <meta name="author" content="Listacctech Academy" /> -->
+    
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        try {
+          if (typeof google !== 'undefined' && google.translate) {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+              autoDisplay: false
+            }, 'google_translate_element');
+          } else {
+            setTimeout(googleTranslateElementInit, 500);
+          }
+        } catch (error) {
+          console.log('Google Translate initialization error:', error);
+          setTimeout(googleTranslateElementInit, 1000);
+        }
+      }
+      
+      // Load Google Translate script
+      window.addEventListener('load', function() {
+        if (!window.google || !window.google.translate) {
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          script.onerror = function() {
+            console.log('Failed to load Google Translate script');
+          };
+          document.head.appendChild(script);
+        } else {
+          googleTranslateElementInit();
+        }
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

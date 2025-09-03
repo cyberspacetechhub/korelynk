@@ -1,12 +1,23 @@
 const Feedback = require('../models/Feedback')
 const APIResponse = require('../utils/APIResponse')
+const { createNotification } = require('../services/notificationService')
 
 // Submit feedback
 const submitFeedback = async (req, res) => {
   try {
     const feedback = new Feedback(req.body)
-    await feedback.save()
-    APIResponse.success(res, feedback, 'Feedback submitted successfully', 201)
+    const savedFeedback = await feedback.save()
+    
+    // Create notification
+    await createNotification(
+      'New Feedback Received',
+      `${req.body.name} left a ${req.body.rating}-star review`,
+      'feedback',
+      savedFeedback._id,
+      'medium'
+    )
+    
+    APIResponse.success(res, savedFeedback, 'Feedback submitted successfully', 201)
   } catch (error) {
     console.error('Error submitting feedback:', error)
     APIResponse.error(res, 'Failed to submit feedback', 500, 'SUBMIT_ERROR')

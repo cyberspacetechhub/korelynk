@@ -76,3 +76,107 @@
 .listac-text{
     color: #ff4800;
 }
+
+/* Google Translate Styles */
+#google_translate_element {
+  display: inline-block !important;
+}
+
+.goog-te-gadget {
+  font-family: inherit !important;
+  font-size: 12px !important;
+  color: #374151 !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 4px !important;
+  background: white !important;
+  color: #374151 !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+}
+
+.goog-te-gadget-simple {
+  background: transparent !important;
+  border: none !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value {
+  color: #374151 !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  padding: 4px 8px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 4px !important;
+  background: white !important;
+  display: inline-block !important;
+  min-width: 100px !important;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value:hover {
+  background: #f9fafb !important;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value span {
+  vertical-align: middle !important;
+}
+
+.goog-te-gadget-simple .goog-te-menu-value img {
+  margin-right: 6px !important;
+  vertical-align: middle !important;
+}
+
+.goog-te-gadget-simple * {
+  display: inline !important;
+  float: none !important;
+}
+
+/* Hide banner but allow functionality */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+html {
+  margin-top: 0 !important;
+}
+
+/* Auto-adjust body when translated */
+body.goog-te-translated {
+  padding-top: 40px !important;
+}
+
+/* Adjust header position when translated */
+body.goog-te-translated header {
+  top: 40px !important;
+}
+
+/* Style the banner when it appears */
+.goog-te-banner-frame {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: 40px !important;
+  background: #4285f4 !important;
+}
+
+.goog-te-banner-frame .goog-te-banner {
+  height: 40px !important;
+  line-height: 40px !important;
+}
