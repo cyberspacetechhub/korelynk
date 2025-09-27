@@ -312,13 +312,22 @@ const Home = () => {
           )}
           
           <div className="text-center mt-12">
-            <Link
-              to="/portfolio"
-              className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center"
-            >
-              View All Projects
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/portfolio"
+                className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center justify-center"
+              >
+                View All Projects
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link
+                to="/coding-demo"
+                className="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 inline-flex items-center justify-center"
+              >
+                Watch Live Demo
+                <Code className="ml-2 w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

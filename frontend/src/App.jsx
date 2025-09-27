@@ -19,6 +19,7 @@ import Feedback from './components/home/Feedback';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import SearchResults from './pages/SearchResults';
+import CodingDemo from './pages/CodingDemo';
 import Careers from './pages/Careers';
 import Unsubscribe from './pages/Unsubscribe';
 import AdminLogin from './pages/AdminLogin';
@@ -83,6 +84,7 @@ function App() {
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="search" element={<SearchResults />} />
+            <Route path="coding-demo" element={<CodingDemo />} />
             <Route path="careers" element={<Careers />} />
           </Route>
           <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
