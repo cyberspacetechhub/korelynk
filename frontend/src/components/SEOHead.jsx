@@ -12,7 +12,7 @@ const SEOHead = ({
 }) => {
   const siteUrl = window.location.origin;
   const fullUrl = url ? `${siteUrl}${url}` : window.location.href;
-  const fullImageUrl = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}/logo.png`;
+  const fullImageUrl = image && image.startsWith('http') ? image : `${siteUrl}/logo.png`;
 
   return (
     <Helmet>

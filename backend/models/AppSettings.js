@@ -19,7 +19,7 @@ const appSettingsSchema = new mongoose.Schema({
   },
   contactEmail: {
     type: String,
-    default: 'hello@cyberspacetechhub.com'
+    default: 'hello@cyberspacetechhub.vercel.app'
   },
   contactPhone: {
     type: String,

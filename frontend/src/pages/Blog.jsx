@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, User, Eye, Tag, Search } from 'lucide-react';
 import axios from '../api/axios';
+import SEO from '../components/SEO';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -67,6 +68,26 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 py-16">
+      <SEO 
+        title="Tech Blog - Programming Tutorials & Development Insights"
+        description="Stay updated with the latest programming tutorials, web development insights, mobile app development tips, and technology trends. Learn React, Node.js, Python, and more."
+        keywords={[
+          'programming blog',
+          'web development tutorials',
+          'React tutorials',
+          'Node.js guides',
+          'JavaScript programming',
+          'mobile app development',
+          'tech blog',
+          'coding tutorials',
+          'software development blog',
+          'programming tips',
+          'developer resources',
+          'tech insights',
+          'coding best practices'
+        ]}
+        url="/blog"
+      />
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">

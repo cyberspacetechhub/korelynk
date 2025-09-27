@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Code, Smartphone, Globe, Database, Cloud, Shield, Star } from 'lucide-react';
 import { useQuery } from 'react-query';
 import axios from '../../api/axios';
+import SEO from '../SEO';
 
 const TestimonialSection = () => {
   const { data: testimonials = [], isLoading, error } = useQuery(
@@ -164,6 +165,26 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Professional Web & Mobile Development Services"
+        description="Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide for global clients and diaspora."
+        keywords={[
+          'web development services',
+          'mobile app development',
+          'React development company',
+          'Node.js developers',
+          'full stack development',
+          'UI UX design services',
+          'e-commerce development',
+          'custom software development',
+          'digital transformation',
+          'tech consulting',
+          'remote development team',
+          'offshore development',
+          'global tech solutions'
+        ]}
+        url="/"
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>

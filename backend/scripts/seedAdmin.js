@@ -8,7 +8,7 @@ const seedAdmin = async () => {
     await connectDb()
     
     // Check if admin already exists
-    const existingAdmin = await Admin.findOne({ email: 'admin@cyberspacetechhub.com' })
+    const existingAdmin = await Admin.findOne({ email: 'admin@cyberspacetechhub.vercel.app' })
     if (existingAdmin) {
       console.log('Admin already exists')
       process.exit(0)
@@ -17,7 +17,7 @@ const seedAdmin = async () => {
     // Create admin user
     const admin = new Admin({
       fullname: 'System Administrator',
-      email: 'admin@cyberspacetechhub.com',
+      email: 'admin@cyberspacetechhub.vercel.app',
       phone: '+1234567890',
       password: 'admin123',
       role: 'admin',
@@ -26,7 +26,7 @@ const seedAdmin = async () => {
 
     await admin.save()
     console.log('Admin user created successfully')
-    console.log('Email: admin@cyberspacetechhub.com')
+    console.log('Email: admin@cyberspacetechhub.vercel.app')
     console.log('Password: admin123')
     
     process.exit(0)

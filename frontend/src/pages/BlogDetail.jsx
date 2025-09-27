@@ -4,7 +4,7 @@ import { Calendar, User, Eye, Tag, MessageCircle, ArrowLeft } from 'lucide-react
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
 import ShareButton from '../components/ShareButton';
-import SEOHead from '../components/SEOHead';
+import SEO from '../components/SEO';
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -82,14 +82,20 @@ const BlogDetail = () => {
 
   return (
     <>
-      <SEOHead 
+      <SEO 
         title={blog.title}
-        description={blog.excerpt || blog.title}
+        description={blog.excerpt || blog.content.substring(0, 160)}
+        keywords={blog.tags || []}
         image={blog.featuredImage}
         url={`/blog/${blog.slug}`}
-        author={blog.author?.fullname}
-        publishedTime={blog.publishedAt}
-        tags={blog.tags}
+        type="article"
+        article={{
+          publishedAt: blog.publishedAt,
+          updatedAt: blog.updatedAt,
+          author: blog.author?.fullname,
+          category: blog.category?.name,
+          tags: blog.tags
+        }}
       />
       <div className="min-h-screen bg-gray-50 py-16">
         <div className="container mx-auto px-6">

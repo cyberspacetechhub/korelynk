@@ -17,7 +17,7 @@ export const SettingsProvider = ({ children }) => {
     siteDescription: 'Professional web and mobile development services',
     logo: '',
     favicon: '',
-    contactEmail: 'hello@cyberspacetechhub.com',
+    contactEmail: 'hello@cyberspacetechhub.vercel.app',
     contactPhone: '+1 (555) 123-4567',
     address: '123 Tech Street, Digital City, DC 12345',
     socialLinks: {

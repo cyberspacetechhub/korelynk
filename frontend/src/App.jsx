@@ -18,6 +18,7 @@ import Contact from './pages/Contact';
 import Feedback from './components/home/Feedback';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
+import SearchResults from './pages/SearchResults';
 import Careers from './pages/Careers';
 import Unsubscribe from './pages/Unsubscribe';
 import AdminLogin from './pages/AdminLogin';
@@ -34,6 +35,7 @@ import AdminBlog from './pages/admin/AdminBlog';
 import AdminCategories from './pages/admin/AdminCategories';
 import AdminBlogForm from './pages/admin/AdminBlogForm';
 import AdminBlogDetails from './pages/admin/AdminBlogDetails';
+import AdminAnalytics from './pages/admin/AdminAnalytics';
 import AdminProfile from './pages/admin/AdminProfile';
 import AdminContactDetails from './pages/admin/AdminContactDetails';
 
@@ -45,6 +47,7 @@ import PersistLogin from './components/PersistLogin';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import DynamicFavicon from './components/DynamicFavicon';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -64,6 +67,7 @@ function App() {
         <AuthProvider>
           <SettingsProvider>
           <DynamicFavicon />
+          <GoogleAnalytics />
           <ScrollToTop />
           <ScrollToTopButton />
           <Routes>
@@ -78,6 +82,7 @@ function App() {
             <Route path="feedback" element={<Feedback />} />
             <Route path="blog" element={<Blog />} />
             <Route path="blog/:slug" element={<BlogDetail />} />
+            <Route path="search" element={<SearchResults />} />
             <Route path="careers" element={<Careers />} />
           </Route>
           <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
@@ -98,6 +103,7 @@ function App() {
               <Route path="blog/:id" element={<AdminBlogDetails />} />
               <Route path="blog/edit/:id" element={<AdminBlogForm />} />
               <Route path="categories" element={<AdminCategories />} />
+              <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="profile" element={<AdminProfile />} />
             </Route>
           </Route>

@@ -1,13 +1,24 @@
 {
-  "name": "Blog Magazine",
-  "short_name": "BlogMag",
-  "description": "Modern blog and magazine platform",
+  "name": "Cyberspace Tech Hub - Professional Web & Mobile Development",
+  "short_name": "Cyberspace Tech Hub",
+  "description": "Professional web development, mobile app development, and digital solutions in Nigeria",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
   "theme_color": "#6366f1",
+  "background_color": "#ffffff",
   "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "en",
-  "categories": ["news", "lifestyle", "productivity"]
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "productivity", "technology"],
+  "lang": "en-US"
 }

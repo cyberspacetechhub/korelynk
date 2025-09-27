@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Clock, DollarSign, Users, Briefcase, Heart } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Careers = () => {
   const openPositions = [
@@ -75,6 +76,26 @@ const Careers = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Careers - Join Our Tech Team"
+        description="Join Cyberspace Tech Hub and build the future of technology. We're hiring web developers, mobile app developers, UI/UX designers, and digital marketing specialists globally with remote opportunities."
+        keywords={[
+          'tech jobs',
+          'web developer jobs',
+          'React developer careers',
+          'mobile app developer jobs',
+          'UI UX designer jobs',
+          'software engineer careers',
+          'tech company jobs',
+          'remote developer jobs',
+          'programming jobs',
+          'digital marketing jobs',
+          'global tech careers',
+          'remote work opportunities',
+          'international tech jobs'
+        ]}
+        url="/careers"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white py-20">
         <div className="container mx-auto px-6 text-center">
@@ -189,7 +210,7 @@ const Careers = () => {
             let us know how you'd like to contribute to our team.
           </p>
           <a
-            href="mailto:careers@cyberspacetechhub.com"
+            href="mailto:careers@cyberspacetechhub.vercel.app"
             className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-colors inline-block"
           >
             Send Your Resume

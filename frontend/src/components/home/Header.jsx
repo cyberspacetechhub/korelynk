@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Code2, Globe } from 'lucide-react';
+import { Menu, X, Code2, Globe, Search } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
+import SearchModal from '../SearchModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
   const { settings } = useSettings();
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+      if (e.key === 'Escape') {
+        setIsSearchOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
 
 
@@ -59,7 +76,18 @@ const Header = () => {
               </Link>
             ))}
             
-
+            {/* Search Button */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center px-3 py-2 text-gray-600 hover:text-indigo-600 transition-colors border border-gray-300 rounded-lg hover:border-indigo-300"
+              title="Search (Ctrl+K)"
+            >
+              <Search className="w-4 h-4 mr-2" />
+              <span className="text-sm">Search</span>
+              <span className="ml-2 px-1.5 py-0.5 text-xs bg-gray-100 rounded text-gray-500">
+                ⌘K
+              </span>
+            </button>
             
             <Link
               to="/contact"
@@ -69,8 +97,14 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile buttons */}
+          <div className="flex items-center space-x-2 md:hidden">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="text-gray-700 hover:text-indigo-600 p-2"
+            >
+              <Search className="w-5 h-5" />
+            </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-indigo-600 p-2"
@@ -99,7 +133,17 @@ const Header = () => {
                 </Link>
               ))}
               
-
+              {/* Mobile Search Button */}
+              <button
+                onClick={() => {
+                  setIsSearchOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center w-full px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition-colors"
+              >
+                <Search className="w-4 h-4 mr-2" />
+                Search
+              </button>
               
               <Link
                 to="/contact"
@@ -112,6 +156,9 @@ const Header = () => {
           </div>
         )}
       </nav>
+      
+      {/* Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   );
 };

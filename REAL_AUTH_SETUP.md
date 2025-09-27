@@ -46,7 +46,7 @@ cd backend
 npm run seed:admin
 ```
 This creates:
-- **Email**: admin@cyberspacetechhub.com
+- **Email**: admin@cyberspacetechhub.vercel.app
 - **Password**: admin123
 
 ### 2. Start Backend
@@ -62,7 +62,7 @@ npm run dev
 
 ### 4. Login
 - Visit `/admin/login`
-- Use: admin@cyberspacetechhub.com / admin123
+- Use: admin@cyberspacetechhub.vercel.app / admin123
 
 ## 🔧 Technical Implementation
 

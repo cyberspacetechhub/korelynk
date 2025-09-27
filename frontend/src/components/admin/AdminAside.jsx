@@ -30,6 +30,12 @@ const AdminAside = ({ isOpen, onClose }) => {
       ]
     },
     {
+      title: 'Analytics',
+      items: [
+        { path: '/admin/analytics', icon: TrendingUp, label: 'Analytics' }
+      ]
+    },
+    {
       title: 'System',
       items: [
         { path: '/admin/settings', icon: Settings, label: 'Settings' }

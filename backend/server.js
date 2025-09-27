@@ -63,6 +63,13 @@ app.use('/api/feedback', require('./routes/feedback'))
 app.use('/api/team', require('./routes/team'))
 app.use('/api/blog', require('./routes/blog'))
 app.use('/api/categories', require('./routes/category'))
+app.use('/api/search', require('./routes/search'))
+
+// SEO routes (no /api prefix)
+const sitemapController = require('./controllers/sitemapController')
+const rssController = require('./controllers/rssController')
+app.get('/sitemap.xml', sitemapController.generateSitemap)
+app.get('/rss.xml', rssController.generateRSSFeed)
 
 // Admin routes (protected)
 app.use('/api/admin', require('./routes/admin'))
