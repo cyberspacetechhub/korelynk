@@ -341,6 +341,164 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Development Process Demo */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              How We Build Your Vision
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              From concept to deployment, see our development process in action
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Code Demo */}
+            <div className="order-2 lg:order-1">
+              <div className="bg-gray-900 rounded-xl p-6 shadow-2xl">
+                <div className="flex items-center mb-4">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <span className="ml-4 text-gray-400 text-sm">app.jsx</span>
+                </div>
+                <div className="text-sm font-mono">
+                  <div className="text-purple-400">import</div>
+                  <div className="text-blue-400 ml-2">React</div>
+                  <div className="text-white ml-2">from</div>
+                  <div className="text-green-400 ml-2">'react';</div>
+                  <br />
+                  <div className="text-purple-400">const</div>
+                  <div className="text-yellow-400 ml-2">App</div>
+                  <div className="text-white ml-2">=</div>
+                  <div className="text-blue-400 ml-2">()</div>
+                  <div className="text-white ml-2">=&gt;</div>
+                  <div className="text-white ml-2">{'{'}</div>
+                  <div className="text-purple-400 ml-4">return</div>
+                  <div className="text-white ml-2">(</div>
+                  <div className="text-green-400 ml-6">&lt;div</div>
+                  <div className="text-blue-400 ml-2">className</div>
+                  <div className="text-white">=</div>
+                  <div className="text-green-400">{'"app"'}</div>
+                  <div className="text-green-400">&gt;</div>
+                  <div className="text-green-400 ml-8">&lt;h1&gt;</div>
+                  <div className="text-white">Your Vision</div>
+                  <div className="text-green-400">&lt;/h1&gt;</div>
+                  <div className="text-green-400 ml-6">&lt;/div&gt;</div>
+                  <div className="text-white ml-4">);</div>
+                  <div className="text-white ml-2">{'};'}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Avatar Illustrations */}
+            <div className="order-1 lg:order-2">
+              <div className="relative">
+                {/* Main Developer */}
+                <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl p-8 mb-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                      <Code className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">Lead Developer</h3>
+                      <p className="text-indigo-600">Architecting your solution</p>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                    <div className="flex items-center text-sm text-gray-600">
+                      <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                      Writing clean, scalable code...
+                    </div>
+                  </div>
+                </div>
+
+                {/* UI/UX Designer */}
+                <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl p-8 mb-6">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mr-4">
+                      <Smartphone className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">UI/UX Designer</h3>
+                      <p className="text-pink-600">Crafting user experience</p>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                    <div className="flex items-center text-sm text-gray-600">
+                      <div className="w-2 h-2 bg-pink-400 rounded-full mr-2 animate-pulse"></div>
+                      Designing intuitive interfaces...
+                    </div>
+                  </div>
+                </div>
+
+                {/* DevOps Engineer */}
+                <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8">
+                  <div className="flex items-center mb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mr-4">
+                      <Cloud className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900">DevOps Engineer</h3>
+                      <p className="text-green-600">Deploying to production</p>
+                    </div>
+                  </div>
+                  <div className="bg-white rounded-lg p-4 shadow-sm">
+                    <div className="flex items-center text-sm text-gray-600">
+                      <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                      Optimizing performance...
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Elements */}
+                <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce"></div>
+                <div className="absolute top-1/2 -left-4 w-6 h-6 bg-blue-400 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-4 right-1/3 w-4 h-4 bg-purple-400 rounded-full animate-ping"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Process Steps */}
+          <div className="mt-16 grid md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-indigo-600">1</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Planning</h3>
+              <p className="text-gray-600">We analyze your requirements and create a detailed roadmap</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-purple-600">2</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Design</h3>
+              <p className="text-gray-600">Our designers create beautiful, user-friendly interfaces</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-green-600">3</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Development</h3>
+              <p className="text-gray-600">We build robust, scalable solutions using modern technologies</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-orange-600">4</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Launch</h3>
+              <p className="text-gray-600">We deploy your project and provide ongoing support</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <TestimonialSection />
 
