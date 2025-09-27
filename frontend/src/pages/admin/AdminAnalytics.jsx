@@ -1,11 +1,9 @@
 import React from 'react';
 import { BarChart3, Users, Eye, TrendingUp, Globe } from 'lucide-react';
-import AdminLayout from '../../components/admin/AdminLayout';
 
 const AdminAnalytics = () => {
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Analytics Dashboard</h2>
           <p className="text-gray-600">Monitor your website performance and user engagement</p>
@@ -159,7 +157,6 @@ const AdminAnalytics = () => {
           </div>
         </div>
       </div>
-    </AdminLayout>
   );
 };
 
