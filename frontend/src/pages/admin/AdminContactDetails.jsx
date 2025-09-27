@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Phone, Building, Calendar, MessageSquare, CheckCircle, Clock, User } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
-import AdminLayout from '../../components/admin/AdminLayout';
 
 const AdminContactDetails = () => {
   const { id } = useParams();
@@ -73,33 +72,28 @@ const AdminContactDetails = () => {
 
   if (loading) {
     return (
-      <AdminLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-        </div>
-      </AdminLayout>
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      </div>
     );
   }
 
   if (!contact) {
     return (
-      <AdminLayout>
-        <div className="text-center py-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Not Found</h2>
-          <button
-            onClick={() => navigate('/admin/contacts')}
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
-          >
-            Back to Contacts
-          </button>
-        </div>
-      </AdminLayout>
+      <div className="text-center py-12">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Not Found</h2>
+        <button
+          onClick={() => navigate('/admin/contacts')}
+          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700"
+        >
+          Back to Contacts
+        </button>
+      </div>
     );
   }
 
   return (
-    <AdminLayout>
-      <div className="space-y-6">
+    <div className="space-y-6">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center gap-4">
@@ -286,7 +280,6 @@ const AdminContactDetails = () => {
           </div>
         </div>
       </div>
-    </AdminLayout>
   );
 };
 
