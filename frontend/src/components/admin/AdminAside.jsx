@@ -65,7 +65,7 @@ const AdminAside = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <aside 
         ref={sidebarRef}
-        className={`fixed top-16 left-0 z-50 w-72 bg-white shadow-2xl border-r border-gray-100 h-[calc(100vh-4rem)] flex flex-col transform transition-all duration-300 ease-out lg:translate-x-0 lg:fixed lg:z-30 lg:shadow-none ${
+        className={`fixed top-16 left-0 z-30 w-72 bg-white shadow-2xl border-r border-gray-100 h-[calc(100vh-4rem)] flex flex-col transform transition-all duration-300 ease-out lg:translate-x-0 lg:fixed lg:z-30 lg:shadow-none ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

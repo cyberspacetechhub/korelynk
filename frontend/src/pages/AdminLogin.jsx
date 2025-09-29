@@ -3,11 +3,13 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff, Shield } from 'lucide-react';
 import { toast } from 'react-toastify';
+import PasswordResetModal from '../components/PasswordResetModal';
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
   const [persist, setPersist] = useState(() => {
     const saved = localStorage.getItem('persist');
     return saved ? JSON.parse(saved) : false;
@@ -102,18 +104,27 @@ const AdminLogin = () => {
               </div>
             </div>
 
-            {/* Remember Me */}
-            <div className="flex items-center mb-6">
-              <input
-                id="persist"
-                type="checkbox"
-                checked={persist}
-                onChange={handlePersistChange}
-                className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-              />
-              <label htmlFor="persist" className="ml-2 text-sm text-gray-700">
-                Keep me signed in
-              </label>
+            {/* Remember Me & Forgot Password */}
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center">
+                <input
+                  id="persist"
+                  type="checkbox"
+                  checked={persist}
+                  onChange={handlePersistChange}
+                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                />
+                <label htmlFor="persist" className="ml-2 text-sm text-gray-700">
+                  Keep me signed in
+                </label>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowResetModal(true)}
+                className="text-sm text-indigo-600 hover:text-indigo-500"
+              >
+                Forgot password?
+              </button>
             </div>
 
             {/* Submit Button */}
@@ -144,6 +155,12 @@ const AdminLogin = () => {
             </div>
           </div>
         </div>
+
+        {/* Password Reset Modal */}
+        <PasswordResetModal 
+          isOpen={showResetModal} 
+          onClose={() => setShowResetModal(false)} 
+        />
       </div>
     </div>
   );

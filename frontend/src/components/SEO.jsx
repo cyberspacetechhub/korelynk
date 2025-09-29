@@ -44,7 +44,9 @@ const SEO = ({
     'diaspora tech services'
   ].join(', ');
   
-  const seoImage = (image && image.startsWith('http')) ? image : (settings.logo || defaultImage);
+  const seoImage = image ? 
+    (image.startsWith('http') ? image : `${siteUrl}${image}`) : 
+    (settings.logo || defaultImage);
   const seoUrl = url ? `${siteUrl}${url}` : siteUrl;
 
   return (

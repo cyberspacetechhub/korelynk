@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
 const { User, Admin } = require('../models/User')
+const PasswordReset = require('../models/PasswordReset')
+const emailService = require('../services/emailService')
 const APIResponse = require('../utils/APIResponse')
 
 // Generate JWT tokens
@@ -240,11 +242,124 @@ const updateProfile = async (req, res) => {
   }
 }
 
+// Generate 6-digit reset code
+const generateResetCode = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString()
+}
+
+// Request password reset
+const requestPasswordReset = async (req, res) => {
+  try {
+    const { email } = req.body
+
+    if (!email) {
+      return APIResponse.error(res, 'Email is required', 400, 'EMAIL_REQUIRED')
+    }
+
+    // Check if user exists
+    const user = await User.findOne({ email, isActive: true })
+    if (!user) {
+      return APIResponse.error(res, 'User not found', 404, 'USER_NOT_FOUND')
+    }
+
+    // Generate reset code
+    const code = generateResetCode()
+    
+    // Save reset code
+    await PasswordReset.create({
+      email,
+      code,
+      expiresAt: new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+    })
+
+    // Send email
+    await emailService.sendPasswordResetCode(email, code)
+
+    APIResponse.success(res, null, 'Reset code sent to your email')
+  } catch (error) {
+    console.error('Request password reset error:', error)
+    APIResponse.error(res, 'Failed to send reset code', 500, 'RESET_REQUEST_ERROR')
+  }
+}
+
+// Verify reset code
+const verifyResetCode = async (req, res) => {
+  try {
+    const { email, code } = req.body
+
+    if (!email || !code) {
+      return APIResponse.error(res, 'Email and code are required', 400, 'MISSING_FIELDS')
+    }
+
+    // Find valid reset code
+    const resetRecord = await PasswordReset.findOne({
+      email,
+      code,
+      used: false,
+      expiresAt: { $gt: new Date() }
+    })
+
+    if (!resetRecord) {
+      return APIResponse.error(res, 'Invalid or expired code', 400, 'INVALID_CODE')
+    }
+
+    APIResponse.success(res, { valid: true }, 'Code verified successfully')
+  } catch (error) {
+    console.error('Verify reset code error:', error)
+    APIResponse.error(res, 'Failed to verify code', 500, 'VERIFY_CODE_ERROR')
+  }
+}
+
+// Reset password
+const resetPassword = async (req, res) => {
+  try {
+    const { email, code, newPassword } = req.body
+
+    if (!email || !code || !newPassword) {
+      return APIResponse.error(res, 'Email, code and new password are required', 400, 'MISSING_FIELDS')
+    }
+
+    // Find and validate reset code
+    const resetRecord = await PasswordReset.findOne({
+      email,
+      code,
+      used: false,
+      expiresAt: { $gt: new Date() }
+    })
+
+    if (!resetRecord) {
+      return APIResponse.error(res, 'Invalid or expired code', 400, 'INVALID_CODE')
+    }
+
+    // Find user
+    const user = await User.findOne({ email, isActive: true })
+    if (!user) {
+      return APIResponse.error(res, 'User not found', 404, 'USER_NOT_FOUND')
+    }
+
+    // Update password
+    user.password = newPassword
+    await user.save()
+
+    // Mark reset code as used
+    resetRecord.used = true
+    await resetRecord.save()
+
+    APIResponse.success(res, null, 'Password reset successfully')
+  } catch (error) {
+    console.error('Reset password error:', error)
+    APIResponse.error(res, 'Failed to reset password', 500, 'RESET_PASSWORD_ERROR')
+  }
+}
+
 module.exports = {
   login,
   registerAdmin,
   getCurrentUser,
   refreshToken,
   logout,
-  updateProfile
+  updateProfile,
+  requestPasswordReset,
+  verifyResetCode,
+  resetPassword
 }

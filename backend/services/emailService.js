@@ -104,6 +104,37 @@ class EmailService {
 
     return await Promise.allSettled(emailPromises)
   }
+
+  async sendPasswordResetCode(email, code) {
+    const resetEmail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Password Reset Code - Cyberspace Tech Hub',
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #4f46e5; text-align: center;">Password Reset Request</h2>
+          <p>You have requested to reset your password for Cyberspace Tech Hub admin panel.</p>
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+            <h3 style="margin: 0; color: #1f2937;">Your Reset Code:</h3>
+            <div style="font-size: 32px; font-weight: bold; color: #4f46e5; letter-spacing: 4px; margin: 10px 0;">${code}</div>
+          </div>
+          <p><strong>Important:</strong></p>
+          <ul>
+            <li>This code will expire in 10 minutes</li>
+            <li>Use this code only on the official admin login page</li>
+            <li>If you didn't request this reset, please ignore this email</li>
+          </ul>
+          <hr style="margin: 32px 0; border: none; border-top: 1px solid #e5e7eb;">
+          <p style="font-size: 12px; color: #6b7280; text-align: center;">
+            This is an automated message from Cyberspace Tech Hub<br>
+            Please do not reply to this email
+          </p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(resetEmail)
+  }
 }
 
 module.exports = new EmailService()
