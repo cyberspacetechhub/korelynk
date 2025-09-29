@@ -4,6 +4,8 @@ import { ArrowRight, Code, Smartphone, Globe, Database, Cloud, Shield, Star } fr
 import { useQuery } from 'react-query';
 import axios from '../../api/axios';
 import SEO from '../SEO';
+import BlogPreview from '../BlogPreview';
+import CodeSamplesPreview from '../CodeSamplesPreview';
 
 const TestimonialSection = () => {
   const { data: testimonials = [], isLoading, error } = useQuery(
@@ -504,6 +506,69 @@ const Home = () => {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Launch</h3>
               <p className="text-gray-600">We deploy your project and provide ongoing support</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Code Playground */}
+      <section className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+              <Code className="w-4 h-4 mr-2" />
+              Interactive Learning
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              🚀 Code. Learn. Build.
+            </h2>
+            <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
+              Master programming with hands-on code samples. From HTML basics to advanced React - 
+              <span className="text-yellow-300 font-semibold">see it, code it, understand it!</span>
+            </p>
+          </div>
+          
+          <CodeSamplesPreview />
+          
+          <div className="text-center mt-12">
+            <Link
+              to="/code-samples"
+              className="bg-white text-indigo-900 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 inline-flex items-center text-lg shadow-xl"
+            >
+              🎯 Explore All Code Tutorials
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
+          </div>
+        </div>
+        
+        {/* Floating Code Elements */}
+        <div className="absolute top-20 left-10 w-16 h-16 bg-yellow-400/20 rounded-lg rotate-12 animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-12 h-12 bg-cyan-400/20 rounded-full animate-bounce"></div>
+        <div className="absolute top-1/2 right-20 w-8 h-8 bg-pink-400/20 rounded rotate-45 animate-ping"></div>
+      </section>
+
+      {/* Latest Blog Posts */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Latest from Our Blog
+            </h2>
+            <p className="text-xl text-gray-600">
+              Stay updated with the latest tech insights and tutorials
+            </p>
+          </div>
+          
+          <BlogPreview />
+          
+          <div className="text-center mt-12">
+            <Link
+              to="/blog"
+              className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center"
+            >
+              Read All Articles
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>

@@ -20,6 +20,8 @@ import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import SearchResults from './pages/SearchResults';
 import CodingDemo from './pages/CodingDemo';
+import CodeSamples from './pages/CodeSamples';
+import CodeSampleDetail from './pages/CodeSampleDetail';
 import Careers from './pages/Careers';
 import Unsubscribe from './pages/Unsubscribe';
 import AdminLogin from './pages/AdminLogin';
@@ -34,6 +36,9 @@ import AdminTeam from './pages/admin/AdminTeam';
 import AdminFeedback from './pages/admin/AdminFeedback';
 import AdminBlog from './pages/admin/AdminBlog';
 import AdminCategories from './pages/admin/AdminCategories';
+import AdminCodeSamples from './pages/admin/AdminCodeSamples';
+import AdminCodeSampleForm from './pages/admin/AdminCodeSampleForm';
+import AdminCodeSampleDetail from './pages/admin/AdminCodeSampleDetail';
 import AdminBlogForm from './pages/admin/AdminBlogForm';
 import AdminBlogDetails from './pages/admin/AdminBlogDetails';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
@@ -85,6 +90,8 @@ function App() {
             <Route path="blog/:slug" element={<BlogDetail />} />
             <Route path="search" element={<SearchResults />} />
             <Route path="coding-demo" element={<CodingDemo />} />
+            <Route path="code-samples" element={<CodeSamples />} />
+            <Route path="code-samples/:slug" element={<CodeSampleDetail />} />
             <Route path="careers" element={<Careers />} />
           </Route>
           <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
@@ -105,6 +112,10 @@ function App() {
               <Route path="blog/:id" element={<AdminBlogDetails />} />
               <Route path="blog/edit/:id" element={<AdminBlogForm />} />
               <Route path="categories" element={<AdminCategories />} />
+              <Route path="code-samples" element={<AdminCodeSamples />} />
+              <Route path="code-samples/new" element={<AdminCodeSampleForm />} />
+              <Route path="code-samples/edit/:id" element={<AdminCodeSampleForm />} />
+              <Route path="code-samples/:id" element={<AdminCodeSampleDetail />} />
               <Route path="analytics" element={<AdminAnalytics />} />
               <Route path="profile" element={<AdminProfile />} />
             </Route>

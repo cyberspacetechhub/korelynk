@@ -1,6 +1,7 @@
 const Blog = require('../models/Blog');
 const Project = require('../models/Project');
 const Team = require('../models/Team');
+const CodeSample = require('../models/CodeSample');
 const APIResponse = require('../utils/APIResponse');
 
 const globalSearch = async (req, res) => {
@@ -80,6 +81,29 @@ const globalSearch = async (req, res) => {
             }));
         }
 
+        // Search code samples
+        if (!type || type === 'code') {
+            const codeSamples = await CodeSample.find({
+                status: 'published',
+                $or: [
+                    { title: searchRegex },
+                    { description: searchRegex },
+                    { language: searchRegex },
+                    { tags: { $in: [searchRegex] } }
+                ]
+            })
+            .populate('author', 'fullname')
+            .select('title description language difficulty tags slug views createdAt author')
+            .limit(parseInt(limit))
+            .sort({ createdAt: -1 });
+
+            results.codeSamples = codeSamples.map(sample => ({
+                ...sample.toObject(),
+                type: 'code',
+                url: `/code-samples/${sample.slug}`
+            }));
+        }
+
         // Calculate total results
         const totalResults = Object.values(results).reduce((sum, arr) => sum + arr.length, 0);
 
@@ -130,10 +154,37 @@ const searchSuggestions = async (req, res) => {
             });
         });
 
+        // Get code sample suggestions
+        const codeSamples = await CodeSample.find({
+            status: 'published',
+            $or: [
+                { title: searchRegex },
+                { language: searchRegex },
+                { tags: { $in: [searchRegex] } }
+            ]
+        })
+        .select('title language tags')
+        .limit(3);
+
+        codeSamples.forEach(sample => {
+            if (sample.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+                suggestions.add(sample.title);
+            }
+            if (sample.language.toLowerCase().includes(searchQuery.toLowerCase())) {
+                suggestions.add(sample.language);
+            }
+            sample.tags.forEach(tag => {
+                if (tag.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    suggestions.add(tag);
+                }
+            });
+        });
+
         // Add common tech terms if they match
         const techTerms = [
             'React', 'Node.js', 'JavaScript', 'TypeScript', 'Python', 'MongoDB',
-            'Web Development', 'Mobile App', 'UI/UX Design', 'API Development'
+            'Web Development', 'Mobile App', 'UI/UX Design', 'API Development',
+            'HTML', 'CSS', 'PHP', 'Code Samples', 'Tutorials', 'Programming'
         ];
         
         techTerms.forEach(term => {

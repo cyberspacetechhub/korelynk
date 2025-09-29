@@ -91,6 +91,16 @@ const SEO = ({
         </>
       )}
       
+      {/* Google News Tags */}
+      {type === 'article' && (
+        <>
+          <meta name="news_keywords" content={seoKeywords} />
+          <meta name="standout" content={seoUrl} />
+          <meta name="syndication-source" content={siteUrl} />
+          <meta name="original-source" content={seoUrl} />
+        </>
+      )}
+      
       {/* Additional SEO Tags */}
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
@@ -123,6 +133,12 @@ const SEO = ({
             mainEntityOfPage: {
               "@type": "WebPage",
               "@id": seoUrl
+            },
+            "@type": "NewsArticle",
+            "isAccessibleForFree": true,
+            "hasPart": {
+              "@type": "WebPageElement",
+              "isAccessibleForFree": true
             }
           } : {
             name: settings.siteName,

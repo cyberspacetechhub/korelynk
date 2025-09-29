@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, Clock, FileText, User, Briefcase } from 'lucide-react';
+import { Search, X, Clock, FileText, User, Briefcase, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
 
@@ -74,6 +74,7 @@ const SearchModal = ({ isOpen, onClose }) => {
       case 'blog': return <FileText className="w-4 h-4" />;
       case 'project': return <Briefcase className="w-4 h-4" />;
       case 'team': return <User className="w-4 h-4" />;
+      case 'code': return <Code className="w-4 h-4" />;
       default: return <Search className="w-4 h-4" />;
     }
   };
@@ -97,7 +98,7 @@ const SearchModal = ({ isOpen, onClose }) => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search articles, projects, team members..."
+              placeholder="Search articles, projects, code samples, team..."
               className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
             />
             <button
@@ -194,6 +195,43 @@ const SearchModal = ({ isOpen, onClose }) => {
                                 ))}
                               </div>
                             )}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Code Samples Results */}
+              {results.codeSamples && results.codeSamples.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                    Code Samples ({results.codeSamples.length})
+                  </h3>
+                  <div className="space-y-2">
+                    {results.codeSamples.map((sample) => (
+                      <Link
+                        key={sample._id}
+                        to={sample.url}
+                        onClick={handleResultClick}
+                        className="block p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      >
+                        <div className="flex items-start">
+                          <div className="text-indigo-600 mr-3 mt-1">
+                            {getIcon('code')}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900">{sample.title}</h4>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                                {sample.language.toUpperCase()}
+                              </span>
+                              <span className="text-xs text-gray-500 capitalize">
+                                {sample.difficulty}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{sample.description}</p>
                           </div>
                         </div>
                       </Link>

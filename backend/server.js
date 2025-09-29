@@ -63,6 +63,7 @@ app.use('/api/feedback', require('./routes/feedback'))
 app.use('/api/team', require('./routes/team'))
 app.use('/api/blog', require('./routes/blog'))
 app.use('/api/categories', require('./routes/category'))
+app.use('/api/code-samples', require('./routes/codeSample'))
 app.use('/api/search', require('./routes/search'))
 
 // SEO routes (no /api prefix)

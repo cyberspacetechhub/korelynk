@@ -229,12 +229,29 @@ const AdminBlogForm = () => {
               {/* Tags */}
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {form.tags.split(',').filter(tag => tag.trim()).map((tag, index) => (
+                    <span key={index} className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm flex items-center">
+                      {tag.trim()}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newTags = form.tags.split(',').filter((t, i) => i !== index).join(', ');
+                          setForm({ ...form, tags: newTags });
+                        }}
+                        className="ml-2 text-indigo-600 hover:text-indigo-800"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
                 <input
                   type="text"
                   value={form.tags}
                   onChange={(e) => setForm({...form, tags: e.target.value})}
                   className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="Separate tags with commas"
+                  placeholder="Type tags separated by commas"
                 />
               </div>
 
