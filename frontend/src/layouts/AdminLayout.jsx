@@ -11,7 +11,7 @@ const AdminLayout = () => {
       <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
       <div className="flex">
         <AdminAside isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        <main className="flex-1 p-4 lg:p-6 lg:ml-6">
+        <main className="flex-1 p-4 pt-20 lg:p-6 lg:pt-24 lg:ml-72">
           <Outlet />
         </main>
       </div>

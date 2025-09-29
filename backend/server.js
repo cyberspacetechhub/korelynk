@@ -74,6 +74,7 @@ app.get('/rss.xml', rssController.generateRSSFeed)
 
 // Admin routes (protected)
 app.use('/api/admin', require('./routes/admin'))
+app.use('/api/analytics', require('./routes/analytics'))
 app.use('/api/notifications', require('./routes/notifications'))
 
 // Handle 404 for undefined routes

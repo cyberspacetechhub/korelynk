@@ -59,20 +59,20 @@ const AdminAside = ({ isOpen, onClose }) => {
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 lg:hidden" onClick={onClose} />
+        <div className="fixed inset-0 z-10 bg-gray-900/50 backdrop-blur-sm lg:hidden" onClick={onClose} />
       )}
       
       {/* Sidebar */}
       <aside 
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-50 w-72 bg-white shadow-2xl border-r border-gray-100 h-screen flex flex-col transform transition-all duration-300 ease-out lg:translate-x-0 lg:static lg:z-auto lg:shadow-none ${
+        className={`fixed top-16 left-0 z-50 w-72 bg-white shadow-2xl border-r border-gray-100 h-[calc(100vh-4rem)] flex flex-col transform transition-all duration-300 ease-out lg:translate-x-0 lg:fixed lg:z-30 lg:shadow-none ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600">
               <BarChart3 className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -82,17 +82,17 @@ const AdminAside = ({ isOpen, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors lg:hidden"
+            className="p-2 text-gray-400 transition-colors rounded-lg hover:text-gray-600 hover:bg-gray-100 lg:hidden"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
         
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full">
+        <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto max-h-[calc(100vh-200px)] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 scrollbar-thumb-rounded-full">
           {navSections.map((section, sectionIndex) => (
             <div key={sectionIndex}>
-              <h3 className="px-3 mb-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+              <h3 className="px-3 mb-3 text-xs font-semibold tracking-wider text-gray-500 uppercase">
                 {section.title}
               </h3>
               <ul className="space-y-1">
