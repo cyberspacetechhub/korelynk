@@ -3,7 +3,8 @@ let allowedOrigins = [
     'http://localhost:3700',
     'https://cyberspacetechhub.vercel.app',
     'https://www.cyberspacetechhub.vercel.app',
-    'https://cyberspacetechhub.onrender.com'
+    'https://cyberspacetechhub.onrender.com',
+    'https://flyerforge-design.vercel.app'
 ]
 
 let environment = process.env.NODE_ENV || 'development'
