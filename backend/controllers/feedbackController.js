@@ -24,18 +24,35 @@ const submitFeedback = async (req, res) => {
   }
 }
 
-// Get approved testimonials
+// Get approved testimonials (excluding FlyerForge)
 const getTestimonials = async (req, res) => {
   try {
     const testimonials = await Feedback.find({ 
       status: 'approved', 
-      isTestimonial: true 
+      isTestimonial: true,
+      site: { $ne: 'flyerforge' }
     }).sort({ createdAt: -1 })
     
     APIResponse.success(res, testimonials, 'Testimonials retrieved successfully')
   } catch (error) {
     console.error('Error fetching testimonials:', error)
     APIResponse.error(res, 'Failed to fetch testimonials', 500, 'FETCH_ERROR')
+  }
+}
+
+// Get FlyerForge testimonials
+const getFlyerForgeTestimonials = async (req, res) => {
+  try {
+    const testimonials = await Feedback.find({ 
+      status: 'approved', 
+      isTestimonial: true,
+      site: 'flyerforge'
+    }).sort({ createdAt: -1 })
+    
+    APIResponse.success(res, testimonials, 'FlyerForge testimonials retrieved successfully')
+  } catch (error) {
+    console.error('Error fetching FlyerForge testimonials:', error)
+    APIResponse.error(res, 'Failed to fetch FlyerForge testimonials', 500, 'FETCH_ERROR')
   }
 }
 
@@ -91,6 +108,7 @@ const updateFeedbackStatus = async (req, res) => {
 module.exports = {
   submitFeedback,
   getTestimonials,
+  getFlyerForgeTestimonials,
   getAllFeedback,
   updateFeedbackStatus
 }

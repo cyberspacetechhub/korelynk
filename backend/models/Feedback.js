@@ -39,6 +39,10 @@ const feedbackSchema = new mongoose.Schema({
   isTestimonial: {
     type: Boolean,
     default: false
+  },
+  site: {
+    type: String,
+    trim: true
   }
 }, {
   timestamps: true
