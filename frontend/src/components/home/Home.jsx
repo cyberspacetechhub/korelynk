@@ -247,22 +247,43 @@ const Home = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {services.map((service, index) => (
-                <div
-                  key={service.id}
-                  className="bg-white p-8 rounded-xl shadow-lg hover-lift text-center"
-                >
-                  <div className="text-indigo-600 mb-4 flex justify-center">
-                    {getServiceIcon(service.title)}
+              {services.map((service, index) => {
+                const getServiceImage = (title) => {
+                  switch (title.toLowerCase()) {
+                    case 'web development': return '/6859d391d0cc1_product.jpg';
+                    case 'mobile development': return '/685ee5834ec0d_mobile.jpg';
+                    case 'backend development': return '/685ad313a9fee_back-end.jpg';
+                    case 'cloud solutions': return '/685edf81e9d89_database.jpg';
+                    default: return '/6859d391d0cc1_product.jpg';
+                  }
+                };
+                
+                return (
+                  <div
+                    key={service.id}
+                    className="bg-white rounded-xl shadow-lg hover-lift overflow-hidden"
+                  >
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={getServiceImage(service.title)}
+                        alt={service.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-6 text-center">
+                      <div className="text-indigo-600 mb-4 flex justify-center">
+                        {getServiceIcon(service.title)}
+                      </div>
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-600">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600">
-                    {service.description}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

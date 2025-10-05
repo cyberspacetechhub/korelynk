@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code } from 'lucide-react';
+import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code, GraduationCap, UserCheck, Database, Calendar } from 'lucide-react';
 
 const AdminAside = ({ isOpen, onClose }) => {
   const sidebarRef = useRef(null);
@@ -22,7 +22,15 @@ const AdminAside = ({ isOpen, onClose }) => {
       ]
     },
     {
-      title: 'User Management',
+      title: 'Learning Management',
+      items: [
+        { path: '/admin/courses', icon: GraduationCap, label: 'Courses' },
+        { path: '/admin/classes', icon: Calendar, label: 'Classes' },
+        { path: '/admin/enrollments', icon: UserCheck, label: 'Enrollments' }
+      ]
+    },
+    {
+      title: 'Communication',
       items: [
         { path: '/admin/contacts', icon: MessageSquare, label: 'Contacts' },
         { path: '/admin/feedback', icon: Star, label: 'Reviews' },
@@ -31,9 +39,17 @@ const AdminAside = ({ isOpen, onClose }) => {
       ]
     },
     {
+      title: 'User Management',
+      items: [
+        { path: '/admin/students', icon: Users, label: 'Students' },
+        { path: '/admin/instructors', icon: GraduationCap, label: 'Instructors' }
+      ]
+    },
+    {
       title: 'Analytics',
       items: [
-        { path: '/admin/analytics', icon: TrendingUp, label: 'Analytics' }
+        { path: '/admin/analytics', icon: TrendingUp, label: 'Analytics' },
+        { path: '/admin/advanced-analytics', icon: Database, label: 'Advanced Analytics' }
       ]
     },
     {

@@ -8,7 +8,7 @@ class ServicesService {
         icon: "globe",
         features: ["Responsive Design", "SEO Optimization", "Performance Optimization", "Cross-browser Compatibility"],
         technologies: ["React", "Next.js", "Vue.js", "Angular"],
-        startingPrice: 2999
+        startingPrice: 500
       },
       {
         id: 2,
@@ -26,7 +26,7 @@ class ServicesService {
         icon: "database",
         features: ["RESTful APIs", "Database Design", "Authentication", "Real-time Features"],
         technologies: ["Node.js", "Python", "PostgreSQL", "MongoDB"],
-        startingPrice: 3999
+        startingPrice: 700
       },
       {
         id: 4,

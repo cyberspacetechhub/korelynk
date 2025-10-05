@@ -32,9 +32,16 @@ const Header = () => {
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Courses', href: '/courses' },
     { name: 'Blog', href: '/blog' },
     { name: 'Feedback', href: '/feedback' },
     { name: 'Contact', href: '/contact' },
+  ];
+
+  const authLinks = [
+    { name: 'Student Portal', href: '/student/login' },
+    { name: 'Instructor Portal', href: '/instructor/login' },
+    { name: 'Admin Portal', href: '/admin/login' }
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -89,12 +96,23 @@ const Header = () => {
               </span>
             </button>
             
-            <Link
-              to="/contact"
-              className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
-            >
-              Get Started
-            </Link>
+            {/* Auth Dropdown */}
+            <div className="relative group">
+              <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+                Get Started
+              </button>
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {authLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 first:rounded-t-md last:rounded-b-md"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Mobile buttons */}

@@ -22,9 +22,19 @@ import SearchResults from './pages/SearchResults';
 import CodingDemo from './pages/CodingDemo';
 import CodeSamples from './pages/CodeSamples';
 import CodeSampleDetail from './pages/CodeSampleDetail';
+import Courses from './pages/Courses';
+import CourseDetail from './pages/CourseDetail';
 import Careers from './pages/Careers';
 import Unsubscribe from './pages/Unsubscribe';
 import AdminLogin from './pages/AdminLogin';
+import StudentLogin from './pages/StudentLogin';
+import StudentDashboard from './pages/StudentDashboard';
+import StudentCourseEnroll from './pages/StudentCourseEnroll';
+import StudentCourseView from './pages/StudentCourseView';
+import StudentAssignmentSubmit from './pages/StudentAssignmentSubmit';
+import AdminAssignments from './pages/admin/AdminAssignments';
+import InstructorLogin from './pages/InstructorLogin';
+import InstructorDashboard from './pages/InstructorDashboard';
 
 // Admin Pages
 import AdminOverview from './pages/admin/AdminOverview';
@@ -44,11 +54,27 @@ import AdminBlogDetails from './pages/admin/AdminBlogDetails';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
 import AdminProfile from './pages/admin/AdminProfile';
 import AdminContactDetails from './pages/admin/AdminContactDetails';
+import AdminCourses from './pages/admin/AdminCourses';
+import AdminCourseForm from './pages/admin/AdminCourseForm';
+import AdminCourseDetail from './pages/admin/AdminCourseDetail';
+import AdminEnrollments from './pages/admin/AdminEnrollments';
+import AdminStudents from './pages/admin/AdminStudents';
+import AdminInstructors from './pages/admin/AdminInstructors';
+import AdminClasses from './pages/admin/AdminClasses';
+import AdminAdvancedAnalytics from './pages/admin/AdminAdvancedAnalytics';
+import InstructorClasses from './pages/instructor/InstructorClasses';
+import InstructorAssignments from './pages/instructor/InstructorAssignments';
+import StudentClasses from './pages/student/StudentClasses';
+import StudentAssignments from './pages/student/StudentAssignments';
+import Unauthorized from './pages/Unauthorized';
 
 // Auth
 import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import StudentProtectedRoute from './components/StudentProtectedRoute';
+import InstructorProtectedRoute from './components/InstructorProtectedRoute';
+import RouteGuard from './components/RouteGuard';
 import PersistLogin from './components/PersistLogin';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollToTopButton from './components/ScrollToTopButton';
@@ -76,8 +102,9 @@ function App() {
           <GoogleAnalytics />
           <ScrollToTop />
           <ScrollToTopButton />
-          <Routes>
-          <Route element={<PersistLogin />}>
+          <RouteGuard>
+            <Routes>
+            <Route element={<PersistLogin />}>
           {/* Public Routes */}
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
@@ -92,9 +119,26 @@ function App() {
             <Route path="coding-demo" element={<CodingDemo />} />
             <Route path="code-samples" element={<CodeSamples />} />
             <Route path="code-samples/:slug" element={<CodeSampleDetail />} />
+            <Route path="courses" element={<Courses />} />
+            <Route path="courses/:id" element={<CourseDetail />} />
             <Route path="careers" element={<Careers />} />
           </Route>
           <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
+          
+            {/* Student Routes */}
+            <Route path="/student/login" element={<StudentLogin />} />
+            <Route path="/student/dashboard" element={<StudentProtectedRoute><StudentDashboard /></StudentProtectedRoute>} />
+            <Route path="/student/courses/:id/enroll" element={<StudentProtectedRoute><StudentCourseEnroll /></StudentProtectedRoute>} />
+            <Route path="/student/courses/:id" element={<StudentProtectedRoute><StudentCourseView /></StudentProtectedRoute>} />
+            <Route path="/student/assignments/:id/submit" element={<StudentProtectedRoute><StudentAssignmentSubmit /></StudentProtectedRoute>} />
+            <Route path="/student/assignments" element={<StudentProtectedRoute><StudentAssignments /></StudentProtectedRoute>} />
+            <Route path="/student/classes" element={<StudentProtectedRoute><StudentClasses /></StudentProtectedRoute>} />
+          
+            {/* Instructor Routes */}
+            <Route path="/instructor/login" element={<InstructorLogin />} />
+            <Route path="/instructor/dashboard" element={<InstructorProtectedRoute><InstructorDashboard /></InstructorProtectedRoute>} />
+            <Route path="/instructor/classes" element={<InstructorProtectedRoute><InstructorClasses /></InstructorProtectedRoute>} />
+            <Route path="/instructor/assignments" element={<InstructorProtectedRoute><InstructorAssignments /></InstructorProtectedRoute>} />
           
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -117,10 +161,24 @@ function App() {
               <Route path="code-samples/edit/:id" element={<AdminCodeSampleForm />} />
               <Route path="code-samples/:id" element={<AdminCodeSampleDetail />} />
               <Route path="analytics" element={<AdminAnalytics />} />
+              <Route path="courses" element={<AdminCourses />} />
+              <Route path="courses/new" element={<AdminCourseForm />} />
+              <Route path="courses/edit/:id" element={<AdminCourseForm />} />
+              <Route path="courses/:id" element={<AdminCourseDetail />} />
+              <Route path="courses/:courseId/assignments" element={<AdminAssignments />} />
+              <Route path="enrollments" element={<AdminEnrollments />} />
+              <Route path="students" element={<AdminStudents />} />
+              <Route path="instructors" element={<AdminInstructors />} />
+              <Route path="classes" element={<AdminClasses />} />
+              <Route path="advanced-analytics" element={<AdminAdvancedAnalytics />} />
               <Route path="profile" element={<AdminProfile />} />
             </Route>
+            
+            {/* Catch-all route for undefined paths */}
+            <Route path="*" element={<Unauthorized />} />
           </Route>
         </Routes>
+          </RouteGuard>
         <ToastContainer
           position="top-right"
           autoClose={3000}

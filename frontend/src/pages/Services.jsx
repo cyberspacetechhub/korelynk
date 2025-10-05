@@ -40,7 +40,7 @@ const Services = () => {
     {
       id: 'starter',
       name: 'Starter',
-      price: '$2,999',
+      price: '$1,000',
       period: 'per project',
       description: 'Perfect for small businesses and startups',
       features: [
@@ -56,7 +56,7 @@ const Services = () => {
     {
       id: 'professional',
       name: 'Professional',
-      price: '$7,999',
+      price: '$2,000',
       period: 'per project',
       description: 'Ideal for growing businesses',
       features: [
@@ -74,7 +74,7 @@ const Services = () => {
     {
       id: 'enterprise',
       name: 'Enterprise',
-      price: '$15,999',
+      price: '$3,500',
       period: 'per project',
       description: 'For large-scale applications',
       features: [
@@ -124,17 +124,36 @@ const Services = () => {
             </div>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {services.map((service, index) => (
-                <div key={service.id} className="p-8 bg-white shadow-lg rounded-xl hover-lift">
-                  <div className="mb-6 text-indigo-600">
-                    {getServiceIcon(service.title)}
-                  </div>
-                  <h3 className="mb-4 text-2xl font-bold text-gray-900">
-                    {service.title}
-                  </h3>
-                  <p className="mb-6 text-gray-600">
-                    {service.description}
-                  </p>
+              {services.map((service, index) => {
+                const getServiceImage = (title) => {
+                  switch (title.toLowerCase()) {
+                    case 'web development': return '/6859d391d0cc1_product.jpg';
+                    case 'mobile development': return '/685ee5834ec0d_mobile.jpg';
+                    case 'backend development': return '/685ad313a9fee_back-end.jpg';
+                    case 'cloud solutions': return '/685edf81e9d89_database.jpg';
+                    default: return '/6859d391d0cc1_product.jpg';
+                  }
+                };
+                
+                return (
+                  <div key={service.id} className="bg-white shadow-lg rounded-xl hover-lift overflow-hidden">
+                    <div className="h-48 overflow-hidden">
+                      <img
+                        src={getServiceImage(service.title)}
+                        alt={service.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-8">
+                      <div className="mb-6 text-indigo-600">
+                        {getServiceIcon(service.title)}
+                      </div>
+                      <h3 className="mb-4 text-2xl font-bold text-gray-900">
+                        {service.title}
+                      </h3>
+                      <p className="mb-6 text-gray-600">
+                        {service.description}
+                      </p>
                   <div className="mb-6">
                     <h4 className="mb-3 font-semibold text-gray-900">Key Features:</h4>
                     <ul className="space-y-2">
@@ -156,16 +175,18 @@ const Services = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="text-center">
-                    <div className="mb-2 text-2xl font-bold text-indigo-600">
-                      Starting at ${service.startingPrice.toLocaleString()}
+                      <div className="text-center">
+                        <div className="mb-2 text-2xl font-bold text-indigo-600">
+                          Starting at ${service.startingPrice.toLocaleString()}
+                        </div>
+                        <button className="px-6 py-2 text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
+                          Learn More
+                        </button>
+                      </div>
                     </div>
-                    <button className="px-6 py-2 text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
-                      Learn More
-                    </button>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
