@@ -47,28 +47,28 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
-      <nav className="container mx-auto px-6">
-        <div className="flex justify-between items-center h-16">
+    <header className="sticky top-0 z-50 bg-white shadow-lg">
+      <nav className="container px-6 mx-auto">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             {settings.logo ? (
-              <img src={settings.logo} alt={settings.siteName} className="h-10 w-auto" />
+              <img src={settings.logo} alt={settings.siteName} className="w-auto h-10" />
             ) : (
               <>
-                <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600">
                   <Code2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold text-gray-900">{settings.siteName.split(' ')[0] || 'Cyberspace'}</span>
-                  <span className="text-sm text-indigo-600 -mt-1">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech Hub'}</span>
+                  <span className="text-xl font-bold text-gray-900">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
+                  <span className="-mt-1 text-sm text-indigo-600">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech'}</span>
                 </div>
               </>
             )}
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="items-center hidden space-x-6 md:flex">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -86,7 +86,7 @@ const Header = () => {
             {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center px-3 py-2 text-gray-600 hover:text-indigo-600 transition-colors border border-gray-300 rounded-lg hover:border-indigo-300"
+              className="flex items-center px-3 py-2 text-gray-600 transition-colors border border-gray-300 rounded-lg hover:text-indigo-600 hover:border-indigo-300"
               title="Search (Ctrl+K)"
             >
               <Search className="w-4 h-4 mr-2" />
@@ -98,10 +98,10 @@ const Header = () => {
             
             {/* Auth Dropdown */}
             <div className="relative group">
-              <button className="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+              <button className="px-6 py-2 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
                 Get Started
               </button>
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div className="absolute right-0 z-50 invisible w-48 mt-2 transition-all duration-200 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible">
                 {authLinks.map((link) => (
                   <Link
                     key={link.name}
@@ -119,13 +119,13 @@ const Header = () => {
           <div className="flex items-center space-x-2 md:hidden">
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="text-gray-700 hover:text-indigo-600 p-2"
+              className="p-2 text-gray-700 hover:text-indigo-600"
             >
               <Search className="w-5 h-5" />
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-indigo-600 p-2"
+              className="p-2 text-gray-700 hover:text-indigo-600"
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -157,7 +157,7 @@ const Header = () => {
                   setIsSearchOpen(true);
                   setIsMenuOpen(false);
                 }}
-                className="flex items-center w-full px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition-colors"
+                className="flex items-center w-full px-3 py-2 text-gray-700 transition-colors rounded-md hover:text-indigo-600 hover:bg-gray-50"
               >
                 <Search className="w-4 h-4 mr-2" />
                 Search
@@ -166,7 +166,7 @@ const Header = () => {
               <Link
                 to="/contact"
                 onClick={() => setIsMenuOpen(false)}
-                className="block w-full text-center bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors mt-4"
+                className="block w-full px-6 py-3 mt-4 font-medium text-center text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
               >
                 Get Started
               </Link>

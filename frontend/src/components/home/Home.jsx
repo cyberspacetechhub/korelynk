@@ -120,9 +120,41 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [featuredProjects, setFeaturedProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      title: "Building Digital",
+      highlight: "Excellence",
+      description: "We create innovative web and mobile solutions that drive business growth and deliver exceptional user experiences.",
+      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop",
+      alt: "Modern workspace"
+    },
+    {
+      title: "Empowering Your",
+      highlight: "Digital Future",
+      description: "Transform your business with cutting-edge technology solutions designed for the modern world.",
+      image: "/kore.png",
+      alt: "KoreLynk Technology"
+    },
+    {
+      title: "Crafting Tomorrow's",
+      highlight: "Solutions Today",
+      description: "Experience the perfect blend of innovation and expertise in our collaborative workspace environment.",
+      image: "/korelynk-workspace.png",
+      alt: "KoreLynk Workspace"
+    }
+  ];
 
   useEffect(() => {
     fetchData();
+    
+    // Auto-slide functionality
+    const slideInterval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % heroSlides.length);
+    }, 5000);
+    
+    return () => clearInterval(slideInterval);
   }, []);
 
   const fetchData = async () => {
@@ -194,11 +226,11 @@ const Home = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
-                Building Digital
-                <span className="gradient-text block">Excellence</span>
+                {heroSlides[currentSlide].title}
+                <span className="gradient-text block">{heroSlides[currentSlide].highlight}</span>
               </h1>
               <p className="text-xl lg:text-2xl mb-8 text-indigo-100 leading-relaxed">
-                We create innovative web and mobile solutions that drive business growth and deliver exceptional user experiences.
+                {heroSlides[currentSlide].description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
@@ -215,13 +247,26 @@ const Home = () => {
                   Get Started
                 </Link>
               </div>
+              
+              {/* Slide indicators */}
+              <div className="flex space-x-2 mt-8">
+                {heroSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentSlide ? 'bg-white' : 'bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
             <div className="relative">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
                 <img
-                  src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop"
-                  alt="Modern workspace"
-                  className="w-full h-80 object-cover rounded-lg"
+                  src={heroSlides[currentSlide].image}
+                  alt={heroSlides[currentSlide].alt}
+                  className="w-full h-80 object-cover rounded-lg transition-all duration-500"
                 />
               </div>
             </div>
