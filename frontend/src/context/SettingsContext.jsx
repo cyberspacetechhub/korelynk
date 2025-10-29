@@ -13,11 +13,11 @@ export const useSettings = () => {
 
 export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState({
-    siteName: 'Cyberspace Tech Hub',
+    siteName: 'KoreLynk Tech',
     siteDescription: 'Professional web and mobile development services',
     logo: '',
     favicon: '',
-    contactEmail: 'hello@cyberspacetechhub.vercel.app',
+    contactEmail: 'hello@korelynk.vercel.app',
     contactPhone: '+1 (555) 123-4567',
     address: '123 Tech Street, Digital City, DC 12345',
     socialLinks: {
@@ -28,7 +28,7 @@ export const SettingsProvider = ({ children }) => {
       instagram: ''
     },
     seoSettings: {
-      metaTitle: 'Cyberspace Tech Hub - Professional Development Services',
+      metaTitle: 'KoreLynk Tech - Professional Development Services',
       metaDescription: 'We create innovative web and mobile solutions that drive business growth',
       keywords: ['web development', 'mobile apps', 'tech solutions']
     }

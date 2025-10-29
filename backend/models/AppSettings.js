@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const appSettingsSchema = new mongoose.Schema({
   siteName: {
     type: String,
-    default: 'Cyberspace Tech Hub'
+    default: 'KoreLynk Tech'
   },
   siteDescription: {
     type: String,
@@ -19,7 +19,7 @@ const appSettingsSchema = new mongoose.Schema({
   },
   contactEmail: {
     type: String,
-    default: 'hello@cyberspacetechhub.vercel.app'
+    default: 'hello@korelynk.vercel.app'
   },
   contactPhone: {
     type: String,

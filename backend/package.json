@@ -1,7 +1,7 @@
 {
   "name": "cyberspace-backend",
   "version": "1.0.0",
-  "description": "Backend for Cyberspace Tech Hub portfolio website",
+  "description": "Backend for KoreLynk Tech portfolio website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -15,7 +15,7 @@
     "express",
     "mongodb"
   ],
-  "author": "Cyberspace Tech Hub",
+  "author": "KoreLynk Tech",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -72,7 +72,7 @@
 - **Error Handling**: Clear error messages
 
 ## 📱 Demo Credentials
-- **Email**: admin@cyberspacetechhub.vercel.app
+- **Email**: admin@korelynk.vercel.app
 - **Password**: admin123
 - **Persist**: Optional remember me checkbox
 

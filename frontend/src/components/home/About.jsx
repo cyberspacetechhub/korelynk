@@ -110,7 +110,7 @@ const About = () => {
         <div className="container mx-auto px-6">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              About Cyberspace Tech Hub
+              About KoreLynk Tech
             </h1>
             <p className="text-xl lg:text-2xl text-indigo-100 leading-relaxed">
               We are a passionate team of developers and designers dedicated to creating 
@@ -130,7 +130,7 @@ const About = () => {
               </h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                 Founded with a vision to bridge the gap between innovative technology and 
-                practical business solutions, Cyberspace Tech Hub has been at the forefront 
+                practical business solutions, KoreLynk Tech has been at the forefront 
                 of digital transformation since our inception.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">

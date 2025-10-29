@@ -3,7 +3,7 @@ const Project = require('../models/Project');
 
 const generateSitemap = async (req, res) => {
     try {
-        const baseUrl = 'https://cyberspacetechhub.vercel.app';
+        const baseUrl = 'https://korelynk.vercel.app';
         
         // Static pages
         const staticPages = [

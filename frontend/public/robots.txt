@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://cyberspacetechhub.vercel.app/sitemap.xml
-Sitemap: https://cyberspacetechhub.vercel.app/rss.xml
+Sitemap: https://korelynk.vercel.app/sitemap.xml
+Sitemap: https://korelynk.vercel.app/rss.xml
 
 # Crawl-delay
 Crawl-delay: 1

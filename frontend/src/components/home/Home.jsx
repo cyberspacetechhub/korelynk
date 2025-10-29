@@ -32,7 +32,7 @@ const TestimonialSection = () => {
     {
       _id: 'fallback-1',
       name: 'Sarah Johnson',
-      message: 'Cyberspace Tech Hub delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail is remarkable.',
+      message: 'KoreLynk Tech delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail is remarkable.',
       rating: 5
     },
     {

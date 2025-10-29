@@ -44,7 +44,7 @@ const AdminHeader = ({ onMenuClick }) => {
           </button>
           <div className="ml-2 lg:ml-0">
             <h1 className="text-lg sm:text-xl font-bold text-gray-900 lg:text-2xl">Admin Dashboard</h1>
-            <p className="hidden sm:block text-sm text-gray-600">Cyberspace Tech Hub</p>
+            <p className="hidden sm:block text-sm text-gray-600">KoreLynk Tech</p>
           </div>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-4">

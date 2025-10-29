@@ -100,7 +100,7 @@ app.use(errorHandler);
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Cyberspace Tech Hub server running on port ${PORT}`)
+  console.log(`KoreLynk Tech server running on port ${PORT}`)
 })
 
 // MongoDB connection events

@@ -1,4 +1,4 @@
-# Cyberspace Tech Hub
+# KoreLynk Tech
 
 A modern full-stack web application for a technology company showcasing services, portfolio, team, and client feedback with a comprehensive admin dashboard.
 
@@ -215,8 +215,8 @@ This project is licensed under the MIT License.
 
 ## 📞 Support
 
-For support, email cyberspacetechhub@gmail.com or create an issue in the repository.
+For support, email korelynk@gmail.com or create an issue in the repository.
 
 ---
 
-**Built with ❤️ by Cyberspace Tech Hub**
+**Built with ❤️ by KoreLynk Tech**

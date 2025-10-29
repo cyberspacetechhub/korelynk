@@ -1,4 +1,4 @@
-# Cyberspace Tech Hub - Clean Project Structure
+# KoreLynk Tech - Clean Project Structure
 
 ## ✅ Fixed Issues
 - **Router Error**: Removed nested BrowserRouter - now only one Router in main.jsx

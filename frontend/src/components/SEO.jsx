@@ -14,7 +14,7 @@ const SEO = ({
 }) => {
   const { settings } = useSettings();
   
-  const siteUrl = 'https://cyberspacetechhub.vercel.app';
+  const siteUrl = 'https://korelynk.vercel.app';
   const defaultImage = `${siteUrl}/og-image.jpg`;
   
   const seoTitle = title 
@@ -22,7 +22,7 @@ const SEO = ({
     : settings.seoSettings?.metaTitle || `${settings.siteName} - Professional Web & Mobile Development`;
     
   const seoDescription = description || settings.seoSettings?.metaDescription || 
-    'Cyberspace Tech Hub provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Transform your business with cutting-edge technology and remote development services.';
+    'KoreLynk Tech provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Transform your business with cutting-edge technology and remote development services.';
     
   const seoKeywords = [
     ...keywords,
@@ -77,8 +77,8 @@ const SEO = ({
       <meta name="twitter:title" content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={seoImage} />
-      <meta name="twitter:site" content="@cyberspacetechhub" />
-      <meta name="twitter:creator" content="@cyberspacetechhub" />
+      <meta name="twitter:site" content="@korelynk" />
+      <meta name="twitter:creator" content="@korelynk" />
       
       {/* Article specific tags */}
       {article && (

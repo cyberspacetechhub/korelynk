@@ -2,7 +2,7 @@ const Blog = require('../models/Blog');
 
 const generateRSSFeed = async (req, res) => {
     try {
-        const baseUrl = 'https://cyberspacetechhub.vercel.app';
+        const baseUrl = 'https://korelynk.vercel.app';
         
         // Get latest published blogs
         const blogs = await Blog.find({ status: 'published' })
@@ -15,16 +15,16 @@ const generateRSSFeed = async (req, res) => {
         let rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Cyberspace Tech Hub Blog</title>
-        <description>Latest programming tutorials, web development insights, and technology trends from Cyberspace Tech Hub</description>
+        <title>KoreLynk Tech Blog</title>
+        <description>Latest programming tutorials, web development insights, and technology trends from KoreLynk Tech</description>
         <link>${baseUrl}/blog</link>
         <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
         <language>en-us</language>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-        <generator>Cyberspace Tech Hub</generator>
+        <generator>KoreLynk Tech</generator>
         <image>
-            <url>${baseUrl}/logo.png</url>
-            <title>Cyberspace Tech Hub</title>
+            <url>${baseUrl}/korelynk.svg</url>
+            <title>KoreLynk Tech</title>
             <link>${baseUrl}</link>
         </image>`;
 
@@ -40,7 +40,7 @@ const generateRSSFeed = async (req, res) => {
             <link>${baseUrl}/blog/${blog.slug}</link>
             <guid isPermaLink="true">${baseUrl}/blog/${blog.slug}</guid>
             <pubDate>${pubDate}</pubDate>
-            <author>${blog.author?.fullname || 'Cyberspace Tech Hub'}</author>
+            <author>${blog.author?.fullname || 'KoreLynk Tech'}</author>
             ${blog.category ? `<category><![CDATA[${blog.category.name}]]></category>` : ''}
             ${blog.tags ? blog.tags.map(tag => `<category><![CDATA[${tag}]]></category>`).join('') : ''}
         </item>`;

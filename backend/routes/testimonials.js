@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         name: "Sarah Johnson",
         role: "CEO, TechStart",
         company: "TechStart Inc.",
-        content: "Cyberspace Tech Hub delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail and technical expertise made our project a huge success.",
+        content: "KoreLynk Tech delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail and technical expertise made our project a huge success.",
         avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
         rating: 5,
         featured: true
@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
         name: "Emily Rodriguez",
         role: "Founder, HealthTech Solutions",
         company: "HealthTech Solutions",
-        content: "Working with Cyberspace Tech Hub was a game-changer for our healthcare platform. They understood our complex requirements and delivered a robust solution.",
+        content: "Working with KoreLynk Tech was a game-changer for our healthcare platform. They understood our complex requirements and delivered a robust solution.",
         avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
         rating: 5,
         featured: false

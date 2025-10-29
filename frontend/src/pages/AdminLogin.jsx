@@ -73,7 +73,7 @@ const AdminLogin = () => {
                   value={credentials.email}
                   onChange={(e) => setCredentials({...credentials, email: e.target.value})}
                   className="pl-10 w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="admin@cyberspacetechhub.vercel.app"
+                  placeholder="admin@korelynk.vercel.app"
                 />
               </div>
             </div>
@@ -139,7 +139,7 @@ const AdminLogin = () => {
 
           {/* Demo Credentials */}
           <div className="text-center text-sm text-gray-600">
-            Demo: admin@cyberspacetechhub.vercel.app / admin123
+            Demo: admin@korelynk.vercel.app / admin123
           </div>
         </form>
 

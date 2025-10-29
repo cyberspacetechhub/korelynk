@@ -1,10 +1,10 @@
 export const seoConfig = {
-  defaultTitle: 'Cyberspace Tech Hub - Professional Web & Mobile Development Services',
-  titleTemplate: '%s | Cyberspace Tech Hub',
+  defaultTitle: 'KoreLynk Tech - Professional Web & Mobile Development Services',
+  titleTemplate: '%s | KoreLynk Tech',
   defaultDescription: 'Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide for global clients and diaspora.',
-  siteUrl: 'https://cyberspacetechhub.vercel.app',
+  siteUrl: 'https://korelynk.vercel.app',
   defaultImage: '/og-image.jpg',
-  twitterHandle: '@cyberspacetechhub',
+  twitterHandle: '@korelynk',
   
   // Core keywords for the business
   coreKeywords: [
