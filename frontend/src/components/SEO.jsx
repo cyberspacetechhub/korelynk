@@ -66,7 +66,7 @@ const SEO = ({
       <meta name="theme-color" content="#6366f1" />
       
       {/* Google Search Console Verification */}
-      <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+      <meta name="google-site-verification" content="google149a351dd1ea4286" />
       
       {/* Canonical URL */}
       <link rel="canonical" href={seoUrl} />
