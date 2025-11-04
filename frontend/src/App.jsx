@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import { HelmetProvider } from 'react-helmet-async';
 import 'react-toastify/dist/ReactToastify.css';
@@ -60,10 +60,17 @@ import AdminCourseDetail from './pages/admin/AdminCourseDetail';
 import AdminEnrollments from './pages/admin/AdminEnrollments';
 import AdminStudents from './pages/admin/AdminStudents';
 import AdminInstructors from './pages/admin/AdminInstructors';
+import AdminInstructorDetail from './pages/admin/AdminInstructorDetail';
+import AdminStudentDetail from './pages/admin/AdminStudentDetail';
 import AdminClasses from './pages/admin/AdminClasses';
 import AdminAdvancedAnalytics from './pages/admin/AdminAdvancedAnalytics';
+import AdminPaymentAccount from './pages/admin/AdminPaymentAccount';
 import InstructorClasses from './pages/instructor/InstructorClasses';
+import InstructorClassDetail from './pages/instructor/InstructorClassDetail';
 import InstructorAssignments from './pages/instructor/InstructorAssignments';
+import InstructorAssignmentDetail from './pages/instructor/InstructorAssignmentDetail';
+import InstructorClassForm from './pages/instructor/InstructorClassForm';
+import InstructorAssignmentForm from './pages/instructor/InstructorAssignmentForm';
 import StudentClasses from './pages/student/StudentClasses';
 import StudentAssignments from './pages/student/StudentAssignments';
 import Unauthorized from './pages/Unauthorized';
@@ -138,7 +145,11 @@ function App() {
             <Route path="/instructor/login" element={<InstructorLogin />} />
             <Route path="/instructor/dashboard" element={<InstructorProtectedRoute><InstructorDashboard /></InstructorProtectedRoute>} />
             <Route path="/instructor/classes" element={<InstructorProtectedRoute><InstructorClasses /></InstructorProtectedRoute>} />
+            <Route path="/instructor/classes/:id" element={<InstructorProtectedRoute><InstructorClassDetail /></InstructorProtectedRoute>} />
+            <Route path="/instructor/classes/new" element={<InstructorProtectedRoute><InstructorClassForm /></InstructorProtectedRoute>} />
             <Route path="/instructor/assignments" element={<InstructorProtectedRoute><InstructorAssignments /></InstructorProtectedRoute>} />
+            <Route path="/instructor/assignments/:id" element={<InstructorProtectedRoute><InstructorAssignmentDetail /></InstructorProtectedRoute>} />
+            <Route path="/instructor/assignments/new" element={<InstructorProtectedRoute><InstructorAssignmentForm /></InstructorProtectedRoute>} />
           
             {/* Admin Routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -168,9 +179,12 @@ function App() {
               <Route path="courses/:courseId/assignments" element={<AdminAssignments />} />
               <Route path="enrollments" element={<AdminEnrollments />} />
               <Route path="students" element={<AdminStudents />} />
+              <Route path="students/:id" element={<AdminStudentDetail />} />
               <Route path="instructors" element={<AdminInstructors />} />
+              <Route path="instructors/:id" element={<AdminInstructorDetail />} />
               <Route path="classes" element={<AdminClasses />} />
               <Route path="advanced-analytics" element={<AdminAdvancedAnalytics />} />
+              <Route path="payment-account" element={<AdminPaymentAccount />} />
               <Route path="profile" element={<AdminProfile />} />
             </Route>
             
@@ -181,15 +195,19 @@ function App() {
           </RouteGuard>
         <ToastContainer
           position="top-right"
-          autoClose={3000}
+          autoClose={4000}
           hideProgressBar={false}
-          newestOnTop={false}
+          newestOnTop
           closeOnClick
           rtl={false}
           pauseOnFocusLoss
           draggable
           pauseOnHover
           theme="light"
+          className="mt-16"
+          toastClassName="shadow-lg"
+          bodyClassName="text-sm"
+          progressClassName="bg-indigo-600"
         />
           </SettingsProvider>
         </AuthProvider>

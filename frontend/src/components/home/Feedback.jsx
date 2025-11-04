@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { Star, StarBorder } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';

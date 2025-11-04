@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Eye, UserCheck, UserX, Mail, Phone, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Search, Eye, UserCheck, UserX, Mail, Phone, Calendar, Users } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
+import ListSkeleton from '../../components/skeletons/ListSkeleton';
+import EmptyState from '../../components/EmptyState';
 
 const AdminStudents = () => {
   const [students, setStudents] = useState([]);
@@ -66,9 +69,9 @@ const AdminStudents = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Student Management</h1>
+    <div className="w-full p-4 md:p-6">
+      <div className="flex flex-col gap-2 mb-6 sm:flex-row sm:justify-between sm:items-center">
+        <h1 className="text-xl font-bold text-gray-900 md:text-2xl">Student Management</h1>
         <div className="text-sm text-gray-600">
           Total Students: {pagination.total}
         </div>
@@ -76,13 +79,13 @@ const AdminStudents = () => {
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-4 mb-6">
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row">
           <div className="flex-1">
             <div className="relative">
               <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search students by name or email..."
+                placeholder="Search students..."
                 value={searchTerm}
                 onChange={handleSearch}
                 className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -90,27 +93,27 @@ const AdminStudents = () => {
             </div>
           </div>
           
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => handleStatusFilter('')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                statusFilter === '' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700'
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                statusFilter === '' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
               All
             </button>
             <button
               onClick={() => handleStatusFilter('active')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                statusFilter === 'active' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700'
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                statusFilter === 'active' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
               Active
             </button>
             <button
               onClick={() => handleStatusFilter('inactive')}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
-                statusFilter === 'inactive' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700'
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                statusFilter === 'inactive' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
               Inactive
@@ -121,13 +124,11 @@ const AdminStudents = () => {
 
       {/* Students Table */}
       {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-        </div>
-      ) : (
+        <ListSkeleton count={8} />
+      ) : students.length > 0 ? (
         <div className="bg-white rounded-lg shadow overflow-hidden">
           {/* Mobile Cards */}
-          <div className="block md:hidden">
+          <div className="block lg:hidden">
             {students.map((student) => (
               <div key={student._id} className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between mb-2">
@@ -153,20 +154,27 @@ const AdminStudents = () => {
                   <div>Courses: {student.enrolledCourses?.length || 0}</div>
                   <div>Joined: {new Date(student.createdAt).toLocaleDateString()}</div>
                 </div>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => window.open(`/admin/students/${student._id}`, '_blank')}
-                    className="text-indigo-600 hover:text-indigo-900 text-sm"
+                <div className="flex gap-2">
+                  <Link
+                    to={`/admin/students/${student._id}`}
+                    className="flex-1 px-3 py-2 text-sm text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors text-center"
                   >
-                    View Details
-                  </button>
+                    <Eye className="w-4 h-4 inline mr-1" />
+                    View
+                  </Link>
                   <button
                     onClick={() => updateStudentStatus(student._id, !student.isActive)}
-                    className={`text-sm ${
-                      student.isActive ? 'text-red-600 hover:text-red-900' : 'text-green-600 hover:text-green-900'
+                    className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors text-center ${
+                      student.isActive 
+                        ? 'text-red-600 bg-red-50 hover:bg-red-100' 
+                        : 'text-green-600 bg-green-50 hover:bg-green-100'
                     }`}
                   >
-                    {student.isActive ? 'Deactivate' : 'Activate'}
+                    {student.isActive ? (
+                      <><UserX className="w-4 h-4 inline mr-1" />Deactivate</>
+                    ) : (
+                      <><UserCheck className="w-4 h-4 inline mr-1" />Activate</>
+                    )}
                   </button>
                 </div>
               </div>
@@ -174,7 +182,7 @@ const AdminStudents = () => {
           </div>
           
           {/* Desktop Table */}
-          <div className="hidden md:block overflow-x-auto">
+          <div className="hidden lg:block overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
@@ -255,13 +263,13 @@ const AdminStudents = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex space-x-2">
-                        <button
-                          onClick={() => window.open(`/admin/students/${student._id}`, '_blank')}
+                        <Link
+                          to={`/admin/students/${student._id}`}
                           className="text-indigo-600 hover:text-indigo-900"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4" />
-                        </button>
+                        </Link>
                         <button
                           onClick={() => updateStudentStatus(student._id, !student.isActive)}
                           className={`${
@@ -283,22 +291,25 @@ const AdminStudents = () => {
           
           {/* Pagination */}
           {pagination.totalPages > 1 && (
-            <div className="px-6 py-3 border-t border-gray-200 flex justify-between items-center">
-              <div className="text-sm text-gray-700">
+            <div className="px-4 py-3 border-t border-gray-200 flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
+              <div className="text-sm text-gray-700 text-center sm:text-left">
                 Showing {((pagination.currentPage - 1) * 10) + 1} to {Math.min(pagination.currentPage * 10, pagination.total)} of {pagination.total} results
               </div>
-              <div className="flex space-x-2">
+              <div className="flex justify-center gap-2">
                 <button
                   onClick={() => setPagination(prev => ({ ...prev, currentPage: prev.currentPage - 1 }))}
                   disabled={pagination.currentPage === 1}
-                  className="px-3 py-1 border border-gray-300 rounded text-sm disabled:opacity-50"
+                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                 >
                   Previous
                 </button>
+                <span className="px-3 py-2 text-sm text-gray-600">
+                  {pagination.currentPage} of {pagination.totalPages}
+                </span>
                 <button
                   onClick={() => setPagination(prev => ({ ...prev, currentPage: prev.currentPage + 1 }))}
                   disabled={pagination.currentPage === pagination.totalPages}
-                  className="px-3 py-1 border border-gray-300 rounded text-sm disabled:opacity-50"
+                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
                 >
                   Next
                 </button>
@@ -306,6 +317,12 @@ const AdminStudents = () => {
             </div>
           )}
         </div>
+      ) : (
+        <EmptyState
+          icon={Users}
+          title="No students found"
+          description="No students match your current search and filter criteria. Students will appear here once they register for courses."
+        />
       )}
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Calendar, Clock, CheckCircle } from 'lucide-react';
+import { FileText, Calendar, Clock, CheckCircle, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
 
 const StudentAssignments = () => {
+  const navigate = useNavigate();
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,6 +53,14 @@ const StudentAssignments = () => {
 
   return (
     <div className="p-6">
+      <button
+        onClick={() => navigate('/student/dashboard')}
+        className="flex items-center text-indigo-600 hover:text-indigo-800 mb-6"
+      >
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        Back to Dashboard
+      </button>
+      
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">My Assignments</h1>
         <p className="text-gray-600">View and submit your assignments</p>

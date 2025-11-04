@@ -1,106 +1,145 @@
 const Class = require('../models/Class')
 const Course = require('../models/Course')
 const Student = require('../models/Student')
-const Enrollment = require('../models/Enrollment')
 
-class ClassService {
-  async getAllClasses(filters = {}, page = 1, limit = 10) {
-    const query = {}
+const generateClassCode = () => {
+  return Math.random().toString(36).substring(2, 8).toUpperCase()
+}
+
+const getAllClasses = async (filters = {}, page = 1, limit = 10) => {
+  const query = {}
+  
+  if (filters.course) query.course = filters.course
+  if (filters.instructor) query.instructor = filters.instructor
+  if (filters.status !== undefined) query.isActive = filters.status === 'active'
+  
+  const skip = (page - 1) * limit
+  
+  const classes = await Class.find(query)
+    .populate('instructor', 'fullName email')
+    .populate('course', 'title category')
+    .populate('students.student', 'fullName email')
+    .skip(skip)
+    .limit(parseInt(limit))
+    .sort({ createdAt: -1 })
     
-    if (filters.course) query.course = filters.course
-    if (filters.instructor) query.instructor = filters.instructor
-    if (filters.status) query.status = filters.status
-    
-    const skip = (page - 1) * limit
-    
-    const classes = await Class.find(query)
-      .populate('course', 'title category')
-      .populate('instructor', 'fullName email')
-      .populate('students', 'fullName email')
-      .sort({ scheduledDate: -1 })
-      .skip(skip)
-      .limit(parseInt(limit))
-    
-    const total = await Class.countDocuments(query)
-    
-    return {
-      classes,
-      currentPage: parseInt(page),
-      totalPages: Math.ceil(total / limit),
+  const total = await Class.countDocuments(query)
+  
+  return {
+    classes,
+    pagination: {
+      current: parseInt(page),
+      pages: Math.ceil(total / limit),
       total
     }
   }
-
-  async createClass(classData) {
-    const newClass = new Class(classData)
-    return await newClass.save()
-  }
-
-  async updateClass(id, updateData) {
-    return await Class.findByIdAndUpdate(id, updateData, { new: true })
-      .populate('course', 'title category')
-      .populate('instructor', 'fullName email')
-  }
-
-  async deleteClass(id) {
-    return await Class.findByIdAndDelete(id)
-  }
-
-  async getClassesByInstructor(instructorId) {
-    return await Class.find({ instructor: instructorId })
-      .populate('course', 'title category level')
-      .populate('students', 'fullName email')
-      .sort({ scheduledDate: -1 })
-  }
-
-  async getClassesByStudent(studentId) {
-    return await Class.find({ students: studentId })
-      .populate('course', 'title category level')
-      .populate('instructor', 'fullName email')
-      .sort({ scheduledDate: -1 })
-  }
-
-  async updateClassStatus(id, status, notes) {
-    return await Class.findByIdAndUpdate(
-      id, 
-      { status, notes, updatedAt: new Date() }, 
-      { new: true }
-    ).populate('course', 'title').populate('instructor', 'fullName')
-  }
-
-  async joinClass(classId, studentId) {
-    const classData = await Class.findById(classId).populate('course')
-    if (!classData) {
-      throw new Error('Class not found')
-    }
-
-    // Check if student is enrolled in the course
-    const enrollment = await Enrollment.findOne({
-      student: studentId,
-      course: classData.course._id,
-      status: 'approved'
-    })
-
-    if (!enrollment) {
-      throw new Error('You must be enrolled in this course to join the class')
-    }
-
-    // Check if student is already in the class
-    if (classData.students.includes(studentId)) {
-      throw new Error('You are already in this class')
-    }
-
-    // Check class capacity
-    if (classData.students.length >= classData.maxStudents) {
-      throw new Error('Class is full')
-    }
-
-    // Add student to class
-    classData.students.push(studentId)
-    await classData.save()
-
-    return classData
-  }
 }
 
-module.exports = new ClassService()
+const createClass = async (classData) => {
+  // Generate unique class code
+  let code
+  let isUnique = false
+  
+  while (!isUnique) {
+    code = generateClassCode()
+    const existing = await Class.findOne({ code })
+    if (!existing) isUnique = true
+  }
+  
+  const classObj = new Class({
+    ...classData,
+    code
+  })
+  
+  await classObj.save()
+  return await classObj.populate(['instructor', 'course'])
+}
+
+const updateClass = async (id, updateData) => {
+  return await Class.findByIdAndUpdate(id, updateData, { new: true })
+    .populate('instructor', 'fullName email')
+    .populate('course', 'title category')
+}
+
+const deleteClass = async (id) => {
+  return await Class.findByIdAndDelete(id)
+}
+
+const getClassesByInstructor = async (instructorId) => {
+  return await Class.find({ instructor: instructorId })
+    .populate('course', 'title category')
+    .populate('students.student', 'fullName email')
+    .sort({ createdAt: -1 })
+}
+
+const getClassesByStudent = async (studentId) => {
+  return await Class.find({ 'students.student': studentId })
+    .populate('instructor', 'fullName email')
+    .populate('course', 'title category')
+    .sort({ createdAt: -1 })
+}
+
+const joinClass = async (classId, studentId) => {
+  const classObj = await Class.findById(classId)
+  if (!classObj) {
+    throw new Error('Class not found')
+  }
+  
+  // Check if student already enrolled
+  const isEnrolled = classObj.students.some(s => s.student.toString() === studentId)
+  if (isEnrolled) {
+    throw new Error('Already enrolled in this class')
+  }
+  
+  // Check capacity
+  if (classObj.students.length >= classObj.maxStudents) {
+    throw new Error('Class is full')
+  }
+  
+  classObj.students.push({
+    student: studentId,
+    enrolledAt: new Date(),
+    status: 'active',
+    progress: 0
+  })
+  
+  await classObj.save()
+  return await classObj.populate(['instructor', 'course', 'students.student'])
+}
+
+const updateStudentProgress = async (classId, studentId, progress) => {
+  return await Class.findOneAndUpdate(
+    { _id: classId, 'students.student': studentId },
+    { $set: { 'students.$.progress': progress } },
+    { new: true }
+  )
+}
+
+const updateClassStatus = async (id, status, notes) => {
+  const updateData = { isActive: status === 'active' }
+  if (notes) updateData.notes = notes
+  
+  return await Class.findByIdAndUpdate(id, updateData, { new: true })
+    .populate('instructor', 'fullName email')
+    .populate('course', 'title category')
+}
+
+const getClassById = async (id) => {
+  return await Class.findById(id)
+    .populate('instructor', 'fullName email')
+    .populate('course', 'title category')
+    .populate('students.student', 'fullName email')
+}
+
+module.exports = {
+  getAllClasses,
+  createClass,
+  updateClass,
+  deleteClass,
+  getClassesByInstructor,
+  getClassesByStudent,
+  joinClass,
+  updateStudentProgress,
+  updateClassStatus,
+  getClassById
+}

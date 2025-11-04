@@ -31,6 +31,30 @@ const studentSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  preferences: {
+    interests: [{
+      type: String,
+      trim: true
+    }],
+    skillLevel: {
+      type: String,
+      enum: ['Beginner', 'Intermediate', 'Advanced'],
+      default: 'Beginner'
+    },
+    learningGoals: [{
+      type: String,
+      trim: true
+    }],
+    preferredSchedule: {
+      type: String,
+      enum: ['Weekdays', 'Weekends', 'Flexible'],
+      default: 'Flexible'
+    }
+  },
   enrolledCourses: [{
     course: {
       type: mongoose.Schema.Types.ObjectId,
@@ -44,7 +68,17 @@ const studentSchema = new mongoose.Schema({
       type: String,
       enum: ['active', 'completed', 'dropped'],
       default: 'active'
+    },
+    progress: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 100
     }
+  }],
+  classes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Class'
   }]
 }, {
   timestamps: true

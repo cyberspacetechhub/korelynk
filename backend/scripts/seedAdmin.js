@@ -10,7 +10,7 @@ const seedAdmin = async () => {
     // Check if admin already exists
     const existingAdmin = await Admin.findOne({ email: 'admin@korelynk.vercel.app' })
     if (existingAdmin) {
-      console.log('Admin already exists')
+      // console.log('Admin already exists')
       process.exit(0)
     }
 
@@ -25,9 +25,9 @@ const seedAdmin = async () => {
     })
 
     await admin.save()
-    console.log('Admin user created successfully')
-    console.log('Email: admin@korelynk.vercel.app')
-    console.log('Password: admin123')
+    // console.log('Admin user created successfully')
+    // console.log('Email: admin@korelynk.vercel.app')
+    // console.log('Password: admin123')
     
     process.exit(0)
   } catch (error) {

@@ -18,8 +18,15 @@ const StudentLogin = () => {
     phone: '',
     verificationCode: '',
     resetCode: '',
-    newPassword: ''
+    newPassword: '',
+    interests: [],
+    skillLevel: 'Beginner',
+    learningGoals: [],
+    preferredSchedule: 'Flexible'
   });
+
+  const skillOptions = ['Web Development', 'Mobile Development', 'Backend Development', 'Database', 'DevOps', 'UI/UX Design', 'Data Science', 'Machine Learning', 'Cybersecurity', 'Cloud Computing'];
+  const goalOptions = ['Career Change', 'Skill Enhancement', 'Personal Growth', 'Certification', 'Freelancing', 'Startup', 'Academic'];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +50,13 @@ const StudentLogin = () => {
           fullName: formData.fullName,
           email: formData.email,
           password: formData.password,
-          phone: formData.phone
+          phone: formData.phone,
+          preferences: {
+            interests: formData.interests,
+            skillLevel: formData.skillLevel,
+            learningGoals: formData.learningGoals,
+            preferredSchedule: formData.preferredSchedule
+          }
         });
         
         if (response.data.success) {
@@ -165,19 +178,61 @@ const StudentLogin = () => {
             </div>
 
             {!isLogin && (
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  required={!isLogin}
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="Enter your phone number"
-                />
-              </div>
+              <>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    required={!isLogin}
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Areas of Interest
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {skillOptions.map(skill => (
+                      <label key={skill} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={formData.interests.includes(skill)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormData({...formData, interests: [...formData.interests, skill]});
+                            } else {
+                              setFormData({...formData, interests: formData.interests.filter(i => i !== skill)});
+                            }
+                          }}
+                          className="mr-2 text-indigo-600"
+                        />
+                        <span className="text-sm">{skill}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Current Skill Level
+                  </label>
+                  <select
+                    value={formData.skillLevel}
+                    onChange={(e) => setFormData({...formData, skillLevel: e.target.value})}
+                    className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+              </>
             )}
 
             <div className="mb-6">

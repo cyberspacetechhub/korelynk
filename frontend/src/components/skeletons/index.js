@@ -1,0 +1,6 @@
+export { default as SkeletonLoader } from './SkeletonLoader';
+export { default as CardSkeleton } from './CardSkeleton';
+export { default as BlogSkeleton } from './BlogSkeleton';
+export { default as DashboardSkeleton } from './DashboardSkeleton';
+export { default as ListSkeleton } from './ListSkeleton';
+export { default as DetailSkeleton } from './DetailSkeleton';

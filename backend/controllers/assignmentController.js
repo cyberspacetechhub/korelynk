@@ -1,9 +1,15 @@
 const assignmentService = require('../services/assignmentService')
 const APIResponse = require('../utils/APIResponse')
+const cloudinary = require('../config/cloudinary')
+const fs = require('fs')
 
 const createAssignment = async (req, res) => {
   try {
-    const assignment = await assignmentService.createAssignment(req.body)
+    const assignmentData = {
+      ...req.body,
+      instructor: req.instructor?._id || req.user?._id
+    }
+    const assignment = await assignmentService.createAssignment(assignmentData)
     APIResponse.success(res, assignment, 'Assignment created successfully', 201)
   } catch (error) {
     console.error('Create assignment error:', error)
@@ -66,6 +72,34 @@ const submitAssignment = async (req, res) => {
       ...req.body,
       student: req.student._id
     }
+    
+    // Handle file uploads if present
+    if (req.files && req.files.length > 0) {
+      const attachments = []
+      
+      for (const file of req.files) {
+        try {
+          const result = await cloudinary.uploader.upload(file.path, {
+            folder: 'submissions',
+            resource_type: 'auto'
+          })
+          attachments.push({
+            filename: file.originalname,
+            url: result.secure_url
+          })
+          // Clean up temp file
+          fs.unlinkSync(file.path)
+        } catch (uploadError) {
+          console.error('File upload error:', uploadError)
+          // Clean up temp file on error
+          if (fs.existsSync(file.path)) {
+            fs.unlinkSync(file.path)
+          }
+        }
+      }
+      submissionData.attachments = attachments
+    }
+    
     const submission = await assignmentService.submitAssignment(submissionData)
     APIResponse.success(res, submission, 'Assignment submitted successfully', 201)
   } catch (error) {
@@ -82,7 +116,7 @@ const submitAssignment = async (req, res) => {
 
 const getSubmissionsByAssignment = async (req, res) => {
   try {
-    const submissions = await assignmentService.getSubmissionsByAssignment(req.params.assignmentId)
+    const submissions = await assignmentService.getSubmissionsByAssignment(req.params.id)
     APIResponse.success(res, submissions, 'Submissions retrieved successfully')
   } catch (error) {
     console.error('Get submissions error:', error)
@@ -112,6 +146,48 @@ const getStudentSubmissions = async (req, res) => {
   }
 }
 
+const createInstructorAssignment = async (req, res) => {
+  try {
+    const assignmentData = {
+      ...req.body,
+      instructor: req.instructor._id
+    }
+    
+    // Handle file uploads if present
+    if (req.files && req.files.length > 0) {
+      const attachments = []
+      
+      for (const file of req.files) {
+        try {
+          const result = await cloudinary.uploader.upload(file.path, {
+            folder: 'assignments',
+            resource_type: 'auto'
+          })
+          attachments.push({
+            filename: file.originalname,
+            url: result.secure_url
+          })
+          // Clean up temp file
+          fs.unlinkSync(file.path)
+        } catch (uploadError) {
+          console.error('File upload error:', uploadError)
+          // Clean up temp file on error
+          if (fs.existsSync(file.path)) {
+            fs.unlinkSync(file.path)
+          }
+        }
+      }
+      assignmentData.attachments = attachments
+    }
+    
+    const assignment = await assignmentService.createAssignment(assignmentData)
+    APIResponse.success(res, assignment, 'Assignment created successfully', 201)
+  } catch (error) {
+    console.error('Create instructor assignment error:', error)
+    APIResponse.error(res, 'Failed to create assignment', 500, 'CREATE_ASSIGNMENT_ERROR')
+  }
+}
+
 const getInstructorAssignments = async (req, res) => {
   try {
     const assignments = await assignmentService.getAssignmentsByInstructor(req.instructor._id)
@@ -134,6 +210,7 @@ const getStudentAssignments = async (req, res) => {
 
 module.exports = {
   createAssignment,
+  createInstructorAssignment,
   getAssignmentsByClass,
   getAssignmentById,
   updateAssignment,

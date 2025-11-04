@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, CheckCircle, XCircle, Clock, Mail, Phone } from 'lucide-react';
+import { Eye, CheckCircle, XCircle, Clock, Mail, Phone, Users } from 'lucide-react';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
+import SkeletonLoader from '../../components/SkeletonLoader';
+import EmptyState from '../../components/EmptyState';
 
 const AdminEnrollments = () => {
   const [enrollments, setEnrollments] = useState([]);
@@ -53,16 +55,16 @@ const AdminEnrollments = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Enrollments Management</h1>
+    <div className="p-4 md:p-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Enrollments Management</h1>
         
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2">
           {['all', 'pending', 'approved', 'rejected', 'completed'].map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium ${
+              className={`px-3 py-2 rounded-lg text-sm font-medium ${
                 filter === status
                   ? 'bg-indigo-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -74,115 +76,103 @@ const AdminEnrollments = () => {
         </div>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-        </div>
-      ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Student
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Course
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Experience
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredEnrollments.map((enrollment) => (
-                  <tr key={enrollment._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
-                          {enrollment.studentName}
-                        </div>
-                        <div className="text-sm text-gray-500 flex items-center">
-                          <Mail className="w-3 h-3 mr-1" />
-                          {enrollment.email}
-                        </div>
-                        <div className="text-sm text-gray-500 flex items-center">
-                          <Phone className="w-3 h-3 mr-1" />
-                          {enrollment.phone}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
-                          {enrollment.course?.title}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {enrollment.course?.category}
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
-                        {enrollment.experience}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(enrollment.status)}`}>
-                        {enrollment.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {new Date(enrollment.enrollmentDate).toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex space-x-2">
-                        {enrollment.status === 'pending' && (
-                          <>
-                            <button
-                              onClick={() => updateStatus(enrollment._id, 'approved')}
-                              className="text-green-600 hover:text-green-900"
-                              title="Approve"
-                            >
-                              <CheckCircle className="w-4 h-4" />
-                            </button>
-                            <button
-                              onClick={() => updateStatus(enrollment._id, 'rejected')}
-                              className="text-red-600 hover:text-red-900"
-                              title="Reject"
-                            >
-                              <XCircle className="w-4 h-4" />
-                            </button>
-                          </>
-                        )}
-                        {enrollment.status === 'approved' && (
-                          <button
-                            onClick={() => updateStatus(enrollment._id, 'completed')}
-                            className="text-blue-600 hover:text-blue-900"
-                            title="Mark as Completed"
-                          >
-                            <Clock className="w-4 h-4" />
-                          </button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <div className="bg-white rounded-lg shadow">
+        {loading ? (
+          <div className="p-6">
+            <SkeletonLoader rows={5} columns={6} />
           </div>
-        </div>
-      )}
+        ) : filteredEnrollments.length > 0 ? (
+          <div className="p-6">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Student</th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Course</th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Experience</th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Status</th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Date</th>
+                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredEnrollments.map((enrollment) => (
+                    <tr key={enrollment._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                      <td className="px-4 py-4">
+                        <div>
+                          <div className="font-medium text-gray-900">{enrollment.studentName}</div>
+                          <div className="text-sm text-gray-500 flex items-center">
+                            <Mail className="w-3 h-3 mr-1" />
+                            {enrollment.email}
+                          </div>
+                          <div className="text-sm text-gray-500 flex items-center">
+                            <Phone className="w-3 h-3 mr-1" />
+                            {enrollment.phone}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4">
+                        <div>
+                          <div className="font-medium text-gray-900">{enrollment.course?.title}</div>
+                          <div className="text-sm text-gray-500">{enrollment.course?.category}</div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-4">
+                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                          {enrollment.experience}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4">
+                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full transition-colors ${getStatusColor(enrollment.status)}`}>
+                          {enrollment.status}
+                        </span>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-900">{new Date(enrollment.enrollmentDate).toLocaleDateString()}</td>
+                      <td className="px-4 py-4">
+                        <div className="flex items-center gap-2">
+                          {enrollment.status === 'pending' && (
+                            <>
+                              <button
+                                onClick={() => updateStatus(enrollment._id, 'approved')}
+                                className="bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
+                              >
+                                <CheckCircle className="w-3 h-3 inline mr-1" />
+                                Approve
+                              </button>
+                              <button
+                                onClick={() => updateStatus(enrollment._id, 'rejected')}
+                                className="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
+                              >
+                                <XCircle className="w-3 h-3 inline mr-1" />
+                                Reject
+                              </button>
+                            </>
+                          )}
+                          {enrollment.status === 'approved' && (
+                            <button
+                              onClick={() => updateStatus(enrollment._id, 'completed')}
+                              className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
+                            >
+                              <Clock className="w-3 h-3 inline mr-1" />
+                              Complete
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <EmptyState
+            icon={Users}
+            title="No enrollments found"
+            description="No student enrollments match your current filter. Try adjusting the status filter or check back later for new enrollments."
+          />
+        )}
+      </div>
 
       {!loading && filteredEnrollments.length === 0 && (
         <div className="text-center py-12">

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, Clock, Video, CheckCircle, Plus } from 'lucide-react';
+import { Calendar, Users, Clock, Video, CheckCircle, Plus, ArrowLeft, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
 
 const InstructorClasses = () => {
+  const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -107,6 +109,14 @@ const InstructorClasses = () => {
 
   return (
     <div className="p-6">
+      <button
+        onClick={() => navigate('/instructor/dashboard')}
+        className="flex items-center text-purple-600 hover:text-purple-800 mb-6"
+      >
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        Back to Dashboard
+      </button>
+      
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">My Classes</h1>
@@ -148,7 +158,7 @@ const InstructorClasses = () => {
                 <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-3">
                   <div className="flex items-center">
                     <Calendar className="w-4 h-4 mr-1" />
-                    {new Date(classItem.scheduledDate).toLocaleDateString()}
+                    {classItem.startDate ? new Date(classItem.startDate).toLocaleDateString() : 'No date set'}
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-1" />
@@ -161,6 +171,14 @@ const InstructorClasses = () => {
                 </div>
                 
                 <div className="flex gap-2 mt-4">
+                  <button
+                    onClick={() => navigate(`/instructor/classes/${classItem._id}`)}
+                    className="inline-flex items-center px-3 py-1 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700"
+                  >
+                    <Settings className="w-4 h-4 mr-1" />
+                    Manage
+                  </button>
+                  
                   {classItem.meetingLink && (
                     <a
                       href={classItem.meetingLink}

@@ -37,6 +37,18 @@ const courseSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  featuredImage: {
+    type: String,
+    default: ''
+  },
+  introVideo: {
+    type: String,
+    default: ''
+  },
+  skills: [{
+    type: String,
+    trim: true
+  }],
   curriculum: [{
     week: Number,
     title: String,

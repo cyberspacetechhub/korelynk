@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ExternalLink, Github, Filter, ArrowRight } from 'lucide-react';
 import axios from '../api/axios';
+import CardSkeleton from '../components/skeletons/CardSkeleton';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -145,8 +146,36 @@ const Portfolio = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen pt-20 bg-gray-50">
-        <div className="w-12 h-12 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
+      <div className="min-h-screen pt">
+        <div className="py-20 bg-gray-200 animate-pulse">
+          <div className="container px-6 mx-auto text-center">
+            <div className="h-16 bg-gray-300 rounded w-96 mx-auto mb-6"></div>
+            <div className="h-8 bg-gray-300 rounded w-80 mx-auto"></div>
+          </div>
+        </div>
+        <section className="py-20 bg-white">
+          <div className="container px-6 mx-auto">
+            <div className="mb-16 text-center">
+              <div className="h-10 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-48 mx-auto animate-pulse"></div>
+            </div>
+            <CardSkeleton count={3} />
+          </div>
+        </section>
+        <section className="py-20 bg-gray-50">
+          <div className="container px-6 mx-auto">
+            <div className="mb-16 text-center">
+              <div className="h-10 bg-gray-200 rounded w-48 mx-auto mb-4 animate-pulse"></div>
+              <div className="h-6 bg-gray-200 rounded w-64 mx-auto mb-8 animate-pulse"></div>
+              <div className="flex flex-wrap justify-center gap-4 mb-12">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="h-12 bg-gray-200 rounded w-32 animate-pulse"></div>
+                ))}
+              </div>
+            </div>
+            <CardSkeleton count={6} />
+          </div>
+        </section>
       </div>
     );
   }
@@ -154,8 +183,14 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen pt">
       {/* Hero Section */}
-      <section className="py-20 text-white bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
-        <div className="container px-6 mx-auto text-center">
+      <section className="py-20 text-white relative" style={{
+        backgroundImage: 'url(/korelynk-workspace.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container px-6 mx-auto text-center relative z-10">
           <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
             Our Portfolio
           </h1>

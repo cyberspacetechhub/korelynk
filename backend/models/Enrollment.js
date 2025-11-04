@@ -36,9 +36,22 @@ const enrollmentSchema = new mongoose.Schema({
     enum: ['pending', 'paid', 'failed'],
     default: 'pending'
   },
+  paymentMethod: {
+    type: String,
+    enum: ['paystack', 'bank_transfer'],
+    required: true
+  },
   paymentAmount: {
     type: Number,
     required: true
+  },
+  paymentReference: {
+    type: String,
+    trim: true
+  },
+  paymentProof: {
+    type: String, // URL to uploaded payment proof
+    trim: true
   },
   experience: {
     type: String,

@@ -180,8 +180,14 @@ const Contact = () => {
   return (
     <div className="min-h-screen ">
       {/* Hero Section */}
-      <section className="py-20 text-white bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
-        <div className="container px-6 mx-auto text-center">
+      <section className="py-20 text-white relative" style={{
+        backgroundImage: 'url(/korelynk-workspace.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container px-6 mx-auto text-center relative z-10">
           <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
             Get In Touch
           </h1>
@@ -192,8 +198,14 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-gray-50">
-        <div className="container px-6 mx-auto">
+      <section className="py-20 relative" style={{
+        backgroundImage: 'url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-white/95"></div>
+        <div className="container px-6 mx-auto relative z-10">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Form */}
             <div className="p-8 bg-white shadow-lg rounded-2xl">
@@ -447,8 +459,14 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
-        <div className="container px-6 mx-auto">
+      <section className="py-20 relative" style={{
+        backgroundImage: 'url(https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=800&fit=crop)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-white/90"></div>
+        <div className="container px-6 mx-auto relative z-10">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-900">
               Frequently Asked Questions

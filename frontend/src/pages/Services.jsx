@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Check, Code, Smartphone, Globe, Database, Cloud, Shield, ArrowRight } from 'lucide-react';
 import axios from '../api/axios';
+import CardSkeleton from '../components/skeletons/CardSkeleton';
 
 const Services = () => {
   const [selectedPlan, setSelectedPlan] = useState('professional');
@@ -95,8 +96,14 @@ const Services = () => {
   return (
     <div className="min-h-screen ">
       {/* Hero Section */}
-      <section className="py-20 text-white bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
-        <div className="container px-6 mx-auto text-center">
+      <section className="py-20 text-white relative" style={{
+        backgroundImage: 'url(/korelynk-workspace.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container px-6 mx-auto text-center relative z-10">
           <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
             Our Services
           </h1>
@@ -119,9 +126,7 @@ const Services = () => {
           </div>
 
           {loading ? (
-            <div className="flex items-center justify-center h-64">
-              <div className="w-12 h-12 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
-            </div>
+            <CardSkeleton count={6} />
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service, index) => {

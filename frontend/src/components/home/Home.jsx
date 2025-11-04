@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Smartphone, Globe, Database, Cloud, Shield, Star } from 'lucide-react';
-import { useQuery } from 'react-query';
+import { ArrowRight, Code, Smartphone, Globe, Database, Cloud, Shield, Star, X, Gift, MessageCircle } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 import SEO from '../SEO';
 import BlogPreview from '../BlogPreview';
 import CodeSamplesPreview from '../CodeSamplesPreview';
+import SkillsShowcase from './SkillsShowcase';
 
 const TestimonialSection = () => {
-  const { data: testimonials = [], isLoading, error } = useQuery(
-    'testimonials',
-    () => axios.get('feedback/testimonials').then(res => res.data.data || []),
-    {
-      onError: (error) => {
-        console.error('Testimonials fetch error:', error);
-      }
+  const { data: testimonials = [], isLoading, error } = useQuery({
+    queryKey: ['testimonials'],
+    queryFn: () => axios.get('feedback/testimonials').then(res => res.data.data || [])
+  });
+
+  useEffect(() => {
+    if (error) {
+      console.error('Testimonials fetch error:', error);
     }
-  );
+  }, [error]);
 
   const getInitials = (name) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -121,6 +123,8 @@ const Home = () => {
   const [featuredProjects, setFeaturedProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+  const [showOfferPopup, setShowOfferPopup] = useState(false);
 
   const heroSlides = [
     {
@@ -153,6 +157,24 @@ const Home = () => {
     const slideInterval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % heroSlides.length);
     }, 5000);
+    
+    // Show popups with delays (only once per session)
+    const welcomeShown = sessionStorage.getItem('welcomePopupShown');
+    const offerShown = sessionStorage.getItem('offerPopupShown');
+    
+    if (!welcomeShown) {
+      setTimeout(() => {
+        setShowWelcomePopup(true);
+        sessionStorage.setItem('welcomePopupShown', 'true');
+      }, 3000);
+    }
+    
+    if (!offerShown) {
+      setTimeout(() => {
+        setShowOfferPopup(true);
+        sessionStorage.setItem('offerPopupShown', 'true');
+      }, 15000);
+    }
     
     return () => clearInterval(slideInterval);
   }, []);
@@ -199,6 +221,73 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
+      {/* Welcome Popup */}
+      {showWelcomePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 transform animate-fade-in">
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex items-center">
+                <MessageCircle className="w-6 h-6 text-indigo-600 mr-2" />
+                <h3 className="text-lg font-semibold text-gray-900">Welcome to KoreLynk!</h3>
+              </div>
+              <button 
+                onClick={() => setShowWelcomePopup(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Ready to transform your business with cutting-edge technology? Let's build something amazing together!
+            </p>
+            <div className="flex gap-3">
+              <Link 
+                to="/contact" 
+                onClick={() => setShowWelcomePopup(false)}
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+              >
+                Get Started
+              </Link>
+              <button 
+                onClick={() => setShowWelcomePopup(false)}
+                className="text-gray-500 hover:text-gray-700 transition-colors text-sm"
+              >
+                Maybe later
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Special Offer Popup */}
+      {showOfferPopup && (
+        <div className="fixed bottom-4 right-4 z-50 max-w-sm">
+          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl shadow-2xl p-4 transform animate-slide-up">
+            <div className="flex justify-between items-start mb-2">
+              <div className="flex items-center">
+                <Gift className="w-5 h-5 mr-2" />
+                <span className="font-semibold text-sm">Limited Time Offer!</span>
+              </div>
+              <button 
+                onClick={() => setShowOfferPopup(false)}
+                className="text-white/80 hover:text-white transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+            <p className="text-sm text-purple-100 mb-3">
+              Get 15% off your first project. Free consultation included!
+            </p>
+            <Link 
+              to="/contact" 
+              onClick={() => setShowOfferPopup(false)}
+              className="bg-white text-purple-600 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors text-sm font-medium inline-block"
+            >
+              Claim Offer
+            </Link>
+          </div>
+        </div>
+      )}
       <SEO 
         title="Professional Web & Mobile Development Services"
         description="Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide for global clients and diaspora."
@@ -220,8 +309,13 @@ const Home = () => {
         url="/"
       />
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+      <section className="relative text-white overflow-hidden" style={{
+        backgroundImage: 'url(/korelynk-workspace.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative container mx-auto px-6 py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
@@ -274,8 +368,11 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Skills Showcase */}
+      <SkillsShowcase />
+
       {/* Services Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">

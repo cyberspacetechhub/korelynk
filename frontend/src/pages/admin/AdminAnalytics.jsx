@@ -1,6 +1,6 @@
 import React from 'react';
 import { BarChart3, Users, Eye, TrendingUp, Globe, Code, MessageCircle, Heart } from 'lucide-react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 
 const AdminAnalytics = () => {

@@ -4,7 +4,7 @@ const verificationService = require('../services/verificationService')
 const APIResponse = require('../utils/APIResponse')
 
 const generateToken = (id) => {
-  return jwt.sign({ id, type: 'student' }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' })
+  return jwt.sign({ id, type: 'Student' }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' })
 }
 
 const register = async (req, res) => {
@@ -124,7 +124,7 @@ const login = async (req, res) => {
 
 const getProfile = async (req, res) => {
   try {
-    const student = await Student.findById(req.student.id)
+    const student = await Student.findById(req.student._id)
       .populate('enrolledCourses.course', 'title category instructor startDate endDate')
       .select('-password')
     

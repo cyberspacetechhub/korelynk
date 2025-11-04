@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, User, Eye, Tag, Search } from 'lucide-react';
 import axios from '../api/axios';
 import SEO from '../components/SEO';
+import BlogSkeleton from '../components/skeletons/BlogSkeleton';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -58,9 +59,11 @@ const Blog = () => {
     return (
       <div className="min-h-screen bg-gray-50 py-16">
         <div className="container mx-auto px-6">
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          <div className="text-center mb-12">
+            <div className="h-12 bg-gray-200 rounded w-64 mx-auto mb-6 animate-pulse"></div>
+            <div className="h-6 bg-gray-200 rounded w-96 mx-auto animate-pulse"></div>
           </div>
+          <BlogSkeleton count={6} />
         </div>
       </div>
     );

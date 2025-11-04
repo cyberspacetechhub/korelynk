@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { Email, Phone, LocationOn } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';

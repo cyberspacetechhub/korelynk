@@ -13,8 +13,10 @@ const StudentCourseEnroll = () => {
   const [formData, setFormData] = useState({
     experience: '',
     motivation: '',
-    availability: ''
+    availability: '',
+    paymentMethod: 'bank_transfer'
   });
+  const [paymentAccount, setPaymentAccount] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('studentToken');
@@ -23,6 +25,7 @@ const StudentCourseEnroll = () => {
       return;
     }
     fetchCourse();
+    fetchPaymentAccount();
   }, [id]);
 
   const fetchCourse = async () => {
@@ -39,18 +42,40 @@ const StudentCourseEnroll = () => {
     }
   };
 
+  const fetchPaymentAccount = async () => {
+    try {
+      const response = await axios.get('/payment-account/active');
+      if (response.data.success) {
+        setPaymentAccount(response.data.data);
+      }
+    } catch (error) {
+      console.error('Error fetching payment account:', error);
+    }
+  };
+
   const handleEnrollment = async (e) => {
     e.preventDefault();
     setEnrolling(true);
 
     try {
-      const studentData = JSON.parse(localStorage.getItem('studentData'));
       const token = localStorage.getItem('studentToken');
-
+      
+      // Get student profile to get correct ID
+      const profileRes = await axios.get('/students/profile', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      
+      if (!profileRes.data.success) {
+        throw new Error('Failed to get student profile');
+      }
+      
       const enrollmentData = {
-        studentId: studentData.id,
+        studentId: profileRes.data.data._id,
         courseId: id,
-        ...formData
+        experience: formData.experience,
+        motivation: formData.motivation,
+        availability: formData.availability,
+        paymentMethod: formData.paymentMethod
       };
 
       const response = await axios.post('/enrollments', enrollmentData, {
@@ -91,7 +116,7 @@ const StudentCourseEnroll = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
         <button
           onClick={() => navigate(`/courses/${id}`)}
@@ -101,7 +126,7 @@ const StudentCourseEnroll = () => {
           Back to Course Details
         </button>
 
-        <div className="bg-white rounded-lg shadow p-8">
+        <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="flex items-center mb-6">
             <BookOpen className="w-8 h-8 text-indigo-600 mr-3" />
             <div>
@@ -157,13 +182,64 @@ const StudentCourseEnroll = () => {
               />
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h3 className="font-medium text-blue-900 mb-2">Course Information</h3>
-              <div className="text-sm text-blue-800 space-y-1">
-                <p><strong>Price:</strong> ${course.price}</p>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Payment Method *
+              </label>
+              <div className="space-y-3">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="bank_transfer"
+                    checked={formData.paymentMethod === 'bank_transfer'}
+                    onChange={(e) => setFormData({...formData, paymentMethod: e.target.value})}
+                    className="mr-3"
+                  />
+                  <div>
+                    <span className="font-medium">Bank Transfer</span>
+                    <p className="text-sm text-gray-600">Transfer to our bank account after enrollment approval</p>
+                  </div>
+                </label>
+                <label className="flex items-center opacity-50">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="paystack"
+                    disabled
+                    className="mr-3"
+                  />
+                  <div>
+                    <span className="font-medium">Paystack Payment</span>
+                    <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Coming Soon</span>
+                    <p className="text-sm text-gray-600">Online payment with card or bank transfer</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {formData.paymentMethod === 'bank_transfer' && paymentAccount && (
+              <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                <h3 className="font-semibold text-yellow-900 mb-2">Payment Instructions</h3>
+                <div className="text-sm text-yellow-800 space-y-1">
+                  <p><strong>Bank:</strong> {paymentAccount.bankName}</p>
+                  <p><strong>Account Number:</strong> {paymentAccount.accountNumber}</p>
+                  <p><strong>Account Name:</strong> {paymentAccount.accountName}</p>
+                  <p><strong>Amount:</strong> ₦{course.price?.toLocaleString()}</p>
+                  <p><strong>Reference:</strong> Use your full name as description</p>
+                </div>
+                <p className="text-xs text-yellow-700 mt-2">
+                  * Payment details will be sent via email after enrollment approval
+                </p>
+              </div>
+            )}
+
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-indigo-900 mb-2">Course Summary</h3>
+              <div className="text-sm text-indigo-800">
+                <p><strong>Price:</strong> ₦{course.price?.toLocaleString()}</p>
                 <p><strong>Duration:</strong> {course.duration}</p>
-                <p><strong>Start Date:</strong> {new Date(course.startDate).toLocaleDateString()}</p>
-                <p><strong>Instructor:</strong> {course.instructor}</p>
+                <p><strong>Level:</strong> {course.level}</p>
               </div>
             </div>
 

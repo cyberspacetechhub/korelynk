@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code, GraduationCap, UserCheck, Database, Calendar } from 'lucide-react';
+import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code, GraduationCap, UserCheck, Database, Calendar, CreditCard } from 'lucide-react';
 
 const AdminAside = ({ isOpen, onClose }) => {
   const sidebarRef = useRef(null);
@@ -55,7 +55,8 @@ const AdminAside = ({ isOpen, onClose }) => {
     {
       title: 'System',
       items: [
-        { path: '/admin/settings', icon: Settings, label: 'Settings' }
+        { path: '/admin/settings', icon: Settings, label: 'Settings' },
+        { path: '/admin/payment-account', icon: CreditCard, label: 'Payment Account' }
       ]
     }
   ];

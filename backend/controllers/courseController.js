@@ -39,6 +39,26 @@ const getCourseById = async (req, res) => {
   }
 }
 
+const uploadMedia = async (req, res) => {
+  try {
+    const cloudinary = require('cloudinary').v2
+    
+    if (!req.file) {
+      return APIResponse.error(res, 'No file uploaded', 400, 'NO_FILE')
+    }
+
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'courses',
+      resource_type: 'auto'
+    })
+
+    APIResponse.success(res, { url: result.secure_url }, 'File uploaded successfully')
+  } catch (error) {
+    console.error('Upload error:', error)
+    APIResponse.error(res, 'Failed to upload file', 500, 'UPLOAD_ERROR')
+  }
+}
+
 const createCourse = async (req, res) => {
   try {
     const course = await courseService.createCourse(req.body)
@@ -81,5 +101,6 @@ module.exports = {
   createCourse,
   updateCourse,
   deleteCourse,
-  getInstructors
+  getInstructors,
+  uploadMedia
 }

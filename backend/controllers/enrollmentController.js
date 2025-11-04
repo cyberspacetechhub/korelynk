@@ -97,9 +97,20 @@ const getEnrollmentById = async (req, res) => {
   }
 }
 
+const getStudentEnrollments = async (req, res) => {
+  try {
+    const enrollments = await enrollmentService.getStudentEnrollments(req.params.studentId)
+    APIResponse.success(res, enrollments, 'Student enrollments retrieved successfully')
+  } catch (error) {
+    console.error('Get student enrollments error:', error)
+    APIResponse.error(res, 'Failed to retrieve enrollments', 500, 'GET_STUDENT_ENROLLMENTS_ERROR')
+  }
+}
+
 module.exports = {
   createEnrollment,
   getAllEnrollments,
   updateEnrollmentStatus,
-  getEnrollmentById
+  getEnrollmentById,
+  getStudentEnrollments
 }

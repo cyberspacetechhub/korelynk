@@ -1,8 +1,9 @@
 import React from 'react';
 import { Users, Mail, FolderOpen, TrendingUp, Calendar, MessageSquare, Eye, Heart, Code, BarChart3, ArrowUp, ArrowDown, Activity } from 'lucide-react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import DashboardSkeleton from '../skeletons/DashboardSkeleton';
 
 const AdminOverview = () => {
   const { data, isLoading, error } = useQuery({
@@ -29,11 +30,7 @@ const AdminOverview = () => {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-12 h-12 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   return (

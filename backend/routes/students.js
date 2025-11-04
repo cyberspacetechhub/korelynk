@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { register, verifyEmail, login, getProfile, requestPasswordReset, resetPassword } = require('../controllers/studentController')
-const { studentAuth } = require('../middleware/studentAuth')
+const { studentAuth } = require('../middleware/auth')
 
 router.post('/register', register)
 router.post('/verify-email', verifyEmail)

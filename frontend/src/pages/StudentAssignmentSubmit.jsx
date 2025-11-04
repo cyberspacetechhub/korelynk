@@ -11,7 +11,8 @@ const StudentAssignmentSubmit = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    content: ''
+    content: '',
+    attachments: null
   });
 
   useEffect(() => {
@@ -43,18 +44,31 @@ const StudentAssignmentSubmit = () => {
 
     try {
       const token = localStorage.getItem('studentToken');
-      const submissionData = {
-        assignment: id,
-        content: formData.content
-      };
+      const submitData = new FormData();
+      submitData.append('assignment', id);
+      submitData.append('content', formData.content);
+      
+      // Add files if present
+      if (formData.attachments && formData.attachments.length > 0) {
+        for (let i = 0; i < formData.attachments.length; i++) {
+          submitData.append('attachments', formData.attachments[i]);
+        }
+      }
 
-      const response = await axios.post('/assignments/submit', submissionData, {
-        headers: { Authorization: `Bearer ${token}` }
+      const response = await axios.post('/assignments/submit', submitData, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
       if (response.data.success) {
         toast.success('Assignment submitted successfully!');
-        navigate(`/student/courses/${assignment.course._id}`);
+        if (assignment.class?.course?._id) {
+          navigate(`/student/courses/${assignment.class.course._id}`);
+        } else {
+          navigate('/student/dashboard');
+        }
       }
     } catch (error) {
       console.error('Submission error:', error);
@@ -91,7 +105,13 @@ const StudentAssignmentSubmit = () => {
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4">
         <button
-          onClick={() => navigate(`/student/courses/${assignment.course._id}`)}
+          onClick={() => {
+            if (assignment.class?.course?._id) {
+              navigate(`/student/courses/${assignment.class.course._id}`);
+            } else {
+              navigate('/student/dashboard');
+            }
+          }}
           className="flex items-center text-indigo-600 hover:text-indigo-800 mb-6"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -104,7 +124,7 @@ const StudentAssignmentSubmit = () => {
               <FileText className="w-8 h-8 text-indigo-600 mr-3" />
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">{assignment.title}</h1>
-                <p className="text-gray-600">{assignment.course.title}</p>
+                <p className="text-gray-600">{assignment.class?.course?.title || 'Course'}</p>
               </div>
             </div>
 
@@ -129,7 +149,26 @@ const StudentAssignmentSubmit = () => {
               <p className="text-gray-700 mb-4">{assignment.description}</p>
               
               <h3 className="font-medium text-gray-900 mb-3">Instructions</h3>
-              <div className="text-gray-700 whitespace-pre-wrap">{assignment.instructions}</div>
+              <div className="text-gray-700 whitespace-pre-wrap mb-4">{assignment.instructions}</div>
+              
+              {assignment.attachments && assignment.attachments.length > 0 && (
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Reference Materials:</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {assignment.attachments.map((attachment, index) => (
+                      <div key={index} className="relative">
+                        <img 
+                          src={attachment.url} 
+                          alt={attachment.filename}
+                          className="w-full h-24 object-cover rounded border cursor-pointer hover:opacity-75"
+                          onClick={() => window.open(attachment.url, '_blank')}
+                        />
+                        <p className="text-xs text-gray-600 mt-1 truncate">{attachment.filename}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -150,6 +189,24 @@ const StudentAssignmentSubmit = () => {
                 Provide your complete solution, code, or written response as required.
               </p>
             </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Attachments (Optional)
+              </label>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onChange={(e) => {
+                  setFormData({...formData, attachments: e.target.files});
+                }}
+              />
+              <p className="text-sm text-gray-500 mt-1">
+                Upload images to support your submission (screenshots, diagrams, etc.)
+              </p>
+            </div>
 
             {isOverdue && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
@@ -168,7 +225,13 @@ const StudentAssignmentSubmit = () => {
             <div className="flex gap-4">
               <button
                 type="button"
-                onClick={() => navigate(`/student/courses/${assignment.course._id}`)}
+                onClick={() => {
+                  if (assignment.class?.course?._id) {
+                    navigate(`/student/courses/${assignment.class.course._id}`);
+                  } else {
+                    navigate('/student/dashboard');
+                  }
+                }}
                 className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
               >
                 Cancel

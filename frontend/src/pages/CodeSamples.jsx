@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Code, Eye, MessageCircle, Filter, Search } from 'lucide-react';
 import axios from '../api/axios';
 import SEO from '../components/SEO';
+import CardSkeleton from '../components/skeletons/CardSkeleton';
 
 const CodeSamples = () => {
   const [codeSamples, setCodeSamples] = useState([]);
@@ -71,9 +72,18 @@ const CodeSamples = () => {
     return (
       <div className="min-h-screen bg-gray-50 py-16">
         <div className="container mx-auto px-6">
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          <div className="text-center mb-12">
+            <div className="h-12 bg-gray-200 rounded w-96 mx-auto mb-6 animate-pulse"></div>
+            <div className="h-6 bg-gray-200 rounded w-80 mx-auto animate-pulse"></div>
           </div>
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8 animate-pulse">
+            <div className="grid md:grid-cols-4 gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="h-10 bg-gray-200 rounded"></div>
+              ))}
+            </div>
+          </div>
+          <CardSkeleton count={6} />
         </div>
       </div>
     );

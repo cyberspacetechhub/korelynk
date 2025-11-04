@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Star, CheckCircle, X, Trash2 } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';

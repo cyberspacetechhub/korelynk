@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BookOpen, Users, FileText, TrendingUp, LogOut, User, Plus, Calendar } from 'lucide-react';
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
-import BrandedLoader from '../components/BrandedLoader';
+import DashboardSkeleton from '../components/skeletons/DashboardSkeleton';
 
 const InstructorDashboard = () => {
   const [instructor, setInstructor] = useState(null);
@@ -13,29 +13,83 @@ const InstructorDashboard = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('instructorToken');
-    if (!token) {
-      window.location.href = '/instructor/login';
+    const instructorData = localStorage.getItem('instructorData');
+    
+    if (!token || !instructorData) {
+      handleLogout();
       return;
     }
+    
     fetchDashboard();
   }, []);
 
   const fetchDashboard = async () => {
     try {
       const token = localStorage.getItem('instructorToken');
-      const response = await axios.get('/instructors/dashboard', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const instructorData = JSON.parse(localStorage.getItem('instructorData'));
       
-      if (response.data.success) {
-        setClasses(response.data.data.classes);
-        setStats(response.data.data.stats);
-        const instructorData = JSON.parse(localStorage.getItem('instructorData'));
-        setInstructor(instructorData);
+      if (!token || !instructorData) {
+        handleLogout();
+        return;
       }
+      
+      // Check if token is valid by making a test request
+      try {
+        await axios.get('/classes/instructor', {
+          headers: { Authorization: `Bearer ${token}` },
+          timeout: 3000
+        });
+      } catch (tokenError) {
+        if (tokenError.response?.status === 401) {
+          // Token is invalid, force re-login
+          handleLogout();
+          return;
+        }
+      }
+      
+      setInstructor(instructorData);
+      
+      // Fetch instructor classes and assignments with timeout and error handling
+      try {
+        const [classesRes, assignmentsRes] = await Promise.all([
+          axios.get('/classes/instructor', {
+            headers: { Authorization: `Bearer ${token}` },
+            timeout: 8000
+          }),
+          axios.get('/assignments/instructor', {
+            headers: { Authorization: `Bearer ${token}` },
+            timeout: 8000
+          })
+        ]);
+        
+        if (classesRes.data.success) {
+          const classesData = classesRes.data.data || [];
+          setClasses(classesData);
+          
+          // Calculate stats from classes data
+          const totalStudents = classesData.reduce((sum, cls) => sum + (cls.students?.length || 0), 0);
+          
+          // Get assignments data
+          const assignmentsData = assignmentsRes.data.success ? assignmentsRes.data.data || [] : [];
+          const totalSubmissions = assignmentsData.reduce((sum, assignment) => sum + (assignment.submissions?.length || 0), 0);
+          
+          setStats({
+            totalClasses: classesData.length,
+            totalStudents: totalStudents,
+            totalAssignments: assignmentsData.length,
+            totalSubmissions: totalSubmissions
+          });
+        }
+      } catch (classError) {
+        console.error('Error fetching dashboard data:', classError);
+        // Continue with empty data instead of failing
+        setClasses([]);
+        setStats({ totalClasses: 0, totalStudents: 0, totalAssignments: 0, totalSubmissions: 0 });
+      }
+      
     } catch (error) {
       console.error('Error fetching dashboard:', error);
-      if (error.response?.status === 401) {
+      if (error.response?.status === 401 || error.code === 'ECONNABORTED') {
         handleLogout();
       }
     } finally {
@@ -50,7 +104,25 @@ const InstructorDashboard = () => {
   };
 
   if (loading) {
-    return <BrandedLoader />;
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <header className="bg-white shadow-sm border-b">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="h-8 w-48 bg-gray-200 rounded animate-pulse"></div>
+              <div className="flex items-center space-x-4">
+                <div className="h-4 w-20 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-4 w-16 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-20 md:pb-8">
+          <DashboardSkeleton />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -62,11 +134,13 @@ const InstructorDashboard = () => {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <Users className="w-8 h-8 text-purple-600" />
-                <span className="text-xl font-bold text-gray-900">Instructor Portal</span>
+                <span className="text-xl font-bold text-gray-900 hidden sm:block">Instructor Portal</span>
+                <span className="text-lg font-bold text-gray-900 sm:hidden">Instructor</span>
               </Link>
             </div>
             
-            <div className="flex items-center space-x-4">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-4">
               <Link
                 to="/instructor/classes"
                 className="flex items-center text-gray-600 hover:text-gray-800"
@@ -93,11 +167,51 @@ const InstructorDashboard = () => {
                 Logout
               </button>
             </div>
+            
+            {/* Mobile User Info */}
+            <div className="md:hidden flex items-center space-x-2">
+              <User className="w-5 h-5 text-gray-400" />
+              <span className="text-gray-700 text-sm truncate max-w-24">{instructor?.fullName?.split(' ')[0]}</span>
+            </div>
           </div>
         </div>
       </header>
+      
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
+        <div className="grid grid-cols-4 h-16">
+          <Link
+            to="/instructor/dashboard"
+            className="flex flex-col items-center justify-center text-purple-600 bg-purple-50"
+          >
+            <Users className="w-5 h-5" />
+            <span className="text-xs mt-1">Dashboard</span>
+          </Link>
+          <Link
+            to="/instructor/classes"
+            className="flex flex-col items-center justify-center text-gray-600 hover:text-gray-800"
+          >
+            <Calendar className="w-5 h-5" />
+            <span className="text-xs mt-1">Classes</span>
+          </Link>
+          <Link
+            to="/instructor/assignments"
+            className="flex flex-col items-center justify-center text-gray-600 hover:text-gray-800"
+          >
+            <FileText className="w-5 h-5" />
+            <span className="text-xs mt-1">Assignments</span>
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex flex-col items-center justify-center text-gray-600 hover:text-gray-800"
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="text-xs mt-1">Logout</span>
+          </button>
+        </div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -109,7 +223,7 @@ const InstructorDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
               <BookOpen className="w-8 h-8 text-purple-600" />
@@ -164,7 +278,7 @@ const InstructorDashboard = () => {
           <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
             <h2 className="text-lg font-semibold text-gray-900">My Classes</h2>
             <Link
-              to="/admin/courses"
+              to="/instructor/classes/new"
               className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
             >
               <Plus className="w-4 h-4 mr-2" />
@@ -178,7 +292,7 @@ const InstructorDashboard = () => {
               <h3 className="text-lg font-medium text-gray-900 mb-2">No classes yet</h3>
               <p className="text-gray-600 mb-4">Create your first class to start teaching.</p>
               <Link
-                to="/admin/courses"
+                to="/instructor/classes/new"
                 className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
               >
                 Create Class
@@ -187,13 +301,13 @@ const InstructorDashboard = () => {
           ) : (
             <div className="divide-y divide-gray-200">
               {classes.map((classItem) => (
-                <div key={classItem._id} className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
+                <div key={classItem._id} className="p-4 sm:p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex-1 mb-4 sm:mb-0">
                       <h3 className="text-lg font-medium text-gray-900 mb-2">
                         {classItem.title}
                       </h3>
-                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-1 sm:space-y-0 text-sm text-gray-600">
                         <div className="flex items-center">
                           <Users className="w-4 h-4 mr-1" />
                           {classItem.students?.length || 0} students
@@ -209,13 +323,22 @@ const InstructorDashboard = () => {
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mt-3 sm:mt-0">
                       <Link
                         to={`/instructor/classes/${classItem._id}`}
-                        className="flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                        className="flex items-center px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-sm w-full sm:w-auto justify-center"
                       >
                         <BookOpen className="w-4 h-4 mr-2" />
-                        Manage Class
+                        <span className="hidden sm:inline">Manage Class</span>
+                        <span className="sm:hidden">Manage</span>
+                      </Link>
+                      <Link
+                        to={`/instructor/assignments/new?classId=${classItem._id}`}
+                        className="flex items-center px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm w-full sm:w-auto justify-center"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        <span className="hidden sm:inline">Add Assignment</span>
+                        <span className="sm:hidden">Assignment</span>
                       </Link>
                     </div>
                   </div>

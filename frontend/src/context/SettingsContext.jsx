@@ -41,7 +41,9 @@ export const SettingsProvider = ({ children }) => {
 
   const fetchSettings = async () => {
     try {
-      const response = await axios.get('/admin/settings');
+      const response = await axios.get('/admin/settings', {
+        timeout: 5000
+      });
       if (response.data.success) {
         setSettings(prev => ({
           ...prev,
@@ -58,6 +60,7 @@ export const SettingsProvider = ({ children }) => {
       }
     } catch (error) {
       console.error('Error fetching settings:', error);
+      // Use default settings on error
     } finally {
       setLoading(false);
     }

@@ -4,6 +4,7 @@ import { Clock, Users, Calendar, CheckCircle, User, ArrowLeft } from 'lucide-rea
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
 import SEO from '../components/SEO';
+import DetailSkeleton from '../components/skeletons/DetailSkeleton';
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ const CourseDetail = () => {
   const [loading, setLoading] = useState(true);
   const [enrolling, setEnrolling] = useState(false);
   const [showEnrollForm, setShowEnrollForm] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
   const [formData, setFormData] = useState({
     studentName: '',
     email: '',
@@ -71,8 +73,31 @@ const CourseDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="min-h-screen bg-gray-50">
+        <div className="py-20 bg-gray-200 animate-pulse">
+          <div className="container mx-auto px-6">
+            <div className="h-6 bg-gray-300 rounded w-32 mb-6"></div>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="h-6 bg-gray-300 rounded w-20"></div>
+                  <div className="h-6 bg-gray-300 rounded w-24"></div>
+                </div>
+                <div className="h-12 bg-gray-300 rounded w-3/4"></div>
+                <div className="h-6 bg-gray-300 rounded w-full"></div>
+                <div className="flex gap-6">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="h-4 bg-gray-300 rounded w-20"></div>
+                  ))}
+                </div>
+              </div>
+              <div className="h-80 bg-gray-300 rounded-2xl"></div>
+            </div>
+          </div>
+        </div>
+        <div className="container mx-auto px-6 py-20">
+          <DetailSkeleton />
+        </div>
       </div>
     );
   }
@@ -140,14 +165,34 @@ const CourseDetail = () => {
                 </div>
                 <div className="flex items-center">
                   <User className="w-5 h-5 mr-2" />
-                  {course.instructor}
+                  {typeof course.instructor === 'object' ? course.instructor.fullName : course.instructor}
                 </div>
               </div>
             </div>
             
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+              {/* Featured Image/Video */}
+              {course.featuredImage && (
+                <div className="relative mb-6 rounded-lg overflow-hidden">
+                  <img 
+                    src={course.featuredImage} 
+                    alt={course.title}
+                    className="w-full h-48 object-cover"
+                  />
+                  {course.introVideo && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer group"
+                         onClick={() => setShowVideo(true)}>
+                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <div className="w-0 h-0 border-l-[16px] border-l-indigo-600 border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
+                      </div>
+                      <div className="absolute inset-0 rounded-full border-4 border-white/50 animate-pulse"></div>
+                    </div>
+                  )}
+                </div>
+              )}
+              
               <div className="text-center mb-6">
-                <div className="text-4xl font-bold mb-2">${course.price}</div>
+                <div className="text-4xl font-bold mb-2">₦{course.price?.toLocaleString()}</div>
                 <div className="text-indigo-200">One-time payment</div>
               </div>
               
@@ -183,17 +228,19 @@ const CourseDetail = () => {
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               {/* Learning Outcomes */}
-              <div className="bg-white rounded-xl p-8 shadow-lg mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">What You'll Learn</h2>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {course.learningOutcomes?.map((outcome, index) => (
-                    <div key={index} className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{outcome}</span>
-                    </div>
-                  ))}
+              {course.learningOutcomes?.length > 0 && (
+                <div className="bg-white rounded-xl p-8 shadow-lg mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">What You'll Learn</h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {course.learningOutcomes.map((outcome, index) => (
+                      <div key={index} className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700">{outcome}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Curriculum */}
               {course.curriculum?.length > 0 && (
@@ -250,7 +297,7 @@ const CourseDetail = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Instructor:</span>
-                    <span className="font-medium">{course.instructor}</span>
+                    <span className="font-medium">{typeof course.instructor === 'object' ? course.instructor.fullName : course.instructor}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Start Date:</span>
@@ -380,6 +427,26 @@ const CourseDetail = () => {
                 </div>
               </form>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Video Modal */}
+      {showVideo && course.introVideo && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-4xl w-full">
+            <button
+              onClick={() => setShowVideo(false)}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 text-2xl"
+            >
+              ×
+            </button>
+            <video 
+              src={course.introVideo} 
+              controls 
+              autoPlay
+              className="w-full rounded-lg"
+            />
           </div>
         </div>
       )}

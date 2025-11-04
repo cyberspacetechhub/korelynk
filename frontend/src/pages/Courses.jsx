@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Clock, Users, Star, Calendar, Filter } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { Clock, Users, Star, Calendar, Filter, Play } from 'lucide-react';
 import axios from '../api/axios';
 import SEO from '../components/SEO';
+import CardSkeleton from '../components/skeletons/CardSkeleton';
 
 const Courses = () => {
+  const [searchParams] = useSearchParams();
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
-    category: '',
-    level: ''
+    category: searchParams.get('category') || '',
+    level: searchParams.get('level') || ''
   });
 
   useEffect(() => {
     fetchCourses();
   }, []);
+
+  useEffect(() => {
+    // Update filters from URL params
+    setFilters({
+      category: searchParams.get('category') || '',
+      level: searchParams.get('level') || ''
+    });
+  }, [searchParams]);
 
   useEffect(() => {
     filterCourses();
@@ -60,8 +70,14 @@ const Courses = () => {
       />
       
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-20 text-white relative" style={{
+        backgroundImage: 'url(/korelynk-workspace.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto px-6 text-center relative z-10">
           <h1 className="text-5xl lg:text-6xl font-bold mb-6">
             Learn. Build. Succeed.
           </h1>
@@ -116,18 +132,54 @@ const Courses = () => {
       <section className="py-20">
         <div className="container mx-auto px-6">
           {loading ? (
-            <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-            </div>
+            <CardSkeleton count={6} />
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
               {filteredCourses.map((course) => (
                 <div key={course._id} className="bg-white rounded-xl shadow-lg overflow-hidden hover-lift">
-                  <div className="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                    <div className="text-white text-center">
-                      <h3 className="text-xl font-bold mb-2">{course.category}</h3>
-                      <div className="text-indigo-200">{course.level}</div>
+                  <div className="h-48 relative overflow-hidden group">
+                    {course.featuredImage ? (
+                      <img 
+                        src={course.featuredImage} 
+                        alt={course.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="h-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <h3 className="text-xl font-bold mb-2">{course.category}</h3>
+                          <div className="text-indigo-200">{course.level}</div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Video Play Button Overlay */}
+                    {course.introVideo && (
+                      <Link 
+                        to={`/courses/${course._id}`}
+                        className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      >
+                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                          <Play className="w-6 h-6 text-indigo-600 ml-1" fill="currentColor" />
+                        </div>
+                      </Link>
+                    )}
+                    
+                    <div className="absolute top-3 left-3">
+                      <span className="px-2 py-1 bg-black/70 text-white text-xs rounded-full">
+                        {course.level}
+                      </span>
                     </div>
+                    
+                    {/* Video indicator badge */}
+                    {course.introVideo && (
+                      <div className="absolute top-3 right-3">
+                        <span className="px-2 py-1 bg-red-600 text-white text-xs rounded-full flex items-center">
+                          <Play className="w-3 h-3 mr-1" fill="currentColor" />
+                          Video
+                        </span>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="p-6">
@@ -136,7 +188,7 @@ const Courses = () => {
                         {course.category}
                       </span>
                       <span className="text-2xl font-bold text-indigo-600">
-                        ${course.price}
+                        ₦{course.price.toLocaleString()}
                       </span>
                     </div>
                     

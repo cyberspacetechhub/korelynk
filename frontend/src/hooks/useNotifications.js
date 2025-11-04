@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from '../api/axios';
 
 const useNotifications = () => {
@@ -25,26 +25,28 @@ const useNotifications = () => {
     }
   }, []);
 
-  const { data: notifications = [], refetch } = useQuery(
-    'admin-notifications',
-    () => axios.get('/notifications').then(res => res.data.data),
-    {
-      refetchInterval: 10000, // Poll every 10 seconds
-      onSuccess: (data) => {
-        const unread = data.filter(n => !n.read).length;
-        setUnreadCount(unread);
+  const { data: notifications = [], refetch } = useQuery({
+    queryKey: ['admin-notifications'],
+    queryFn: () => axios.get('/notifications').then(res => res.data.data),
+    refetchInterval: 10000, // Poll every 10 seconds
+  });
 
-        // Play sound and show browser notification for new notifications
-        if (data.length > 0 && lastNotificationId.current !== data[0]._id) {
-          if (lastNotificationId.current !== null && notificationsEnabled) {
-            playNotificationSound();
-            showBrowserNotification(data[0]);
-          }
-          lastNotificationId.current = data[0]._id;
+  // Handle notifications data changes
+  useEffect(() => {
+    if (notifications.length > 0) {
+      const unread = notifications.filter(n => !n.read).length;
+      setUnreadCount(unread);
+
+      // Play sound and show browser notification for new notifications
+      if (lastNotificationId.current !== notifications[0]._id) {
+        if (lastNotificationId.current !== null && notificationsEnabled) {
+          playNotificationSound();
+          showBrowserNotification(notifications[0]);
         }
+        lastNotificationId.current = notifications[0]._id;
       }
     }
-  );
+  }, [notifications, notificationsEnabled]);
 
   const playNotificationSound = () => {
     if (audioRef.current && notificationsEnabled) {

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, Clock, Video, Plus } from 'lucide-react';
+import { Calendar, Users, Clock, Video, Plus, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import { toast } from 'react-toastify';
+import JoinClassModal from '../../components/JoinClassModal';
 
 const StudentClasses = () => {
+  const navigate = useNavigate();
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showJoinModal, setShowJoinModal] = useState(false);
 
   useEffect(() => {
     fetchStudentClasses();
@@ -13,12 +17,24 @@ const StudentClasses = () => {
 
   const fetchStudentClasses = async () => {
     try {
-      const response = await axios.get('/classes/student');
+      const token = localStorage.getItem('studentToken');
+      const response = await axios.get('/classes/student', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       if (response.data.success) {
         setClasses(response.data.data);
       }
     } catch (error) {
       console.error('Error fetching student classes:', error);
+      if (error.response?.status === 401) {
+        // Token is invalid, redirect to login
+        localStorage.removeItem('studentToken');
+        localStorage.removeItem('studentData');
+        window.location.href = '/student/login';
+        return;
+      }
       toast.error('Failed to fetch classes');
     } finally {
       setLoading(false);
@@ -45,14 +61,29 @@ const StudentClasses = () => {
 
   return (
     <div className="p-6">
+      <button
+        onClick={() => navigate('/student/dashboard')}
+        className="flex items-center text-indigo-600 hover:text-indigo-800 mb-6"
+      >
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        Back to Dashboard
+      </button>
+      
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-900">My Classes</h1>
         <p className="text-gray-600">View your enrolled classes</p>
       </div>
 
       <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
+        <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-medium text-gray-900">Enrolled Classes</h2>
+          <button
+            onClick={() => setShowJoinModal(true)}
+            className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Join Class
+          </button>
         </div>
         
         <div className="divide-y divide-gray-200">
@@ -81,7 +112,7 @@ const StudentClasses = () => {
                 <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-3">
                   <div className="flex items-center">
                     <Calendar className="w-4 h-4 mr-1" />
-                    {new Date(classItem.scheduledDate).toLocaleDateString()}
+                    {classItem.startDate ? new Date(classItem.startDate).toLocaleDateString() : 'No date set'}
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-1" />
@@ -111,6 +142,12 @@ const StudentClasses = () => {
           )}
         </div>
       </div>
+      
+      <JoinClassModal 
+        isOpen={showJoinModal}
+        onClose={() => setShowJoinModal(false)}
+        onSuccess={fetchStudentClasses}
+      />
     </div>
   );
 };

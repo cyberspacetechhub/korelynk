@@ -5,6 +5,7 @@ import axios from '../api/axios';
 import { toast } from 'react-toastify';
 import ShareButton from '../components/ShareButton';
 import SEO from '../components/SEO';
+import DetailSkeleton from '../components/skeletons/DetailSkeleton';
 
 const BlogDetail = () => {
   const { slug } = useParams();
@@ -61,8 +62,8 @@ const BlogDetail = () => {
     return (
       <div className="min-h-screen bg-gray-50 py-16">
         <div className="container mx-auto px-6">
-          <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          <div className="max-w-4xl mx-auto">
+            <DetailSkeleton />
           </div>
         </div>
       </div>

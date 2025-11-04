@@ -5,7 +5,7 @@ const verificationService = require('../services/verificationService')
 const APIResponse = require('../utils/APIResponse')
 
 const generateToken = (id) => {
-  return jwt.sign({ id, type: 'instructor' }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' })
+  return jwt.sign({ id, type: 'Instructor' }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '7d' })
 }
 
 const register = async (req, res) => {
@@ -130,7 +130,7 @@ const login = async (req, res) => {
 
 const getDashboard = async (req, res) => {
   try {
-    const instructorId = req.instructor.id
+    const instructorId = req.instructor._id
     const [classes, stats] = await Promise.all([
       instructorService.getInstructorClasses(instructorId),
       instructorService.getInstructorStats(instructorId)
@@ -151,7 +151,7 @@ const getClassDetails = async (req, res) => {
     }
 
     // Verify instructor owns this class
-    if (classData.instructor._id.toString() !== req.instructor.id) {
+    if (classData.instructor._id.toString() !== req.instructor._id.toString()) {
       return APIResponse.error(res, 'Access denied', 403, 'ACCESS_DENIED')
     }
 

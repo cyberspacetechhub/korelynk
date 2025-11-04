@@ -89,7 +89,10 @@ export const AuthProvider = ({ children }) => {
         return true;
       }
     } catch (error) {
-      console.error('Token refresh failed:', error);
+      // Silently handle refresh token failures (expected when no valid refresh token exists)
+      if (error.response?.status !== 401) {
+        console.error('Token refresh failed:', error);
+      }
     }
     return false;
   };

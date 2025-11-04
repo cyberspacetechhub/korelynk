@@ -92,7 +92,7 @@ const updateClassStatus = async (req, res) => {
 // Student endpoints
 const getStudentClasses = async (req, res) => {
   try {
-    const studentId = req.user.id
+    const studentId = req.student._id
     const classes = await classService.getClassesByStudent(studentId)
     APIResponse.success(res, classes, 'Student classes retrieved successfully')
   } catch (error) {
@@ -103,14 +103,37 @@ const getStudentClasses = async (req, res) => {
 
 const joinClass = async (req, res) => {
   try {
-    const studentId = req.user.id
-    const classId = req.params.id
+    const studentId = req.student._id
+    let classId = req.params.id
+    
+    // If joining by code
+    if (req.body.classCode) {
+      const Class = require('../models/Class')
+      const classObj = await Class.findOne({ code: req.body.classCode })
+      if (!classObj) {
+        return APIResponse.error(res, 'Invalid class code', 404, 'CLASS_NOT_FOUND')
+      }
+      classId = classObj._id
+    }
     
     const result = await classService.joinClass(classId, studentId)
     APIResponse.success(res, result, 'Joined class successfully')
   } catch (error) {
     console.error('Join class error:', error)
     APIResponse.error(res, error.message || 'Failed to join class', 400, 'JOIN_CLASS_ERROR')
+  }
+}
+
+const getClassById = async (req, res) => {
+  try {
+    const classData = await classService.getClassById(req.params.id)
+    if (!classData) {
+      return APIResponse.error(res, 'Class not found', 404, 'CLASS_NOT_FOUND')
+    }
+    APIResponse.success(res, classData, 'Class retrieved successfully')
+  } catch (error) {
+    console.error('Get class error:', error)
+    APIResponse.error(res, 'Failed to retrieve class', 500, 'GET_CLASS_ERROR')
   }
 }
 
@@ -123,5 +146,6 @@ module.exports = {
   createInstructorClass,
   updateClassStatus,
   getStudentClasses,
-  joinClass
+  joinClass,
+  getClassById
 }

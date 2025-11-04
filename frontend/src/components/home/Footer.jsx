@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Code2, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
-import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';
 
@@ -11,24 +10,22 @@ const Footer = () => {
   const { settings } = useSettings();
   const [newsletterEmail, setNewsletterEmail] = useState('');
 
-  const newsletterMutation = useMutation(
-    (email) => axios.post('newsletter/subscribe', { email }),
-    {
-      onSuccess: () => {
-        setNewsletterEmail('');
-        toast.success('Successfully subscribed to newsletter!');
-      },
-      onError: (error) => {
-        const message = error.response?.data?.message || 'Subscription failed. Please try again.';
-        toast.error(message);
-      }
-    }
-  );
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
-  const handleNewsletterSubmit = (e) => {
+  const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    if (newsletterEmail.trim()) {
-      newsletterMutation.mutate(newsletterEmail);
+    if (!newsletterEmail.trim()) return;
+    
+    setIsSubscribing(true);
+    try {
+      await axios.post('newsletter/subscribe', { email: newsletterEmail });
+      setNewsletterEmail('');
+      toast.success('Successfully subscribed to newsletter!');
+    } catch (error) {
+      const message = error.response?.data?.message || 'Subscription failed. Please try again.';
+      toast.error(message);
+    } finally {
+      setIsSubscribing(false);
     }
   };
 
@@ -172,10 +169,10 @@ const Footer = () => {
               />
               <button 
                 type="submit"
-                disabled={newsletterMutation.isLoading}
+                disabled={isSubscribing}
                 className="px-6 py-2 text-white transition-colors bg-indigo-600 rounded-r-lg hover:bg-indigo-700 disabled:opacity-50"
               >
-                {newsletterMutation.isLoading ? 'Subscribing...' : 'Subscribe'}
+                {isSubscribing ? 'Subscribing...' : 'Subscribe'}
               </button>
             </form>
           </div>

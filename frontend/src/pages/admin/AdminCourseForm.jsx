@@ -10,6 +10,7 @@ const AdminCourseForm = () => {
   const isEdit = Boolean(id);
   
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState({ image: false, video: false });
   const [instructors, setInstructors] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
@@ -20,6 +21,9 @@ const AdminCourseForm = () => {
     price: '',
     instructor: '',
     image: '',
+    featuredImage: '',
+    introVideo: '',
+    skills: [''],
     maxStudents: 50,
     startDate: '',
     endDate: '',
@@ -118,6 +122,52 @@ const AdminCourseForm = () => {
       ...prev,
       [field]: prev[field].map((item, i) => i === index ? value : item)
     }));
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(prev => ({ ...prev, image: true }));
+    const formDataUpload = new FormData();
+    formDataUpload.append('file', file);
+
+    try {
+      const response = await axios.post('/courses/upload', formDataUpload, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      if (response.data.success) {
+        setFormData(prev => ({ ...prev, featuredImage: response.data.data.url }));
+      }
+    } catch (error) {
+      console.error('Image upload error:', error);
+      toast.error('Failed to upload image');
+    } finally {
+      setUploading(prev => ({ ...prev, image: false }));
+    }
+  };
+
+  const handleVideoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(prev => ({ ...prev, video: true }));
+    const formDataUpload = new FormData();
+    formDataUpload.append('file', file);
+
+    try {
+      const response = await axios.post('/courses/upload', formDataUpload, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      if (response.data.success) {
+        setFormData(prev => ({ ...prev, introVideo: response.data.data.url }));
+      }
+    } catch (error) {
+      console.error('Video upload error:', error);
+      toast.error('Failed to upload video');
+    } finally {
+      setUploading(prev => ({ ...prev, video: false }));
+    }
   };
 
   const categories = ['Web Development', 'Mobile Development', 'Backend Development', 'Database', 'DevOps', 'UI/UX Design'];
@@ -294,6 +344,63 @@ const AdminCourseForm = () => {
             </div>
           </div>
 
+          {/* Media Uploads */}
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Featured Image
+              </label>
+              <div className="space-y-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                {uploading.image && <p className="text-sm text-indigo-600">Uploading...</p>}
+                {formData.featuredImage && (
+                  <div className="relative">
+                    <img src={formData.featuredImage} alt="Featured" className="w-full h-32 object-cover rounded-lg" />
+                    <button
+                      type="button"
+                      onClick={() => setFormData({...formData, featuredImage: ''})}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                    >
+                      ×
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Intro Video (Optional)
+              </label>
+              <div className="space-y-3">
+                <input
+                  type="file"
+                  accept="video/*"
+                  onChange={handleVideoUpload}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                {uploading.video && <p className="text-sm text-indigo-600">Uploading...</p>}
+                {formData.introVideo && (
+                  <div className="relative">
+                    <video src={formData.introVideo} className="w-full h-32 object-cover rounded-lg" controls />
+                    <button
+                      type="button"
+                      onClick={() => setFormData({...formData, introVideo: ''})}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                    >
+                      ×
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -320,6 +427,39 @@ const AdminCourseForm = () => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
+          </div>
+
+          {/* Skills */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Skills Taught
+            </label>
+            {formData.skills.map((skill, index) => (
+              <div key={index} className="flex gap-2 mb-2">
+                <input
+                  type="text"
+                  value={skill}
+                  onChange={(e) => updateArrayItem('skills', index, e.target.value)}
+                  className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  placeholder="Enter skill"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeArrayItem('skills', index)}
+                  className="p-2 text-red-600 hover:text-red-800"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() => addArrayItem('skills')}
+              className="flex items-center text-indigo-600 hover:text-indigo-800"
+            >
+              <Plus className="w-4 h-4 mr-1" />
+              Add Skill
+            </button>
           </div>
 
           {/* Prerequisites */}

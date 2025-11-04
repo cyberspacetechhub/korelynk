@@ -36,9 +36,21 @@ const instructorSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  isApproved: {
+    type: Boolean,
+    default: false
+  },
   classes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Class'
+  }],
+  courses: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course'
   }]
 }, {
   timestamps: true

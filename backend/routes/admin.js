@@ -149,15 +149,15 @@ router.post('/upload', uploadService.getUploadMiddleware(), (req, res) => {
 // Favicon upload route
 router.post('/upload-favicon', uploadService.getUploadMiddleware(), (req, res) => {
   try {
-    console.log('Favicon upload request received');
-    console.log('File:', req.file);
+    // console.log('Favicon upload request received');
+    // console.log('File:', req.file);
     
     if (!req.file) {
-      console.log('No favicon file in request');
+      // console.log('No favicon file in request');
       return APIResponse.error(res, 'No favicon uploaded', 400, 'NO_FILE')
     }
     
-    console.log('Favicon uploaded successfully:', req.file.path);
+    // console.log('Favicon uploaded successfully:', req.file.path);
     APIResponse.success(res, { url: req.file.path }, 'Favicon uploaded successfully')
   } catch (error) {
     console.error('Favicon upload error:', error)

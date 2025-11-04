@@ -181,11 +181,11 @@ class EmailService {
             <h3 style="color: #1f2937; margin-top: 0;">Course Details:</h3>
             <p><strong>Course:</strong> ${enrollment.course.title}</p>
             <p><strong>Category:</strong> ${enrollment.course.category}</p>
-            <p><strong>Instructor:</strong> ${enrollment.course.instructor}</p>
-            <p><strong>Amount:</strong> $${enrollment.paymentAmount}</p>
+            <p><strong>Amount:</strong> ₦${enrollment.paymentAmount?.toLocaleString()}</p>
+            <p><strong>Payment Method:</strong> ${enrollment.paymentMethod === 'bank_transfer' ? 'Bank Transfer' : 'Paystack'}</p>
             <p><strong>Status:</strong> Pending Review</p>
           </div>
-          <p>We'll notify you once your enrollment is approved. Payment instructions will be provided upon approval.</p>
+          <p>We'll notify you once your enrollment is approved and provide payment instructions.</p>
           <p>Best regards,<br>KoreLynk Tech Team</p>
         </div>
       `
@@ -194,7 +194,23 @@ class EmailService {
     return await this.transporter.sendMail(confirmationEmail)
   }
 
-  async sendEnrollmentApproval(enrollment) {
+  async sendEnrollmentApproval(enrollment, paymentAccount = null) {
+    const paymentInstructions = enrollment.paymentMethod === 'bank_transfer' && paymentAccount ? `
+      <div style="background-color: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #f59e0b;">
+        <h3 style="color: #1f2937; margin-top: 0;">Payment Instructions:</h3>
+        <p><strong>Bank:</strong> ${paymentAccount.bankName}</p>
+        <p><strong>Account Number:</strong> ${paymentAccount.accountNumber}</p>
+        <p><strong>Account Name:</strong> ${paymentAccount.accountName}</p>
+        <p><strong>Amount:</strong> ₦${enrollment.paymentAmount?.toLocaleString()}</p>
+        <p><strong>Reference:</strong> Use your full name (${enrollment.studentName}) as description</p>
+      </div>
+    ` : `
+      <div style="background-color: #dbeafe; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3b82f6;">
+        <h3 style="color: #1f2937; margin-top: 0;">Payment Method:</h3>
+        <p>Paystack payment integration coming soon! Please contact support for payment instructions.</p>
+      </div>
+    `
+    
     const approvalEmail = {
       from: process.env.EMAIL_USER,
       to: enrollment.email,
@@ -204,12 +220,14 @@ class EmailService {
           <h2 style="color: #10b981; text-align: center;">🎉 Enrollment Approved!</h2>
           <p>Dear ${enrollment.studentName},</p>
           <p>Congratulations! Your enrollment has been approved.</p>
+          ${paymentInstructions}
           <div style="background-color: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981;">
             <h3 style="color: #1f2937; margin-top: 0;">Next Steps:</h3>
             <ol>
-              <li>Complete payment of $${enrollment.paymentAmount}</li>
+              <li>Complete payment of ₦${enrollment.paymentAmount?.toLocaleString()}</li>
+              <li>Upload payment proof if using bank transfer</li>
+              <li>Wait for payment confirmation</li>
               <li>Join our course community</li>
-              <li>Prepare for the course start date</li>
             </ol>
           </div>
           <p>We're excited to have you in our learning community!</p>
@@ -219,6 +237,83 @@ class EmailService {
     }
 
     return await this.transporter.sendMail(approvalEmail)
+  }
+
+
+
+  async sendEnrollmentRejection(enrollment, reason = '') {
+    const rejectionEmail = {
+      from: process.env.EMAIL_USER,
+      to: enrollment.email,
+      subject: `Enrollment Update - ${enrollment.course.title}`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #ef4444; text-align: center;">Enrollment Update</h2>
+          <p>Dear ${enrollment.studentName},</p>
+          <p>Thank you for your interest in <strong>${enrollment.course.title}</strong>.</p>
+          <div style="background-color: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ef4444;">
+            <p>Unfortunately, we cannot proceed with your enrollment at this time.</p>
+            ${reason ? `<p><strong>Reason:</strong> ${reason}</p>` : ''}
+          </div>
+          <p>We encourage you to explore our other courses or reapply in the future.</p>
+          <p>Best regards,<br>KoreLynk Tech Team</p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(rejectionEmail)
+  }
+
+  async sendWelcomeEmail(email, fullName, userType) {
+    const welcomeEmail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: `Welcome to KoreLynk Tech - ${userType} Account Created`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #4f46e5; text-align: center;">Welcome to KoreLynk Tech!</h2>
+          <p>Dear ${fullName},</p>
+          <p>Your ${userType} account has been successfully created.</p>
+          <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3b82f6;">
+            <h3 style="color: #1f2937; margin-top: 0;">What's Next?</h3>
+            <ul>
+              <li>Complete your profile setup</li>
+              <li>Explore available courses</li>
+              <li>Join our learning community</li>
+            </ul>
+          </div>
+          <p>We're excited to have you on board!</p>
+          <p>Best regards,<br>KoreLynk Tech Team</p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(welcomeEmail)
+  }
+
+  async sendGradeNotification(email, data) {
+    const { studentName, assignmentTitle, grade, feedback } = data
+    
+    const gradeEmail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: `Assignment Graded - ${assignmentTitle}`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #4f46e5; text-align: center;">Assignment Graded</h2>
+          <p>Dear ${studentName},</p>
+          <p>Your assignment <strong>${assignmentTitle}</strong> has been graded.</p>
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #1f2937; margin-top: 0;">Grade: ${grade}</h3>
+            ${feedback ? `<p><strong>Feedback:</strong></p><p>${feedback}</p>` : ''}
+          </div>
+          <p>Keep up the great work!</p>
+          <p>Best regards,<br>KoreLynk Tech Team</p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(gradeEmail)
   }
 }
 
