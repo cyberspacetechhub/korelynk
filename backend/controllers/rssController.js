@@ -15,16 +15,16 @@ const generateRSSFeed = async (req, res) => {
         let rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>KoreLynk Tech Blog</title>
-        <description>Latest programming tutorials, web development insights, and technology trends from KoreLynk Tech</description>
+        <title>KoreLynk Blog</title>
+        <description>Latest programming tutorials, web development insights, and technology trends from KoreLynk</description>
         <link>${baseUrl}/blog</link>
         <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
         <language>en-us</language>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-        <generator>KoreLynk Tech</generator>
+        <generator>KoreLynk</generator>
         <image>
-            <url>${baseUrl}/korelynk.svg</url>
-            <title>KoreLynk Tech</title>
+            <url>${baseUrl}/kore-lynk.png</url>
+            <title>KoreLynk</title>
             <link>${baseUrl}</link>
         </image>`;
 
@@ -40,7 +40,7 @@ const generateRSSFeed = async (req, res) => {
             <link>${baseUrl}/blog/${blog.slug}</link>
             <guid isPermaLink="true">${baseUrl}/blog/${blog.slug}</guid>
             <pubDate>${pubDate}</pubDate>
-            <author>${blog.author?.fullname || 'KoreLynk Tech'}</author>
+            <author>${blog.author?.fullname || 'KoreLynk'}</author>
             ${blog.category ? `<category><![CDATA[${blog.category.name}]]></category>` : ''}
             ${blog.tags ? blog.tags.map(tag => `<category><![CDATA[${tag}]]></category>`).join('') : ''}
         </item>`;

@@ -15,7 +15,7 @@ const SEO = ({
   const { settings } = useSettings();
   
   const siteUrl = 'https://korelynk.vercel.app';
-  const defaultImage = `${siteUrl}/og-image.jpg`;
+  const defaultImage = `${siteUrl}/kore-lynk.png`;
   
   const seoTitle = title 
     ? `${title} | ${settings.siteName}` 
@@ -47,6 +47,11 @@ const SEO = ({
   const seoImage = image ? 
     (image.startsWith('http') ? image : `${siteUrl}${image}`) : 
     (settings.logo || defaultImage);
+  
+  // Ensure image has proper dimensions for social sharing
+  const processedImage = seoImage.includes('cloudinary.com') && !seoImage.includes('w_') ? 
+    seoImage.replace('/upload/', '/upload/w_1200,h_630,c_fill/') : 
+    seoImage;
   const seoUrl = url ? `${siteUrl}${url}` : siteUrl;
 
   return (
@@ -67,7 +72,10 @@ const SEO = ({
       <meta property="og:type" content={type} />
       <meta property="og:title" content={seoTitle} />
       <meta property="og:description" content={seoDescription} />
-      <meta property="og:image" content={seoImage} />
+      <meta property="og:image" content={processedImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/jpeg" />
       <meta property="og:url" content={seoUrl} />
       <meta property="og:site_name" content={settings.siteName} />
       <meta property="og:locale" content="en_US" />
@@ -76,7 +84,7 @@ const SEO = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
-      <meta name="twitter:image" content={seoImage} />
+      <meta name="twitter:image" content={processedImage} />
       <meta name="twitter:site" content="@korelynk" />
       <meta name="twitter:creator" content="@korelynk" />
       
@@ -117,7 +125,7 @@ const SEO = ({
           ...(type === 'article' ? {
             headline: title,
             description: seoDescription,
-            image: seoImage,
+            image: processedImage,
             author: {
               "@type": "Person",
               name: article?.author || settings.siteName

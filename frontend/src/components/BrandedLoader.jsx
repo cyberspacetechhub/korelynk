@@ -6,7 +6,7 @@ const BrandedLoader = () => {
       {/* Logo and Brand */}
       <div className="flex items-center mb-8">
         <img 
-          src="/korelynk.svg" 
+          src="/kore-lynk.png" 
           alt="KoreLynk Tech" 
           className="w-40 h-40 mr-3"
         />

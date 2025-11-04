@@ -54,7 +54,7 @@ A modern full-stack web application for a technology company showcasing services
 ## 📁 Project Structure
 
 ```
-cyberspace/
+korelynk/
 ├── frontend/                 # React application
 │   ├── src/
 │   │   ├── components/      # Reusable components
@@ -86,7 +86,7 @@ cyberspace/
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
-cd cyberspace
+cd korelynk
 ```
 
 2. **Backend Setup**
@@ -99,7 +99,7 @@ npm install
 Create `.env` file in backend directory:
 ```env
 # Database
-DATABASE_URI=mongodb://localhost:27017/cyberspace
+DATABASE_URI=mongodb://localhost:27017/korelynk
 
 # JWT Secrets
 ACCESS_TOKEN_SECRET=your_access_token_secret

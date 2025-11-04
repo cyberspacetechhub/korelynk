@@ -8,9 +8,10 @@ Sitemap: https://korelynk.vercel.app/rss.xml
 # Crawl-delay
 Crawl-delay: 1
 
-# Disallow admin pages
+# Disallow admin areas
 Disallow: /admin/
-Disallow: /admin/*
+Disallow: /student/
+Disallow: /instructor/
 
 # Allow important pages
 Allow: /
@@ -19,6 +20,5 @@ Allow: /services
 Allow: /portfolio
 Allow: /contact
 Allow: /blog
-Allow: /blog/*
+Allow: /courses
 Allow: /code-samples
-Allow: /code-samples/*
