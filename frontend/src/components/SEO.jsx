@@ -65,6 +65,9 @@ const SEO = ({
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta name="theme-color" content="#6366f1" />
       
+      {/* Google Search Console Verification */}
+      <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+      
       {/* Canonical URL */}
       <link rel="canonical" href={seoUrl} />
       
