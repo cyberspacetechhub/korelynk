@@ -4,3 +4,6 @@ export { default as BlogSkeleton } from './BlogSkeleton';
 export { default as DashboardSkeleton } from './DashboardSkeleton';
 export { default as ListSkeleton } from './ListSkeleton';
 export { default as DetailSkeleton } from './DetailSkeleton';
+export { default as TableSkeleton } from './TableSkeleton';
+export { default as FormSkeleton } from './FormSkeleton';
+export { default as StatsSkeleton } from './StatsSkeleton';

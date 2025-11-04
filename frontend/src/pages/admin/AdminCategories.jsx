@@ -97,8 +97,32 @@ const AdminCategories = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div>
+            <div className="h-8 bg-gray-200 rounded animate-pulse w-48 mb-2"></div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse w-64"></div>
+          </div>
+          <div className="w-32 h-10 bg-gray-200 rounded animate-pulse"></div>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center">
+                  <div className="w-4 h-4 bg-gray-200 rounded-full mr-3 animate-pulse"></div>
+                  <div className="h-5 bg-gray-200 rounded animate-pulse w-24"></div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
+                </div>
+              </div>
+              <div className="h-12 bg-gray-200 rounded animate-pulse mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-20"></div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

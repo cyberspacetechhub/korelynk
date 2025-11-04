@@ -74,8 +74,44 @@ const AdminBlog = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="space-y-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div>
+            <div className="h-8 bg-gray-200 rounded animate-pulse w-48 mb-2"></div>
+            <div className="h-4 bg-gray-200 rounded animate-pulse w-64"></div>
+          </div>
+          <div className="flex gap-4">
+            <div className="h-10 bg-gray-200 rounded animate-pulse w-32"></div>
+            <div className="h-10 bg-gray-200 rounded animate-pulse w-24"></div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-gray-50 px-6 py-3">
+            <div className="flex space-x-4">
+              {Array.from({ length: 7 }).map((_, i) => (
+                <div key={i} className="h-4 bg-gray-200 rounded animate-pulse flex-1"></div>
+              ))}
+            </div>
+          </div>
+          <div className="divide-y divide-gray-200">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="px-6 py-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-gray-200 rounded animate-pulse mr-3"></div>
+                  <div className="flex-1">
+                    <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4"></div>
+                  </div>
+                  <div className="flex space-x-2">
+                    <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

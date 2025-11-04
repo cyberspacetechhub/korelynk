@@ -78,8 +78,31 @@ const AdminPaymentAccount = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
+      <div className="p-6">
+        <div className="mb-6">
+          <div className="h-8 bg-gray-200 rounded animate-pulse w-64 mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded animate-pulse w-96"></div>
+        </div>
+        <div className="max-w-2xl bg-white rounded-lg shadow">
+          <div className="px-6 py-4 border-b border-gray-200">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-5 h-5 bg-gray-200 rounded animate-pulse mr-2"></div>
+                <div className="h-6 bg-gray-200 rounded animate-pulse w-48"></div>
+              </div>
+            </div>
+          </div>
+          <div className="p-6">
+            <div className="space-y-4">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i}>
+                  <div className="h-4 bg-gray-200 rounded animate-pulse w-24 mb-2"></div>
+                  <div className="h-10 bg-gray-200 rounded animate-pulse w-full"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -28,8 +28,56 @@ const AdminAdvancedAnalytics = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="p-6 space-y-6">
+        <div className="flex justify-between items-center">
+          <div className="h-8 bg-gray-200 rounded animate-pulse w-48"></div>
+          <div className="h-4 bg-gray-200 rounded animate-pulse w-32"></div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+          {Array.from({ length: 7 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-lg shadow p-4">
+              <div className="flex items-center">
+                <div className="w-8 h-8 bg-gray-200 rounded animate-pulse" />
+                <div className="ml-3 flex-1">
+                  <div className="h-6 bg-gray-200 rounded animate-pulse mb-1"></div>
+                  <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="grid lg:grid-cols-2 gap-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-lg shadow p-6">
+              <div className="h-6 bg-gray-200 rounded animate-pulse w-32 mb-4"></div>
+              <div className="h-72 bg-gray-200 rounded animate-pulse"></div>
+            </div>
+          ))}
+        </div>
+        <div className="grid lg:grid-cols-2 gap-6">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-lg shadow p-6">
+              <div className="h-6 bg-gray-200 rounded animate-pulse w-32 mb-4"></div>
+              <div className="space-y-3">
+                {Array.from({ length: 3 }).map((_, j) => (
+                  <div key={j} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse mr-3"></div>
+                      <div>
+                        <div className="h-4 bg-gray-200 rounded animate-pulse w-24 mb-1"></div>
+                        <div className="h-3 bg-gray-200 rounded animate-pulse w-32"></div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="h-4 bg-gray-200 rounded animate-pulse w-16 mb-1"></div>
+                      <div className="h-3 bg-gray-200 rounded animate-pulse w-12"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

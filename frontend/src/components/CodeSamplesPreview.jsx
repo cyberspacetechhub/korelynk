@@ -41,10 +41,20 @@ const CodeSamplesPreview = () => {
     return (
       <div className="grid md:grid-cols-3 gap-6">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-xl p-6 animate-pulse">
-            <div className="h-4 bg-gray-300 rounded mb-3"></div>
-            <div className="h-6 bg-gray-300 rounded mb-3"></div>
-            <div className="h-4 bg-gray-300 rounded"></div>
+          <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="h-6 bg-gray-200 rounded-full animate-pulse w-16"></div>
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-12"></div>
+              </div>
+              <div className="h-6 bg-gray-200 rounded animate-pulse w-full mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-full mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4 mb-4"></div>
+              <div className="flex items-center justify-between">
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-12"></div>
+              </div>
+            </div>
           </div>
         ))}
       </div>

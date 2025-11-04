@@ -186,8 +186,22 @@ const AdminSettings = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+      <div className="space-y-6">
+        <div>
+          <div className="h-8 bg-gray-200 rounded animate-pulse w-48 mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded animate-pulse w-64"></div>
+        </div>
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="space-y-6">
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-24 mb-2"></div>
+              <div className="h-10 bg-gray-200 rounded animate-pulse w-full"></div>
+            </div>
+          </div>
+        ))}
+        <div className="flex justify-end">
+          <div className="h-10 bg-gray-200 rounded animate-pulse w-32"></div>
+        </div>
       </div>
     );
   }

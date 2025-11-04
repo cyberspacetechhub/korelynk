@@ -36,12 +36,18 @@ const BlogPreview = () => {
     return (
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
-            <div className="h-48 bg-gray-300"></div>
+          <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="h-48 bg-gray-200 animate-pulse"></div>
             <div className="p-6">
-              <div className="h-4 bg-gray-300 rounded mb-3"></div>
-              <div className="h-6 bg-gray-300 rounded mb-3"></div>
-              <div className="h-4 bg-gray-300 rounded"></div>
+              <div className="h-6 bg-gray-200 rounded animate-pulse w-20 mb-3"></div>
+              <div className="h-6 bg-gray-200 rounded animate-pulse w-full mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-full mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4 mb-4"></div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-24"></div>
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-20"></div>
+              </div>
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-20"></div>
             </div>
           </div>
         ))}

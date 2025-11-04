@@ -131,39 +131,54 @@ const SkillsShowcase = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-          {skills.map((skill, index) => {
-            const IconComponent = skill.icon;
-            return (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
-              >
-                <div className={`w-12 h-12 ${skill.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <IconComponent className="w-6 h-6 text-white" />
-                </div>
-                
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {skill.title}
-                </h3>
-                
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {skill.description}
-                </p>
-                
+          {loading ? (
+            Array.from({ length: 10 }).map((_, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 shadow-lg">
+                <div className="w-12 h-12 bg-gray-200 rounded-lg mb-4 animate-pulse"></div>
+                <div className="h-5 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-3/4 mb-4"></div>
                 <div className="flex items-center justify-between">
-                  <span className="text-indigo-600 font-medium text-sm">
-                    {loading ? '...' : (courseCounts[skill.title] || 0)} Courses
-                  </span>
-                  <Link 
-                    to={`/courses?category=${encodeURIComponent(skill.category)}`}
-                    className="text-indigo-600 hover:text-indigo-800 text-sm font-medium group-hover:translate-x-1 transition-transform"
-                  >
-                    Explore →
-                  </Link>
+                  <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
+                  <div className="h-4 bg-gray-200 rounded animate-pulse w-12"></div>
                 </div>
               </div>
-            );
-          })}
+            ))
+          ) : (
+            skills.map((skill, index) => {
+              const IconComponent = skill.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+                >
+                  <div className={`w-12 h-12 ${skill.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {skill.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                    {skill.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <span className="text-indigo-600 font-medium text-sm">
+                      {courseCounts[skill.title] || 0} Courses
+                    </span>
+                    <Link 
+                      to={`/courses?category=${encodeURIComponent(skill.category)}`}
+                      className="text-indigo-600 hover:text-indigo-800 text-sm font-medium group-hover:translate-x-1 transition-transform"
+                    >
+                      Explore →
+                    </Link>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
 
         <div className="text-center mt-12">

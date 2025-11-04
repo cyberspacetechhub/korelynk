@@ -9,33 +9,32 @@ const AdminFeedback = () => {
   const [statusFilter, setStatusFilter] = useState('all');
   const queryClient = useQueryClient();
 
-  const { data: feedbackData, isLoading, refetch } = useQuery(
-    ['admin-feedback', statusFilter],
-    () => axios.get(`admin/feedback?status=${statusFilter}`).then(res => res.data.data),
-    {
-      onError: (error) => {
-        toast.error(error.response?.data?.message || 'Failed to fetch feedback');
-      }
+  const { data: feedbackData, isLoading, refetch } = useQuery({
+    queryKey: ['admin-feedback', statusFilter],
+    queryFn: () => axios.get(`admin/feedback?status=${statusFilter}`).then(res => res.data.data)
+  });
+
+  useEffect(() => {
+    if (feedbackData?.error) {
+      toast.error('Failed to fetch feedback');
     }
-  );
+  }, [feedbackData]);
 
   useEffect(() => {
     refetch();
   }, [statusFilter, refetch]);
 
-  const updateStatusMutation = useMutation(
-    ({ id, status, isTestimonial }) => axios.put(`admin/feedback/${id}`, { status, isTestimonial }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('admin-feedback');
-        queryClient.invalidateQueries('testimonials');
-        toast.success('Feedback status updated successfully');
-      },
-      onError: (error) => {
-        toast.error(error.response?.data?.message || 'Failed to update feedback status');
-      }
+  const updateStatusMutation = useMutation({
+    mutationFn: ({ id, status, isTestimonial }) => axios.put(`admin/feedback/${id}`, { status, isTestimonial }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-feedback'] });
+      queryClient.invalidateQueries({ queryKey: ['testimonials'] });
+      toast.success('Feedback status updated successfully');
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || 'Failed to update feedback status');
     }
-  );
+  });
 
   const handleStatusUpdate = (id, status, isTestimonial = false) => {
     updateStatusMutation.mutate({ id, status, isTestimonial });
