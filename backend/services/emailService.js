@@ -137,6 +137,11 @@ class EmailService {
   }
 
   async sendVerificationCode(email, code, userType) {
+    if (!this.transporter) {
+      console.log(`Development mode: Verification code for ${email}: ${code}`)
+      return { messageId: 'dev-mode' }
+    }
+
     const verificationEmail = {
       from: process.env.EMAIL_USER,
       to: email,

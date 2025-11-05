@@ -51,7 +51,15 @@ const InstructorLogin = () => {
         });
         
         if (response.data.success) {
-          toast.success('Verification code sent to your email!');
+          // Show code in toast for 5 seconds if available (dev mode)
+          if (response.data.data.devCode) {
+            toast.success(`Verification code: ${response.data.data.devCode}`, {
+              autoClose: 5000,
+              hideProgressBar: false
+            });
+          } else {
+            toast.success('Verification code sent to your email!');
+          }
           setStep(2);
         }
       }
@@ -291,13 +299,47 @@ const InstructorLogin = () => {
                 {loading ? 'Verifying...' : 'Verify Account'}
               </button>
 
-              <div className="text-center mt-4">
+              <div className="flex gap-3 mt-4">
                 <button
                   type="button"
                   onClick={() => setStep(1)}
-                  className="text-gray-600 hover:text-gray-800 text-sm"
+                  className="flex-1 text-gray-600 hover:text-gray-800 text-sm"
                 >
                   ← Back to registration
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setLoading(true);
+                    try {
+                      const response = await axios.post('/instructors/register', {
+                        fullName: formData.fullName,
+                        email: formData.email,
+                        password: formData.password,
+                        phone: formData.phone,
+                        bio: formData.bio,
+                        expertise: formData.expertise
+                      });
+                      if (response.data.success) {
+                        if (response.data.data.devCode) {
+                          toast.success(`New code: ${response.data.data.devCode}`, {
+                            autoClose: 5000,
+                            hideProgressBar: false
+                          });
+                        } else {
+                          toast.success('New verification code sent!');
+                        }
+                      }
+                    } catch (error) {
+                      toast.error('Failed to resend code');
+                    } finally {
+                      setLoading(false);
+                    }
+                  }}
+                  disabled={loading}
+                  className="flex-1 text-purple-600 hover:text-purple-800 text-sm disabled:opacity-50"
+                >
+                  {loading ? 'Sending...' : 'Resend Code'}
                 </button>
               </div>
             </div>

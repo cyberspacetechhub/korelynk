@@ -21,9 +21,12 @@ const register = async (req, res) => {
     }
 
     // Send verification code instead of creating account immediately
-    await verificationService.sendVerificationCode(email, { fullName, email, password, phone }, 'student')
+    const result = await verificationService.sendVerificationCode(email, { fullName, email, password, phone }, 'student')
 
-    APIResponse.success(res, { email }, 'Verification code sent to your email', 201)
+    APIResponse.success(res, { 
+      email,
+      ...(result.code && { devCode: result.code }) // Include code in dev mode
+    }, 'Verification code sent to your email', 201)
   } catch (error) {
     console.error('Student registration error:', error)
     APIResponse.error(res, 'Registration failed', 500, 'REGISTRATION_ERROR')

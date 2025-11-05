@@ -60,7 +60,15 @@ const StudentLogin = () => {
         });
         
         if (response.data.success) {
-          toast.success('Verification code sent to your email!');
+          // Show code in toast for 5 seconds if available (dev mode)
+          if (response.data.data.devCode) {
+            toast.success(`Verification code: ${response.data.data.devCode}`, {
+              autoClose: 5000,
+              hideProgressBar: false
+            });
+          } else {
+            toast.success('Verification code sent to your email!');
+          }
           setStep(2);
         }
       }
@@ -329,13 +337,53 @@ const StudentLogin = () => {
                 {loading ? 'Verifying...' : 'Verify Email'}
               </button>
               
-              <button
-                type="button"
-                onClick={() => setStep(1)}
-                className="w-full mt-3 text-gray-600 hover:text-gray-800"
-              >
-                Back to Registration
-              </button>
+              <div className="flex gap-3 mt-3">
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="flex-1 text-gray-600 hover:text-gray-800"
+                >
+                  Back to Registration
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    setLoading(true);
+                    try {
+                      const response = await axios.post('/students/register', {
+                        fullName: formData.fullName,
+                        email: formData.email,
+                        password: formData.password,
+                        phone: formData.phone,
+                        preferences: {
+                          interests: formData.interests,
+                          skillLevel: formData.skillLevel,
+                          learningGoals: formData.learningGoals,
+                          preferredSchedule: formData.preferredSchedule
+                        }
+                      });
+                      if (response.data.success) {
+                        if (response.data.data.devCode) {
+                          toast.success(`New code: ${response.data.data.devCode}`, {
+                            autoClose: 5000,
+                            hideProgressBar: false
+                          });
+                        } else {
+                          toast.success('New verification code sent!');
+                        }
+                      }
+                    } catch (error) {
+                      toast.error('Failed to resend code');
+                    } finally {
+                      setLoading(false);
+                    }
+                  }}
+                  disabled={loading}
+                  className="flex-1 text-indigo-600 hover:text-indigo-800 disabled:opacity-50"
+                >
+                  {loading ? 'Sending...' : 'Resend Code'}
+                </button>
+              </div>
             </div>
           </form>
         )}

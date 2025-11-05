@@ -23,10 +23,16 @@ class VerificationService {
       userData
     })
 
-    // Send email
-    await emailService.sendVerificationCode(email, code, userType)
+    // Send email with error handling
+    try {
+      await emailService.sendVerificationCode(email, code, userType)
+    } catch (emailError) {
+      console.error('Email service error:', emailError)
+      // Continue without failing - verification code is still saved
+      // In production, you might want to use a queue system for retries
+    }
     
-    return { success: true }
+    return { success: true, code: process.env.NODE_ENV === 'development' ? code : undefined }
   }
 
   async verifyCode(email, code, userType) {
