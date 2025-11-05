@@ -8,7 +8,7 @@ import BlogPreview from '../BlogPreview';
 import CodeSamplesPreview from '../CodeSamplesPreview';
 import SkillsShowcase from './SkillsShowcase';
 
-const TestimonialSection = () => {
+const TestimonialSection = React.memo(() => {
   const { data: testimonials = [], isLoading, error } = useQuery({
     queryKey: ['testimonials'],
     queryFn: () => axios.get('feedback/testimonials').then(res => res.data.data || [])
@@ -116,7 +116,7 @@ const TestimonialSection = () => {
       </div>
     </section>
   );
-};
+});
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -182,16 +182,16 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const [servicesRes, projectsRes] = await Promise.all([
-        axios.get('/services'),
-        axios.get('/projects?featured=true')
+        axios.get('/services?limit=4'),
+        axios.get('/projects?featured=true&limit=3')
       ]);
       
       if (servicesRes.data.success) {
-        setServices(servicesRes.data.data.slice(0, 4)); // Show only first 4
+        setServices(servicesRes.data.data);
       }
       
       if (projectsRes.data.success) {
-        setFeaturedProjects(projectsRes.data.data.slice(0, 3)); // Show only first 3
+        setFeaturedProjects(projectsRes.data.data);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -309,12 +309,17 @@ const Home = () => {
         url="/"
       />
       {/* Hero Section */}
-      <section className="relative text-white overflow-hidden" style={{
-        backgroundImage: 'url(/korelynk-workspace.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
+      <section className="relative text-white overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="/korelynk-workspace.png" 
+            alt="KoreLynk Workspace" 
+            className="w-full h-full object-cover"
+            loading="eager"
+            decoding="sync"
+            fetchpriority="high"
+          />
+        </div>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative container mx-auto px-6 py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -391,13 +396,14 @@ const Home = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {services.map((service, index) => {
                 const getServiceImage = (title) => {
-                  switch (title.toLowerCase()) {
-                    case 'web development': return '/6859d391d0cc1_product.jpg';
-                    case 'mobile development': return '/685ee5834ec0d_mobile.jpg';
-                    case 'backend development': return '/685ad313a9fee_back-end.jpg';
-                    case 'cloud solutions': return '/685edf81e9d89_database.jpg';
-                    default: return '/6859d391d0cc1_product.jpg';
-                  }
+                  const baseImages = {
+                    'web development': '/6859d391d0cc1_product',
+                    'mobile development': '/685ee5834ec0d_mobile', 
+                    'backend development': '/685ad313a9fee_back-end',
+                    'cloud solutions': '/685edf81e9d89_database'
+                  };
+                  const imageName = baseImages[title.toLowerCase()] || baseImages['web development'];
+                  return `${imageName}.jpg`; // Keep original format for now
                 };
                 
                 return (
@@ -410,6 +416,8 @@ const Home = () => {
                         src={getServiceImage(service.title)}
                         alt={service.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     <div className="p-6 text-center">
@@ -457,6 +465,8 @@ const Home = () => {
                         src={project.image}
                         alt={project.title}
                         className="w-full h-40 object-cover rounded"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     <h3 className="text-xl font-semibold mb-2">{project.title}</h3>

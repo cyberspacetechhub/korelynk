@@ -8,7 +8,7 @@ const BrandedLoader = () => {
         <img 
           src="/kore-lynk.png" 
           alt="KoreLynk Tech" 
-          className="w-40 h-40 mr-3"
+          className="h-40 mr-3 w-"
         />
         {/* <div>
           <h1 className="text-2xl font-bold text-gray-900">KoreLynk Tech</h1>

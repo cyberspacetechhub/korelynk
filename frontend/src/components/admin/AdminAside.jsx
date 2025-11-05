@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code, GraduationCap, UserCheck, Database, Calendar, CreditCard } from 'lucide-react';
+import PerformanceMonitor from '../PerformanceMonitor';
 
 const AdminAside = ({ isOpen, onClose }) => {
   const sidebarRef = useRef(null);
@@ -142,11 +143,15 @@ const AdminAside = ({ isOpen, onClose }) => {
         
         {/* Footer */}
         <div className="px-6 py-4 border-t border-gray-100">
-          <div className="flex items-center space-x-3 text-sm text-gray-500">
+          <div className="flex items-center mb-2 space-x-3 text-sm text-gray-500">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             <span>System Online</span>
           </div>
         </div>
+        
+        {/* <div className='my-10'>
+          <PerformanceMonitor />
+        </div> */}
       </aside>
     </>
   );

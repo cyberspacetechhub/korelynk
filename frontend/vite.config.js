@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-manualChunks: {
+        manualChunks: {
           'react-vendor': ['react', 'react-dom'],
           'router-vendor': ['react-router-dom'],
           'query-vendor': ['@tanstack/react-query'],
@@ -21,6 +21,12 @@ manualChunks: {
     },
     chunkSizeWarningLimit: 500,
     target: 'esnext',
-    minify: 'esbuild'
+    minify: 'esbuild',
+    cssMinify: true,
+    reportCompressedSize: false,
+    sourcemap: false
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'axios', 'lucide-react']
   }
 })
