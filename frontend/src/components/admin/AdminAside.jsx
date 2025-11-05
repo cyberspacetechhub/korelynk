@@ -35,6 +35,7 @@ const AdminAside = ({ isOpen, onClose }) => {
       title: 'Communication',
       items: [
         { path: '/admin/contacts', icon: MessageSquare, label: 'Contacts' },
+        { path: '/admin/chat', icon: MessageSquare, label: 'Chat Support' },
         { path: '/admin/feedback', icon: Star, label: 'Reviews' },
         { path: '/admin/team', icon: Users, label: 'Team Members' },
         { path: '/admin/newsletter', icon: Mail, label: 'Newsletter' }

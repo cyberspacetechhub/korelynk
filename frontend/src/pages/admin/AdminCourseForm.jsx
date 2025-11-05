@@ -440,6 +440,19 @@ const AdminCourseForm = () => {
                   type="text"
                   value={skill}
                   onChange={(e) => updateArrayItem('skills', index, e.target.value)}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const paste = e.clipboardData.getData('text');
+                    const items = paste.split(/[\n,;]/).map(item => item.trim()).filter(item => item);
+                    if (items.length > 1) {
+                      const newSkills = [...formData.skills];
+                      newSkills[index] = items[0];
+                      items.slice(1).forEach(item => newSkills.push(item));
+                      setFormData({...formData, skills: newSkills});
+                    } else {
+                      updateArrayItem('skills', index, paste.trim());
+                    }
+                  }}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter skill"
                 />
@@ -473,6 +486,19 @@ const AdminCourseForm = () => {
                   type="text"
                   value={prereq}
                   onChange={(e) => updateArrayItem('prerequisites', index, e.target.value)}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const paste = e.clipboardData.getData('text');
+                    const items = paste.split(/[\n,;]/).map(item => item.trim()).filter(item => item);
+                    if (items.length > 1) {
+                      const newPrereqs = [...formData.prerequisites];
+                      newPrereqs[index] = items[0];
+                      items.slice(1).forEach(item => newPrereqs.push(item));
+                      setFormData({...formData, prerequisites: newPrereqs});
+                    } else {
+                      updateArrayItem('prerequisites', index, paste.trim());
+                    }
+                  }}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter prerequisite"
                 />
@@ -506,6 +532,19 @@ const AdminCourseForm = () => {
                   type="text"
                   value={outcome}
                   onChange={(e) => updateArrayItem('learningOutcomes', index, e.target.value)}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const paste = e.clipboardData.getData('text');
+                    const items = paste.split(/[\n,;]/).map(item => item.trim()).filter(item => item);
+                    if (items.length > 1) {
+                      const newOutcomes = [...formData.learningOutcomes];
+                      newOutcomes[index] = items[0];
+                      items.slice(1).forEach(item => newOutcomes.push(item));
+                      setFormData({...formData, learningOutcomes: newOutcomes});
+                    } else {
+                      updateArrayItem('learningOutcomes', index, paste.trim());
+                    }
+                  }}
                   className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   placeholder="Enter learning outcome"
                 />

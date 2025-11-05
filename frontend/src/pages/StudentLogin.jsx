@@ -228,6 +228,31 @@ const StudentLogin = () => {
 
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Learning Goals
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {goalOptions.map(goal => (
+                      <label key={goal} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={formData.learningGoals.includes(goal)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setFormData({...formData, learningGoals: [...formData.learningGoals, goal]});
+                            } else {
+                              setFormData({...formData, learningGoals: formData.learningGoals.filter(g => g !== goal)});
+                            }
+                          }}
+                          className="mr-2 text-indigo-600"
+                        />
+                        <span className="text-sm">{goal}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Current Skill Level
                   </label>
                   <select
@@ -238,6 +263,22 @@ const StudentLogin = () => {
                     <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Preferred Schedule
+                  </label>
+                  <select
+                    value={formData.preferredSchedule}
+                    onChange={(e) => setFormData({...formData, preferredSchedule: e.target.value})}
+                    className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <option value="Flexible">Flexible</option>
+                    <option value="Weekdays">Weekdays</option>
+                    <option value="Weekends">Weekends</option>
+                    <option value="Evenings">Evenings</option>
                   </select>
                 </div>
               </>

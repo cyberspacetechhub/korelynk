@@ -45,14 +45,28 @@ const AdminInstructors = () => {
     }
   };
 
-  const updateInstructorStatus = async (instructorId, isActive) => {
+  const updateInstructorStatus = async (instructorId, isActive, isApproved) => {
     try {
-      await axios.put(`/admin/management/instructors/${instructorId}/status`, { isActive });
-      toast.success(`Instructor ${isActive ? 'activated' : 'deactivated'} successfully`);
+      const updateData = {};
+      if (isActive !== undefined) updateData.isActive = isActive;
+      if (isApproved !== undefined) updateData.isApproved = isApproved;
+      
+      await axios.put(`/admin/management/instructors/${instructorId}/status`, updateData);
+      
+      let message = '';
+      if (isApproved !== undefined && isActive !== undefined) {
+        message = `Instructor ${isApproved ? 'approved' : 'unapproved'} and ${isActive ? 'activated' : 'deactivated'}`;
+      } else if (isApproved !== undefined) {
+        message = `Instructor ${isApproved ? 'approved' : 'unapproved'}`;
+      } else {
+        message = `Instructor ${isActive ? 'activated' : 'deactivated'}`;
+      }
+      
+      toast.success(`${message} successfully`);
       fetchInstructors();
     } catch (error) {
-      console.error('Error updating instructor status:', error);
-      toast.error('Failed to update instructor status');
+      console.error('Error updating instructor:', error);
+      toast.error('Failed to update instructor');
     }
   };
 
@@ -154,11 +168,18 @@ const AdminInstructors = () => {
                       <div className="text-sm text-gray-500">{instructor.phone}</div>
                     </div>
                   </div>
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full flex-shrink-0 ml-2 ${
-                    instructor.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                  }`}>
-                    {instructor.isActive ? 'Active' : 'Inactive'}
-                  </span>
+                  <div className="flex flex-col gap-1 ml-2">
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full text-center ${
+                      instructor.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}>
+                      {instructor.isActive ? 'Active' : 'Inactive'}
+                    </span>
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full text-center ${
+                      instructor.isApproved ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {instructor.isApproved ? 'Approved' : 'Pending'}
+                    </span>
+                  </div>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-2 mb-3 text-sm text-gray-600">
@@ -194,8 +215,16 @@ const AdminInstructors = () => {
                   >
                     <Eye className="inline w-4 h-4 mr-1" />
                   </Link>
+                  {!instructor.isApproved && (
+                    <button
+                      onClick={() => updateInstructorStatus(instructor._id, instructor.isActive, true)}
+                      className="flex-1 px-3 py-2 text-sm text-center text-blue-600 transition-colors rounded-lg bg-blue-50 hover:bg-blue-100"
+                    >
+                      Approve
+                    </button>
+                  )}
                   <button
-                    onClick={() => updateInstructorStatus(instructor._id, !instructor.isActive)}
+                    onClick={() => updateInstructorStatus(instructor._id, !instructor.isActive, instructor.isApproved)}
                     className={`flex-1 px-3 py-2 text-sm rounded-lg transition-colors text-center ${
                       instructor.isActive 
                         ? 'text-red-600 bg-red-50 hover:bg-red-100' 
@@ -279,11 +308,18 @@ const AdminInstructors = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        instructor.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                      }`}>
-                        {instructor.isActive ? 'Active' : 'Inactive'}
-                      </span>
+                      <div className="flex flex-col gap-1">
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full text-center ${
+                          instructor.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                        }`}>
+                          {instructor.isActive ? 'Active' : 'Inactive'}
+                        </span>
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full text-center ${
+                          instructor.isApproved ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'
+                        }`}>
+                          {instructor.isApproved ? 'Approved' : 'Pending'}
+                        </span>
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center text-sm text-gray-500">
@@ -300,8 +336,17 @@ const AdminInstructors = () => {
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
+                        {!instructor.isApproved && (
+                          <button
+                            onClick={() => updateInstructorStatus(instructor._id, instructor.isActive, true)}
+                            className="text-blue-600 hover:text-blue-900"
+                            title="Approve Instructor"
+                          >
+                            <UserCheck className="w-4 h-4" />
+                          </button>
+                        )}
                         <button
-                          onClick={() => updateInstructorStatus(instructor._id, !instructor.isActive)}
+                          onClick={() => updateInstructorStatus(instructor._id, !instructor.isActive, instructor.isApproved)}
                           className={`${
                             instructor.isActive 
                               ? 'text-red-600 hover:text-red-900' 

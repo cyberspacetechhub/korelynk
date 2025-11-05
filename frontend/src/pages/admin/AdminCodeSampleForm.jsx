@@ -425,6 +425,14 @@ const AdminCodeSampleForm = () => {
               name="tags"
               value={formData.tags}
               onChange={handleChange}
+              onPaste={(e) => {
+                e.preventDefault();
+                const paste = e.clipboardData.getData('text');
+                const items = paste.split(/[\n,;]/).map(item => item.trim()).filter(item => item);
+                const existingTags = formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(t => t) : [];
+                const allTags = [...existingTags, ...items];
+                setFormData({...formData, tags: allTags.join(', ')});
+              }}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
               placeholder="Type tags separated by commas (e.g., responsive, animation, beginner)"
             />

@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/home/Header';
 import Footer from '../components/home/Footer';
+import ChatWidget from '../components/chat/ChatWidget';
 import { useSettings } from '../context/SettingsContext';
 
 const MainLayout = () => {
@@ -47,6 +48,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ChatWidget />
     </div>
   );
 };

@@ -147,10 +147,13 @@ const StudentDashboard = () => {
                 <FileText className="w-4 h-4 mr-1" />
                 Assignments
               </Link>
-              <div className="flex items-center space-x-2">
+              <Link
+                to="/student/profile"
+                className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
+              >
                 <User className="w-5 h-5 text-gray-400" />
                 <span className="text-gray-700">{student?.fullName}</span>
-              </div>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="flex items-center text-gray-600 hover:text-gray-800"
@@ -171,7 +174,7 @@ const StudentDashboard = () => {
       
       {/* Mobile Bottom Navigation */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
-        <div className="grid grid-cols-4 h-16">
+        <div className="grid grid-cols-5 h-16">
           <Link
             to="/student/dashboard"
             className="flex flex-col items-center justify-center text-indigo-600 bg-indigo-50"
@@ -192,6 +195,13 @@ const StudentDashboard = () => {
           >
             <FileText className="w-5 h-5" />
             <span className="text-xs mt-1">Assignments</span>
+          </Link>
+          <Link
+            to="/student/profile"
+            className="flex flex-col items-center justify-center text-gray-600 hover:text-gray-800"
+          >
+            <User className="w-5 h-5" />
+            <span className="text-xs mt-1">Profile</span>
           </Link>
           <button
             onClick={handleLogout}

@@ -146,10 +146,15 @@ const getInstructorById = async (req, res) => {
 
 const updateInstructorStatus = async (req, res) => {
   try {
-    const { isActive } = req.body
+    const { isActive, isApproved } = req.body
+    const updateData = {}
+    
+    if (isActive !== undefined) updateData.isActive = isActive
+    if (isApproved !== undefined) updateData.isApproved = isApproved
+    
     const instructor = await Instructor.findByIdAndUpdate(
       req.params.id,
-      { isActive },
+      updateData,
       { new: true }
     ).select('-password')
 
@@ -157,7 +162,7 @@ const updateInstructorStatus = async (req, res) => {
       return APIResponse.error(res, 'Instructor not found', 404, 'INSTRUCTOR_NOT_FOUND')
     }
 
-    APIResponse.success(res, instructor, 'Instructor status updated')
+    APIResponse.success(res, instructor, 'Instructor updated successfully')
   } catch (error) {
     console.error('Update instructor error:', error)
     APIResponse.error(res, 'Failed to update instructor', 500, 'UPDATE_INSTRUCTOR_ERROR')

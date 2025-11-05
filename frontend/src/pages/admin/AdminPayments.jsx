@@ -160,47 +160,109 @@ const AdminPayments = () => {
 
       {/* Payment Detail Modal */}
       {selectedPayment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="w-full max-w-md p-6 mx-4 bg-white rounded-lg">
-            <h3 className="mb-4 text-lg font-medium">Payment Details</h3>
-            <div className="space-y-3">
-              <div>
-                <label className="text-sm font-medium text-gray-500">Student</label>
-                <p>{selectedPayment.student?.firstName} {selectedPayment.student?.lastName}</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-500">Course</label>
-                <p>{selectedPayment.course?.title}</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-500">Amount</label>
-                <p>₦{selectedPayment.amount?.toLocaleString()}</p>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-500">Payment Method</label>
-                <p className="capitalize">{selectedPayment.paymentMethod}</p>
-              </div>
-              {selectedPayment.paymentReference && (
-                <div>
-                  <label className="text-sm font-medium text-gray-500">Reference</label>
-                  <p>{selectedPayment.paymentReference}</p>
-                </div>
-              )}
-              {selectedPayment.paymentProof && (
-                <div>
-                  <label className="text-sm font-medium text-gray-500">Payment Proof</label>
-                  <img 
-                    src={selectedPayment.paymentProof} 
-                    alt="Payment proof" 
-                    className="h-auto max-w-full mt-2 rounded"
-                  />
-                </div>
-              )}
-            </div>
-            <div className="flex justify-end mt-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+          <div className="w-full max-w-lg bg-white rounded-lg max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h3 className="text-lg font-medium">Payment Details</h3>
               <button
                 onClick={() => setSelectedPayment(null)}
-                className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                className="text-gray-400 hover:text-gray-600"
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="flex-1 p-6 overflow-y-auto">
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Student</label>
+                  <p className="text-gray-900">
+                    {selectedPayment.studentName || 
+                     `${selectedPayment.student?.firstName || ''} ${selectedPayment.student?.lastName || ''}`.trim() ||
+                     selectedPayment.student?.fullName || 
+                     'N/A'}
+                  </p>
+                  {selectedPayment.email && (
+                    <p className="text-sm text-gray-500">{selectedPayment.email}</p>
+                  )}
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Course</label>
+                  <p className="text-gray-900">{selectedPayment.course?.title || 'N/A'}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Amount</label>
+                  <p className="text-lg font-semibold text-gray-900">₦{selectedPayment.amount?.toLocaleString() || '0'}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Payment Method</label>
+                  <p className="text-gray-900 capitalize">{selectedPayment.paymentMethod || 'N/A'}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Status</label>
+                  <span className={getStatusBadge(selectedPayment.status)}>
+                    {selectedPayment.status}
+                  </span>
+                </div>
+                
+                {selectedPayment.paymentReference && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-500 mb-1">Reference</label>
+                    <p className="text-gray-900 font-mono text-sm">{selectedPayment.paymentReference}</p>
+                  </div>
+                )}
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-500 mb-1">Date</label>
+                  <p className="text-gray-900">{new Date(selectedPayment.createdAt).toLocaleString()}</p>
+                </div>
+                
+                {selectedPayment.paymentProof && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-500 mb-1">Payment Proof</label>
+                    <div className="mt-2">
+                      <img 
+                        src={selectedPayment.paymentProof} 
+                        alt="Payment proof" 
+                        className="max-w-full h-auto rounded-lg border"
+                        style={{ maxHeight: '300px' }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="flex justify-end gap-3 p-6 border-t">
+              {selectedPayment.status === 'pending' && (
+                <>
+                  <button
+                    onClick={() => {
+                      setSelectedPayment(null);
+                      handleConfirmPayment(selectedPayment, 'rejected');
+                    }}
+                    className="px-4 py-2 text-red-600 border border-red-300 rounded-lg hover:bg-red-50"
+                  >
+                    Reject
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedPayment(null);
+                      handleConfirmPayment(selectedPayment, 'confirmed');
+                    }}
+                    className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+                  >
+                    Confirm
+                  </button>
+                </>
+              )}
+              <button
+                onClick={() => setSelectedPayment(null)}
+                className="px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50"
               >
                 Close
               </button>

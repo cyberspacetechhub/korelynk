@@ -20,6 +20,7 @@ const AdminCourses = () => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get('/courses');
+      console.log(response)
       if (response.data.success) {
         setCourses(response.data.data);
       }

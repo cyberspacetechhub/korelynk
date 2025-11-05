@@ -378,6 +378,50 @@ class EmailService {
 
     return await this.transporter.sendMail(rejectionEmail)
   }
+
+  async sendEnrollmentStatusUpdate(email, data) {
+    const { studentName, courseTitle, status } = data
+    
+    const statusConfig = {
+      approved: {
+        color: '#10b981',
+        title: '🎉 Enrollment Approved!',
+        message: 'Your enrollment has been approved. Please proceed with payment to secure your spot.'
+      },
+      rejected: {
+        color: '#ef4444', 
+        title: 'Enrollment Update',
+        message: 'Unfortunately, your enrollment could not be approved at this time.'
+      },
+      completed: {
+        color: '#8b5cf6',
+        title: '🎓 Course Completed!',
+        message: 'Congratulations on completing the course! Your certificate will be available soon.'
+      }
+    }
+
+    const config = statusConfig[status] || statusConfig.approved
+    
+    const statusEmail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: `Enrollment ${status.charAt(0).toUpperCase() + status.slice(1)} - ${courseTitle}`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: ${config.color}; text-align: center;">${config.title}</h2>
+          <p>Dear ${studentName},</p>
+          <p>${config.message}</p>
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="color: #1f2937; margin-top: 0;">Course: ${courseTitle}</h3>
+            <p><strong>Status:</strong> ${status.charAt(0).toUpperCase() + status.slice(1)}</p>
+          </div>
+          <p>Best regards,<br>KoreLynk Tech Team</p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(statusEmail)
+  }
 }
 
 module.exports = new EmailService()

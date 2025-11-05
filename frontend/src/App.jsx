@@ -41,6 +41,7 @@ const StudentCourseView = React.lazy(() => import('./pages/StudentCourseView'));
 const StudentAssignmentSubmit = React.lazy(() => import('./pages/StudentAssignmentSubmit'));
 const StudentClasses = React.lazy(() => import('./pages/student/StudentClasses'));
 const StudentAssignments = React.lazy(() => import('./pages/student/StudentAssignments'));
+const StudentProfile = React.lazy(() => import('./pages/student/StudentProfile'));
 
 // Instructor pages
 const InstructorDashboard = React.lazy(() => import('./pages/InstructorDashboard'));
@@ -50,6 +51,7 @@ const InstructorAssignments = React.lazy(() => import('./pages/instructor/Instru
 const InstructorAssignmentDetail = React.lazy(() => import('./pages/instructor/InstructorAssignmentDetail'));
 const InstructorClassForm = React.lazy(() => import('./pages/instructor/InstructorClassForm'));
 const InstructorAssignmentForm = React.lazy(() => import('./pages/instructor/InstructorAssignmentForm'));
+const InstructorProfile = React.lazy(() => import('./pages/instructor/InstructorProfile'));
 
 // Admin pages
 const AdminOverview = React.lazy(() => import('./pages/admin/AdminOverview'));
@@ -82,6 +84,7 @@ const AdminAdvancedAnalytics = React.lazy(() => import('./pages/admin/AdminAdvan
 const AdminPaymentAccount = React.lazy(() => import('./pages/admin/AdminPaymentAccount'));
 const AdminPayments = React.lazy(() => import('./pages/admin/AdminPayments'));
 const AdminAssignments = React.lazy(() => import('./pages/admin/AdminAssignments'));
+const AdminChat = React.lazy(() => import('./pages/admin/AdminChat'));
 
 // Auth
 import { AuthProvider } from './context/AuthContext';
@@ -154,6 +157,7 @@ function App() {
                   <Route path="/student/assignments/:id/submit" element={<StudentProtectedRoute><StudentAssignmentSubmit /></StudentProtectedRoute>} />
                   <Route path="/student/assignments" element={<StudentProtectedRoute><StudentAssignments /></StudentProtectedRoute>} />
                   <Route path="/student/classes" element={<StudentProtectedRoute><StudentClasses /></StudentProtectedRoute>} />
+                  <Route path="/student/profile" element={<StudentProtectedRoute><StudentProfile /></StudentProtectedRoute>} />
                 
                   {/* Instructor Routes */}
                   <Route path="/instructor/login" element={<InstructorLogin />} />
@@ -164,6 +168,7 @@ function App() {
                   <Route path="/instructor/assignments" element={<InstructorProtectedRoute><InstructorAssignments /></InstructorProtectedRoute>} />
                   <Route path="/instructor/assignments/:id" element={<InstructorProtectedRoute><InstructorAssignmentDetail /></InstructorProtectedRoute>} />
                   <Route path="/instructor/assignments/new" element={<InstructorProtectedRoute><InstructorAssignmentForm /></InstructorProtectedRoute>} />
+                  <Route path="/instructor/profile" element={<InstructorProtectedRoute><InstructorProfile /></InstructorProtectedRoute>} />
                 
                   {/* Admin Routes */}
                   <Route path="/admin/login" element={<AdminLogin />} />
@@ -200,6 +205,7 @@ function App() {
                     <Route path="advanced-analytics" element={<AdminAdvancedAnalytics />} />
                     <Route path="payment-account" element={<AdminPaymentAccount />} />
                     <Route path="payments" element={<AdminPayments />} />
+                    <Route path="chat" element={<AdminChat />} />
                     <Route path="profile" element={<AdminProfile />} />
                   </Route>
                   

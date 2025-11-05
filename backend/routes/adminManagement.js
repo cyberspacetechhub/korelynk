@@ -19,6 +19,17 @@ router.put('/students/:id/status', auth, updateStudentStatus)
 
 // Instructor Management
 router.get('/instructors', auth, getAllInstructors)
+router.get('/instructors/all', auth, async (req, res) => {
+  try {
+    const instructors = await require('../models/Instructor').find({ isActive: true })
+      .select('fullName email expertise')
+      .sort({ fullName: 1 })
+    
+    require('../utils/APIResponse').success(res, instructors, 'All instructors retrieved')
+  } catch (error) {
+    require('../utils/APIResponse').error(res, 'Failed to get instructors', 500, 'GET_ALL_INSTRUCTORS_ERROR')
+  }
+})
 router.get('/instructors/:id', auth, getInstructorById)
 router.put('/instructors/:id/status', auth, updateInstructorStatus)
 

@@ -2,10 +2,14 @@ require('dotenv').config()
 require('./config/cloudinary')
 const express = require('express')
 const app = express()
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
 const path = require('path')
 const cors = require('cors')
 const errorHandler = require('./middleware/errorHandler')
 const APIResponse = require('./utils/APIResponse')
+const setupChatSocket = require('./socket/chatSocket')
 
 const { logger } = require('./middleware/logEvents')
 const credentials = require('./middleware/credentials')
@@ -75,6 +79,7 @@ app.use('/api/assignments', require('./routes/assignments'))
 app.use('/api/payment-account', require('./routes/paymentAccount'))
 app.use('/api/upload', require('./routes/upload'))
 app.use('/api/admin/management', require('./routes/adminManagement'))
+app.use('/api/chat', require('./routes/chat'))
 
 // SEO routes (no /api prefix)
 const sitemapController = require('./controllers/sitemapController')
@@ -100,8 +105,33 @@ app.all('*', (req, res) => {
 // Global error handling middleware (must be last)
 app.use(errorHandler);
 
+// Setup Socket.IO
+const io = new Server(server, {
+  cors: {
+    origin: [process.env.FRONTEND_URL || "https://korelynk.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+})
+
+// Setup chat socket handlers
+setupChatSocket(io)
+
+// Cleanup old chat sessions every hour
+setInterval(async () => {
+  try {
+    const chatService = require('./services/chatService')
+    const deletedCount = await chatService.cleanupOldSessions()
+    if (deletedCount > 0) {
+      console.log(`Cleaned up ${deletedCount} old chat sessions`)
+    }
+  } catch (error) {
+    console.error('Error cleaning up old sessions:', error)
+  }
+}, 60 * 60 * 1000) // Run every hour
+
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`KoreLynk Tech server running on port ${PORT}`)
 })
 

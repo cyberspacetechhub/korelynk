@@ -10,16 +10,24 @@ const getAllCourses = async (filters = {}) => {
   if (filters.featured !== undefined) query.featured = filters.featured
   
   return await Course.find(query)
-    .populate('instructor', 'fullName email')
+    .populate({
+      path: 'instructor',
+      select: 'fullName email',
+      options: { strictPopulate: false }
+    })
     .sort({ createdAt: -1 })
 }
 
 const getCourseById = async (id) => {
-  return await Course.findById(id).populate('instructor', 'fullName email bio')
+  return await Course.findById(id).populate({
+    path: 'instructor',
+    select: 'fullName email bio',
+    options: { strictPopulate: false }
+  })
 }
 
 const createCourse = async (courseData) => {
-  const course = new Course(courseData)
+  const course = new Course({ ...courseData, isActive: true })
   return await course.save()
 }
 
@@ -55,8 +63,9 @@ const deleteCourse = async (id) => {
 }
 
 const getActiveInstructors = async () => {
-  return await Instructor.find({ isApproved: true, isActive: true })
+  return await Instructor.find({ isActive: true })
     .select('fullName email expertise')
+    .sort({ fullName: 1 })
 }
 
 const getEnrollmentStats = async (courseId) => {

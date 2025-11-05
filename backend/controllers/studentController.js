@@ -142,11 +142,31 @@ const getProfile = async (req, res) => {
   }
 }
 
+const updateProfile = async (req, res) => {
+  try {
+    const student = await Student.findByIdAndUpdate(
+      req.student._id,
+      req.body,
+      { new: true }
+    ).select('-password')
+    
+    if (!student) {
+      return APIResponse.error(res, 'Student not found', 404, 'STUDENT_NOT_FOUND')
+    }
+
+    APIResponse.success(res, student, 'Profile updated successfully')
+  } catch (error) {
+    console.error('Update profile error:', error)
+    APIResponse.error(res, 'Failed to update profile', 500, 'UPDATE_PROFILE_ERROR')
+  }
+}
+
 module.exports = {
   register,
   verifyEmail,
   login,
   getProfile,
+  updateProfile,
   requestPasswordReset,
   resetPassword
 }

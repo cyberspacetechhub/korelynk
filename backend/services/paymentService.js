@@ -7,14 +7,14 @@ class PaymentService {
     const payment = new Payment(paymentData)
     await payment.save()
     return await Payment.findById(payment._id)
-      .populate('student', 'firstName lastName email')
+      .populate('student', 'fullName email')
       .populate('course', 'title')
       .populate('enrollment')
   }
 
   async getAllPayments() {
     return await Payment.find()
-      .populate('student', 'firstName lastName email')
+      .populate('student', 'fullName email')
       .populate('course', 'title')
       .populate('enrollment')
       .sort({ createdAt: -1 })
@@ -22,7 +22,7 @@ class PaymentService {
 
   async confirmPayment(paymentId, adminId) {
     const payment = await Payment.findById(paymentId)
-      .populate('student', 'firstName lastName email')
+      .populate('student', 'fullName email')
       .populate('course', 'title')
       .populate('enrollment')
 
@@ -37,13 +37,13 @@ class PaymentService {
 
     // Update enrollment status
     const enrollment = await Enrollment.findById(payment.enrollment._id)
-    enrollment.status = 'active'
-    enrollment.paymentStatus = 'confirmed'
+    enrollment.status = 'approved'
+    enrollment.paymentStatus = 'paid'
     await enrollment.save()
 
     // Send confirmation email
     await emailService.sendPaymentConfirmation(payment.student.email, {
-      studentName: `${payment.student.firstName} ${payment.student.lastName}`,
+      studentName: payment.student.fullName,
       courseName: payment.course.title,
       amount: payment.amount
     })
@@ -53,7 +53,7 @@ class PaymentService {
 
   async rejectPayment(paymentId, adminId, reason = '') {
     const payment = await Payment.findById(paymentId)
-      .populate('student', 'firstName lastName email')
+      .populate('student', 'fullName email')
       .populate('course', 'title')
 
     if (!payment) {
@@ -69,12 +69,12 @@ class PaymentService {
     // Update enrollment status
     const enrollment = await Enrollment.findById(payment.enrollment._id)
     enrollment.status = 'rejected'
-    enrollment.paymentStatus = 'rejected'
+    enrollment.paymentStatus = 'failed'
     await enrollment.save()
 
     // Send rejection email
     await emailService.sendPaymentRejection(payment.student.email, {
-      studentName: `${payment.student.firstName} ${payment.student.lastName}`,
+      studentName: payment.student.fullName,
       courseName: payment.course.title
     })
 
