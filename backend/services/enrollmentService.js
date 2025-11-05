@@ -5,6 +5,7 @@ const emailService = require('./emailService')
 
 const createEnrollment = async (enrollmentData) => {
   const Class = require('../models/Class')
+  const Payment = require('../models/Payment')
   
   // Check course exists and capacity
   const course = await Course.findById(enrollmentData.course)
@@ -22,6 +23,20 @@ const createEnrollment = async (enrollmentData) => {
 
   const enrollment = new Enrollment(enrollmentData)
   await enrollment.save()
+
+  // Create payment record if payment proof provided
+  if (enrollmentData.paymentProof) {
+    const payment = new Payment({
+      student: enrollmentData.student,
+      enrollment: enrollment._id,
+      course: enrollmentData.course,
+      amount: course.price,
+      paymentMethod: enrollmentData.paymentMethod,
+      paymentProof: enrollmentData.paymentProof,
+      status: 'pending'
+    })
+    await payment.save()
+  }
 
   // Update course enrollment count
   await courseService.updateEnrollmentCount(enrollmentData.course, true)

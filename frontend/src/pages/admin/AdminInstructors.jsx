@@ -67,7 +67,7 @@ const AdminInstructors = () => {
   };
 
   return (
-    <div className="w-full p-4 md:p-6">
+    <div className="w-full">
       <div className="flex flex-col gap-2 mb-6 sm:flex-row sm:justify-between sm:items-center">
         <h1 className="text-xl font-bold text-gray-900 md:text-2xl">Instructor Management</h1>
         <div className="text-sm text-gray-600">
@@ -214,71 +214,109 @@ const AdminInstructors = () => {
           </div>
           
           {/* Desktop Table */}
-          <div className="hidden p-6 lg:block">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Instructor</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Contact</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Classes</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Status</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Joined</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Actions</th>
+          <div className="hidden overflow-x-auto lg:block">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Instructor
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Contact
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Classes
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Joined
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {instructors.map((instructor) => (
+                  <tr key={instructor._id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <div className="flex items-center justify-center w-10 h-10 bg-purple-100 rounded-full">
+                          <span className="text-sm font-medium text-purple-600">
+                            {instructor.fullName?.charAt(0) || 'I'}
+                          </span>
+                        </div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">
+                            {instructor.fullName}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            ID: {instructor._id.slice(-6)}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        <div className="flex items-center mb-1">
+                          <Mail className="w-3 h-3 mr-1" />
+                          {instructor.email}
+                        </div>
+                        <div className="flex items-center">
+                          <Phone className="w-3 h-3 mr-1" />
+                          {instructor.phone}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {instructor.classes?.length || 0} classes
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {instructor.expertise?.slice(0, 2).join(', ')}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        instructor.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}>
+                        {instructor.isActive ? 'Active' : 'Inactive'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="w-3 h-3 mr-1" />
+                        {new Date(instructor.createdAt).toLocaleDateString()}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                      <div className="flex space-x-2">
+                        <Link
+                          to={`/admin/instructors/${instructor._id}`}
+                          className="text-indigo-600 hover:text-indigo-900"
+                          title="View Details"
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => updateInstructorStatus(instructor._id, !instructor.isActive)}
+                          className={`${
+                            instructor.isActive 
+                              ? 'text-red-600 hover:text-red-900' 
+                              : 'text-green-600 hover:text-green-900'
+                          }`}
+                          title={instructor.isActive ? 'Deactivate' : 'Activate'}
+                        >
+                          {instructor.isActive ? <UserX className="w-4 h-4" /> : <UserCheck className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {instructors.map((instructor) => (
-                    <tr key={instructor._id} className="transition-colors border-b border-gray-100 hover:bg-gray-50">
-                      <td className="px-4 py-4">
-                        <div>
-                          <div className="font-medium text-gray-900">{instructor.fullName}</div>
-                          <div className="text-sm text-gray-500">{instructor.email}</div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-900">{instructor.phone}</td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-1 text-sm text-gray-900">
-                          <BookOpen className="w-4 h-4" />
-                          {instructor.classes?.length || 0}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                          instructor.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                        }`}>
-                          {instructor.isActive ? 'Active' : 'Inactive'}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-900">{new Date(instructor.createdAt).toLocaleDateString()}</td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-2">
-                          <Link
-                            to={`/admin/instructors/${instructor._id}`}
-                            className="px-3 py-1 text-sm text-white transition-all duration-200 bg-blue-600 rounded hover:bg-blue-700"
-                          >
-                            <Eye className="inline w-3 h-3 mr-1" />
-                            
-                          </Link>
-                          <button
-                            onClick={() => updateInstructorStatus(instructor._id, !instructor.isActive)}
-                            className={`px-3 py-1 text-sm text-white rounded transition-all duration-200 ${
-                              instructor.isActive ? 'bg-red-600 hover:bg-red-700' : 'bg-green-600 hover:bg-green-700'
-                            }`}
-                          >
-                            {instructor.isActive ? (
-                              <><UserX className="inline w-3 h-3 mr-1" /></>
-                            ) : (
-                              <><UserCheck className="inline w-3 h-3 mr-1" /></>
-                            )}
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
           
           {/* Pagination */}

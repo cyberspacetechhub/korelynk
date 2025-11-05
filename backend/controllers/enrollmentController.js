@@ -26,7 +26,9 @@ const createEnrollment = async (req, res) => {
       phone: student.phone,
       experience: req.body.experience || 'Basic',
       motivation: req.body.motivation || 'Learning new skills',
-      availability: req.body.availability || 'Flexible'
+      availability: req.body.availability || 'Flexible',
+      paymentMethod: req.body.paymentMethod || 'bank_transfer',
+      paymentProof: req.body.paymentProof
     }
 
     const enrollment = await enrollmentService.createEnrollment(enrollmentData)

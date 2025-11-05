@@ -161,12 +161,12 @@ const AdminClasses = () => {
   };
 
   return (
-    <div className="p-4 md:p-6">
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Class Management</h1>
+    <div className="">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:justify-between sm:items-center">
+        <h1 className="text-xl font-bold text-gray-900 md:text-2xl">Class Management</h1>
         <button
           onClick={() => setShowModal(true)}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center justify-center"
+          className="flex items-center justify-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Create Class
@@ -174,17 +174,17 @@ const AdminClasses = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
-        <div className="flex flex-col md:flex-row gap-4">
+      <div className="p-4 mb-6 bg-white rounded-lg shadow">
+        <div className="flex flex-col gap-4 md:flex-row">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Search className="absolute w-4 h-4 text-gray-400 left-3 top-3" />
               <input
                 type="text"
                 placeholder="Search classes..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           </div>
@@ -206,78 +206,74 @@ const AdminClasses = () => {
       </div>
 
       {/* Classes Table */}
-      <div className="bg-white rounded-lg shadow">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         {loading ? (
           <div className="p-6">
             <SkeletonLoader rows={5} columns={6} />
           </div>
         ) : classes.length > 0 ? (
-          <div className="p-6">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Class Details</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Course & Instructor</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Schedule</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Students</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Status</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Actions</th>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Class Details</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Course & Instructor</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Schedule</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Students</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Status</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {classes.map((classItem) => (
+                  <tr key={classItem._id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">{classItem.title}</div>
+                        <div className="text-sm text-gray-500">{classItem.description}</div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">{classItem.course?.title}</div>
+                        <div className="text-sm text-gray-500">{classItem.instructor?.fullName}</div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{new Date(classItem.scheduledDate).toLocaleDateString()}</div>
+                      <div className="text-sm text-gray-500">{classItem.duration} minutes</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-1 text-sm text-gray-900">
+                        <Users className="w-4 h-4" />
+                        {classItem.students?.length || 0}/{classItem.maxStudents}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(classItem.status)}`}>
+                        {classItem.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleEdit(classItem)}
+                          className="text-indigo-600 hover:text-indigo-900"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(classItem._id)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {classes.map((classItem) => (
-                    <tr key={classItem._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-4">
-                        <div>
-                          <div className="font-medium text-gray-900">{classItem.title}</div>
-                          <div className="text-sm text-gray-500">{classItem.description}</div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <div>
-                          <div className="font-medium text-gray-900">{classItem.course?.title}</div>
-                          <div className="text-sm text-gray-500">{classItem.instructor?.fullName}</div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <div className="text-sm text-gray-900">{new Date(classItem.scheduledDate).toLocaleDateString()}</div>
-                        <div className="text-sm text-gray-500">{classItem.duration} minutes</div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-1 text-sm text-gray-900">
-                          <Users className="w-4 h-4" />
-                          {classItem.students?.length || 0}/{classItem.maxStudents}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full transition-colors ${getStatusColor(classItem.status)}`}>
-                          {classItem.status}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleEdit(classItem)}
-                            className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
-                          >
-                            <Edit className="w-3 h-3 inline mr-1" />
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDelete(classItem._id)}
-                            className="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
-                          >
-                            <Trash2 className="w-3 h-3 inline mr-1" />
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
           <EmptyState
@@ -292,16 +288,16 @@ const AdminClasses = () => {
 
       {/* Create/Edit Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="mb-4 text-xl font-bold">
               {editingClass ? 'Edit Class' : 'Create New Class'}
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block mb-1 text-sm font-medium text-gray-700">
                     Class Title
                   </label>
                   <input
@@ -314,7 +310,7 @@ const AdminClasses = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block mb-1 text-sm font-medium text-gray-700">
                     Course
                   </label>
                   <select
@@ -333,7 +329,7 @@ const AdminClasses = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block mb-1 text-sm font-medium text-gray-700">
                     Instructor
                   </label>
                   <select
@@ -352,7 +348,7 @@ const AdminClasses = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block mb-1 text-sm font-medium text-gray-700">
                     Scheduled Date & Time
                   </label>
                   <input
@@ -365,7 +361,7 @@ const AdminClasses = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block mb-1 text-sm font-medium text-gray-700">
                     Duration (minutes)
                   </label>
                   <input
@@ -380,7 +376,7 @@ const AdminClasses = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block mb-1 text-sm font-medium text-gray-700">
                     Max Students
                   </label>
                   <input
@@ -396,7 +392,7 @@ const AdminClasses = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Meeting Link
                 </label>
                 <input
@@ -409,7 +405,7 @@ const AdminClasses = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Description
                 </label>
                 <textarea
@@ -421,7 +417,7 @@ const AdminClasses = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block mb-1 text-sm font-medium text-gray-700">
                   Status
                 </label>
                 <select
@@ -436,7 +432,7 @@ const AdminClasses = () => {
                 </select>
               </div>
               
-              <div className="flex justify-end space-x-3 pt-4">
+              <div className="flex justify-end pt-4 space-x-3">
                 <button
                   type="button"
                   onClick={() => {
@@ -444,13 +440,13 @@ const AdminClasses = () => {
                     setEditingClass(null);
                     resetForm();
                   }}
-                  className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                  className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                  className="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
                 >
                   {editingClass ? 'Update' : 'Create'} Class
                 </button>

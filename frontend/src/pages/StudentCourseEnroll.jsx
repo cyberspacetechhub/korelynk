@@ -17,6 +17,10 @@ const StudentCourseEnroll = () => {
     paymentMethod: 'bank_transfer'
   });
   const [paymentAccount, setPaymentAccount] = useState(null);
+  const [step, setStep] = useState(1); // 1: enrollment form, 2: payment confirmation
+  const [paymentMade, setPaymentMade] = useState(false);
+  const [paymentProof, setPaymentProof] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('studentToken');
@@ -53,8 +57,43 @@ const StudentCourseEnroll = () => {
     }
   };
 
-  const handleEnrollment = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (formData.paymentMethod === 'bank_transfer') {
+      setStep(2); // Go to payment confirmation step
+    } else {
+      handleEnrollment(); // Direct enrollment for other methods
+    }
+  };
+
+  const handlePaymentProofUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const response = await axios.post('/upload/payment-proof', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response.data.success) {
+        setPaymentProof(response.data.data.url);
+        toast.success('Payment proof uploaded successfully');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.error('Failed to upload payment proof');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleEnrollment = async () => {
     setEnrolling(true);
 
     try {
@@ -75,7 +114,8 @@ const StudentCourseEnroll = () => {
         experience: formData.experience,
         motivation: formData.motivation,
         availability: formData.availability,
-        paymentMethod: formData.paymentMethod
+        paymentMethod: formData.paymentMethod,
+        paymentProof: paymentProof
       };
 
       const response = await axios.post('/enrollments', enrollmentData, {
@@ -135,7 +175,8 @@ const StudentCourseEnroll = () => {
             </div>
           </div>
 
-          <form onSubmit={handleEnrollment} className="space-y-6">
+          {step === 1 ? (
+            <form onSubmit={handleFormSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Programming Experience *
@@ -253,13 +294,79 @@ const StudentCourseEnroll = () => {
               </button>
               <button
                 type="submit"
-                disabled={enrolling}
-                className="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                className="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
               >
-                {enrolling ? 'Submitting...' : 'Submit Enrollment'}
+                {formData.paymentMethod === 'bank_transfer' ? 'Continue to Payment' : 'Submit Enrollment'}
               </button>
             </div>
           </form>
+          ) : (
+            <div className="space-y-6">
+              <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                <h3 className="font-semibold text-green-900 mb-2">Payment Instructions</h3>
+                <div className="text-sm text-green-800 space-y-1">
+                  <p><strong>Bank:</strong> {paymentAccount.bankName}</p>
+                  <p><strong>Account Number:</strong> {paymentAccount.accountNumber}</p>
+                  <p><strong>Account Name:</strong> {paymentAccount.accountName}</p>
+                  <p><strong>Amount:</strong> ₦{course.price?.toLocaleString()}</p>
+                  <p><strong>Reference:</strong> Use your full name as description</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    id="paymentMade"
+                    checked={paymentMade}
+                    onChange={(e) => setPaymentMade(e.target.checked)}
+                    className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                  />
+                  <label htmlFor="paymentMade" className="text-sm font-medium text-gray-700">
+                    I have made this payment
+                  </label>
+                </div>
+
+                {paymentMade && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Upload Payment Proof *
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePaymentProofUpload}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      required
+                    />
+                    {uploading && <p className="text-sm text-gray-500 mt-1">Uploading...</p>}
+                    {paymentProof && (
+                      <div className="mt-2">
+                        <img src={paymentProof} alt="Payment proof" className="max-w-xs h-auto rounded" />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={handleEnrollment}
+                  disabled={!paymentMade || !paymentProof || enrolling}
+                  className="flex-1 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                >
+                  {enrolling ? 'Submitting...' : 'Complete Enrollment'}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

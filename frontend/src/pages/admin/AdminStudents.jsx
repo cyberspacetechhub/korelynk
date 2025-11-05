@@ -69,7 +69,7 @@ const AdminStudents = () => {
   };
 
   return (
-    <div className="w-full p-4 md:p-6">
+    <div className="w-full">
       <div className="flex flex-col gap-2 mb-6 sm:flex-row sm:justify-between sm:items-center">
         <h1 className="text-xl font-bold text-gray-900 md:text-2xl">Student Management</h1>
         <div className="text-sm text-gray-600">
@@ -78,22 +78,22 @@ const AdminStudents = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow p-4 mb-6">
+      <div className="p-4 mb-6 bg-white rounded-lg shadow">
         <div className="flex flex-col gap-4 sm:flex-row">
           <div className="flex-1">
             <div className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Search className="absolute w-4 h-4 text-gray-400 left-3 top-3" />
               <input
                 type="text"
                 placeholder="Search students..."
                 value={searchTerm}
                 onChange={handleSearch}
-                className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
           </div>
           
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={() => handleStatusFilter('')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -126,15 +126,15 @@ const AdminStudents = () => {
       {loading ? (
         <ListSkeleton count={8} />
       ) : students.length > 0 ? (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="overflow-hidden bg-white rounded-lg shadow">
           {/* Mobile Cards */}
           <div className="block lg:hidden">
             {students.map((student) => (
               <div key={student._id} className="p-4 border-b border-gray-200">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-indigo-600 font-medium text-sm">
+                    <div className="flex items-center justify-center w-10 h-10 mr-3 bg-indigo-100 rounded-full">
+                      <span className="text-sm font-medium text-indigo-600">
                         {student.fullName.charAt(0)}
                       </span>
                     </div>
@@ -149,7 +149,7 @@ const AdminStudents = () => {
                     {student.isActive ? 'Active' : 'Inactive'}
                   </span>
                 </div>
-                <div className="text-sm text-gray-600 mb-2">
+                <div className="mb-2 text-sm text-gray-600">
                   <div>Phone: {student.phone}</div>
                   <div>Courses: {student.enrolledCourses?.length || 0}</div>
                   <div>Joined: {new Date(student.createdAt).toLocaleDateString()}</div>
@@ -157,9 +157,9 @@ const AdminStudents = () => {
                 <div className="flex gap-2">
                   <Link
                     to={`/admin/students/${student._id}`}
-                    className="flex-1 px-3 py-2 text-sm text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors text-center"
+                    className="flex-1 px-3 py-2 text-sm text-center text-indigo-600 transition-colors rounded-lg bg-indigo-50 hover:bg-indigo-100"
                   >
-                    <Eye className="w-4 h-4 inline mr-1" />
+                    <Eye className="inline w-4 h-4 mr-1" />
                     View
                   </Link>
                   <button
@@ -171,9 +171,9 @@ const AdminStudents = () => {
                     }`}
                   >
                     {student.isActive ? (
-                      <><UserX className="w-4 h-4 inline mr-1" />Deactivate</>
+                      <><UserX className="inline w-4 h-4 mr-1" />Deactivate</>
                     ) : (
-                      <><UserCheck className="w-4 h-4 inline mr-1" />Activate</>
+                      <><UserCheck className="inline w-4 h-4 mr-1" />Activate</>
                     )}
                   </button>
                 </div>
@@ -182,26 +182,26 @@ const AdminStudents = () => {
           </div>
           
           {/* Desktop Table */}
-          <div className="hidden lg:block overflow-x-auto">
+          <div className="hidden overflow-x-auto lg:block">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Student
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Contact
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Enrolled Courses
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Joined
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Actions
                   </th>
                 </tr>
@@ -211,8 +211,8 @@ const AdminStudents = () => {
                   <tr key={student._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center">
-                          <span className="text-indigo-600 font-medium text-sm">
+                        <div className="flex items-center justify-center w-10 h-10 bg-indigo-100 rounded-full">
+                          <span className="text-sm font-medium text-indigo-600">
                             {student.fullName.charAt(0)}
                           </span>
                         </div>
@@ -261,7 +261,7 @@ const AdminStudents = () => {
                         {new Date(student.createdAt).toLocaleDateString()}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
                       <div className="flex space-x-2">
                         <Link
                           to={`/admin/students/${student._id}`}
@@ -291,15 +291,15 @@ const AdminStudents = () => {
           
           {/* Pagination */}
           {pagination.totalPages > 1 && (
-            <div className="px-4 py-3 border-t border-gray-200 flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
-              <div className="text-sm text-gray-700 text-center sm:text-left">
+            <div className="flex flex-col gap-2 px-4 py-3 border-t border-gray-200 sm:flex-row sm:justify-between sm:items-center">
+              <div className="text-sm text-center text-gray-700 sm:text-left">
                 Showing {((pagination.currentPage - 1) * 10) + 1} to {Math.min(pagination.currentPage * 10, pagination.total)} of {pagination.total} results
               </div>
               <div className="flex justify-center gap-2">
                 <button
                   onClick={() => setPagination(prev => ({ ...prev, currentPage: prev.currentPage - 1 }))}
                   disabled={pagination.currentPage === 1}
-                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                  className="px-3 py-2 text-sm transition-colors border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                 >
                   Previous
                 </button>
@@ -309,7 +309,7 @@ const AdminStudents = () => {
                 <button
                   onClick={() => setPagination(prev => ({ ...prev, currentPage: prev.currentPage + 1 }))}
                   disabled={pagination.currentPage === pagination.totalPages}
-                  className="px-3 py-2 border border-gray-300 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+                  className="px-3 py-2 text-sm transition-colors border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                 >
                   Next
                 </button>

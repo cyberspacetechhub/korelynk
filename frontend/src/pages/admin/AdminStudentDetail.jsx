@@ -44,15 +44,15 @@ const AdminStudentDetail = () => {
 
   if (loading) {
     return (
-      <div className="w-full p-4 md:p-6">
+      <div className="w-full">
         <div className="animate-pulse">
-          <div className="h-6 bg-gray-300 rounded w-32 mb-6"></div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="h-8 bg-gray-300 rounded w-48 mb-4"></div>
+          <div className="w-32 h-6 mb-6 bg-gray-300 rounded"></div>
+          <div className="p-6 bg-white rounded-lg shadow">
+            <div className="w-48 h-8 mb-4 bg-gray-300 rounded"></div>
             <div className="space-y-3">
-              <div className="h-4 bg-gray-300 rounded w-full"></div>
-              <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-              <div className="h-4 bg-gray-300 rounded w-1/2"></div>
+              <div className="w-full h-4 bg-gray-300 rounded"></div>
+              <div className="w-3/4 h-4 bg-gray-300 rounded"></div>
+              <div className="w-1/2 h-4 bg-gray-300 rounded"></div>
             </div>
           </div>
         </div>
@@ -63,12 +63,12 @@ const AdminStudentDetail = () => {
   if (!student) {
     return (
       <div className="w-full p-4 md:p-6">
-        <Link to="/admin/students" className="inline-flex items-center text-indigo-600 hover:text-indigo-800 mb-6">
+        <Link to="/admin/students" className="inline-flex items-center mb-6 text-indigo-600 hover:text-indigo-800">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Students
         </Link>
-        <div className="text-center py-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Student not found</h2>
+        <div className="py-12 text-center">
+          <h2 className="mb-2 text-xl font-semibold text-gray-900">Student not found</h2>
           <p className="text-gray-600">The student you're looking for doesn't exist.</p>
         </div>
       </div>
@@ -77,19 +77,19 @@ const AdminStudentDetail = () => {
 
   return (
     <div className="w-full p-4 md:p-6">
-      <Link to="/admin/students" className="inline-flex items-center text-indigo-600 hover:text-indigo-800 mb-6">
+      <Link to="/admin/students" className="inline-flex items-center mb-6 text-indigo-600 hover:text-indigo-800">
         <ArrowLeft className="w-4 h-4 mr-2" />
         Back to Students
       </Link>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid gap-6 lg:grid-cols-3">
         {/* Main Info */}
-        <div className="lg:col-span-2 space-y-6">
-          <div className="bg-white rounded-lg shadow p-6">
+        <div className="space-y-6 lg:col-span-2">
+          <div className="p-6 bg-white rounded-lg shadow">
             <div className="flex items-start justify-between mb-6">
               <div className="flex items-center">
-                <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-indigo-600 font-bold text-xl">
+                <div className="flex items-center justify-center w-16 h-16 mr-4 bg-indigo-100 rounded-full">
+                  <span className="text-xl font-bold text-indigo-600">
                     {student.fullName?.charAt(0) || 'S'}
                   </span>
                 </div>
@@ -108,17 +108,17 @@ const AdminStudentDetail = () => {
                   }`}
                 >
                   {student.isActive ? (
-                    <><UserX className="w-4 h-4 inline mr-1" />Deactivate</>
+                    <><UserX className="inline w-4 h-4 mr-1" />Deactivate</>
                   ) : (
-                    <><UserCheck className="w-4 h-4 inline mr-1" />Activate</>
+                    <><UserCheck className="inline w-4 h-4 mr-1" />Activate</>
                   )}
                 </button>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Contact Information</h3>
+                <h3 className="mb-3 text-lg font-semibold text-gray-900">Contact Information</h3>
                 <div className="space-y-2">
                   <div className="flex items-center text-gray-600">
                     <Mail className="w-4 h-4 mr-2" />
@@ -136,7 +136,7 @@ const AdminStudentDetail = () => {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Status</h3>
+                <h3 className="mb-3 text-lg font-semibold text-gray-900">Status</h3>
                 <span className={`inline-flex px-3 py-1 text-sm font-medium rounded-full ${
                   student.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                 }`}>
@@ -147,27 +147,27 @@ const AdminStudentDetail = () => {
           </div>
 
           {/* Enrollments */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Course Enrollments</h3>
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">Course Enrollments</h3>
             {Array.isArray(student.enrollments) && student.enrollments.length > 0 ? (
               <div className="space-y-3">
                 {student.enrollments.map((enrollment, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex justify-between items-start">
+                  <div key={index} className="p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-start justify-between">
                       <div>
                         <h4 className="font-medium text-gray-900">{enrollment.course?.title || 'Course Title'}</h4>
-                        <p className="text-sm text-gray-600 mt-1">
+                        <p className="mt-1 text-sm text-gray-600">
                           Enrolled: {new Date(enrollment.enrollmentDate).toLocaleDateString()}
                         </p>
                         {enrollment.progress && (
                           <div className="mt-2">
-                            <div className="flex justify-between text-sm text-gray-600 mb-1">
+                            <div className="flex justify-between mb-1 text-sm text-gray-600">
                               <span>Progress</span>
                               <span>{enrollment.progress.completionPercentage || 0}%</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="w-full h-2 bg-gray-200 rounded-full">
                               <div 
-                                className="bg-indigo-600 h-2 rounded-full" 
+                                className="h-2 bg-indigo-600 rounded-full" 
                                 style={{ width: `${enrollment.progress.completionPercentage || 0}%` }}
                               ></div>
                             </div>
@@ -186,7 +186,7 @@ const AdminStudentDetail = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-gray-500">
+              <div className="py-8 text-center text-gray-500">
                 <BookOpen className="w-12 h-12 mx-auto mb-2 opacity-50" />
                 <p>No course enrollments yet</p>
               </div>
@@ -194,18 +194,18 @@ const AdminStudentDetail = () => {
           </div>
 
           {/* Assignments */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Assignments</h3>
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">Recent Assignments</h3>
             {Array.isArray(student.assignments) && student.assignments.length > 0 ? (
               <div className="space-y-3">
                 {student.assignments?.slice(0, 5).map((assignment, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex justify-between items-start">
+                  <div key={index} className="p-4 border border-gray-200 rounded-lg">
+                    <div className="flex items-start justify-between">
                       <div>
                         <h4 className="font-medium text-gray-900">{assignment.title}</h4>
                         <p className="text-sm text-gray-600">Due: {assignment.dueDate ? new Date(assignment.dueDate).toLocaleDateString() : 'No due date'}</p>
                         {assignment.grade && (
-                          <p className="text-sm font-medium text-indigo-600 mt-1">Grade: {assignment.grade}/100</p>
+                          <p className="mt-1 text-sm font-medium text-indigo-600">Grade: {assignment.grade}/100</p>
                         )}
                       </div>
                       <span className={`px-2 py-1 text-xs font-medium rounded-full ${
@@ -220,7 +220,7 @@ const AdminStudentDetail = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-gray-500">
+              <div className="py-8 text-center text-gray-500">
                 <GraduationCap className="w-12 h-12 mx-auto mb-2 opacity-50" />
                 <p>No assignments yet</p>
               </div>
@@ -231,8 +231,8 @@ const AdminStudentDetail = () => {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Quick Stats */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">Quick Stats</h3>
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-600">Total Enrollments:</span>
@@ -264,8 +264,8 @@ const AdminStudentDetail = () => {
 
           {/* Learning Preferences */}
           {student.learningPreferences && (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Learning Preferences</h3>
+            <div className="p-6 bg-white rounded-lg shadow">
+              <h3 className="mb-4 text-lg font-semibold text-gray-900">Learning Preferences</h3>
               <div className="space-y-2 text-sm text-gray-600">
                 {Object.entries(student.learningPreferences).map(([key, value]) => (
                   <div key={key} className="flex justify-between">

@@ -163,13 +163,20 @@ const Header = () => {
                 Search
               </button>
               
-              <Link
-                to="/contact"
-                onClick={() => setIsMenuOpen(false)}
-                className="block w-full px-6 py-3 mt-4 font-medium text-center text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700"
-              >
-                Get Started
-              </Link>
+              {/* Mobile Auth Links */}
+              <div className="pt-4 mt-4 border-t border-gray-200">
+                <p className="px-3 py-2 text-sm font-medium text-gray-500">Login Portals</p>
+                {authLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block px-3 py-2 text-base font-medium text-gray-700 transition-colors rounded-md hover:text-indigo-600 hover:bg-gray-50"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         )}

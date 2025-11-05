@@ -131,7 +131,7 @@ const AdminCodeSamples = () => {
       </div>
 
       {/* Code Samples Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-lg shadow overflow-hidden">
         {codeSamples.length === 0 ? (
           <div className="text-center py-12">
             <Code className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -146,29 +146,29 @@ const AdminCodeSamples = () => {
             </Link>
           </div>
         ) : (
-          <div className="max-w-full overflow-x-auto">
-            <table className="w-full table-auto">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Title
                   </th>
-                  <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase md:table-cell">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Language
                   </th>
-                  <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase lg:table-cell">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Difficulty
                   </th>
-                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:table-cell">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Views
                   </th>
-                  <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase lg:table-cell">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Created
                   </th>
-                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase sm:px-6">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -176,63 +176,57 @@ const AdminCodeSamples = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {codeSamples.map((sample) => (
                   <tr key={sample._id} className="hover:bg-gray-50">
-                    <td className="px-2 py-4 sm:px-6">
-                      <div className="min-w-0 flex-1">
-                        <div className="text-sm font-medium text-gray-900 line-clamp-2">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
                           {sample.title}
                         </div>
-                        <div className="text-xs sm:text-sm text-gray-500 line-clamp-1 md:hidden">
-                          {sample.language.toUpperCase()} • {sample.difficulty} • {formatDate(sample.createdAt)}
-                        </div>
-                        <div className="hidden md:block text-xs text-gray-400 mt-1 line-clamp-2 max-w-xs">
-                          {sample.description.length > 80 ? `${sample.description.substring(0, 80)}...` : sample.description}
+                        <div className="text-sm text-gray-500">
+                          {sample.description.length > 60 ? `${sample.description.substring(0, 60)}...` : sample.description}
                         </div>
                       </div>
                     </td>
-                    <td className="hidden md:table-cell px-6 py-4">
-                      <span className="px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="inline-flex px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-800 rounded-full">
                         {sample.language.toUpperCase()}
                       </span>
                     </td>
-                    <td className="hidden lg:table-cell px-6 py-4">
+                    <td className="px-6 py-4 whitespace-nowrap">
                       <span className="text-sm text-gray-900 capitalize">
                         {sample.difficulty}
                       </span>
                     </td>
-                    <td className="px-2 py-4 sm:px-6">
-                      <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(sample.status)}`}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(sample.status)}`}>
                         {sample.status}
                       </span>
                     </td>
-                    <td className="hidden sm:table-cell px-6 py-4">
+                    <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center text-sm text-gray-900">
                         <Eye className="w-4 h-4 mr-1" />
                         {sample.views}
                       </div>
                     </td>
-                    <td className="hidden lg:table-cell px-6 py-4 text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {formatDate(sample.createdAt)}
                     </td>
-                    <td className="px-2 py-4 text-right sm:px-6">
-                      <div className="flex items-center justify-end space-x-1">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex items-center space-x-2">
                         <Link
                           to={`/admin/code-samples/${sample._id}`}
-                          className="p-1 text-gray-400 hover:text-blue-600"
-                          title="View Details"
+                          className="text-blue-600 hover:text-blue-900"
                         >
                           <Eye className="w-4 h-4" />
                         </Link>
                         <Link
                           to={`/admin/code-samples/edit/${sample._id}`}
-                          className="p-1 text-gray-400 hover:text-indigo-600"
-                          title="Edit"
+                          className="text-indigo-600 hover:text-indigo-900"
                         >
                           <Edit className="w-4 h-4" />
                         </Link>
                         <button
                           onClick={() => setDeleteModal({ show: true, sample })}
-                          className="p-1 text-gray-400 hover:text-red-600"
-                          title="Delete"
+                          className="text-red-600 hover:text-red-900"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>

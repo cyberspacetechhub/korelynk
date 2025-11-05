@@ -55,9 +55,9 @@ const AdminEnrollments = () => {
   };
 
   return (
-    <div className="p-4 md:p-6">
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Enrollments Management</h1>
+    <div className="">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:justify-between sm:items-center">
+        <h1 className="text-xl font-bold text-gray-900 md:text-2xl">Enrollments Management</h1>
         
         <div className="flex flex-wrap gap-2">
           {['all', 'pending', 'approved', 'rejected', 'completed'].map((status) => (
@@ -76,17 +76,16 @@ const AdminEnrollments = () => {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         {loading ? (
           <div className="p-6">
             <SkeletonLoader rows={5} columns={6} />
           </div>
         ) : filteredEnrollments.length > 0 ? (
-          <div className="p-6">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-gray-200">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
                     <th className="px-4 py-3 text-sm font-semibold text-gray-900">Student</th>
                     <th className="px-4 py-3 text-sm font-semibold text-gray-900">Course</th>
                     <th className="px-4 py-3 text-sm font-semibold text-gray-900">Experience</th>
@@ -95,17 +94,17 @@ const AdminEnrollments = () => {
                     <th className="px-4 py-3 text-sm font-semibold text-gray-900">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-white divide-y divide-gray-200">
                   {filteredEnrollments.map((enrollment) => (
-                    <tr key={enrollment._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                    <tr key={enrollment._id} className="hover:bg-gray-50">
                       <td className="px-4 py-4">
                         <div>
                           <div className="font-medium text-gray-900">{enrollment.studentName}</div>
-                          <div className="text-sm text-gray-500 flex items-center">
+                          <div className="flex items-center text-sm text-gray-500">
                             <Mail className="w-3 h-3 mr-1" />
                             {enrollment.email}
                           </div>
-                          <div className="text-sm text-gray-500 flex items-center">
+                          <div className="flex items-center text-sm text-gray-500">
                             <Phone className="w-3 h-3 mr-1" />
                             {enrollment.phone}
                           </div>
@@ -118,7 +117,7 @@ const AdminEnrollments = () => {
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                        <span className="inline-flex px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-100 rounded-full">
                           {enrollment.experience}
                         </span>
                       </td>
@@ -134,16 +133,16 @@ const AdminEnrollments = () => {
                             <>
                               <button
                                 onClick={() => updateStatus(enrollment._id, 'approved')}
-                                className="bg-green-600 hover:bg-green-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
+                                className="px-3 py-1 text-sm text-white transition-all duration-200 bg-green-600 rounded hover:bg-green-700 hover:shadow-md"
                               >
-                                <CheckCircle className="w-3 h-3 inline mr-1" />
+                                <CheckCircle className="inline w-3 h-3 mr-1" />
                                 Approve
                               </button>
                               <button
                                 onClick={() => updateStatus(enrollment._id, 'rejected')}
-                                className="bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
+                                className="px-3 py-1 text-sm text-white transition-all duration-200 bg-red-600 rounded hover:bg-red-700 hover:shadow-md"
                               >
-                                <XCircle className="w-3 h-3 inline mr-1" />
+                                <XCircle className="inline w-3 h-3 mr-1" />
                                 Reject
                               </button>
                             </>
@@ -151,9 +150,9 @@ const AdminEnrollments = () => {
                           {enrollment.status === 'approved' && (
                             <button
                               onClick={() => updateStatus(enrollment._id, 'completed')}
-                              className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded transition-all duration-200 hover:shadow-md"
+                              className="px-3 py-1 text-sm text-white transition-all duration-200 bg-blue-600 rounded hover:bg-blue-700 hover:shadow-md"
                             >
-                              <Clock className="w-3 h-3 inline mr-1" />
+                              <Clock className="inline w-3 h-3 mr-1" />
                               Complete
                             </button>
                           )}
@@ -164,7 +163,6 @@ const AdminEnrollments = () => {
                 </tbody>
               </table>
             </div>
-          </div>
         ) : (
           <EmptyState
             icon={Users}
@@ -175,7 +173,7 @@ const AdminEnrollments = () => {
       </div>
 
       {!loading && filteredEnrollments.length === 0 && (
-        <div className="text-center py-12">
+        <div className="py-12 text-center">
           <p className="text-gray-500">No enrollments found.</p>
         </div>
       )}

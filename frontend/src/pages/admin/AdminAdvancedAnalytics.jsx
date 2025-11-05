@@ -28,49 +28,49 @@ const AdminAdvancedAnalytics = () => {
 
   if (loading) {
     return (
-      <div className="p-6 space-y-6">
-        <div className="flex justify-between items-center">
-          <div className="h-8 bg-gray-200 rounded animate-pulse w-48"></div>
-          <div className="h-4 bg-gray-200 rounded animate-pulse w-32"></div>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div className="w-48 h-8 bg-gray-200 rounded animate-pulse"></div>
+          <div className="w-32 h-4 bg-gray-200 rounded animate-pulse"></div>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-7">
           {Array.from({ length: 7 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-lg shadow p-4">
+            <div key={i} className="p-4 bg-white rounded-lg shadow">
               <div className="flex items-center">
                 <div className="w-8 h-8 bg-gray-200 rounded animate-pulse" />
-                <div className="ml-3 flex-1">
-                  <div className="h-6 bg-gray-200 rounded animate-pulse mb-1"></div>
-                  <div className="h-4 bg-gray-200 rounded animate-pulse w-16"></div>
+                <div className="flex-1 ml-3">
+                  <div className="h-6 mb-1 bg-gray-200 rounded animate-pulse"></div>
+                  <div className="w-16 h-4 bg-gray-200 rounded animate-pulse"></div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid gap-6 lg:grid-cols-2">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-lg shadow p-6">
-              <div className="h-6 bg-gray-200 rounded animate-pulse w-32 mb-4"></div>
-              <div className="h-72 bg-gray-200 rounded animate-pulse"></div>
+            <div key={i} className="p-6 bg-white rounded-lg shadow">
+              <div className="w-32 h-6 mb-4 bg-gray-200 rounded animate-pulse"></div>
+              <div className="bg-gray-200 rounded h-72 animate-pulse"></div>
             </div>
           ))}
         </div>
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid gap-6 lg:grid-cols-2">
           {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-lg shadow p-6">
-              <div className="h-6 bg-gray-200 rounded animate-pulse w-32 mb-4"></div>
+            <div key={i} className="p-6 bg-white rounded-lg shadow">
+              <div className="w-32 h-6 mb-4 bg-gray-200 rounded animate-pulse"></div>
               <div className="space-y-3">
                 {Array.from({ length: 3 }).map((_, j) => (
-                  <div key={j} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  <div key={j} className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
                     <div className="flex items-center">
-                      <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse mr-3"></div>
+                      <div className="w-8 h-8 mr-3 bg-gray-200 rounded-full animate-pulse"></div>
                       <div>
-                        <div className="h-4 bg-gray-200 rounded animate-pulse w-24 mb-1"></div>
-                        <div className="h-3 bg-gray-200 rounded animate-pulse w-32"></div>
+                        <div className="w-24 h-4 mb-1 bg-gray-200 rounded animate-pulse"></div>
+                        <div className="w-32 h-3 bg-gray-200 rounded animate-pulse"></div>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="h-4 bg-gray-200 rounded animate-pulse w-16 mb-1"></div>
-                      <div className="h-3 bg-gray-200 rounded animate-pulse w-12"></div>
+                      <div className="w-16 h-4 mb-1 bg-gray-200 rounded animate-pulse"></div>
+                      <div className="w-12 h-3 bg-gray-200 rounded animate-pulse"></div>
                     </div>
                   </div>
                 ))}
@@ -86,7 +86,7 @@ const AdminAdvancedAnalytics = () => {
     return (
       <div className="p-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Analytics Unavailable</h2>
+          <h2 className="mb-4 text-2xl font-bold text-gray-900">Analytics Unavailable</h2>
           <p className="text-gray-600">Unable to load analytics data.</p>
         </div>
       </div>
@@ -97,7 +97,7 @@ const AdminAdvancedAnalytics = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">Advanced Analytics</h1>
         <div className="text-sm text-gray-600">
           Last updated: {new Date().toLocaleString()}
@@ -105,8 +105,8 @@ const AdminAdvancedAnalytics = () => {
       </div>
 
       {/* Overview Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        <div className="bg-white rounded-lg shadow p-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-7">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <Users className="w-8 h-8 text-blue-600" />
             <div className="ml-3">
@@ -118,7 +118,7 @@ const AdminAdvancedAnalytics = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <GraduationCap className="w-8 h-8 text-purple-600" />
             <div className="ml-3">
@@ -130,7 +130,7 @@ const AdminAdvancedAnalytics = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <BookOpen className="w-8 h-8 text-green-600" />
             <div className="ml-3">
@@ -142,7 +142,7 @@ const AdminAdvancedAnalytics = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <Users className="w-8 h-8 text-orange-600" />
             <div className="ml-3">
@@ -154,7 +154,7 @@ const AdminAdvancedAnalytics = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <Award className="w-8 h-8 text-red-600" />
             <div className="ml-3">
@@ -166,7 +166,7 @@ const AdminAdvancedAnalytics = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <Clock className="w-8 h-8 text-yellow-600" />
             <div className="ml-3">
@@ -178,7 +178,7 @@ const AdminAdvancedAnalytics = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-4">
+        <div className="p-4 bg-white rounded-lg shadow">
           <div className="flex items-center">
             <TrendingUp className="w-8 h-8 text-indigo-600" />
             <div className="ml-3">
@@ -192,10 +192,10 @@ const AdminAdvancedAnalytics = () => {
       </div>
 
       {/* Charts Row 1 */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Enrollment Trends */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Enrollment Trends</h3>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Enrollment Trends</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={analytics.students.enrollmentTrends}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -209,8 +209,8 @@ const AdminAdvancedAnalytics = () => {
         </div>
 
         {/* Course Categories */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Popular Courses</h3>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Popular Courses</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={analytics.courses.popularCourses}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -225,10 +225,10 @@ const AdminAdvancedAnalytics = () => {
       </div>
 
       {/* Charts Row 2 */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Submission Status Distribution */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Submission Status</h3>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Submission Status</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -251,8 +251,8 @@ const AdminAdvancedAnalytics = () => {
         </div>
 
         {/* Grade Trends */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Grade Trends</h3>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Grade Trends</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={analytics.submissions.gradeTrends}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -267,16 +267,16 @@ const AdminAdvancedAnalytics = () => {
       </div>
 
       {/* Top Performers */}
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Top Instructors */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Instructors</h3>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Top Instructors</h3>
           <div className="space-y-3">
             {analytics.instructors.topInstructors.map((instructor, index) => (
-              <div key={instructor._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={instructor._id} className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-purple-600 font-medium text-sm">
+                  <div className="flex items-center justify-center w-8 h-8 mr-3 bg-purple-100 rounded-full">
+                    <span className="text-sm font-medium text-purple-600">
                       {instructor.fullName.charAt(0)}
                     </span>
                   </div>
@@ -295,11 +295,11 @@ const AdminAdvancedAnalytics = () => {
         </div>
 
         {/* Top Performing Classes */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Performing Classes</h3>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">Top Performing Classes</h3>
           <div className="space-y-3">
             {analytics.classes.topPerformingClasses.map((classItem, index) => (
-              <div key={classItem._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={classItem._id} className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
                 <div>
                   <div className="font-medium text-gray-900">{classItem.className}</div>
                   <div className="text-sm text-gray-500">{classItem.studentCount} students</div>
@@ -319,12 +319,12 @@ const AdminAdvancedAnalytics = () => {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
-        <div className="grid md:grid-cols-3 gap-6">
+      <div className="p-6 bg-white rounded-lg shadow">
+        <h3 className="mb-4 text-lg font-semibold text-gray-900">Recent Activity</h3>
+        <div className="grid gap-6 md:grid-cols-3">
           {/* Recent Enrollments */}
           <div>
-            <h4 className="font-medium text-gray-900 mb-3">Recent Enrollments</h4>
+            <h4 className="mb-3 font-medium text-gray-900">Recent Enrollments</h4>
             <div className="space-y-2">
               {analytics.recentActivity.recentEnrollments.map((enrollment) => (
                 <div key={enrollment._id} className="text-sm">
@@ -340,7 +340,7 @@ const AdminAdvancedAnalytics = () => {
 
           {/* Recent Submissions */}
           <div>
-            <h4 className="font-medium text-gray-900 mb-3">Recent Submissions</h4>
+            <h4 className="mb-3 font-medium text-gray-900">Recent Submissions</h4>
             <div className="space-y-2">
               {analytics.recentActivity.recentSubmissions.map((submission) => (
                 <div key={submission._id} className="text-sm">
@@ -356,7 +356,7 @@ const AdminAdvancedAnalytics = () => {
 
           {/* Recent Classes */}
           <div>
-            <h4 className="font-medium text-gray-900 mb-3">Recent Classes</h4>
+            <h4 className="mb-3 font-medium text-gray-900">Recent Classes</h4>
             <div className="space-y-2">
               {analytics.recentActivity.recentClasses.map((classItem) => (
                 <div key={classItem._id} className="text-sm">

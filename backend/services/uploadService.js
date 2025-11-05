@@ -31,6 +31,10 @@ class UploadService {
     return upload.single('image')
   }
 
+  getFileUploadMiddleware() {
+    return upload.single('file')
+  }
+
   async deleteImage(publicId) {
     try {
       const result = await cloudinary.uploader.destroy(publicId)

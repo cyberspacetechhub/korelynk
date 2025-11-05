@@ -73,6 +73,7 @@ app.use('/api/instructors', require('./routes/instructors'))
 app.use('/api/classes', require('./routes/classes'))
 app.use('/api/assignments', require('./routes/assignments'))
 app.use('/api/payment-account', require('./routes/paymentAccount'))
+app.use('/api/upload', require('./routes/upload'))
 app.use('/api/admin/management', require('./routes/adminManagement'))
 
 // SEO routes (no /api prefix)

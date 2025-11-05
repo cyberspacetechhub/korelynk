@@ -75,21 +75,21 @@ const AdminBlog = () => {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
           <div>
-            <div className="h-8 bg-gray-200 rounded animate-pulse w-48 mb-2"></div>
-            <div className="h-4 bg-gray-200 rounded animate-pulse w-64"></div>
+            <div className="w-48 h-8 mb-2 bg-gray-200 rounded animate-pulse"></div>
+            <div className="w-64 h-4 bg-gray-200 rounded animate-pulse"></div>
           </div>
           <div className="flex gap-4">
-            <div className="h-10 bg-gray-200 rounded animate-pulse w-32"></div>
-            <div className="h-10 bg-gray-200 rounded animate-pulse w-24"></div>
+            <div className="w-32 h-10 bg-gray-200 rounded animate-pulse"></div>
+            <div className="w-24 h-10 bg-gray-200 rounded animate-pulse"></div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="bg-gray-50 px-6 py-3">
+        <div className="overflow-hidden bg-white border border-gray-200 shadow-sm rounded-xl">
+          <div className="px-6 py-3 bg-gray-50">
             <div className="flex space-x-4">
               {Array.from({ length: 7 }).map((_, i) => (
-                <div key={i} className="h-4 bg-gray-200 rounded animate-pulse flex-1"></div>
+                <div key={i} className="flex-1 h-4 bg-gray-200 rounded animate-pulse"></div>
               ))}
             </div>
           </div>
@@ -97,10 +97,10 @@ const AdminBlog = () => {
             {Array.from({ length: 5 }).map((_, i) => (
               <div key={i} className="px-6 py-4">
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-gray-200 rounded animate-pulse mr-3"></div>
+                  <div className="w-10 h-10 mr-3 bg-gray-200 rounded animate-pulse"></div>
                   <div className="flex-1">
-                    <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
-                    <div className="h-3 bg-gray-200 rounded animate-pulse w-3/4"></div>
+                    <div className="h-4 mb-2 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="w-3/4 h-3 bg-gray-200 rounded animate-pulse"></div>
                   </div>
                   <div className="flex space-x-2">
                     <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
@@ -119,7 +119,7 @@ const AdminBlog = () => {
   return (
     <>
       <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Blog Management</h2>
             <p className="text-gray-600">Create and manage blog posts</p>
@@ -137,7 +137,7 @@ const AdminBlog = () => {
             </select>
             <Link
               to="/admin/blog/new"
-              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center"
+              className="flex items-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
             >
               <Plus className="w-4 h-4 mr-2" />
               New Post
@@ -145,15 +145,15 @@ const AdminBlog = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="overflow-hidden bg-white rounded-lg shadow">
           {blogs.length === 0 ? (
             <div className="py-12 text-center">
               <h3 className="mb-2 text-lg font-medium text-gray-900">No blog posts found</h3>
               <p className="text-gray-600">Create your first blog post to get started.</p>
             </div>
           ) : (
-          <div className="max-w-full overflow-x-auto">
-            <table className="w-full table-auto">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
@@ -188,34 +188,34 @@ const AdminBlog = () => {
                           <img
                             src={blog.featuredImage}
                             alt={blog.title}
-                            className="w-8 h-8 sm:w-10 sm:h-10 rounded object-cover mr-2 sm:mr-3 flex-shrink-0"
+                            className="flex-shrink-0 object-cover w-8 h-8 mr-2 rounded sm:w-10 sm:h-10 sm:mr-3"
                           />
                         )}
-                        <div className="min-w-0 flex-1">
-                          <div className="text-sm font-medium text-gray-900 line-clamp-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-gray-900 whitespace-nowrap line-clamp-2">
                             {blog.title}
                           </div>
-                          <div className="text-xs sm:text-sm text-gray-500 line-clamp-1 md:hidden">
+                          <div className="text-xs text-gray-500 sm:text-sm line-clamp-1 md:hidden">
                             {blog.author?.fullname || 'Unknown'} • {formatDate(blog.createdAt)}
                           </div>
                           {blog.excerpt && (
-                            <div className="hidden md:block text-xs text-gray-400 mt-1 line-clamp-2 max-w-xs">
+                            <div className="hidden max-w-xs mt-1 text-xs text-gray-400 md:block line-clamp-2">
                               {blog.excerpt.length > 80 ? `${blog.excerpt.substring(0, 80)}...` : blog.excerpt}
                             </div>
                           )}
                         </div>
                       </div>
                     </td>
-                    <td className="hidden md:table-cell px-6 py-4 text-sm text-gray-900">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 text-gray-400 mr-1" />
-                        <span>{blog.author?.fullname || 'Unknown'}</span>
+                    <td className="hidden px-6 py-4 text-sm text-gray-900 md:table-cell">
+                      <div className="flex flex-row items-center">
+                        <User className="w-4 h-4 mr-1 text-gray-400" />
+                        <span className=' whitespace-nowrap'>{blog.author?.fullname || 'Unknown'}</span>
                       </div>
                     </td>
-                    <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">
+                    <td className="hidden px-6 py-4 lg:table-cell whitespace-nowrap">
                       {blog.category ? (
                         <span 
-                          className="inline-flex px-2 py-1 text-xs font-semibold rounded-full text-white"
+                          className="inline-flex px-2 py-1 text-xs font-semibold text-white rounded-full"
                           style={{ backgroundColor: blog.category.color }}
                         >
                           {blog.category.name}
@@ -229,13 +229,13 @@ const AdminBlog = () => {
                         {blog.status}
                       </span>
                     </td>
-                    <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
+                    <td className="hidden px-6 py-4 sm:table-cell whitespace-nowrap">
                       <div className="flex items-center text-sm text-gray-900">
-                        <Eye className="w-4 h-4 text-gray-400 mr-1" />
+                        <Eye className="w-4 h-4 mr-1 text-gray-400" />
                         {blog.views}
                       </div>
                     </td>
-                    <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">
+                    <td className="hidden px-6 py-4 lg:table-cell whitespace-nowrap">
                       <div className="flex items-center text-sm text-gray-500">
                         <Calendar className="w-4 h-4 mr-1" />
                         {formatDate(blog.createdAt)}

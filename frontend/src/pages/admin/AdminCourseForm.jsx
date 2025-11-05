@@ -174,11 +174,11 @@ const AdminCourseForm = () => {
   const levels = ['Beginner', 'Intermediate', 'Advanced'];
 
   return (
-    <div className="p-6">
+    <div className="">
       <div className="flex items-center mb-6">
         <button
           onClick={() => navigate('/admin/courses')}
-          className="mr-4 p-2 text-gray-600 hover:text-gray-800"
+          className="p-2 mr-4 text-gray-600 hover:text-gray-800"
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
@@ -188,11 +188,11 @@ const AdminCourseForm = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="max-w-4xl">
-        <div className="bg-white rounded-lg shadow p-6 space-y-6">
+        <div className="p-6 space-y-6 bg-white rounded-lg shadow">
           {/* Basic Information */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Course Title *
               </label>
               <input
@@ -205,7 +205,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Instructor *
               </label>
               <select
@@ -225,7 +225,7 @@ const AdminCourseForm = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
               Description *
             </label>
             <textarea
@@ -237,9 +237,9 @@ const AdminCourseForm = () => {
             />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Category *
               </label>
               <select
@@ -256,7 +256,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Level *
               </label>
               <select
@@ -273,7 +273,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Duration *
               </label>
               <input
@@ -287,9 +287,9 @@ const AdminCourseForm = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Price ($) *
               </label>
               <input
@@ -303,7 +303,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Max Students
               </label>
               <input
@@ -316,9 +316,9 @@ const AdminCourseForm = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Start Date *
               </label>
               <input
@@ -331,7 +331,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 End Date *
               </label>
               <input
@@ -345,9 +345,9 @@ const AdminCourseForm = () => {
           </div>
 
           {/* Media Uploads */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Featured Image
               </label>
               <div className="space-y-3">
@@ -360,11 +360,11 @@ const AdminCourseForm = () => {
                 {uploading.image && <p className="text-sm text-indigo-600">Uploading...</p>}
                 {formData.featuredImage && (
                   <div className="relative">
-                    <img src={formData.featuredImage} alt="Featured" className="w-full h-32 object-cover rounded-lg" />
+                    <img src={formData.featuredImage} alt="Featured" className="object-cover w-full h-32 rounded-lg" />
                     <button
                       type="button"
                       onClick={() => setFormData({...formData, featuredImage: ''})}
-                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                      className="absolute flex items-center justify-center w-6 h-6 text-xs text-white bg-red-500 rounded-full top-2 right-2"
                     >
                       ×
                     </button>
@@ -374,7 +374,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Intro Video (Optional)
               </label>
               <div className="space-y-3">
@@ -387,11 +387,11 @@ const AdminCourseForm = () => {
                 {uploading.video && <p className="text-sm text-indigo-600">Uploading...</p>}
                 {formData.introVideo && (
                   <div className="relative">
-                    <video src={formData.introVideo} className="w-full h-32 object-cover rounded-lg" controls />
+                    <video src={formData.introVideo} className="object-cover w-full h-32 rounded-lg" controls />
                     <button
                       type="button"
                       onClick={() => setFormData({...formData, introVideo: ''})}
-                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                      className="absolute flex items-center justify-center w-6 h-6 text-xs text-white bg-red-500 rounded-full top-2 right-2"
                     >
                       ×
                     </button>
@@ -401,9 +401,9 @@ const AdminCourseForm = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Meeting Link
               </label>
               <input
@@ -416,7 +416,7 @@ const AdminCourseForm = () => {
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block mb-2 text-sm font-medium text-gray-700">
                 Meeting Schedule
               </label>
               <input
@@ -431,7 +431,7 @@ const AdminCourseForm = () => {
 
           {/* Skills */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
               Skills Taught
             </label>
             {formData.skills.map((skill, index) => (
@@ -464,7 +464,7 @@ const AdminCourseForm = () => {
 
           {/* Prerequisites */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
               Prerequisites
             </label>
             {formData.prerequisites.map((prereq, index) => (
@@ -497,7 +497,7 @@ const AdminCourseForm = () => {
 
           {/* Learning Outcomes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block mb-2 text-sm font-medium text-gray-700">
               Learning Outcomes
             </label>
             {formData.learningOutcomes.map((outcome, index) => (
@@ -545,14 +545,14 @@ const AdminCourseForm = () => {
             <button
               type="button"
               onClick={() => navigate('/admin/courses')}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+              className="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+              className="flex items-center px-6 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
             >
               <Save className="w-4 h-4 mr-2" />
               {loading ? 'Saving...' : (isEdit ? 'Update Course' : 'Create Course')}

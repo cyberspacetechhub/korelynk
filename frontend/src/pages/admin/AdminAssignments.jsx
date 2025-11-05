@@ -56,8 +56,8 @@ const AdminAssignments = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
+    <div className="">
+      <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Assignments</h1>
           {course && (
@@ -66,7 +66,7 @@ const AdminAssignments = () => {
         </div>
         <Link
           to={`/admin/courses/${courseId}/assignments/new`}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center"
+          className="flex items-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Assignment
@@ -74,28 +74,28 @@ const AdminAssignments = () => {
       </div>
 
       {loading ? (
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        <div className="flex items-center justify-center h-64">
+          <div className="w-8 h-8 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="overflow-hidden bg-white rounded-lg shadow">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Assignment
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Due Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Max Points
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Submissions
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                     Actions
                   </th>
                 </tr>
@@ -134,7 +134,7 @@ const AdminAssignments = () => {
                         View Submissions
                       </Link>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
                       <div className="flex space-x-2">
                         <Link
                           to={`/admin/assignments/edit/${assignment._id}`}
@@ -159,13 +159,13 @@ const AdminAssignments = () => {
       )}
 
       {!loading && assignments.length === 0 && (
-        <div className="text-center py-12">
-          <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No assignments yet</h3>
-          <p className="text-gray-600 mb-4">Create your first assignment for this course.</p>
+        <div className="py-12 text-center">
+          <FileText className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+          <h3 className="mb-2 text-lg font-medium text-gray-900">No assignments yet</h3>
+          <p className="mb-4 text-gray-600">Create your first assignment for this course.</p>
           <Link
             to={`/admin/courses/${courseId}/assignments/new`}
-            className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+            className="inline-flex items-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Assignment

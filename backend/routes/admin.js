@@ -146,6 +146,8 @@ router.post('/upload', uploadService.getUploadMiddleware(), (req, res) => {
   }
 })
 
+
+
 // Favicon upload route
 router.post('/upload-favicon', uploadService.getUploadMiddleware(), (req, res) => {
   try {
@@ -177,5 +179,10 @@ router.put('/feedback/:id', updateFeedbackStatus)
 
 // Profile routes
 router.put('/profile', updateProfile)
+
+// Payment routes
+const paymentController = require('../controllers/paymentController')
+router.get('/payments', paymentController.getAllPayments)
+router.patch('/payments/:id/confirm', paymentController.confirmPayment)
 
 module.exports = router

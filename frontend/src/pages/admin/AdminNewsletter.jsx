@@ -241,21 +241,21 @@ const AdminNewsletter = () => {
         </div>
 
         {/* Subscribers Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          <div className="max-w-full overflow-x-auto">
-            <table className="w-full table-auto">
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Subscriber
                   </th>
-                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase sm:px-6">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="hidden px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase lg:table-cell">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Subscribed Date
                   </th>
-                  <th className="px-2 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase sm:px-6">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -263,35 +263,32 @@ const AdminNewsletter = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredSubscribers.map((subscriber) => (
                   <tr key={subscriber._id} className="hover:bg-gray-50">
-                    <td className="px-2 py-4 sm:px-6">
-                      <div className="min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
                           {subscriber.name || 'Anonymous'}
                         </div>
-                        <div className="text-xs sm:text-sm text-gray-500 truncate">{subscriber.email}</div>
-                        <div className="text-xs text-gray-400 lg:hidden">
-                          {new Date(subscriber.createdAt).toLocaleDateString()}
-                        </div>
+                        <div className="text-sm text-gray-500">{subscriber.email}</div>
                       </div>
                     </td>
-                    <td className="px-2 py-4 sm:px-6">
+                    <td className="px-6 py-4 whitespace-nowrap">
                       <select
                         value={subscriber.status}
                         onChange={(e) => handleStatusChange(subscriber._id, e.target.value)}
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(subscriber.status)} border-0 focus:ring-2 focus:ring-indigo-500 min-w-0`}
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(subscriber.status)} border-0 focus:ring-2 focus:ring-indigo-500`}
                       >
                         <option value="active">Active</option>
                         <option value="unsubscribed">Unsubscribed</option>
                         <option value="pending">Pending</option>
                       </select>
                     </td>
-                    <td className="hidden px-6 py-4 text-sm text-gray-500 lg:table-cell whitespace-nowrap">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {new Date(subscriber.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-2 py-4 text-right sm:px-6">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <button
                         onClick={() => handleDeleteClick(subscriber)}
-                        className="p-1 text-red-600 hover:text-red-900"
+                        className="text-red-600 hover:text-red-900"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

@@ -57,7 +57,7 @@ const AdminCourses = () => {
   };
 
   return (
-    <div className="w-full p-4 md:p-6">
+    <div className="w-full">
       <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:justify-between sm:items-center">
         <h1 className="text-xl font-bold text-gray-900 md:text-2xl">Courses Management</h1>
         <Link
@@ -69,80 +69,76 @@ const AdminCourses = () => {
         </Link>
       </div>
 
-      <div className="bg-white rounded-lg shadow">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         {loading ? (
           <div className="p-6">
             <SkeletonLoader rows={5} columns={7} />
           </div>
         ) : courses.length > 0 ? (
-          <div className="p-6">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Course</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Category</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Price</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Enrollments</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Start Date</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Status</th>
-                    <th className="px-4 py-3 text-sm font-semibold text-gray-900">Actions</th>
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Course</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Category</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Price</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Enrollments</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Start Date</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Status</th>
+                  <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {courses.map((course) => (
+                  <tr key={course._id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">{course.title}</div>
+                        <div className="text-sm text-gray-500">{course.level} • {course.duration}</div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className="inline-flex px-2 py-1 text-xs font-semibold text-indigo-800 bg-indigo-100 rounded-full">
+                        {course.category}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">₦{course.price.toLocaleString()}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center gap-1 text-sm text-gray-900">
+                        <Users className="w-4 h-4" />
+                        {course.currentEnrollments}/{course.maxStudents}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-900 whitespace-nowrap">{new Date(course.startDate).toLocaleDateString()}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                        course.isActive 
+                          ? 'bg-green-100 text-green-800' 
+                          : 'bg-red-100 text-red-800'
+                      }`}>
+                        {course.isActive ? 'Active' : 'Inactive'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium whitespace-nowrap">
+                      <div className="flex items-center space-x-2">
+                        <Link
+                          to={`/admin/courses/edit/${course._id}`}
+                          className="text-indigo-600 hover:text-indigo-900"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteClick(course)}
+                          className="text-red-600 hover:text-red-900"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {courses.map((course) => (
-                    <tr key={course._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-4">
-                        <div>
-                          <div className="font-medium text-gray-900">{course.title}</div>
-                          <div className="text-sm text-gray-500">{course.level} • {course.duration}</div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        <span className="inline-flex px-2 py-1 text-xs font-semibold text-indigo-800 bg-indigo-100 rounded-full">
-                          {course.category}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-900">₦{course.price.toLocaleString()}</td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-1 text-sm text-gray-900">
-                          <Users className="w-4 h-4" />
-                          {course.currentEnrollments}/{course.maxStudents}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-900">{new Date(course.startDate).toLocaleDateString()}</td>
-                      <td className="px-4 py-4">
-                        <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full transition-colors ${
-                          course.isActive 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {course.isActive ? 'Active' : 'Inactive'}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <div className="flex items-center gap-2">
-                          <Link
-                            to={`/admin/courses/edit/${course._id}`}
-                            className="px-3 py-1 text-sm text-white transition-all duration-200 bg-blue-600 rounded hover:bg-blue-700 hover:shadow-md"
-                          >
-                            <Edit className="w-3 h-3 inline mr-1" />
-                            Edit
-                          </Link>
-                          <button
-                            onClick={() => handleDeleteClick(course)}
-                            className="px-3 py-1 text-sm text-white transition-all duration-200 bg-red-600 rounded hover:bg-red-700 hover:shadow-md"
-                          >
-                            <Trash2 className="w-3 h-3 inline mr-1" />
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         ) : (
           <EmptyState

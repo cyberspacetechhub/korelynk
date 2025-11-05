@@ -80,6 +80,7 @@ const AdminStudentDetail = React.lazy(() => import('./pages/admin/AdminStudentDe
 const AdminClasses = React.lazy(() => import('./pages/admin/AdminClasses'));
 const AdminAdvancedAnalytics = React.lazy(() => import('./pages/admin/AdminAdvancedAnalytics'));
 const AdminPaymentAccount = React.lazy(() => import('./pages/admin/AdminPaymentAccount'));
+const AdminPayments = React.lazy(() => import('./pages/admin/AdminPayments'));
 const AdminAssignments = React.lazy(() => import('./pages/admin/AdminAssignments'));
 
 // Auth
@@ -193,6 +194,7 @@ function App() {
                     <Route path="classes" element={<AdminClasses />} />
                     <Route path="advanced-analytics" element={<AdminAdvancedAnalytics />} />
                     <Route path="payment-account" element={<AdminPaymentAccount />} />
+                    <Route path="payments" element={<AdminPayments />} />
                     <Route path="profile" element={<AdminProfile />} />
                   </Route>
                   

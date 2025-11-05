@@ -315,6 +315,64 @@ class EmailService {
 
     return await this.transporter.sendMail(gradeEmail)
   }
+
+  async sendPaymentConfirmation(email, data) {
+    const { studentName, courseName, amount } = data
+    
+    const confirmationEmail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: `Payment Confirmed - ${courseName}`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #10b981; text-align: center;">🎉 Payment Confirmed!</h2>
+          <p>Dear ${studentName},</p>
+          <p>Your payment has been confirmed and your enrollment is now active.</p>
+          <div style="background-color: #f0fdf4; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981;">
+            <h3 style="color: #1f2937; margin-top: 0;">Payment Details:</h3>
+            <p><strong>Course:</strong> ${courseName}</p>
+            <p><strong>Amount:</strong> ₦${amount?.toLocaleString()}</p>
+            <p><strong>Status:</strong> Confirmed ✅</p>
+          </div>
+          <p>You can now access your course materials and join class sessions.</p>
+          <p>Welcome to the learning community!</p>
+          <p>Best regards,<br>KoreLynk Tech Team</p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(confirmationEmail)
+  }
+
+  async sendPaymentRejection(email, data) {
+    const { studentName, courseName } = data
+    
+    const rejectionEmail = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: `Payment Issue - ${courseName}`,
+      html: `
+        <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
+          <h2 style="color: #ef4444; text-align: center;">Payment Issue</h2>
+          <p>Dear ${studentName},</p>
+          <p>We were unable to confirm your payment for <strong>${courseName}</strong>.</p>
+          <div style="background-color: #fef2f2; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ef4444;">
+            <h3 style="color: #1f2937; margin-top: 0;">Next Steps:</h3>
+            <ul>
+              <li>Check your payment details</li>
+              <li>Ensure payment was made to the correct account</li>
+              <li>Contact support if you believe this is an error</li>
+              <li>Resubmit payment proof if necessary</li>
+            </ul>
+          </div>
+          <p>Please contact our support team for assistance.</p>
+          <p>Best regards,<br>KoreLynk Tech Team</p>
+        </div>
+      `
+    }
+
+    return await this.transporter.sendMail(rejectionEmail)
+  }
 }
 
 module.exports = new EmailService()

@@ -21,7 +21,7 @@ class AdminAnalyticsService {
       Student.countDocuments({ isActive: true }),
       Instructor.countDocuments({ isActive: true }),
       Course.countDocuments({ isActive: true }),
-      Class.countDocuments({ isActive: true }),
+      Class.countDocuments(),
       Assignment.countDocuments({ isActive: true }),
       Submission.countDocuments(),
       Enrollment.countDocuments({ status: 'approved' })
