@@ -324,6 +324,11 @@ const Home = () => {
         <div className="relative container mx-auto px-6 py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
+              <div className="mb-4">
+                <span className="inline-block bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/20">
+                  #Pioneering Africa's Digital Transformation
+                </span>
+              </div>
               <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
                 {heroSlides[currentSlide].title}
                 <span className="gradient-text block">{heroSlides[currentSlide].highlight}</span>
