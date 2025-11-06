@@ -4,7 +4,11 @@ const APIResponse = require('../utils/APIResponse')
 const getAllCourses = async (req, res) => {
   try {
     const { category, level, featured } = req.query
-    const filters = { category, level, featured: featured === 'true' }
+    const filters = {}
+    
+    if (category) filters.category = category
+    if (level) filters.level = level
+    if (featured !== undefined) filters.featured = featured === 'true'
     
     const courses = await courseService.getAllCourses(filters)
     APIResponse.success(res, courses, 'Courses retrieved successfully')
