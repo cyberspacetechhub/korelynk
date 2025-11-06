@@ -21,13 +21,13 @@ const MainLayout = () => {
       </div>
       
       {/* Quick Contact Info Bar */}
-      <div className="py-2 bg-indigo-600 text-white">
+      <div className="py-2 text-white bg-indigo-600">
         <div className="container px-6 mx-auto">
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-1 sm:space-y-0 sm:space-x-6 text-sm">
-            <a href={`tel:${settings.contactPhone || '+234-813-456-7890'}`} className="flex items-center hover:text-indigo-200 transition-colors">
-              📞 {settings.contactPhone || '+234-813-456-7890'}
+          <div className="flex flex-col items-center justify-center space-y-1 text-sm sm:flex-row sm:space-y-0 sm:space-x-6">
+            <a href={`tel:${settings.contactPhone || '+234-916-140-3450'}`} className="flex items-center transition-colors hover:text-indigo-200">
+              📞 {settings.contactPhone || '+234-916-140-3450'}
             </a>
-            <a href={`mailto:${settings.contactEmail || 'korelynk@gmail.com'}`} className="flex items-center hover:text-indigo-200 transition-colors">
+            <a href={`mailto:${settings.contactEmail || 'korelynk@gmail.com'}`} className="flex items-center transition-colors hover:text-indigo-200">
               ✉️ {settings.contactEmail || 'korelynk@gmail.com'}
             </a>
             {(settings.businessHours || 'Mon-Fri 9AM-6PM WAT') && (
