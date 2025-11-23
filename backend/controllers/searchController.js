@@ -107,24 +107,30 @@ const globalSearch = async (req, res) => {
 
         // Search courses
         if (!type || type === 'course') {
+            const priceQuery = !isNaN(parseFloat(searchQuery)) ? parseFloat(searchQuery) : null;
+            
             const courses = await Course.find({
-                status: 'published',
+                isActive: true,
                 $or: [
                     { title: searchRegex },
                     { description: searchRegex },
                     { category: searchRegex },
-                    { tags: { $in: [searchRegex] } }
+                    { level: searchRegex },
+                    { skills: { $in: [searchRegex] } },
+                    { prerequisites: { $in: [searchRegex] } },
+                    { learningOutcomes: { $in: [searchRegex] } },
+                    ...(priceQuery ? [{ price: { $lte: priceQuery } }] : [])
                 ]
             })
             .populate('instructor', 'fullname')
-            .select('title description image category level duration price tags slug createdAt instructor')
+            .select('title description image category level duration price skills _id createdAt instructor')
             .limit(parseInt(limit))
             .sort({ createdAt: -1 });
 
             results.courses = courses.map(course => ({
                 ...course.toObject(),
                 type: 'course',
-                url: `/courses/${course.slug}`
+                url: `/courses`
             }));
         }
 

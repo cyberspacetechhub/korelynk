@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, Clock, FileText, User, Briefcase, Code, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
+import { highlightText } from '../utils/highlightText.jsx';
 
 const SearchModal = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState('');
@@ -147,8 +148,8 @@ const SearchModal = ({ isOpen, onClose }) => {
                             {getIcon('blog')}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 line-clamp-1">{blog.title}</h4>
-                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{blog.excerpt}</p>
+                            <h4 className="font-medium text-gray-900 line-clamp-1">{highlightText(blog.title, query)}</h4>
+                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{highlightText(blog.excerpt, query)}</p>
                             <div className="flex items-center mt-2 text-xs text-gray-500">
                               <span>{blog.author?.fullname}</span>
                               {blog.category && (
@@ -185,8 +186,8 @@ const SearchModal = ({ isOpen, onClose }) => {
                             {getIcon('project')}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900">{project.title}</h4>
-                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{project.description}</p>
+                            <h4 className="font-medium text-gray-900">{highlightText(project.title, query)}</h4>
+                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{highlightText(project.description, query)}</p>
                             {project.technologies && (
                               <div className="flex flex-wrap gap-1 mt-2">
                                 {project.technologies.slice(0, 3).map((tech, index) => (
@@ -223,7 +224,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                             {getIcon('code')}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900">{sample.title}</h4>
+                            <h4 className="font-medium text-gray-900">{highlightText(sample.title, query)}</h4>
                             <div className="flex items-center gap-2 mt-1">
                               <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
                                 {sample.language.toUpperCase()}
@@ -232,7 +233,7 @@ const SearchModal = ({ isOpen, onClose }) => {
                                 {sample.difficulty}
                               </span>
                             </div>
-                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{sample.description}</p>
+                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{highlightText(sample.description, query)}</p>
                           </div>
                         </div>
                       </Link>
@@ -260,8 +261,8 @@ const SearchModal = ({ isOpen, onClose }) => {
                             {getIcon('course')}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 dark:text-white">{course.title}</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">{course.description}</p>
+                            <h4 className="font-medium text-gray-900 dark:text-white">{highlightText(course.title, query)}</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">{highlightText(course.description, query)}</p>
                             <div className="flex items-center gap-2 mt-2 text-xs text-gray-500 dark:text-gray-400">
                               <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">
                                 {course.level}
@@ -301,9 +302,9 @@ const SearchModal = ({ isOpen, onClose }) => {
                             {getIcon('team')}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 dark:text-white">{member.name}</h4>
+                            <h4 className="font-medium text-gray-900 dark:text-white">{highlightText(member.name, query)}</h4>
                             <p className="text-sm text-indigo-600">{member.role}</p>
-                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">{member.bio}</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">{highlightText(member.bio, query)}</p>
                           </div>
                         </div>
                       </Link>
