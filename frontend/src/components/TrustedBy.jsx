@@ -11,13 +11,13 @@ const TrustedBy = () => {
     }
   });
 
-  // Duplicate projects for seamless loop
-  const duplicatedProjects = [...projects, ...projects];
+  // Duplicate projects multiple times for seamless loop on all screen sizes
+  const duplicatedProjects = [...projects, ...projects, ...projects, ...projects];
 
   return (
     <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors overflow-hidden">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 px-6">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Trusted By Amazing Clients
           </h2>
@@ -27,13 +27,13 @@ const TrustedBy = () => {
         </div>
         
         <div className="relative">
-          <div className="flex animate-marquee space-x-12">
+          <div className="flex animate-marquee space-x-8 md:space-x-12">
             {duplicatedProjects.map((project, index) => (
               <div 
                 key={`${project._id}-${index}`}
-                className="flex-shrink-0 flex flex-col items-center group"
+                className="flex-shrink-0 flex flex-col items-center group min-w-[80px]"
               >
-                <div className="w-20 h-20 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-3 mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-2 md:p-3 mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-300">
                   <img
                     src={project.image || '/default-project.png'}
                     alt={`${project.title} logo`}
@@ -41,7 +41,7 @@ const TrustedBy = () => {
                     loading="lazy"
                   />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 text-center max-w-20 truncate">
+                <h3 className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 text-center max-w-16 md:max-w-20 truncate">
                   {project.title}
                 </h3>
               </div>
@@ -49,8 +49,8 @@ const TrustedBy = () => {
           </div>
           
           {/* Gradient overlays */}
-          <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-gray-50 to-transparent dark:from-gray-800 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-gray-50 to-transparent dark:from-gray-800 pointer-events-none"></div>
+          <div className="absolute left-0 top-0 w-16 md:w-32 h-full bg-gradient-to-r from-gray-50 to-transparent dark:from-gray-800 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-16 md:w-32 h-full bg-gradient-to-l from-gray-50 to-transparent dark:from-gray-800 pointer-events-none"></div>
         </div>
       </div>
     </section>

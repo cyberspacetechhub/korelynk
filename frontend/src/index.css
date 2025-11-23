@@ -266,9 +266,23 @@ body.goog-te-translated header {
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
+  width: max-content;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* Responsive marquee adjustments */
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+}
+
+@media (max-width: 480px) {
+  .animate-marquee {
+    animation: marquee 80s linear infinite;
+  }
 }
