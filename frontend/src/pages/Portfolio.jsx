@@ -181,7 +181,7 @@ const Portfolio = () => {
   }
 
   return (
-    <div className="min-h-screen pt">
+    <div className="min-h-screen pt bg-white dark:bg-gray-900 transition-colors">
       {/* Hero Section */}
       <section className="py-20 text-white relative" style={{
         backgroundImage: 'url(/korelynk-workspace.png)',
@@ -201,13 +201,13 @@ const Portfolio = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container px-6 mx-auto">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               Featured Projects
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Our most impactful and innovative solutions
             </p>
           </div>
@@ -267,13 +267,13 @@ const Portfolio = () => {
       </section>
 
       {/* All Projects with Filter */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container px-6 mx-auto">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               All Projects
             </h2>
-            <p className="mb-8 text-xl text-gray-600">
+            <p className="mb-8 text-xl text-gray-600 dark:text-gray-300">
               Browse through our complete portfolio
             </p>
 

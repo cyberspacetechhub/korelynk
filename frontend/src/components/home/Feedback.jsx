@@ -12,20 +12,18 @@ const Feedback = () => {
 
 
 
-  const feedbackMutation = useMutation(
-    (data) => axios.post('feedback', { ...data, rating }),
-    {
-      onSuccess: () => {
-        toast.success('Feedback submitted successfully!');
-        reset();
-        setRating(0);
-      },
-      onError: (error) => {
-        console.error('Error submitting feedback:', error);
-        toast.error(error.response?.data?.message || 'Failed to submit feedback. Please try again.');
-      }
+  const feedbackMutation = useMutation({
+    mutationFn: (data) => axios.post('feedback', { ...data, rating }),
+    onSuccess: () => {
+      toast.success('Feedback submitted successfully!');
+      reset();
+      setRating(0);
+    },
+    onError: (error) => {
+      console.error('Error submitting feedback:', error);
+      toast.error(error.response?.data?.message || 'Failed to submit feedback. Please try again.');
     }
-  );
+  });
 
   const onSubmit = (data) => {
     if (rating === 0) {
@@ -36,17 +34,17 @@ const Feedback = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">We Value Your Feedback</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">We Value Your Feedback</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Help us improve our services by sharing your thoughts, suggestions, and experiences with KoreLynk Tech.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-8 md:p-12 transition-colors">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             {/* Personal Information */}
             <div className="grid md:grid-cols-3 gap-6">

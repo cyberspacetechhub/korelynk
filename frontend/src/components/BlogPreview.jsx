@@ -36,7 +36,7 @@ const BlogPreview = () => {
     return (
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden transition-colors">
             <div className="h-48 bg-gray-200 animate-pulse"></div>
             <div className="p-6">
               <div className="h-6 bg-gray-200 rounded animate-pulse w-20 mb-3"></div>
@@ -58,8 +58,8 @@ const BlogPreview = () => {
   if (blogs.length === 0) {
     return (
       <div className="text-center py-12">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">No blog posts yet</h3>
-        <p className="text-gray-600">Check back soon for our latest articles!</p>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No blog posts yet</h3>
+        <p className="text-gray-600 dark:text-gray-300">Check back soon for our latest articles!</p>
       </div>
     );
   }
@@ -67,7 +67,7 @@ const BlogPreview = () => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {blogs.map((blog) => (
-        <article key={blog._id} className="bg-white rounded-xl shadow-lg overflow-hidden hover-lift">
+        <article key={blog._id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden hover-lift transition-colors">
           {blog.featuredImage && (
             <img
               src={blog.featuredImage}
@@ -86,17 +86,17 @@ const BlogPreview = () => {
               </span>
             )}
             
-            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
-              <Link to={`/blog/${blog.slug}`} className="hover:text-indigo-600 transition-colors">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2">
+              <Link to={`/blog/${blog.slug}`} className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                 {blog.title}
               </Link>
             </h3>
             
-            <p className="text-gray-600 mb-4 line-clamp-3">
+            <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
               {blog.excerpt || blog.content.substring(0, 120)}...
             </p>
             
-            <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+            <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
               <div className="flex items-center">
                 <User className="w-4 h-4 mr-1" />
                 {blog.author?.fullname}
@@ -109,7 +109,7 @@ const BlogPreview = () => {
             
             <Link
               to={`/blog/${blog.slug}`}
-              className="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium"
+              className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium"
             >
               Read More
               <ArrowRight className="w-4 h-4 ml-1" />

@@ -104,7 +104,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* Hero Section */}
       <section className="text-white py-20 relative" style={{
         backgroundImage: 'url(/korelynk-workspace.png)',
@@ -127,19 +127,19 @@ const About = () => {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                 Our Story
               </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                 Founded with a vision to bridge the gap between innovative technology and 
                 practical business solutions, KoreLynk Tech has been at the forefront 
                 of digital transformation since our inception.
               </p>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                 We believe that great software is not just about code – it's about understanding 
                 your business, your users, and your goals. Every project we undertake is a 
                 partnership aimed at delivering exceptional results that drive growth.
@@ -147,19 +147,19 @@ const About = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 font-medium">3+ Years of Excellence</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">3+ Years of Excellence</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 font-medium">50+ Successful Projects</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">50+ Successful Projects</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 font-medium">30+ Happy Clients</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">30+ Happy Clients</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 font-medium">99% Client Satisfaction Rate</span>
+                  <span className="text-gray-700 dark:text-gray-300 font-medium">99% Client Satisfaction Rate</span>
                 </div>
               </div>
             </div>
@@ -171,10 +171,10 @@ const About = () => {
                   className="w-full h-80 object-cover rounded-lg"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg">
+              <div className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-colors">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-indigo-600">99%</div>
-                  <div className="text-gray-600">Client Satisfaction</div>
+                  <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">99%</div>
+                  <div className="text-gray-600 dark:text-gray-300">Client Satisfaction</div>
                 </div>
               </div>
             </div>
@@ -183,13 +183,13 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Our Core Values
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               These principles guide everything we do and shape how we work with our clients
             </p>
           </div>
@@ -198,15 +198,15 @@ const About = () => {
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-xl shadow-lg hover-lift text-center"
+                className="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift text-center transition-colors"
               >
                 <div className="text-indigo-600 mb-4 flex justify-center">
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -216,13 +216,13 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Meet Our Team
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Passionate professionals dedicated to delivering exceptional results
             </p>
           </div>
@@ -236,7 +236,7 @@ const About = () => {
               {teamMembers.map((member) => (
                 <div
                   key={member._id}
-                  className="bg-white rounded-xl shadow-lg hover-lift overflow-hidden"
+                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift overflow-hidden transition-colors"
                 >
                   <img
                     src={member.avatar}
@@ -244,13 +244,13 @@ const About = () => {
                     className="w-full h-64 object-cover"
                   />
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                       {member.name}
                     </h3>
-                    <p className="text-indigo-600 font-medium mb-4">
+                    <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-4">
                       {member.role}
                     </p>
-                    <p className="text-gray-600 leading-relaxed mb-4">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                       {member.bio}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">

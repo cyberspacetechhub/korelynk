@@ -7,116 +7,10 @@ import SEO from '../SEO';
 import BlogPreview from '../BlogPreview';
 import CodeSamplesPreview from '../CodeSamplesPreview';
 import SkillsShowcase from './SkillsShowcase';
+import Testimonials from '../Testimonials';
+import TrustedBy from '../TrustedBy';
 
-const TestimonialSection = React.memo(() => {
-  const { data: testimonials = [], isLoading, error } = useQuery({
-    queryKey: ['testimonials'],
-    queryFn: () => axios.get('feedback/testimonials').then(res => res.data.data || [])
-  });
 
-  useEffect(() => {
-    if (error) {
-      console.error('Testimonials fetch error:', error);
-    }
-  }, [error]);
-
-  const getInitials = (name) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase();
-  };
-
-  const getRandomColor = (index) => {
-    const colors = ['bg-indigo-600', 'bg-purple-600', 'bg-green-600', 'bg-blue-600', 'bg-pink-600', 'bg-yellow-600'];
-    return colors[index % colors.length];
-  };
-
-  // Fallback testimonials when no real ones exist
-  const fallbackTestimonials = [
-    {
-      _id: 'fallback-1',
-      name: 'Sarah Johnson',
-      message: 'KoreLynk Tech delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail is remarkable.',
-      rating: 5
-    },
-    {
-      _id: 'fallback-2', 
-      name: 'Michael Chen',
-      message: 'Professional team with excellent technical skills. They transformed our business with their innovative solutions.',
-      rating: 5
-    },
-    {
-      _id: 'fallback-3',
-      name: 'Emily Rodriguez', 
-      message: 'Outstanding service and support. The mobile app they developed has significantly improved our customer engagement.',
-      rating: 5
-    }
-  ];
-
-  const displayTestimonials = testimonials.length > 0 ? testimonials : fallbackTestimonials;
-
-  if (isLoading) {
-    return (
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <div className="text-center">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-gray-600">Loading testimonials...</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-xl text-gray-600">
-            Don't just take our word for it
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {displayTestimonials.slice(0, 3).map((testimonial, index) => (
-            <div key={testimonial._id} className="bg-white p-8 rounded-xl shadow-lg hover-lift">
-              <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className={`w-5 h-5 ${
-                    i < testimonial.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                  }`} />
-                ))}
-              </div>
-              <p className="text-gray-600 mb-6 text-lg italic">
-                "{testimonial.message}"
-              </p>
-              <div className="flex items-center">
-                <div className={`w-12 h-12 ${getRandomColor(index)} rounded-full flex items-center justify-center mr-4`}>
-                  <span className="font-bold text-white text-sm">{getInitials(testimonial.name)}</span>
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                  <div className="text-gray-600">Valued Client</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <Link
-            to="/feedback"
-            className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center"
-          >
-            Share Your Feedback
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-});
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -128,25 +22,31 @@ const Home = () => {
 
   const heroSlides = [
     {
-      title: "Building Digital",
-      highlight: "Excellence",
-      description: "We create innovative web and mobile solutions that drive business growth and deliver exceptional user experiences.",
+      title: "We Build High-Performance",
+      highlight: "Web & Mobile Apps",
+      description: "Specializing in React, Next.js & Node.js solutions for startups and SMBs across Africa and beyond.",
       image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop",
-      alt: "Modern workspace"
+      alt: "Modern workspace",
+      cta: "View Our Work",
+      ctaLink: "/portfolio"
     },
     {
-      title: "Empowering Your",
-      highlight: "Digital Future",
-      description: "Transform your business with cutting-edge technology solutions designed for the modern world.",
+      title: "Full-Stack Development",
+      highlight: "Made Simple",
+      description: "From concept to deployment - we handle frontend, backend, and everything in between.",
       image: "/kore.png",
-      alt: "KoreLynk Technology"
+      alt: "KoreLynk Technology",
+      cta: "Start Your Project",
+      ctaLink: "/contact"
     },
     {
-      title: "Crafting Tomorrow's",
-      highlight: "Solutions Today",
-      description: "Experience the perfect blend of innovation and expertise in our collaborative workspace environment.",
+      title: "Remote Team,",
+      highlight: "Global Solutions",
+      description: "Based in Nigeria, delivering world-class digital solutions to clients worldwide.",
       image: "/korelynk-workspace.png",
-      alt: "KoreLynk Workspace"
+      alt: "KoreLynk Workspace",
+      cta: "Hire Our Team",
+      ctaLink: "/contact"
     }
   ];
 
@@ -223,12 +123,12 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Welcome Popup */}
       {showWelcomePopup && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 transform animate-fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 dark:bg-black/40">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 transform animate-fade-in transition-colors">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center">
                 <MessageCircle className="w-6 h-6 text-indigo-600 mr-2" />
-                <h3 className="text-lg font-semibold text-gray-900">Welcome to KoreLynk!</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Welcome to KoreLynk!</h3>
               </div>
               <button 
                 onClick={() => setShowWelcomePopup(false)}
@@ -237,7 +137,7 @@ const Home = () => {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
               Ready to transform your business with cutting-edge technology? Let's build something amazing together!
             </p>
             <div className="flex gap-3">
@@ -309,7 +209,7 @@ const Home = () => {
         url="/"
       />
       {/* Hero Section */}
-      <section className="relative text-white overflow-hidden">
+      <section className="relative text-white overflow-hidden dark:bg-gray-900">
         <div className="absolute inset-0">
           <img 
             src="/korelynk-workspace.png" 
@@ -329,26 +229,26 @@ const Home = () => {
                   #Pioneering Africa's Digital Transformation
                 </span>
               </div>
-              <h1 className="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-6xl lg:text-8xl font-bold mb-8 leading-tight">
                 {heroSlides[currentSlide].title}
                 <span className="gradient-text block">{heroSlides[currentSlide].highlight}</span>
               </h1>
-              <p className="text-xl lg:text-2xl mb-8 text-indigo-100 leading-relaxed">
+              <p className="text-2xl lg:text-3xl mb-10 text-indigo-100 leading-relaxed font-medium">
                 {heroSlides[currentSlide].description}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-6">
                 <Link
-                  to="/portfolio"
-                  className="bg-white text-indigo-900 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 hover-lift inline-flex items-center justify-center"
+                  to={heroSlides[currentSlide].ctaLink}
+                  className="bg-white text-indigo-900 px-10 py-5 rounded-xl font-bold text-lg hover:bg-indigo-50 transition-all duration-300 hover-lift inline-flex items-center justify-center shadow-2xl"
                 >
-                  View Our Work
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  {heroSlides[currentSlide].cta}
+                  <ArrowRight className="ml-3 w-6 h-6" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-900 transition-all duration-300"
+                  className="border-3 border-white text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white hover:text-indigo-900 transition-all duration-300 backdrop-blur-sm"
                 >
-                  Get Started
+                  Get Free Quote
                 </Link>
               </div>
               
@@ -381,14 +281,17 @@ const Home = () => {
       {/* Skills Showcase */}
       <SkillsShowcase />
 
+      {/* Trusted By */}
+      <TrustedBy />
+
       {/* Services Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Our Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               We offer comprehensive digital solutions tailored to your business needs
             </p>
           </div>
@@ -414,7 +317,7 @@ const Home = () => {
                 return (
                   <div
                     key={service.id}
-                    className="bg-white rounded-xl shadow-lg hover-lift overflow-hidden"
+                    className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift overflow-hidden transition-colors"
                   >
                     <div className="h-48 overflow-hidden">
                       <img
@@ -429,10 +332,10 @@ const Home = () => {
                       <div className="text-indigo-600 mb-4 flex justify-center">
                         {getServiceIcon(service.title)}
                       </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                         {service.title}
                       </h3>
-                      <p className="text-gray-600">
+                      <p className="text-gray-600 dark:text-gray-300">
                         {service.description}
                       </p>
                     </div>
@@ -445,13 +348,13 @@ const Home = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Featured Projects
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Some of our recent work that we're proud of
             </p>
           </div>
@@ -463,23 +366,51 @@ const Home = () => {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProjects.length > 0 ? featuredProjects.map((project) => (
-                <div key={project._id} className="group hover-lift">
-                  <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-8 text-white">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6 mb-4">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-40 object-cover rounded"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                <div key={project._id} className="group hover-lift bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden transition-colors">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors"
+                          >
+                            Live Demo
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-gray-900 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
+                          >
+                            GitHub
+                          </a>
+                        )}
+                      </div>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-indigo-100 mb-4">{project.description.substring(0, 60)}...</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 3).map((tech, idx) => (
-                        <span key={idx} className="bg-white/20 px-3 py-1 rounded-full text-sm">{tech}</span>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description.substring(0, 100)}...</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.slice(0, 4).map((tech, idx) => (
+                        <span key={idx} className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">{tech}</span>
                       ))}
+                    </div>
+                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                      <span>Role: Full-Stack Developer</span>
+                      <span className="text-indigo-600 dark:text-indigo-400 font-medium">Featured Project</span>
                     </div>
                   </div>
                 </div>
@@ -512,6 +443,97 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Tech Stack Section */}
+      <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Our Technology Stack
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              We use cutting-edge technologies to build scalable solutions
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 max-w-6xl mx-auto">
+            {[
+              { 
+                name: 'React', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', 
+                color: 'text-blue-500' 
+              },
+              { 
+                name: 'Next.js', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', 
+                color: 'text-black dark:text-white' 
+              },
+              { 
+                name: 'Node.js', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', 
+                color: 'text-green-600' 
+              },
+              { 
+                name: 'Express.js', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', 
+                color: 'text-gray-600 dark:text-gray-300' 
+              },
+              { 
+                name: 'MongoDB', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', 
+                color: 'text-green-500' 
+              },
+              { 
+                name: 'TypeScript', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', 
+                color: 'text-blue-600' 
+              },
+              { 
+                name: 'Tailwind CSS', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg', 
+                color: 'text-cyan-500' 
+              },
+              { 
+                name: 'Git', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', 
+                color: 'text-orange-600' 
+              },
+              { 
+                name: 'GitHub', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg', 
+                color: 'text-gray-800 dark:text-white' 
+              },
+              { 
+                name: 'Docker', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', 
+                color: 'text-blue-400' 
+              },
+              { 
+                name: 'AWS', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg', 
+                color: 'text-orange-500' 
+              },
+              { 
+                name: 'Figma', 
+                logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg', 
+                color: 'text-purple-500' 
+              }
+            ].map((tech, index) => (
+              <div key={index} className="text-center group hover:scale-110 transition-transform duration-300">
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-3 group-hover:bg-gray-100 dark:group-hover:bg-gray-700 transition-colors">
+                  <img 
+                    src={tech.logo} 
+                    alt={`${tech.name} logo`}
+                    className={`w-10 h-10 mx-auto ${tech.name === 'Express.js' || tech.name === 'GitHub' ? 'dark:filter dark:brightness-0 dark:invert' : ''}`}
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className={`font-semibold text-sm ${tech.color}`}>{tech.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-20 bg-indigo-600 text-white">
         <div className="container mx-auto px-6">
@@ -531,13 +553,13 @@ const Home = () => {
       </section>
 
       {/* Development Process Demo */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               How We Build Your Vision
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               From concept to deployment, see our development process in action
             </p>
           </div>
@@ -593,7 +615,7 @@ const Home = () => {
                       <Code className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">Lead Developer</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Lead Developer</h3>
                       <p className="text-indigo-600">Architecting your solution</p>
                     </div>
                   </div>
@@ -612,7 +634,7 @@ const Home = () => {
                       <Smartphone className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">UI/UX Designer</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">UI/UX Designer</h3>
                       <p className="text-pink-600">Crafting user experience</p>
                     </div>
                   </div>
@@ -631,7 +653,7 @@ const Home = () => {
                       <Cloud className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900">DevOps Engineer</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">DevOps Engineer</h3>
                       <p className="text-green-600">Deploying to production</p>
                     </div>
                   </div>
@@ -657,32 +679,32 @@ const Home = () => {
               <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-indigo-600">1</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Planning</h3>
-              <p className="text-gray-600">We analyze your requirements and create a detailed roadmap</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Planning</h3>
+              <p className="text-gray-600 dark:text-gray-300">We analyze your requirements and create a detailed roadmap</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-purple-600">2</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Design</h3>
-              <p className="text-gray-600">Our designers create beautiful, user-friendly interfaces</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Design</h3>
+              <p className="text-gray-600 dark:text-gray-300">Our designers create beautiful, user-friendly interfaces</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-green-600">3</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Development</h3>
-              <p className="text-gray-600">We build robust, scalable solutions using modern technologies</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Development</h3>
+              <p className="text-gray-600 dark:text-gray-300">We build robust, scalable solutions using modern technologies</p>
             </div>
             
             <div className="text-center">
               <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-orange-600">4</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Launch</h3>
-              <p className="text-gray-600">We deploy your project and provide ongoing support</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Launch</h3>
+              <p className="text-gray-600 dark:text-gray-300">We deploy your project and provide ongoing support</p>
             </div>
           </div>
         </div>
@@ -726,13 +748,13 @@ const Home = () => {
       </section>
 
       {/* Latest Blog Posts */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Latest from Our Blog
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Stay updated with the latest tech insights and tutorials
             </p>
           </div>
@@ -752,24 +774,84 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <TestimonialSection />
+      <Testimonials />
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Ready to Start Your Project?
-          </h2>
-          <p className="text-xl mb-8 text-indigo-100 max-w-2xl mx-auto">
-            Let's discuss how we can help bring your digital vision to life
-          </p>
-          <Link
-            to="/contact"
-            className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 inline-flex items-center text-lg"
-          >
-            Get Free Consultation
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                Let's Build Something Great Together
+              </h2>
+              <p className="text-xl mb-6 text-indigo-100">
+                Ready to transform your business with cutting-edge technology? We're here to help.
+              </p>
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center text-indigo-100">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <span>Available for freelance, contract, and full-time opportunities</span>
+                </div>
+                <div className="flex items-center text-indigo-100">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <span>Based in Nigeria, serving clients globally</span>
+                </div>
+                <div className="flex items-center text-indigo-100">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <span>Remote-first team with flexible time zones</span>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  to="/contact"
+                  className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 inline-flex items-center justify-center text-lg"
+                >
+                  Get Free Consultation
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+                <a
+                  href="mailto:korelynk@gmail.com"
+                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-all duration-300 inline-flex items-center justify-center"
+                >
+                  Email Us Directly
+                </a>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <h3 className="text-2xl font-bold mb-6">Quick Contact</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                      <span className="text-2xl">📧</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold">Email</div>
+                      <div className="text-indigo-200">korelynk@gmail.com</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                      <span className="text-2xl">📱</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold">Phone</div>
+                      <div className="text-indigo-200">+234-916-140-3450</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                      <span className="text-2xl">🌍</span>
+                    </div>
+                    <div>
+                      <div className="font-semibold">Location</div>
+                      <div className="text-indigo-200">Nigeria (WAT Timezone)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

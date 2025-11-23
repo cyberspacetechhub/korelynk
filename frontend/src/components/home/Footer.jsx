@@ -48,7 +48,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="text-white bg-gray-900">
+    <footer className="text-white bg-gray-900 dark:bg-black transition-colors">
       <div className="container px-6 py-12 mx-auto">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
@@ -68,7 +68,7 @@ const Footer = () => {
                 </>
               )}
             </div>
-            <p className="max-w-md mb-6 leading-relaxed text-gray-300">
+            <p className="max-w-md mb-6 leading-relaxed text-gray-300 dark:text-gray-400">
               {settings.siteDescription}
             </p>
             <div className="flex space-x-4">
@@ -156,7 +156,7 @@ const Footer = () => {
           <div className="flex flex-col items-center justify-between md:flex-row">
             <div className="mb-4 md:mb-0">
               <h3 className="mb-2 text-lg font-semibold">Stay Updated</h3>
-              <p className="text-gray-300">Subscribe to our newsletter for the latest updates</p>
+              <p className="text-gray-300 dark:text-gray-400">Subscribe to our newsletter for the latest updates</p>
             </div>
             <form onSubmit={handleNewsletterSubmit} className="flex w-full md:w-auto">
               <input
@@ -165,7 +165,7 @@ const Footer = () => {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 required
-                className="flex-1 px-4 py-2 text-white bg-gray-800 border border-gray-700 rounded-l-lg md:w-64 focus:outline-none focus:border-indigo-500"
+                className="flex-1 px-4 py-2 text-white bg-gray-800 dark:bg-gray-700 border border-gray-700 dark:border-gray-600 rounded-l-lg md:w-64 focus:outline-none focus:border-indigo-500 dark:focus:border-indigo-400 transition-colors"
               />
               <button 
                 type="submit"
@@ -180,7 +180,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="pt-8 mt-8 text-center border-t border-gray-800">
-          <p className="text-gray-400">
+          <p className="text-gray-400 dark:text-gray-500">
             © {currentYear} {settings.siteName}. All rights reserved.
           </p>
         </div>

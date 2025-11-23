@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, X, Clock, FileText, User, Briefcase, Code } from 'lucide-react';
+import { Search, X, Clock, FileText, User, Briefcase, Code, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import axios from '../api/axios';
 
@@ -75,6 +75,7 @@ const SearchModal = ({ isOpen, onClose }) => {
       case 'project': return <Briefcase className="w-4 h-4" />;
       case 'team': return <User className="w-4 h-4" />;
       case 'code': return <Code className="w-4 h-4" />;
+      case 'course': return <BookOpen className="w-4 h-4" />;
       default: return <Search className="w-4 h-4" />;
     }
   };
@@ -87,10 +88,10 @@ const SearchModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-20">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-70 z-50 flex items-start justify-center pt-20">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[80vh] overflow-hidden transition-colors">
         {/* Search Input */}
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
             <input
@@ -98,8 +99,8 @@ const SearchModal = ({ isOpen, onClose }) => {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search articles, projects, code samples, team..."
-              className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
+              placeholder="Search articles, projects, courses, code samples, team..."
+              className="w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg transition-colors"
             />
             <button
               onClick={onClose}
@@ -240,6 +241,47 @@ const SearchModal = ({ isOpen, onClose }) => {
                 </div>
               )}
 
+              {/* Course Results */}
+              {results.courses && results.courses.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                    Courses ({results.courses.length})
+                  </h3>
+                  <div className="space-y-2">
+                    {results.courses.map((course) => (
+                      <Link
+                        key={course._id}
+                        to={course.url}
+                        onClick={handleResultClick}
+                        className="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      >
+                        <div className="flex items-start">
+                          <div className="text-indigo-600 mr-3 mt-1">
+                            {getIcon('course')}
+                          </div>
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 dark:text-white">{course.title}</h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">{course.description}</p>
+                            <div className="flex items-center gap-2 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                              <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">
+                                {course.level}
+                              </span>
+                              <span>{course.duration}</span>
+                              {course.price && (
+                                <>
+                                  <span>•</span>
+                                  <span>${course.price}</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Team Results */}
               {results.team && results.team.length > 0 && (
                 <div className="mb-6">
@@ -252,16 +294,16 @@ const SearchModal = ({ isOpen, onClose }) => {
                         key={member._id}
                         to={member.url}
                         onClick={handleResultClick}
-                        className="block p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                        className="block p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                       >
                         <div className="flex items-start">
                           <div className="text-indigo-600 mr-3 mt-1">
                             {getIcon('team')}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-medium text-gray-900">{member.name}</h4>
+                            <h4 className="font-medium text-gray-900 dark:text-white">{member.name}</h4>
                             <p className="text-sm text-indigo-600">{member.role}</p>
-                            <p className="text-sm text-gray-600 line-clamp-2 mt-1">{member.bio}</p>
+                            <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mt-1">{member.bio}</p>
                           </div>
                         </div>
                       </Link>

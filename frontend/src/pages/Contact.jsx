@@ -178,7 +178,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* Hero Section */}
       <section className="py-20 text-white relative" style={{
         backgroundImage: 'url(/korelynk-workspace.png)',
@@ -204,15 +204,15 @@ const Contact = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div className="absolute inset-0 bg-white/95"></div>
+        <div className="absolute inset-0 bg-white/95 dark:bg-gray-900/95"></div>
         <div className="container px-6 mx-auto relative z-10">
           <div className="grid gap-12 lg:grid-cols-2">
             {/* Contact Form */}
-            <div className="p-8 bg-white shadow-lg rounded-2xl">
-              <h2 className="mb-6 text-3xl font-bold text-gray-900">
+            <div className="p-8 bg-white dark:bg-gray-800 shadow-lg dark:shadow-gray-900/50 rounded-2xl transition-colors">
+              <h2 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
                 Send us a message
               </h2>
-              <p className="mb-8 text-gray-600">
+              <p className="mb-8 text-gray-600 dark:text-gray-300">
                 Fill out the form below and we'll get back to you within 24 hours.
               </p>
 
@@ -361,29 +361,29 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="mb-6 text-3xl font-bold text-gray-900">
+                <h2 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
                   Contact Information
                 </h2>
-                <p className="mb-8 text-gray-600">
+                <p className="mb-8 text-gray-600 dark:text-gray-300">
                   We're here to help and answer any question you might have. We look forward to hearing from you.
                 </p>
               </div>
 
               <div className="grid gap-6">
                 {contactInfo.map((info, index) => (
-                  <div key={index} className="p-6 bg-white shadow-lg rounded-xl hover-lift">
+                  <div key={index} className="p-6 bg-white dark:bg-gray-800 shadow-lg dark:shadow-gray-900/50 rounded-xl hover-lift transition-colors">
                     <div className="flex items-start">
                       <div className="mt-1 mr-4 text-indigo-600">
                         {info.icon}
                       </div>
                       <div>
-                        <h3 className="mb-1 text-lg font-semibold text-gray-900">
+                        <h3 className="mb-1 text-lg font-semibold text-gray-900 dark:text-white">
                           {info.title}
                         </h3>
-                        <p className="mb-1 font-medium text-indigo-600">
+                        <p className="mb-1 font-medium text-indigo-600 dark:text-indigo-400">
                           {info.details}
                         </p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
                           {info.description}
                         </p>
                       </div>
@@ -465,25 +465,25 @@ const Contact = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
-        <div className="absolute inset-0 bg-white/90"></div>
+        <div className="absolute inset-0 bg-white/90 dark:bg-gray-900/90"></div>
         <div className="container px-6 mx-auto relative z-10">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               Frequently Asked Questions
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Quick answers to common questions
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-6">
             {faqs.map((faq, index) => (
-              <div key={index} className="p-6 bg-gray-50 rounded-xl">
-                <h3 className="flex items-center mb-3 text-lg font-semibold text-gray-900">
+              <div key={index} className="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl transition-colors">
+                <h3 className="flex items-center mb-3 text-lg font-semibold text-gray-900 dark:text-white">
                   <CheckCircle className="w-5 h-5 mr-3 text-green-500" />
                   {faq.question}
                 </h3>
-                <p className="ml-8 text-gray-600">
+                <p className="ml-8 text-gray-600 dark:text-gray-300">
                   {faq.answer}
                 </p>
               </div>

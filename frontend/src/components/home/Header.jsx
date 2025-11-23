@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Code2, Globe, Search } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import SearchModal from '../SearchModal';
+import ThemeToggle from '../ThemeToggle';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +48,7 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-lg">
+    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800/50 transition-colors">
       <nav className="container px-6 mx-auto">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -60,8 +61,8 @@ const Header = () => {
                   <Code2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold text-gray-900">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
-                  <span className="-mt-1 text-sm text-indigo-600">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech'}</span>
+                  <span className="text-xl font-bold text-gray-900 dark:text-white">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
+                  <span className="-mt-1 text-sm text-indigo-600 dark:text-indigo-400">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech'}</span>
                 </div>
               </>
             )}
@@ -75,8 +76,8 @@ const Header = () => {
                 to={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-indigo-600 bg-indigo-50'
-                    : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50'
+                    ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                 }`}
               >
                 {item.name}
@@ -86,15 +87,18 @@ const Header = () => {
             {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center px-3 py-2 text-gray-600 transition-colors border border-gray-300 rounded-lg hover:text-indigo-600 hover:border-indigo-300"
+              className="flex items-center px-3 py-2 text-gray-600 dark:text-gray-400 transition-colors border border-gray-300 dark:border-gray-600 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-500"
               title="Search (Ctrl+K)"
             >
               <Search className="w-4 h-4 mr-2" />
               <span className="text-sm">Search</span>
-              <span className="ml-2 px-1.5 py-0.5 text-xs bg-gray-100 rounded text-gray-500">
+              <span className="ml-2 px-1.5 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-400">
                 ⌘K
               </span>
             </button>
+            
+            {/* Theme Toggle */}
+            <ThemeToggle />
             
             {/* Auth Dropdown */}
             <div className="relative group">
@@ -117,6 +121,7 @@ const Header = () => {
 
           {/* Mobile buttons */}
           <div className="flex items-center space-x-2 md:hidden">
+            <ThemeToggle />
             <button
               onClick={() => setIsSearchOpen(true)}
               className="p-2 text-gray-700 hover:text-indigo-600"
@@ -135,7 +140,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t dark:border-gray-700">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -143,8 +148,8 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive(item.href)
-                      ? 'text-indigo-600 bg-indigo-50'
-                      : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50'
+                      ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                   }`}
                 >
                   {item.name}

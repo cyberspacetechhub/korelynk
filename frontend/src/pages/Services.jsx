@@ -94,7 +94,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* Hero Section */}
       <section className="py-20 text-white relative" style={{
         backgroundImage: 'url(/korelynk-workspace.png)',
@@ -114,13 +114,13 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container px-6 mx-auto">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               What We Offer
             </h2>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300">
               From concept to deployment, we provide end-to-end solutions
             </p>
           </div>
@@ -141,7 +141,7 @@ const Services = () => {
                 };
                 
                 return (
-                  <div key={service.id} className="bg-white shadow-lg rounded-xl hover-lift overflow-hidden">
+                  <div key={service.id} className="bg-white dark:bg-gray-700 shadow-lg dark:shadow-gray-900/50 rounded-xl hover-lift overflow-hidden transition-colors">
                     <div className="h-48 overflow-hidden">
                       <img
                         src={getServiceImage(service.title)}
@@ -153,17 +153,17 @@ const Services = () => {
                       <div className="mb-6 text-indigo-600">
                         {getServiceIcon(service.title)}
                       </div>
-                      <h3 className="mb-4 text-2xl font-bold text-gray-900">
+                      <h3 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
                         {service.title}
                       </h3>
-                      <p className="mb-6 text-gray-600">
+                      <p className="mb-6 text-gray-600 dark:text-gray-300">
                         {service.description}
                       </p>
                   <div className="mb-6">
-                    <h4 className="mb-3 font-semibold text-gray-900">Key Features:</h4>
+                    <h4 className="mb-3 font-semibold text-gray-900 dark:text-white">Key Features:</h4>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center text-gray-600">
+                        <li key={idx} className="flex items-center text-gray-600 dark:text-gray-300">
                           <Check className="flex-shrink-0 w-4 h-4 mr-2 text-green-500" />
                           {feature}
                         </li>
@@ -171,7 +171,7 @@ const Services = () => {
                     </ul>
                   </div>
                   <div className="mb-6">
-                    <h4 className="mb-3 font-semibold text-gray-900">Technologies:</h4>
+                    <h4 className="mb-3 font-semibold text-gray-900 dark:text-white">Technologies:</h4>
                     <div className="flex flex-wrap gap-2">
                       {service.technologies.map((tech, idx) => (
                         <span key={idx} className="px-3 py-1 text-sm text-indigo-800 bg-indigo-100 rounded-full">
@@ -181,7 +181,7 @@ const Services = () => {
                     </div>
                   </div>
                       <div className="text-center">
-                        <div className="mb-2 text-2xl font-bold text-indigo-600">
+                        <div className="mb-2 text-2xl font-bold text-indigo-600 dark:text-indigo-400">
                           Starting at ${service.startingPrice.toLocaleString()}
                         </div>
                         <button className="px-6 py-2 text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
@@ -198,13 +198,13 @@ const Services = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
         <div className="container px-6 mx-auto">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               Transparent Pricing
             </h2>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300">
               Choose the plan that fits your project needs and budget
             </p>
           </div>
@@ -216,7 +216,7 @@ const Services = () => {
                 className={`rounded-2xl p-8 ${
                   plan.popular
                     ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white transform scale-105'
-                    : 'bg-white border-2 border-gray-200'
+                    : 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600'
                 } hover-lift relative`}
               >
                 {plan.popular && (
@@ -272,13 +272,13 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container px-6 mx-auto">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
               Our Process
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               How we bring your project to life
             </p>
           </div>
@@ -294,10 +294,10 @@ const Services = () => {
                 <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 text-xl font-bold text-white bg-indigo-600 rounded-full">
                   {item.step}
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-gray-900">
+                <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
                   {item.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-300">
                   {item.description}
                 </p>
               </div>

@@ -89,6 +89,7 @@ const AdminChat = React.lazy(() => import('./pages/admin/AdminChat'));
 // Auth
 import { AuthProvider } from './context/AuthContext';
 import { SettingsProvider } from './context/SettingsContext';
+import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import StudentProtectedRoute from './components/StudentProtectedRoute';
 import InstructorProtectedRoute from './components/InstructorProtectedRoute';
@@ -118,8 +119,9 @@ function App() {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <SettingsProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <SettingsProvider>
           <DynamicFavicon />
           <GoogleAnalytics />
           <PerformanceMonitor />
@@ -231,8 +233,9 @@ function App() {
           bodyClassName="text-sm"
           progressClassName="bg-indigo-600"
         />
-          </SettingsProvider>
-        </AuthProvider>
+            </SettingsProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </QueryClientProvider>
     </HelmetProvider>
   );

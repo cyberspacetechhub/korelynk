@@ -18,7 +18,7 @@ export const SettingsProvider = ({ children }) => {
     logo: '',
     favicon: '',
     contactEmail: 'hello@korelynk.vercel.app',
-    contactPhone: '+1 (555) 123-4567',
+    contactPhone: '+234-916-140-3450',
     address: '123 Tech Street, Digital City, DC 12345',
     socialLinks: {
       facebook: '',

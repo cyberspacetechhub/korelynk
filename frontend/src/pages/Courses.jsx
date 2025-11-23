@@ -62,7 +62,7 @@ const Courses = () => {
   const levels = ['Beginner', 'Intermediate', 'Advanced'];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <SEO 
         title="Online Courses - Learn Programming & Development"
         description="Master programming with our comprehensive online courses. From web development to mobile apps, learn from industry experts."
@@ -88,10 +88,10 @@ const Courses = () => {
       </section>
 
       {/* Filters */}
-      <section className="py-8 bg-white border-b">
+      <section className="py-8 bg-white dark:bg-gray-800 border-b dark:border-gray-700 transition-colors">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center text-gray-700">
+            <div className="flex items-center text-gray-700 dark:text-gray-300">
               <Filter className="w-5 h-5 mr-2" />
               <span className="font-medium">Filter by:</span>
             </div>
@@ -120,7 +120,7 @@ const Courses = () => {
             
             <button
               onClick={() => setFilters({ category: '', level: '' })}
-              className="px-4 py-2 text-indigo-600 hover:text-indigo-800"
+              className="px-4 py-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300"
             >
               Clear Filters
             </button>
@@ -136,7 +136,7 @@ const Courses = () => {
           ) : (
             <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
               {filteredCourses.map((course) => (
-                <div key={course._id} className="bg-white rounded-xl shadow-lg overflow-hidden hover-lift">
+                <div key={course._id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden hover-lift transition-colors">
                   <div className="h-48 relative overflow-hidden group">
                     {course.featuredImage ? (
                       <img 
@@ -192,15 +192,15 @@ const Courses = () => {
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                       {course.title}
                     </h3>
                     
-                    <p className="text-gray-600 mb-4 line-clamp-2">
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
                       {course.description}
                     </p>
                     
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
                       <div className="flex items-center">
                         <Clock className="w-4 h-4 mr-1" />
                         {course.duration}
@@ -231,7 +231,7 @@ const Courses = () => {
           
           {!loading && filteredCourses.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">No courses found matching your criteria.</p>
+              <p className="text-gray-500 dark:text-gray-400 text-lg">No courses found matching your criteria.</p>
             </div>
           )}
         </div>

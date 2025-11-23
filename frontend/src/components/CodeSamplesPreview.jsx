@@ -41,7 +41,7 @@ const CodeSamplesPreview = () => {
     return (
       <div className="grid md:grid-cols-3 gap-6">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden transition-colors">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="h-6 bg-gray-200 rounded-full animate-pulse w-16"></div>
@@ -65,7 +65,7 @@ const CodeSamplesPreview = () => {
     return (
       <div className="text-center py-12">
         <Code className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-        <p className="text-gray-600">No code tutorials available yet.</p>
+        <p className="text-gray-600 dark:text-gray-300">No code tutorials available yet.</p>
       </div>
     );
   }
@@ -73,7 +73,7 @@ const CodeSamplesPreview = () => {
   return (
     <div className="grid md:grid-cols-3 gap-6">
       {codeSamples.map((sample, index) => (
-        <div key={sample._id} className="group relative bg-white rounded-xl shadow-lg overflow-hidden hover-lift">
+        <div key={sample._id} className="group relative bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden hover-lift transition-colors">
           <div className={`absolute inset-0 bg-gradient-to-br ${getLanguageColor(sample.language)} opacity-5 group-hover:opacity-10 transition-opacity`}></div>
           
           <div className="relative p-6">
@@ -81,29 +81,29 @@ const CodeSamplesPreview = () => {
               <span className={`px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r ${getLanguageColor(sample.language)}`}>
                 {sample.language.toUpperCase()}
               </span>
-              <div className="flex items-center text-gray-500">
+              <div className="flex items-center text-gray-500 dark:text-gray-400">
                 <Zap className="w-4 h-4 mr-1" />
                 <span className="text-xs capitalize">{sample.difficulty}</span>
               </div>
             </div>
             
-            <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
               {sample.title}
             </h3>
             
-            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">
               {sample.description}
             </p>
             
             <div className="flex items-center justify-between">
-              <div className="flex items-center text-xs text-gray-500">
+              <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
                 <Play className="w-3 h-3 mr-1" />
                 {sample.views} views
               </div>
               
               <Link
                 to={`/code-samples/${sample.slug}`}
-                className="text-indigo-600 hover:text-indigo-700 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform"
+                className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform"
               >
                 Try it
                 <ArrowRight className="w-3 h-3 ml-1" />

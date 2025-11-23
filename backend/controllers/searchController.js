@@ -2,6 +2,7 @@ const Blog = require('../models/Blog');
 const Project = require('../models/Project');
 const Team = require('../models/Team');
 const CodeSample = require('../models/CodeSample');
+const Course = require('../models/Course');
 const APIResponse = require('../utils/APIResponse');
 
 const globalSearch = async (req, res) => {
@@ -101,6 +102,29 @@ const globalSearch = async (req, res) => {
                 ...sample.toObject(),
                 type: 'code',
                 url: `/code-samples/${sample.slug}`
+            }));
+        }
+
+        // Search courses
+        if (!type || type === 'course') {
+            const courses = await Course.find({
+                status: 'published',
+                $or: [
+                    { title: searchRegex },
+                    { description: searchRegex },
+                    { category: searchRegex },
+                    { tags: { $in: [searchRegex] } }
+                ]
+            })
+            .populate('instructor', 'fullname')
+            .select('title description image category level duration price tags slug createdAt instructor')
+            .limit(parseInt(limit))
+            .sort({ createdAt: -1 });
+
+            results.courses = courses.map(course => ({
+                ...course.toObject(),
+                type: 'course',
+                url: `/courses/${course.slug}`
             }));
         }
 

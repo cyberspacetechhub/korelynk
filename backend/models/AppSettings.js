@@ -19,15 +19,15 @@ const appSettingsSchema = new mongoose.Schema({
   },
   contactEmail: {
     type: String,
-    default: 'hello@korelynk.vercel.app'
+    default: 'korelynk@gmail.com'
   },
   contactPhone: {
     type: String,
-    default: '+1 (555) 123-4567'
+    default: '+234-916-140-3450'
   },
   address: {
     type: String,
-    default: '123 Tech Street, Digital City, DC 12345'
+    default: 'Abakaliki, Ebonyi State, Nigeria'
   },
   socialLinks: {
     facebook: String,

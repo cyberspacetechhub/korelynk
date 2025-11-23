@@ -118,13 +118,13 @@ const SkillsShowcase = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Master In-Demand Skills
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Choose from our comprehensive range of technology and business skills. 
             Each skill is taught by industry experts with hands-on projects and real-world applications.
           </p>
@@ -133,7 +133,7 @@ const SkillsShowcase = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {loading ? (
             Array.from({ length: 10 }).map((_, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-lg">
+              <div key={index} className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg dark:shadow-gray-900/50 transition-colors">
                 <div className="w-12 h-12 bg-gray-200 rounded-lg mb-4 animate-pulse"></div>
                 <div className="h-5 bg-gray-200 rounded animate-pulse mb-2"></div>
                 <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
@@ -150,17 +150,16 @@ const SkillsShowcase = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
-                >
+                  className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-300 hover:-translate-y-2 group">
                   <div className={`w-12 h-12 ${skill.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                     <IconComponent className="w-6 h-6 text-white" />
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                     {skill.title}
                   </h3>
                   
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
                     {skill.description}
                   </p>
                   
@@ -182,7 +181,7 @@ const SkillsShowcase = () => {
         </div>
 
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-8 bg-white rounded-full px-8 py-4 shadow-lg">
+          <div className="inline-flex items-center gap-8 bg-white dark:bg-gray-700 rounded-full px-8 py-4 shadow-lg dark:shadow-gray-900/50 transition-colors">
             <div className="text-center">
               <div className="text-2xl font-bold text-indigo-600">500+</div>
               <div className="text-sm text-gray-600">Students Trained</div>
