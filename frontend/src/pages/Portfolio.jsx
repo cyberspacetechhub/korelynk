@@ -186,8 +186,11 @@ const Portfolio = () => {
                   <img
                     src={tech.logo}
                     alt={`${tech.name} logo`}
+                    width="64"
+                    height="64"
                     className={`w-full h-full object-contain ${tech.darkInvert ? 'dark:filter dark:brightness-0 dark:invert' : ''}`}
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-1">{tech.name}</h3>
@@ -283,8 +286,11 @@ const Portfolio = () => {
                     <img
                       src={project.image}
                       alt={project.title}
+                      width="400"
+                      height="224"
                       className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-4 left-4 right-4 flex gap-2">

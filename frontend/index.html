@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KoreLynk Tech - Where Ideas Link to Solutions</title>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts - Optimized -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
     <!-- PWA Meta Tags -->
     <!-- <meta name="theme-color" content="#3b82f6" />
@@ -71,16 +71,17 @@
     }
     </script>
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5104YWY3LE"></script>
+    <!-- Google Analytics - Async -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-5104YWY3LE');
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5104YWY3LE"></script>
     
-    <script type="text/javascript">
+    <!-- Google Translate - Deferred -->
+    <script defer>
       function googleTranslateElementInit() {
         try {
           if (typeof google !== 'undefined' && google.translate) {
@@ -89,28 +90,17 @@
               layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
               autoDisplay: false
             }, 'google_translate_element');
-          } else {
-            setTimeout(googleTranslateElementInit, 500);
           }
-        } catch (error) {
-          // console.log('Google Translate initialization error:', error);
-          setTimeout(googleTranslateElementInit, 1000);
-        }
+        } catch (error) {}
       }
       
-      // Load Google Translate script
       window.addEventListener('load', function() {
-        if (!window.google || !window.google.translate) {
+        setTimeout(function() {
           var script = document.createElement('script');
-          script.type = 'text/javascript';
-          script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-          script.onerror = function() {
-            console.log('Failed to load Google Translate script');
-          };
+          script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          script.async = true;
           document.head.appendChild(script);
-        } else {
-          googleTranslateElementInit();
-        }
+        }, 3000);
       });
     </script>
   </head>
