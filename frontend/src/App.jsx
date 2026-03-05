@@ -31,6 +31,7 @@ const CodeSamples = React.lazy(() => import('./pages/CodeSamples'));
 const CodeSampleDetail = React.lazy(() => import('./pages/CodeSampleDetail'));
 const Courses = React.lazy(() => import('./pages/Courses'));
 const Academy = React.lazy(() => import('./pages/Academy'));
+const TutorialDetail = React.lazy(() => import('./pages/TutorialDetail'));
 const Store = React.lazy(() => import('./pages/Store'));
 const AI = React.lazy(() => import('./pages/AI'));
 const CourseDetail = React.lazy(() => import('./pages/CourseDetail'));
@@ -151,6 +152,7 @@ function App() {
                     <Route path="code-samples/:slug" element={<CodeSampleDetail />} />
                     <Route path="courses" element={<Courses />} />
                     <Route path="academy" element={<Academy />} />
+                    <Route path="academy/:category/:slug" element={<TutorialDetail />} />
                     <Route path="store" element={<Store />} />
                     <Route path="ai" element={<AI />} />
                     <Route path="courses/:id" element={<CourseDetail />} />
