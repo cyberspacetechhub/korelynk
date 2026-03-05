@@ -30,12 +30,11 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
+    { name: 'Academy', href: '/academy' },
     { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Courses', href: '/courses' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Feedback', href: '/feedback' },
+    { name: 'Store', href: '/store', badge: 'Soon' },
+    { name: 'AI', href: '/ai', badge: 'Soon' },
+    { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -48,7 +47,7 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-lg dark:shadow-gray-800/50 transition-colors">
+    <header className="sticky top-0 z-50 transition-colors backdrop-blur-md bg-midnight/80 border-b border-white/5">
       <nav className="container px-6 mx-auto">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -57,42 +56,50 @@ const Header = () => {
               <img src={settings.logo} alt={settings.siteName} className="w-auto h-10" />
             ) : (
               <>
-                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-electric">
                   <Code2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold text-gray-900 dark:text-white">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
-                  <span className="-mt-1 text-sm text-indigo-600 dark:text-indigo-400">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech'}</span>
+                  <span className="text-xl font-bold font-display text-white">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
+                  <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
                 </div>
               </>
             )}
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="items-center hidden space-x-6 md:flex">
+          <div className="items-center hidden space-x-4 md:flex">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-all relative group ${
                   isActive(item.href)
-                    ? 'text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                    ? 'text-electric-cyan'
+                    : 'text-gray-300 hover:text-white'
                 }`}
               >
                 {item.name}
+                {item.badge && (
+                  <span className="ml-1.5 px-1.5 py-0.5 text-[10px] font-semibold bg-electric-violet/20 text-electric-violet rounded">
+                    {item.badge}
+                  </span>
+                )}
+                {isActive(item.href) && (
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-electric"></span>
+                )}
               </Link>
             ))}
             
             {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center px-3 py-2 text-gray-600 dark:text-gray-400 transition-colors border border-gray-300 dark:border-gray-600 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-500"
+              className="flex items-center px-3 py-2 text-gray-400 transition-all border border-white/10 rounded-lg hover:text-white hover:border-electric-cyan/50 hover:bg-white/5"
               title="Search (Ctrl+K)"
             >
               <Search className="w-4 h-4 mr-2" />
               <span className="text-sm">Search</span>
-              <span className="ml-2 px-1.5 py-0.5 text-xs bg-gray-100 dark:bg-gray-700 rounded text-gray-500 dark:text-gray-400">
+              <span className="ml-2 px-1.5 py-0.5 text-xs bg-white/10 rounded text-gray-400">
                 ⌘K
               </span>
             </button>
@@ -102,15 +109,15 @@ const Header = () => {
             
             {/* Auth Dropdown */}
             <div className="relative group">
-              <button className="px-6 py-2 font-medium text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700">
+              <button className="px-4 py-2 font-medium text-white transition-all bg-gradient-electric rounded-lg hover:shadow-lg hover:shadow-electric-blue/50">
                 Get Started
               </button>
-              <div className="absolute right-0 z-50 invisible w-48 mt-2 transition-all duration-200 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible">
+              <div className="absolute right-0 z-50 invisible w-48 mt-2 transition-all duration-200 rounded-md shadow-lg bg-midnight-50 border border-white/10 opacity-0 group-hover:opacity-100 group-hover:visible">
                 {authLinks.map((link) => (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 first:rounded-t-md last:rounded-b-md"
+                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white first:rounded-t-md last:rounded-b-md transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -140,7 +147,7 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t dark:border-gray-700">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t dark:bg-gray-900 dark:border-gray-700">
               {navigation.map((item) => (
                 <Link
                   key={item.name}

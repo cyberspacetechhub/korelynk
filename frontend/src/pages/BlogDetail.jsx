@@ -98,14 +98,14 @@ const BlogDetail = () => {
           tags: blog.tags
         }}
       />
-      <div className="min-h-screen bg-gray-50 py-16">
+      <div className="min-h-screen bg-midnight py-16">
         <div className="container mx-auto px-6">
           <article className="max-w-4xl mx-auto">
           {/* Navigation */}
           <div className="mb-6">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors"
+              className="flex items-center text-gray-400 hover:text-electric-cyan transition-colors"
             >
               <ArrowLeft className="w-5 h-5 mr-2" />
               Back to previous page
@@ -123,11 +123,11 @@ const BlogDetail = () => {
               </span>
             )}
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">
               {blog.title}
             </h1>
             
-            <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-6">
+            <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-6">
               <div className="flex items-center">
                 <User className="w-5 h-5 mr-2" />
                 {blog.author?.fullname}
@@ -148,7 +148,7 @@ const BlogDetail = () => {
             
             <div className="mb-6">
               <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-600">Share this article:</span>
+                <span className="text-sm text-gray-400">Share this article:</span>
                 <ShareButton 
                   url={window.location.href}
                   title={blog.title}
@@ -168,10 +168,10 @@ const BlogDetail = () => {
           </header>
 
           {/* Content */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8">
             <div className="prose prose-lg max-w-none">
               {blog.content.split('\n').map((paragraph, index) => (
-                <p key={index} className="mb-4 text-gray-700 leading-relaxed">
+                <p key={index} className="mb-4 text-gray-300 leading-relaxed text-lg">
                   {paragraph}
                 </p>
               ))}
@@ -179,10 +179,10 @@ const BlogDetail = () => {
 
             {/* Tags */}
             {blog.tags && blog.tags.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-gray-200">
+              <div className="mt-8 pt-8 border-t border-white/10">
                 <div className="flex flex-wrap gap-2">
                   {blog.tags.map((tag, index) => (
-                    <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600">
+                    <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-white/5 text-gray-400">
                       <Tag className="w-3 h-3 mr-1" />
                       {tag}
                     </span>
@@ -193,21 +193,21 @@ const BlogDetail = () => {
           </div>
 
           {/* Comments Section */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold font-display text-white mb-6">
               Comments ({blog.comments?.length || 0})
             </h3>
 
             {/* Comment Form */}
-            <form onSubmit={handleCommentSubmit} className="mb-8 p-6 bg-gray-50 rounded-lg">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Leave a Comment</h4>
+            <form onSubmit={handleCommentSubmit} className="mb-8 p-6 bg-white/5 border border-white/10 rounded-xl">
+              <h4 className="text-lg font-semibold text-white mb-4">Leave a Comment</h4>
               <div className="grid md:grid-cols-3 gap-4 mb-4">
                 <input
                   type="text"
                   placeholder="Full Name"
                   value={commentForm.fullName}
                   onChange={(e) => setCommentForm({...commentForm, fullName: e.target.value})}
-                  className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
                   required
                 />
                 <input
@@ -215,7 +215,7 @@ const BlogDetail = () => {
                   placeholder="Email"
                   value={commentForm.email}
                   onChange={(e) => setCommentForm({...commentForm, email: e.target.value})}
-                  className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
                   required
                 />
                 <input
@@ -223,7 +223,7 @@ const BlogDetail = () => {
                   placeholder="Phone"
                   value={commentForm.phone}
                   onChange={(e) => setCommentForm({...commentForm, phone: e.target.value})}
-                  className="px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
                   required
                 />
               </div>
@@ -231,12 +231,12 @@ const BlogDetail = () => {
                 placeholder="Your comment..."
                 value={commentForm.content}
                 onChange={(e) => setCommentForm({...commentForm, content: e.target.value})}
-                className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent h-24 mb-4"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent h-24 mb-4"
                 required
               />
               <button
                 type="submit"
-                className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                className="bg-gradient-electric text-white px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-electric-blue/50 transition-all"
               >
                 Post Comment
               </button>
@@ -245,19 +245,19 @@ const BlogDetail = () => {
             {/* Comments List */}
             <div className="space-y-6">
               {blog.comments?.map((comment, index) => (
-                <div key={index} className="border-b border-gray-200 pb-6 last:border-b-0">
+                <div key={index} className="border-b border-white/10 pb-6 last:border-b-0">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
-                        <User className="w-5 h-5 text-indigo-600" />
+                      <div className="w-10 h-10 bg-electric-blue/20 rounded-full flex items-center justify-center mr-3">
+                        <User className="w-5 h-5 text-electric-cyan" />
                       </div>
                       <div>
-                        <h5 className="font-semibold text-gray-900">{comment.fullName}</h5>
-                        <p className="text-sm text-gray-500">{formatDate(comment.createdAt)}</p>
+                        <h5 className="font-semibold text-white">{comment.fullName}</h5>
+                        <p className="text-sm text-gray-400">{formatDate(comment.createdAt)}</p>
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-700 ml-13">{comment.content}</p>
+                  <p className="text-gray-300 ml-13">{comment.content}</p>
                 </div>
               ))}
             </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code, GraduationCap, UserCheck, Database, Calendar, CreditCard } from 'lucide-react';
+import { TrendingUp, MessageSquare, FolderOpen, Mail, Settings, Star, Users, X, BookOpen, Tag, BarChart3, Layers, Code, GraduationCap, UserCheck, Database, Calendar, CreditCard, BookMarked } from 'lucide-react';
 import PerformanceMonitor from '../PerformanceMonitor';
 
 const AdminAside = ({ isOpen, onClose }) => {
@@ -26,6 +26,7 @@ const AdminAside = ({ isOpen, onClose }) => {
       title: 'Learning Management',
       items: [
         { path: '/admin/courses', icon: GraduationCap, label: 'Courses' },
+        { path: '/admin/tutorials', icon: BookMarked, label: 'Tutorials' },
         { path: '/admin/classes', icon: Calendar, label: 'Classes' },
         { path: '/admin/enrollments', icon: UserCheck, label: 'Enrollments' },
         { path: '/admin/payments', icon: CreditCard, label: 'Payments' }

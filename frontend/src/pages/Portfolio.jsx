@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Github, Filter, ArrowRight } from 'lucide-react';
+import { ExternalLink, Github, Filter, Mail, MapPin, Briefcase, Code2, Palette } from 'lucide-react';
 import axios from '../api/axios';
-import CardSkeleton from '../components/skeletons/CardSkeleton';
+import SEO from '../components/SEO';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -20,8 +20,6 @@ const Portfolio = () => {
       }
     } catch (error) {
       console.error('Error fetching projects:', error);
-      // Use default projects as fallback
-      setProjects([]);
     } finally {
       setLoading(false);
     }
@@ -35,379 +33,324 @@ const Portfolio = () => {
     { id: 'saas', name: 'SaaS Platforms' }
   ];
 
-  const defaultProjects = [
-    {
-      id: 1,
-      title: 'TechStore E-commerce Platform',
-      category: 'ecommerce',
-      description: 'Modern e-commerce platform with advanced features including inventory management, payment processing, and analytics dashboard.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
+  const techStack = [
+    { 
+      name: 'React', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+      category: 'Frontend'
     },
-    {
-      id: 2,
-      title: 'HealthCare Management System',
-      category: 'saas',
-      description: 'Comprehensive healthcare management platform for clinics and hospitals with patient records, appointment scheduling, and billing.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop',
-      technologies: ['Vue.js', 'Laravel', 'PostgreSQL', 'AWS'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
+    { 
+      name: 'Next.js', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+      category: 'Frontend',
+      darkInvert: true
     },
-    {
-      id: 3,
-      title: 'FitTracker Mobile App',
-      category: 'mobile',
-      description: 'Cross-platform fitness tracking app with workout plans, nutrition tracking, and social features.',
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
-      technologies: ['React Native', 'Firebase', 'Redux', 'Node.js'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
+    { 
+      name: 'Node.js', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+      category: 'Backend'
     },
-    {
-      id: 4,
-      title: 'Corporate Website Redesign',
-      category: 'web',
-      description: 'Complete redesign of corporate website with modern UI/UX, improved performance, and SEO optimization.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-      technologies: ['Next.js', 'Tailwind CSS', 'Contentful', 'Vercel'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
+    { 
+      name: 'Express.js', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+      category: 'Backend',
+      darkInvert: true
     },
-    {
-      id: 5,
-      title: 'Restaurant Ordering System',
-      category: 'web',
-      description: 'Online ordering system for restaurants with menu management, order tracking, and payment integration.',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop',
-      technologies: ['React', 'Express.js', 'MySQL', 'PayPal API'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
+    { 
+      name: 'MongoDB', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+      category: 'Database'
     },
-    {
-      id: 6,
-      title: 'Learning Management Platform',
-      category: 'saas',
-      description: 'Educational platform with course creation, student management, progress tracking, and certification system.',
-      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop',
-      technologies: ['Angular', 'Django', 'PostgreSQL', 'Redis'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
+    { 
+      name: 'Figma', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg',
+      category: 'Design'
     },
-    {
-      id: 7,
-      title: 'Real Estate Mobile App',
-      category: 'mobile',
-      description: 'Property listing and management app with advanced search, virtual tours, and agent communication.',
-      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop',
-      technologies: ['Flutter', 'Firebase', 'Google Maps API', 'Stripe'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
+    { 
+      name: 'Photoshop', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg',
+      category: 'Design'
     },
-    {
-      id: 8,
-      title: 'Fashion E-commerce Store',
-      category: 'ecommerce',
-      description: 'Luxury fashion e-commerce platform with AR try-on features, wishlist, and personalized recommendations.',
-      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop',
-      technologies: ['React', 'Shopify Plus', 'GraphQL', 'AR.js'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
-    },
-    {
-      id: 9,
-      title: 'Project Management Tool',
-      category: 'saas',
-      description: 'Collaborative project management platform with task tracking, team communication, and reporting features.',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
-      technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Socket.io'],
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
+    { 
+      name: 'Illustrator', 
+      logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg',
+      category: 'Design'
     }
   ];
 
-  const allProjects = projects.length > 0 ? projects : defaultProjects;
   const filteredProjects = activeFilter === 'all' 
-    ? allProjects 
-    : allProjects.filter(project => project.category === activeFilter);
-
-  const featuredProjects = allProjects.filter(project => project.featured);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen pt">
-        <div className="py-20 bg-gray-200 animate-pulse">
-          <div className="container px-6 mx-auto text-center">
-            <div className="h-16 bg-gray-300 rounded w-96 mx-auto mb-6"></div>
-            <div className="h-8 bg-gray-300 rounded w-80 mx-auto"></div>
-          </div>
-        </div>
-        <section className="py-20 bg-white">
-          <div className="container px-6 mx-auto">
-            <div className="mb-16 text-center">
-              <div className="h-10 bg-gray-200 rounded w-64 mx-auto mb-4 animate-pulse"></div>
-              <div className="h-6 bg-gray-200 rounded w-48 mx-auto animate-pulse"></div>
-            </div>
-            <CardSkeleton count={3} />
-          </div>
-        </section>
-        <section className="py-20 bg-gray-50">
-          <div className="container px-6 mx-auto">
-            <div className="mb-16 text-center">
-              <div className="h-10 bg-gray-200 rounded w-48 mx-auto mb-4 animate-pulse"></div>
-              <div className="h-6 bg-gray-200 rounded w-64 mx-auto mb-8 animate-pulse"></div>
-              <div className="flex flex-wrap justify-center gap-4 mb-12">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="h-12 bg-gray-200 rounded w-32 animate-pulse"></div>
-                ))}
-              </div>
-            </div>
-            <CardSkeleton count={6} />
-          </div>
-        </section>
-      </div>
-    );
-  }
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
   return (
-    <div className="min-h-screen pt bg-white dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-midnight">
+      <SEO 
+        title="Portfolio - Mkpuma Shedrach | Full-Stack Developer"
+        description="Explore the portfolio of Mkpuma Shedrach, Founder/CEO of Korelynk Tech. Specializing in React, Node.js, Express.js, MongoDB, Next.js, and Graphics Design."
+      />
+
       {/* Hero Section */}
-      <section className="py-20 text-white relative" style={{
-        backgroundImage: 'url(/korelynk-workspace.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="container px-6 mx-auto text-center relative z-10">
-          <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
-            Our Portfolio
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-glow opacity-50"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-electric-blue/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-electric-violet/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+
+        <div className="relative container mx-auto px-6 py-20 text-center">
+          <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8">
+            <Briefcase className="w-4 h-4 text-electric-cyan mr-2" />
+            <span className="text-sm font-medium text-gray-300">Founder & CEO</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold font-display text-white mb-6">
+            Mkpuma Shedrach
           </h1>
-          <p className="max-w-3xl mx-auto text-xl text-indigo-100 lg:text-2xl">
-            Showcasing our best work and successful projects across various industries
+          
+          <p className="text-2xl md:text-3xl text-gray-300 mb-8">
+            Full-Stack Developer & Creative Designer
           </p>
+
+          <div className="flex flex-wrap justify-center gap-4 text-gray-400">
+            <div className="flex items-center">
+              <MapPin className="w-5 h-5 mr-2 text-electric-cyan" />
+              <span>Nigeria</span>
+            </div>
+            <div className="flex items-center">
+              <Mail className="w-5 h-5 mr-2 text-electric-cyan" />
+              <span>korelynk@gmail.com</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
-        <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-              Featured Projects
+      {/* Biography Section */}
+      <section className="py-24 bg-white/5">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-8 text-center">
+              About Me
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Our most impactful and innovative solutions
+            
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                I'm Mkpuma Shedrach, the Founder and CEO of Korelynk Tech Group. With a passion for building innovative digital solutions, 
+                I specialize in full-stack web development and creative design, transforming ideas into powerful, scalable applications.
+              </p>
+              
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                My journey in technology began with a curiosity about how things work on the web. Over the years, I've honed my skills 
+                in modern web technologies including React, Node.js, Express.js, MongoDB, and Next.js. I believe in writing clean, 
+                maintainable code and creating user experiences that are both beautiful and functional.
+              </p>
+              
+              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                Beyond development, I'm also passionate about graphic design and visual communication. I use tools like Figma, Photoshop, 
+                and Illustrator to bring creative visions to life, ensuring that every project I work on is not just technically sound 
+                but also visually compelling.
+              </p>
+              
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Through Korelynk Tech, I'm building a platform that empowers developers, businesses, and creators across Africa and beyond. 
+                My mission is to bridge the gap between technology and innovation, creating tools and education that make a real difference.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tech Stack Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-6">
+              <Code2 className="w-4 h-4 text-electric-cyan mr-2" />
+              <span className="text-sm font-medium text-gray-300">Technologies I Use</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+              My Tech Stack
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Specialized in modern web technologies and creative design tools
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <div key={project._id || project.id} className="group hover-lift">
-                <div className="overflow-hidden bg-white shadow-lg rounded-xl">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="object-cover w-full h-64 transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/50 to-transparent group-hover:opacity-100">
-                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
-                        <a
-                          href={project.liveUrl}
-                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
-                          title="View Live"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                        <a
-                          href={project.githubUrl}
-                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
-                          title="View Code"
-                        >
-                          <Github className="w-4 h-4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-3 text-xl font-bold text-gray-900">
-                      {project.title}
-                    </h3>
-                    <p className="mb-4 text-gray-600 line-clamp-3">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 text-sm text-indigo-800 bg-indigo-100 rounded-full"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {techStack.map((tech, index) => (
+              <div
+                key={index}
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 group"
+              >
+                <div className="w-16 h-16 bg-white/5 rounded-xl p-3 mb-4 group-hover:bg-white/10 transition-colors">
+                  <img
+                    src={tech.logo}
+                    alt={`${tech.name} logo`}
+                    className={`w-full h-full object-contain ${tech.darkInvert ? 'dark:filter dark:brightness-0 dark:invert' : ''}`}
+                    loading="lazy"
+                  />
                 </div>
+                <h3 className="text-lg font-bold text-white mb-1">{tech.name}</h3>
+                <p className="text-sm text-gray-400">{tech.category}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* All Projects with Filter */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
-        <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-              All Projects
+      {/* Graphics & Design Section */}
+      <section className="py-24 bg-white/5">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-6">
+              <Palette className="w-4 h-4 text-electric-cyan mr-2" />
+              <span className="text-sm font-medium text-gray-300">Creative Design</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+              Graphics & Design
             </h2>
-            <p className="mb-8 text-xl text-gray-600 dark:text-gray-300">
-              Browse through our complete portfolio
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Creating visually stunning designs that communicate and inspire
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Palette className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Brand Identity</h3>
+              <p className="text-gray-400">Logo design, color schemes, and visual branding</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Code2 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">UI/UX Design</h3>
+              <p className="text-gray-400">User interfaces and experience design</p>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Briefcase className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Marketing Materials</h3>
+              <p className="text-gray-400">Social media graphics and promotional content</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+              My Projects
+            </h2>
+            <p className="text-xl text-gray-400 mb-8">
+              A showcase of my work across web development and design
             </p>
 
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-4">
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setActiveFilter(category.id)}
                   className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                     activeFilter === category.id
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600'
+                      ? 'bg-gradient-electric text-white shadow-lg shadow-electric-blue/50'
+                      : 'bg-white/5 backdrop-blur-sm text-gray-300 border border-white/10 hover:bg-white/10 hover:border-white/20'
                   }`}
                 >
-                  <Filter className="inline-block w-4 h-4 mr-2" />
                   {category.name}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Projects Grid */}
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {filteredProjects.map((project) => (
-              <div key={project._id || project.id} className="group hover-lift">
-                <div className="overflow-hidden bg-white shadow-lg rounded-xl">
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-electric-cyan"></div>
+            </div>
+          ) : filteredProjects.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project) => (
+                <div key={project._id} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="object-cover w-full h-48 transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
-                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/50 to-transparent group-hover:opacity-100">
-                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
-                        <a
-                          href={project.liveUrl}
-                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
-                          title="View Live"
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                        <a
-                          href={project.githubUrl}
-                          className="p-2 text-gray-900 transition-colors bg-white rounded-lg hover:bg-gray-100"
-                          title="View Code"
-                        >
-                          <Github className="w-4 h-4" />
-                        </a>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-white text-gray-900 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors flex items-center justify-center"
+                          >
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Live Demo
+                          </a>
+                        )}
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors flex items-center justify-center"
+                          >
+                            <Github className="w-4 h-4 mr-2" />
+                            Code
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
                   <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-lg font-bold text-gray-900">
-                        {project.title}
-                      </h3>
-                      {project.featured && (
-                        <span className="px-2 py-1 text-xs font-semibold text-yellow-800 bg-yellow-100 rounded-full">
-                          Featured
-                        </span>
-                      )}
-                    </div>
-                    <p className="mb-4 text-sm text-gray-600 line-clamp-3">
-                      {project.description}
-                    </p>
+                    <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                    <p className="text-gray-400 mb-4 line-clamp-2">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 3).map((tech, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-1 text-xs text-indigo-800 bg-indigo-100 rounded-full"
-                        >
+                      {project.technologies.slice(0, 4).map((tech, idx) => (
+                        <span key={idx} className="px-3 py-1 bg-electric-blue/20 text-electric-cyan rounded-full text-sm font-medium">
                           {tech}
                         </span>
                       ))}
-                      {project.technologies.length > 3 && (
-                        <span className="px-2 py-1 text-xs text-gray-600 bg-gray-100 rounded-full">
-                          +{project.technologies.length - 3} more
-                        </span>
-                      )}
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {filteredProjects.length === 0 && (
-            <div className="py-12 text-center">
-              <p className="text-lg text-gray-500">
-                No projects found in this category.
-              </p>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-400 text-lg">No projects found in this category.</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 text-white bg-indigo-600">
-        <div className="container px-6 mx-auto">
-          <div className="grid grid-cols-2 gap-8 text-center lg:grid-cols-4">
-            <div>
-              <div className="mb-2 text-4xl font-bold lg:text-5xl">50+</div>
-              <div className="text-indigo-200">Projects Completed</div>
-            </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold lg:text-5xl">30+</div>
-              <div className="text-indigo-200">Happy Clients</div>
-            </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold lg:text-5xl">15+</div>
-              <div className="text-indigo-200">Technologies</div>
-            </div>
-            <div>
-              <div className="mb-2 text-4xl font-bold lg:text-5xl">99%</div>
-              <div className="text-indigo-200">Success Rate</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-20 text-white bg-gradient-to-r from-purple-600 to-pink-600">
-        <div className="container px-6 mx-auto text-center">
-          <h2 className="mb-6 text-4xl font-bold">
-            Ready to Start Your Project?
+      <section className="py-24 bg-white/5">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">
+            Let's Work Together
           </h2>
-          <p className="max-w-2xl mx-auto mb-8 text-xl text-purple-100">
-            Let's create something amazing together. Contact us to discuss your project requirements.
+          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            Have a project in mind? Let's create something amazing together.
           </p>
-          <button className="inline-flex items-center px-8 py-4 text-lg font-semibold text-purple-600 transition-all duration-300 bg-white rounded-lg hover:bg-purple-50">
-            Start Your Project
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </button>
+          <a
+            href="/contact"
+            className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold text-lg hover:shadow-2xl hover:shadow-electric-blue/50 transition-all duration-300"
+          >
+            Get In Touch
+            <Mail className="ml-2 w-5 h-5" />
+          </a>
         </div>
       </section>
     </div>

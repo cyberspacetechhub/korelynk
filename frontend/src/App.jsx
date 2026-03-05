@@ -11,8 +11,7 @@ import AdminLayout from './layouts/AdminLayout';
 import BrandedLoader from './components/BrandedLoader';
 
 // Critical pages (loaded immediately)
-import Home from './components/home/Home';
-import About from './components/home/About';
+import Home from './components/home/HomeNew';
 import AdminLogin from './pages/AdminLogin';
 import StudentLogin from './pages/StudentLogin';
 import InstructorLogin from './pages/InstructorLogin';
@@ -21,6 +20,7 @@ import Unauthorized from './pages/Unauthorized';
 // Lazy loaded pages
 const Services = React.lazy(() => import('./pages/Services'));
 const Portfolio = React.lazy(() => import('./pages/Portfolio'));
+const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const Feedback = React.lazy(() => import('./components/home/Feedback'));
 const Blog = React.lazy(() => import('./pages/Blog'));
@@ -30,6 +30,9 @@ const CodingDemo = React.lazy(() => import('./pages/CodingDemo'));
 const CodeSamples = React.lazy(() => import('./pages/CodeSamples'));
 const CodeSampleDetail = React.lazy(() => import('./pages/CodeSampleDetail'));
 const Courses = React.lazy(() => import('./pages/Courses'));
+const Academy = React.lazy(() => import('./pages/Academy'));
+const Store = React.lazy(() => import('./pages/Store'));
+const AI = React.lazy(() => import('./pages/AI'));
 const CourseDetail = React.lazy(() => import('./pages/CourseDetail'));
 const Careers = React.lazy(() => import('./pages/Careers'));
 const Unsubscribe = React.lazy(() => import('./pages/Unsubscribe'));
@@ -85,6 +88,7 @@ const AdminPaymentAccount = React.lazy(() => import('./pages/admin/AdminPaymentA
 const AdminPayments = React.lazy(() => import('./pages/admin/AdminPayments'));
 const AdminAssignments = React.lazy(() => import('./pages/admin/AdminAssignments'));
 const AdminChat = React.lazy(() => import('./pages/admin/AdminChat'));
+const AdminTutorials = React.lazy(() => import('./components/admin/AdminTutorials'));
 
 // Auth
 import { AuthProvider } from './context/AuthContext';
@@ -146,6 +150,9 @@ function App() {
                     <Route path="code-samples" element={<CodeSamples />} />
                     <Route path="code-samples/:slug" element={<CodeSampleDetail />} />
                     <Route path="courses" element={<Courses />} />
+                    <Route path="academy" element={<Academy />} />
+                    <Route path="store" element={<Store />} />
+                    <Route path="ai" element={<AI />} />
                     <Route path="courses/:id" element={<CourseDetail />} />
                     <Route path="careers" element={<Careers />} />
                   </Route>
@@ -207,6 +214,7 @@ function App() {
                     <Route path="advanced-analytics" element={<AdminAdvancedAnalytics />} />
                     <Route path="payment-account" element={<AdminPaymentAccount />} />
                     <Route path="payments" element={<AdminPayments />} />
+                    <Route path="tutorials" element={<AdminTutorials />} />
                     <Route path="chat" element={<AdminChat />} />
                     <Route path="profile" element={<AdminProfile />} />
                   </Route>

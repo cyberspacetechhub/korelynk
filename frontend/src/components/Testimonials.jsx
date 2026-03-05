@@ -54,7 +54,7 @@ const Testimonials = () => {
       <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">What Our Clients Say</h2>
+            <h2 className="text-4xl lg:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">What Our Clients Say</h2>
             <p className="text-xl text-gray-600 dark:text-gray-300">Loading testimonials...</p>
           </div>
         </div>
@@ -66,7 +66,7 @@ const Testimonials = () => {
     <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
             What Our Clients Say
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300">

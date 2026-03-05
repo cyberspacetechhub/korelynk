@@ -62,7 +62,7 @@ const Courses = () => {
   const levels = ['Beginner', 'Intermediate', 'Advanced'];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-midnight">
       <SEO 
         title="Online Courses - Learn Programming & Development"
         description="Master programming with our comprehensive online courses. From web development to mobile apps, learn from industry experts."
@@ -70,28 +70,23 @@ const Courses = () => {
       />
       
       {/* Hero Section */}
-      <section className="py-20 text-white relative" style={{
-        backgroundImage: 'url(/korelynk-workspace.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}>
-        <div className="absolute inset-0 bg-black/60"></div>
-        <div className="container mx-auto px-6 text-center relative z-10">
-          <h1 className="text-5xl lg:text-6xl font-bold mb-6">
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
+        <div className="relative container mx-auto px-6 text-center">
+          <h1 className="text-5xl lg:text-6xl font-bold font-display text-white mb-6">
             Learn. Build. Succeed.
           </h1>
-          <p className="text-xl lg:text-2xl text-indigo-100 max-w-3xl mx-auto">
+          <p className="text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
             Master programming and development skills with our expert-led online courses
           </p>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="py-8 bg-white dark:bg-gray-800 border-b dark:border-gray-700 transition-colors">
+      <section className="py-8 border-b border-white/10">
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex items-center text-gray-700 dark:text-gray-300">
+            <div className="flex items-center text-gray-300">
               <Filter className="w-5 h-5 mr-2" />
               <span className="font-medium">Filter by:</span>
             </div>
@@ -99,28 +94,28 @@ const Courses = () => {
             <select
               value={filters.category}
               onChange={(e) => setFilters({...filters, category: e.target.value})}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-electric-cyan focus:border-transparent transition-all"
             >
-              <option value="">All Categories</option>
+              <option value="" className="bg-gray-900">All Categories</option>
               {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
+                <option key={category} value={category} className="bg-gray-900">{category}</option>
               ))}
             </select>
             
             <select
               value={filters.level}
               onChange={(e) => setFilters({...filters, level: e.target.value})}
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white focus:ring-2 focus:ring-electric-cyan focus:border-transparent transition-all"
             >
-              <option value="">All Levels</option>
+              <option value="" className="bg-gray-900">All Levels</option>
               {levels.map(level => (
-                <option key={level} value={level}>{level}</option>
+                <option key={level} value={level} className="bg-gray-900">{level}</option>
               ))}
             </select>
             
             <button
               onClick={() => setFilters({ category: '', level: '' })}
-              className="px-4 py-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300"
+              className="px-4 py-2 text-electric-cyan hover:text-white transition-colors"
             >
               Clear Filters
             </button>
@@ -134,47 +129,45 @@ const Courses = () => {
           {loading ? (
             <CardSkeleton count={6} />
           ) : (
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredCourses.map((course) => (
-                <div key={course._id} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden hover-lift transition-colors">
-                  <div className="h-48 relative overflow-hidden group">
+                <div key={course._id} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                  <div className="h-48 relative overflow-hidden">
                     {course.featuredImage ? (
                       <img 
                         src={course.featuredImage} 
                         alt={course.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="h-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                      <div className="h-full bg-gradient-electric flex items-center justify-center">
                         <div className="text-white text-center">
                           <h3 className="text-xl font-bold mb-2">{course.category}</h3>
-                          <div className="text-indigo-200">{course.level}</div>
+                          <div className="text-white/80">{course.level}</div>
                         </div>
                       </div>
                     )}
                     
-                    {/* Video Play Button Overlay */}
                     {course.introVideo && (
                       <Link 
                         to={`/courses/${course._id}`}
-                        className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       >
-                        <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
-                          <Play className="w-6 h-6 text-indigo-600 ml-1" fill="currentColor" />
+                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                          <Play className="w-6 h-6 text-electric-blue ml-1" fill="currentColor" />
                         </div>
                       </Link>
                     )}
                     
                     <div className="absolute top-3 left-3">
-                      <span className="px-2 py-1 bg-black/70 text-white text-xs rounded-full">
+                      <span className="px-3 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-medium rounded-full">
                         {course.level}
                       </span>
                     </div>
                     
-                    {/* Video indicator badge */}
                     {course.introVideo && (
                       <div className="absolute top-3 right-3">
-                        <span className="px-2 py-1 bg-red-600 text-white text-xs rounded-full flex items-center">
+                        <span className="px-3 py-1 bg-electric-violet text-white text-xs font-medium rounded-full flex items-center">
                           <Play className="w-3 h-3 mr-1" fill="currentColor" />
                           Video
                         </span>
@@ -184,23 +177,23 @@ const Courses = () => {
                   
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="px-3 py-1 bg-indigo-100 text-indigo-800 text-sm rounded-full">
+                      <span className="px-3 py-1 bg-electric-blue/20 text-electric-cyan text-sm font-medium rounded-full">
                         {course.category}
                       </span>
-                      <span className="text-2xl font-bold text-indigo-600">
+                      <span className="text-2xl font-bold font-display text-white">
                         ₦{course.price.toLocaleString()}
                       </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                    <h3 className="text-xl font-bold font-display text-white mb-3 group-hover:text-electric-cyan transition-colors">
                       {course.title}
                     </h3>
                     
-                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                    <p className="text-gray-400 mb-4 line-clamp-2">
                       {course.description}
                     </p>
                     
-                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <div className="flex items-center justify-between text-sm text-gray-400 mb-6">
                       <div className="flex items-center">
                         <Clock className="w-4 h-4 mr-1" />
                         {course.duration}
@@ -209,20 +202,14 @@ const Courses = () => {
                         <Users className="w-4 h-4 mr-1" />
                         {course.currentEnrollments}/{course.maxStudents}
                       </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {new Date(course.startDate).toLocaleDateString()}
-                      </div>
                     </div>
                     
-                    <div className="text-center">
-                      <Link
-                        to={`/courses/${course._id}`}
-                        className="w-full bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 transition-colors inline-block"
-                      >
-                        View Details
-                      </Link>
-                    </div>
+                    <Link
+                      to={`/courses/${course._id}`}
+                      className="block w-full bg-gradient-electric text-white py-3 px-6 rounded-lg font-semibold text-center hover:shadow-lg hover:shadow-electric-blue/50 transition-all duration-300"
+                    >
+                      View Details
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -231,7 +218,7 @@ const Courses = () => {
           
           {!loading && filteredCourses.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 dark:text-gray-400 text-lg">No courses found matching your criteria.</p>
+              <p className="text-gray-400 text-lg">No courses found matching your criteria.</p>
             </div>
           )}
         </div>

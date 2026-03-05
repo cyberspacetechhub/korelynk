@@ -18,7 +18,7 @@ const TrustedBy = () => {
     <section className="py-16 bg-gray-50 dark:bg-gray-800 transition-colors overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-12 px-6">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">
             Trusted By Amazing Clients
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300">
