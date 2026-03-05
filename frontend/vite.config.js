@@ -21,19 +21,15 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 500,
     target: 'esnext',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info']
-      }
-    },
+    minify: 'esbuild',
     cssMinify: true,
     reportCompressedSize: false,
     sourcemap: false
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'axios', 'lucide-react']
+  },
+  esbuild: {
+    drop: ['console', 'debugger']
   }
 })
