@@ -3,7 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Code2, Globe, Search } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import SearchModal from '../SearchModal';
+import ThemeToggle from '../ThemeToggle';
 import { optimizeCloudinaryUrl } from '../../utils/imageOptimizer';
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +49,7 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 transition-colors backdrop-blur-md bg-midnight/80 border-b border-white/5">
+    <header className="sticky top-0 z-50 transition-colors border-b backdrop-blur-md bg-midnight/80 border-white/5">
       <nav className="container px-6 mx-auto">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -66,7 +68,7 @@ const Header = () => {
                   <Code2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold font-display text-white">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
+                  <span className="text-xl font-bold text-white font-display">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
                   <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
                 </div>
               </>
@@ -100,7 +102,7 @@ const Header = () => {
             {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="flex items-center px-3 py-2 text-gray-400 transition-all border border-white/10 rounded-lg hover:text-white hover:border-electric-cyan/50 hover:bg-white/5"
+              className="flex items-center px-3 py-2 text-gray-400 transition-all border rounded-lg border-white/10 hover:text-white hover:border-electric-cyan/50 hover:bg-white/5"
               title="Search (Ctrl+K)"
             >
               <Search className="w-4 h-4 mr-2" />
@@ -115,15 +117,15 @@ const Header = () => {
             
             {/* Auth Dropdown */}
             <div className="relative group">
-              <button className="px-4 py-2 font-medium text-white transition-all bg-gradient-electric rounded-lg hover:shadow-lg hover:shadow-electric-blue/50">
+              <button className="px-4 py-2 font-medium text-white transition-all rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50">
                 Get Started
               </button>
-              <div className="absolute right-0 z-50 invisible w-48 mt-2 transition-all duration-200 rounded-md shadow-lg bg-midnight-50 border border-white/10 opacity-0 group-hover:opacity-100 group-hover:visible">
+              <div className="absolute right-0 z-50 invisible w-48 mt-2 transition-all duration-200 border rounded-md shadow-lg opacity-0 bg-midnight-50 border-white/10 group-hover:opacity-100 group-hover:visible">
                 {authLinks.map((link) => (
                   <Link
                     key={link.name}
                     to={link.href}
-                    className="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-white first:rounded-t-md last:rounded-b-md transition-colors"
+                    className="block px-4 py-2 text-sm text-gray-300 transition-colors hover:bg-white/5 hover:text-white first:rounded-t-md last:rounded-b-md"
                   >
                     {link.name}
                   </Link>
