@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../api/axios';
+import { optimizeCloudinaryUrl } from '../utils/imageOptimizer';
 
 const TrustedBy = () => {
   const { data: projects = [] } = useQuery({
@@ -35,10 +36,13 @@ const TrustedBy = () => {
               >
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-gray-700 rounded-xl shadow-lg p-2 md:p-3 mb-2 md:mb-3 group-hover:scale-110 transition-transform duration-300">
                   <img
-                    src={project.image || '/default-project.png'}
+                    src={optimizeCloudinaryUrl(project.image || '/default-project.png', 100, 100)}
                     alt={`${project.title} logo`}
+                    width="80"
+                    height="80"
                     className="w-full h-full object-contain rounded-lg"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <h3 className="text-xs md:text-sm font-semibold text-gray-700 dark:text-gray-300 text-center max-w-16 md:max-w-20 truncate">

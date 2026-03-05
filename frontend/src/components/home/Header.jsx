@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Code2, Globe, Search } from 'lucide-react';
 import { useSettings } from '../../context/SettingsContext';
 import SearchModal from '../SearchModal';
-import ThemeToggle from '../ThemeToggle';
+import { optimizeCloudinaryUrl } from '../../utils/imageOptimizer';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,7 +53,13 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             {settings.logo ? (
-              <img src={settings.logo} alt={settings.siteName} className="w-auto h-10" />
+              <img 
+                src={optimizeCloudinaryUrl(settings.logo, 250, 70)} 
+                alt={settings.siteName} 
+                className="w-auto h-10"
+                width="250"
+                height="70"
+              />
             ) : (
               <>
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-electric">
@@ -132,12 +138,14 @@ const Header = () => {
             <button
               onClick={() => setIsSearchOpen(true)}
               className="p-2 text-gray-700 hover:text-indigo-600"
+              aria-label="Search"
             >
               <Search className="w-5 h-5" />
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-gray-700 hover:text-indigo-600"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

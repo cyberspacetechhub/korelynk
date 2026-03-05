@@ -239,6 +239,7 @@ const ChatWidget = () => {
           onClick={() => setIsOpen(true)}
           data-chat-trigger
           className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          aria-label="Open chat support"
         >
           <MessageCircle size={24} />
         </button>
@@ -263,13 +264,14 @@ const ChatWidget = () => {
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="hover:bg-blue-700 p-1 rounded"
-                title={isExpanded ? 'Minimize' : 'Expand'}
+                aria-label={isExpanded ? 'Minimize chat' : 'Expand chat'}
               >
                 {isExpanded ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
                 className="hover:bg-blue-700 p-1 rounded"
+                aria-label="Close chat"
               >
                 <X size={20} />
               </button>
@@ -374,6 +376,7 @@ const ChatWidget = () => {
                   onClick={sendMessage}
                   disabled={!newMessage.trim()}
                   className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white p-2 rounded-lg transition-colors"
+                  aria-label="Send message"
                 >
                   <Send size={16} />
                 </button>

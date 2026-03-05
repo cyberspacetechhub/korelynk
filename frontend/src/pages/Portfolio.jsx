@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ExternalLink, Github, Filter, Mail, MapPin, Briefcase, Code2, Palette } from 'lucide-react';
 import axios from '../api/axios';
 import SEO from '../components/SEO';
+import { optimizeCloudinaryUrl } from '../utils/imageOptimizer';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -184,7 +185,7 @@ const Portfolio = () => {
               >
                 <div className="w-16 h-16 bg-white/5 rounded-xl p-3 mb-4 group-hover:bg-white/10 transition-colors">
                   <img
-                    src={tech.logo}
+                    src={optimizeCloudinaryUrl(tech.logo, 64, 64)}
                     alt={`${tech.name} logo`}
                     width="64"
                     height="64"
@@ -284,7 +285,7 @@ const Portfolio = () => {
                 <div key={project._id} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
-                      src={project.image}
+                      src={optimizeCloudinaryUrl(project.image, 400, 300)}
                       alt={project.title}
                       width="400"
                       height="224"
