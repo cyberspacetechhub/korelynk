@@ -85,16 +85,26 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-6 space-x-3">
-              {settings.logo ? (
-                <img src={settings.logo} alt={settings.siteName} className="w-auto h-10" />
+              {settings.favicon ? (
+                <>
+                  <img 
+                    src={settings.favicon} 
+                    alt={settings.siteName || 'KoreLynk Tech'} 
+                    className="w-10 h-10 object-contain" 
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-xl font-bold font-display text-white">{settings.siteName?.split(' ')[0] || 'KoreLynk'}</span>
+                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
+                  </div>
+                </>
               ) : (
                 <>
                   <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-electric">
                     <Code2 className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xl font-bold font-display text-white">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
-                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech'}</span>
+                    <span className="text-xl font-bold font-display text-white">{settings.siteName?.split(' ')[0] || 'KoreLynk'}</span>
+                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
                   </div>
                 </>
               )}

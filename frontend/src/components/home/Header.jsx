@@ -54,22 +54,28 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            {settings.logo ? (
-              <img 
-                src={optimizeCloudinaryUrl(settings.logo, 250, 70)} 
-                alt={settings.siteName} 
-                className="w-auto h-10"
-                width="250"
-                height="70"
-              />
+            {settings.favicon ? (
+              <>
+                <img 
+                  src={optimizeCloudinaryUrl(settings.favicon, 40, 40)} 
+                  alt={settings.siteName || 'KoreLynk Tech'} 
+                  className="w-10 h-10 object-contain"
+                  width="40"
+                  height="40"
+                />
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold text-white font-display">{settings.siteName?.split(' ')[0] || 'KoreLynk'}</span>
+                  <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
+                </div>
+              </>
             ) : (
               <>
                 <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-electric">
                   <Code2 className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold text-white font-display">{settings.siteName.split(' ')[0] || 'KoreLynk'}</span>
-                  <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
+                  <span className="text-xl font-bold text-white font-display">{settings.siteName?.split(' ')[0] || 'KoreLynk'}</span>
+                  <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
                 </div>
               </>
             )}
