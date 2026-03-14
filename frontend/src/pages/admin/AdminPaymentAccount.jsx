@@ -194,7 +194,7 @@ const AdminPaymentAccount = () => {
                   className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
                     errors.accountName ? 'border-red-500' : 'border-gray-300'
                   }`}
-                  placeholder="KoreLynk Tech Limited"
+                  placeholder="InnTechLabs Limited"
                 />
                 {errors.accountName && <p className="mt-1 text-sm text-red-500">{errors.accountName.message}</p>}
               </div>

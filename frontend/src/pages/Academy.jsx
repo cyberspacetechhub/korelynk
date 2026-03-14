@@ -69,8 +69,8 @@ const Academy = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO 
-        title="Korelynk Academy - Free Programming Tutorials"
-        description="Learn web development for free with Korelynk Academy. Master HTML, CSS, JavaScript, React, Node.js, and more with hands-on tutorials."
+        title="InnTechLabs Academy - Free Programming Tutorials"
+        description="Learn web development for free with InnTechLabs Academy. Master HTML, CSS, JavaScript, React, Node.js, and more with hands-on tutorials."
       />
 
       {/* Hero Section */}
@@ -273,7 +273,7 @@ const Academy = () => {
             Ready to Start Learning?
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-            Join thousands of developers learning to code with Korelynk Academy
+            Join thousands of developers learning to code with InnTechLabs Academy
           </p>
           <Link
             to="/courses"

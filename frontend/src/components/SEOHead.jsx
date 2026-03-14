@@ -12,7 +12,7 @@ const SEOHead = ({
 }) => {
   const siteUrl = window.location.origin;
   const fullUrl = url ? `${siteUrl}${url}` : window.location.href;
-  const fullImageUrl = image && image.startsWith('http') ? image : `${siteUrl}/korelynk.svg`;
+  const fullImageUrl = image && image.startsWith('http') ? image : `${siteUrl}/inntechlabs.png`;
 
   return (
     <Helmet>
@@ -25,7 +25,7 @@ const SEOHead = ({
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="KoreLynk Tech" />
+      <meta property="og:site_name" content="InnTechLabs" />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

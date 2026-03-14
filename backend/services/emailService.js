@@ -41,7 +41,7 @@ class EmailService {
     const autoReply = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Thank you for contacting KoreLynk Tech',
+      subject: 'Thank you for contacting InnTechLabs',
       html: `
         <h2>Thank you for reaching out!</h2>
         <p>Dear ${name},</p>
@@ -49,7 +49,7 @@ class EmailService {
         <p><strong>Your message:</strong></p>
         <p>${message}</p>
         <br>
-        <p>Best regards,<br>KoreLynk Tech Team</p>
+        <p>Best regards,<br>InnTechLabs Team</p>
       `
     }
 
@@ -60,13 +60,13 @@ class EmailService {
     const welcomeEmail = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Welcome to KoreLynk Tech Newsletter',
+      subject: 'Welcome to InnTechLabs Newsletter',
       html: `
         <h2>Welcome to our newsletter!</h2>
-        <p>Thank you for subscribing to KoreLynk Tech newsletter.</p>
+        <p>Thank you for subscribing to InnTechLabs newsletter.</p>
         <p>You'll receive updates about our latest projects, tech insights, and industry news.</p>
         <br>
-        <p>Best regards,<br>KoreLynk Tech Team</p>
+        <p>Best regards,<br>InnTechLabs Team</p>
       `
     }
 
@@ -109,11 +109,11 @@ class EmailService {
     const resetEmail = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Password Reset Code - KoreLynk Tech',
+      subject: 'Password Reset Code - InnTechLabs',
       html: `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
           <h2 style="color: #4f46e5; text-align: center;">Password Reset Request</h2>
-          <p>You have requested to reset your password for KoreLynk Tech ${userType} portal.</p>
+          <p>You have requested to reset your password for InnTechLabs ${userType} portal.</p>
           <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
             <h3 style="margin: 0; color: #1f2937;">Your Reset Code:</h3>
             <div style="font-size: 32px; font-weight: bold; color: #4f46e5; letter-spacing: 4px; margin: 10px 0;">${code}</div>
@@ -126,7 +126,7 @@ class EmailService {
           </ul>
           <hr style="margin: 32px 0; border: none; border-top: 1px solid #e5e7eb;">
           <p style="font-size: 12px; color: #6b7280; text-align: center;">
-            This is an automated message from KoreLynk Tech<br>
+            This is an automated message from InnTechLabs<br>
             Please do not reply to this email
           </p>
         </div>
@@ -145,11 +145,11 @@ class EmailService {
     const verificationEmail = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Email Verification - KoreLynk Tech',
+      subject: 'Email Verification - InnTechLabs',
       html: `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
           <h2 style="color: #4f46e5; text-align: center;">Verify Your Email</h2>
-          <p>Welcome to KoreLynk Tech! Please verify your email to complete your ${userType} account setup.</p>
+          <p>Welcome to InnTechLabs! Please verify your email to complete your ${userType} account setup.</p>
           <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
             <h3 style="margin: 0; color: #1f2937;">Your Verification Code:</h3>
             <div style="font-size: 32px; font-weight: bold; color: #4f46e5; letter-spacing: 4px; margin: 10px 0;">${code}</div>
@@ -162,7 +162,7 @@ class EmailService {
           </ul>
           <hr style="margin: 32px 0; border: none; border-top: 1px solid #e5e7eb;">
           <p style="font-size: 12px; color: #6b7280; text-align: center;">
-            This is an automated message from KoreLynk Tech<br>
+            This is an automated message from InnTechLabs<br>
             Please do not reply to this email
           </p>
         </div>
@@ -191,7 +191,7 @@ class EmailService {
             <p><strong>Status:</strong> Pending Review</p>
           </div>
           <p>We'll notify you once your enrollment is approved and provide payment instructions.</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -236,7 +236,7 @@ class EmailService {
             </ol>
           </div>
           <p>We're excited to have you in our learning community!</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -261,7 +261,7 @@ class EmailService {
             ${reason ? `<p><strong>Reason:</strong> ${reason}</p>` : ''}
           </div>
           <p>We encourage you to explore our other courses or reapply in the future.</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -273,10 +273,10 @@ class EmailService {
     const welcomeEmail = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: `Welcome to KoreLynk Tech - ${userType} Account Created`,
+      subject: `Welcome to InnTechLabs - ${userType} Account Created`,
       html: `
         <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; padding: 20px;">
-          <h2 style="color: #4f46e5; text-align: center;">Welcome to KoreLynk Tech!</h2>
+          <h2 style="color: #4f46e5; text-align: center;">Welcome to InnTechLabs!</h2>
           <p>Dear ${fullName},</p>
           <p>Your ${userType} account has been successfully created.</p>
           <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #3b82f6;">
@@ -288,7 +288,7 @@ class EmailService {
             </ul>
           </div>
           <p>We're excited to have you on board!</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -313,7 +313,7 @@ class EmailService {
             ${feedback ? `<p><strong>Feedback:</strong></p><p>${feedback}</p>` : ''}
           </div>
           <p>Keep up the great work!</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -341,7 +341,7 @@ class EmailService {
           </div>
           <p>You can now access your course materials and join class sessions.</p>
           <p>Welcome to the learning community!</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -371,7 +371,7 @@ class EmailService {
             </ul>
           </div>
           <p>Please contact our support team for assistance.</p>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }
@@ -415,7 +415,7 @@ class EmailService {
             <h3 style="color: #1f2937; margin-top: 0;">Course: ${courseTitle}</h3>
             <p><strong>Status:</strong> ${status.charAt(0).toUpperCase() + status.slice(1)}</p>
           </div>
-          <p>Best regards,<br>KoreLynk Tech Team</p>
+          <p>Best regards,<br>InnTechLabs Team</p>
         </div>
       `
     }

@@ -27,8 +27,8 @@ const MainLayout = () => {
             <a href={`tel:${settings.contactPhone || '+234-916-140-3450'}`} className="flex items-center transition-colors hover:text-indigo-200">
               📞 {settings.contactPhone || '+234-916-140-3450'}
             </a>
-            <a href={`mailto:${settings.contactEmail || 'korelynk@gmail.com'}`} className="flex items-center transition-colors hover:text-indigo-200">
-              ✉️ {settings.contactEmail || 'korelynk@gmail.com'}
+            <a href={`mailto:${settings.contactEmail || 'inntechlabs@gmail.com'}`} className="flex items-center transition-colors hover:text-indigo-200">
+              ✉️ {settings.contactEmail || 'inntechlabs@gmail.com'}
             </a>
             {(settings.businessHours || 'Mon-Fri 9AM-6PM WAT') && (
               <span className="flex items-center">

@@ -30,7 +30,7 @@ const Testimonials = () => {
     {
       _id: 'fallback-1',
       name: 'Sarah Johnson',
-      message: 'KoreLynk Tech delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail is remarkable.',
+      message: 'InnTechLabs delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail is remarkable.',
       rating: 5
     },
     {

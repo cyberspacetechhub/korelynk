@@ -8,7 +8,7 @@ const AI = () => {
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO 
         title="AI Tools - Coming Soon"
-        description="Korelynk AI platform launching soon. Revolutionary AI tools and automation for developers and businesses."
+        description="InnTechLabs AI platform launching soon. Revolutionary AI tools and automation for developers and businesses."
       />
       
       <div className="container mx-auto px-6 py-20">
@@ -23,7 +23,7 @@ const AI = () => {
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold font-display text-gray-900 dark:text-white mb-6">
-            Korelynk AI
+            InnTechLabs AI
           </h1>
           
           <p className="text-xl text-gray-500 dark:text-gray-400 mb-8">

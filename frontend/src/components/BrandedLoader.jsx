@@ -13,7 +13,7 @@ const BrandedLoader = () => {
         {/* <div>
           <h1 className="text-2xl font-bold text-gray-900">InnTechLabs</h1>
           <p className="text-sm text-gray-600">Innovation in Technology</p>
-        </div> */}}
+        </div> */}
       </div>
       
       {/* Spinner */}

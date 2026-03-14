@@ -107,7 +107,7 @@ const About = () => {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
       {/* Hero Section */}
       <section className="text-white py-20 relative" style={{
-        backgroundImage: 'url(/korelynk-workspace.png)',
+        backgroundImage: 'url(/inntechlabs-workspace.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -116,7 +116,7 @@ const About = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              About KoreLynk Tech
+              About InnTechLabs
             </h1>
             <p className="text-xl lg:text-2xl text-indigo-100 leading-relaxed">
               We are a passionate team of developers and designers dedicated to creating 
@@ -136,7 +136,7 @@ const About = () => {
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                 Founded with a vision to bridge the gap between innovative technology and 
-                practical business solutions, KoreLynk Tech has been at the forefront 
+                practical business solutions, InnTechLabs has been at the forefront 
                 of digital transformation since our inception.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">

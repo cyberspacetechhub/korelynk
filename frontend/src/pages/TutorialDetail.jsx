@@ -62,7 +62,7 @@ const TutorialDetail = () => {
   return (
     <div className="min-h-screen bg-midnight">
       <SEO 
-        title={`${tutorial.title} - Korelynk Academy`}
+        title={`${tutorial.title} - InnTechLabs Academy`}
         description={tutorial.description}
       />
 

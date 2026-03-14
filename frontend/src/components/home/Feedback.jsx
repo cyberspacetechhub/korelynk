@@ -40,7 +40,7 @@ const Feedback = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">We Value Your Feedback</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Help us improve our services by sharing your thoughts, suggestions, and experiences with KoreLynk Tech.
+            Help us improve our services by sharing your thoughts, suggestions, and experiences with InnTechLabs.
           </p>
         </div>
 

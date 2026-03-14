@@ -87,7 +87,7 @@ const Portfolio = () => {
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO 
         title="Portfolio - Mkpuma Shedrach | Full-Stack Developer"
-        description="Explore the portfolio of Mkpuma Shedrach, Founder/CEO of Korelynk Tech. Specializing in React, Node.js, Express.js, MongoDB, Next.js, and Graphics Design."
+        description="Explore the portfolio of Mkpuma Shedrach, Founder/CEO of InnTechLabs. Specializing in React, Node.js, Express.js, MongoDB, Next.js, and Graphics Design."
       />
 
       {/* Hero Section */}
@@ -119,7 +119,7 @@ const Portfolio = () => {
             </div>
             <div className="flex items-center">
               <Mail className="w-5 h-5 mr-2 text-electric-cyan" />
-              <span>korelynk@gmail.com</span>
+              <span>inntechlabs@gmail.com</span>
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@ const Portfolio = () => {
             
             <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 md:p-12">
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                I'm Mkpuma Shedrach, the Founder and CEO of Korelynk Tech Group. With a passion for building innovative digital solutions, 
+                I'm Mkpuma Shedrach, the Founder and CEO of InnTechLabs. With a passion for building innovative digital solutions, 
                 I specialize in full-stack web development and creative design, transforming ideas into powerful, scalable applications.
               </p>
               
@@ -152,7 +152,7 @@ const Portfolio = () => {
               </p>
               
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                Through Korelynk Tech, I'm building a platform that empowers developers, businesses, and creators across Africa and beyond. 
+                Through InnTechLabs, I'm building a platform that empowers developers, businesses, and creators across Africa and beyond. 
                 My mission is to bridge the gap between technology and innovation, creating tools and education that make a real difference.
               </p>
             </div>

@@ -41,7 +41,7 @@ const AdminCodeSampleDetail = () => {
         content: replyData.content,
         author: {
           name: 'Admin',
-          email: 'admin@korelynk.com'
+          email: 'admin@inntechlabs.com'
         }
       });
       

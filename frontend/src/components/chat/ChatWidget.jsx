@@ -382,10 +382,9 @@ const ChatWidget = () => {
                 </button>
               </div>
               
-              {/* Powered by KoreLynk */}
               <div className="text-center mt-2">
                 <p className="text-xs text-gray-400">
-                  Powered by <span className="font-semibold text-blue-600">KoreLynk Tech</span>
+                  Powered by <span className="font-semibold text-blue-600">InnTechLabs</span>
                 </p>
               </div>
             </div>

@@ -35,7 +35,7 @@ const Home = () => {
       highlight: "Made Simple",
       description: "From concept to deployment - we handle frontend, backend, and everything in between.",
       image: "/kore.png",
-      alt: "KoreLynk Technology",
+      alt: "InnTechLabs Technology",
       cta: "Start Your Project",
       ctaLink: "/contact"
     },
@@ -43,8 +43,8 @@ const Home = () => {
       title: "Remote Team,",
       highlight: "Global Solutions",
       description: "Based in Nigeria, delivering world-class digital solutions to clients worldwide.",
-      image: "/korelynk-workspace.png",
-      alt: "KoreLynk Workspace",
+      image: "/inntechlabs-workspace.png",
+      alt: "InnTechLabs Workspace",
       cta: "Hire Our Team",
       ctaLink: "/contact"
     }
@@ -128,7 +128,7 @@ const Home = () => {
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center">
                 <MessageCircle className="w-6 h-6 text-electric-blue mr-2" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Welcome to KoreLynk!</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Welcome to InnTechLabs!</h3>
               </div>
               <button 
                 onClick={() => setShowWelcomePopup(false)}
@@ -212,8 +212,8 @@ const Home = () => {
       <section className="relative text-white overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="/korelynk-workspace.png" 
-            alt="KoreLynk Workspace" 
+            src="/inntechlabs-workspace.png" 
+            alt="InnTechLabs Workspace" 
             className="w-full h-full object-cover"
             loading="eager"
             decoding="sync"
@@ -810,7 +810,7 @@ const Home = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
                 <a
-                  href="mailto:korelynk@gmail.com"
+                  href="mailto:inntechlabs@gmail.com"
                   className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-all duration-300 inline-flex items-center justify-center"
                 >
                   Email Us Directly
@@ -827,7 +827,7 @@ const Home = () => {
                     </div>
                     <div>
                       <div className="font-semibold">Email</div>
-                      <div className="text-indigo-200">korelynk@gmail.com</div>
+                      <div className="text-indigo-200">inntechlabs@gmail.com</div>
                     </div>
                   </div>
                   <div className="flex items-center">

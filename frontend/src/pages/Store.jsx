@@ -8,7 +8,7 @@ const Store = () => {
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO 
         title="Store - Coming Soon"
-        description="Korelynk digital store launching soon. Stay tuned for innovative digital products and tools."
+        description="InnTechLabs digital store launching soon. Stay tuned for innovative digital products and tools."
       />
       
       <div className="container mx-auto px-6 py-20">
@@ -23,7 +23,7 @@ const Store = () => {
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold font-display text-gray-900 dark:text-white mb-6">
-            Korelynk Store
+            InnTechLabs Store
           </h1>
           
           <p className="text-xl text-gray-500 dark:text-gray-400 mb-8">

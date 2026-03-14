@@ -1,7 +1,7 @@
 {
-  "name": "korelynk-backend",
+  "name": "inntechlabs-backend",
   "version": "1.0.0",
-  "description": "Backend for KoreLynk Tech portfolio website",
+  "description": "Backend for InnTechLabs portfolio website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,7 +16,7 @@
     "express",
     "mongodb"
   ],
-  "author": "KoreLynk Tech",
+  "author": "InnTechLabs",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
