@@ -2,85 +2,122 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/korelynk-icon.svg" />
+    <link rel="icon" type="image/png" href="/inntechlabs.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KoreLynk Tech - Where Ideas Link to Solutions</title>
+    <title>InnTechLabs - Professional Web & Mobile Development Services</title>
     
-    <!-- Google Fonts - Optimized -->
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://korelynk.onrender.com">
-    <link rel="dns-prefetch" href="https://korelynk.onrender.com">
+    <link rel="preconnect" href="https://inntechlabs.onrender.com">
+    <link rel="dns-prefetch" href="https://inntechlabs.onrender.com">
+    <link rel="dns-prefetch" href="https://res.cloudinary.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 
-    <!-- PWA Meta Tags -->
-    <!-- <meta name="theme-color" content="#3b82f6" />
-    <meta name="background-color" content="#0a0a0a" />
-    <meta name="display" content="standalone" />
-    <meta name="orientation" content="portrait" /> -->
-
-    <!-- Apple PWA Meta Tags -->
-    <!-- <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="StudentLMS" />
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" /> -->
-
-    <!-- Microsoft PWA Meta Tags
-    <meta name="msapplication-TileColor" content="#3b82f6" />
-    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" /> -->
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Professional web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services for global clients." />
-    <meta name="keywords" content="web development, mobile app development, React development, Node.js, full stack development, digital solutions, tech consulting" />
-    <meta name="author" content="KoreLynk Tech" />
+    <!-- Primary SEO Meta Tags -->
+    <meta name="description" content="InnTechLabs provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Expert React, Node.js, and full-stack development services for startups and businesses." />
+    <meta name="keywords" content="web development, mobile app development, React development, Node.js, full stack development, UI UX design, digital solutions, tech consulting, software development, e-commerce development, Nigeria tech company, Africa tech" />
+    <meta name="author" content="InnTechLabs" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="rating" content="general" />
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="KoreLynk Tech - Professional Digital Solutions" />
-    <meta property="og:description" content="Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert development services worldwide." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://korelynk.vercel.app" />
-    <meta property="og:image" content="https://korelynk.vercel.app/korelynk.svg" />
-    <meta property="og:site_name" content="KoreLynk Tech" />
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="KoreLynk Tech - Professional Digital Solutions" />
-    <meta name="twitter:description" content="Expert web development, mobile apps, and digital solutions for global clients." />
-    <meta name="twitter:image" content="https://korelynk.vercel.app/korelynk.svg" />
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="google149a351dd1ea4286" />
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://korelynk.vercel.app" />
+    <link rel="canonical" href="https://inntechlabs.vercel.app" />
     
-    <!-- Structured Data -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://inntechlabs.vercel.app" />
+    <meta property="og:title" content="InnTechLabs - Professional Web & Mobile Development" />
+    <meta property="og:description" content="Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide." />
+    <meta property="og:image" content="https://inntechlabs.vercel.app/inntechlabs.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="InnTechLabs - Professional Web & Mobile Development" />
+    <meta property="og:site_name" content="InnTechLabs" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@inntechlabs" />
+    <meta name="twitter:creator" content="@inntechlabs" />
+    <meta name="twitter:title" content="InnTechLabs - Professional Web & Mobile Development" />
+    <meta name="twitter:description" content="Expert web development, mobile apps, and digital solutions for global clients." />
+    <meta name="twitter:image" content="https://inntechlabs.vercel.app/inntechlabs.png" />
+    <meta name="twitter:image:alt" content="InnTechLabs" />
+    
+    <!-- Structured Data: Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "KoreLynk Tech",
-      "url": "https://korelynk.vercel.app",
-      "logo": "https://korelynk.vercel.app/korelynk.svg",
-      "description": "Professional web development, mobile apps, and digital solutions",
+      "name": "InnTechLabs",
+      "url": "https://inntechlabs.vercel.app",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://inntechlabs.vercel.app/inntechlabs.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "Professional web development, mobile app development, UI/UX design, and digital solutions globally.",
+      "foundingDate": "2022",
+      "founders": [{ "@type": "Person", "name": "Mkpuma Shedrach" }],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Abakaliki",
+        "addressRegion": "Ebonyi State",
+        "addressCountry": "NG"
+      },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-555-0123",
+        "telephone": "+234-916-140-3450",
         "contactType": "customer service",
-        "email": "inntechlabs@gmail.com"
+        "email": "inntechlabs@gmail.com",
+        "availableLanguage": "English"
       },
       "sameAs": [
-        "https://github.com/korelynk",
-        "https://linkedin.com/company/korelynk"
-      ]
+        "https://github.com/inntechlabs",
+        "https://linkedin.com/company/inntechlabs",
+        "https://twitter.com/inntechlabs"
+      ],
+      "areaServed": "Worldwide",
+      "knowsAbout": ["Web Development", "Mobile App Development", "React", "Node.js", "UI/UX Design", "Digital Solutions"]
     }
     </script>
     
-    <!-- Google Analytics - Async -->
+    <!-- Structured Data: WebSite with SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "InnTechLabs",
+      "url": "https://inntechlabs.vercel.app",
+      "description": "Professional web development, mobile apps, and digital solutions",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://inntechlabs.vercel.app/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5104YWY3LE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-5104YWY3LE');
+      gtag('config', 'G-5104YWY3LE', { 'anonymize_ip': true });
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5104YWY3LE"></script>
     
     <!-- Google Translate - Deferred -->
     <script defer>

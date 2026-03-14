@@ -120,54 +120,50 @@ const SEO = ({
       <meta name="distribution" content="global" />
       <meta name="rating" content="general" />
       
-      {/* Schema.org JSON-LD */}
+      {/* Schema.org: Article or Organization */}
       <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": type === 'article' ? 'Article' : 'Organization',
-          ...(type === 'article' ? {
+        {JSON.stringify(
+          type === 'article' ? {
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
             headline: title,
             description: seoDescription,
-            image: processedImage,
-            author: {
-              "@type": "Person",
-              name: article?.author || settings.siteName
-            },
+            image: [processedImage],
+            author: { "@type": "Person", name: article?.author || settings.siteName },
             publisher: {
               "@type": "Organization",
               name: settings.siteName,
-              logo: {
-                "@type": "ImageObject",
-                url: settings.logo || defaultImage
-              }
+              logo: { "@type": "ImageObject", url: settings.logo || defaultImage }
             },
             datePublished: article?.publishedAt,
-            dateModified: article?.updatedAt,
-            mainEntityOfPage: {
-              "@type": "WebPage",
-              "@id": seoUrl
-            },
-            "@type": "NewsArticle",
-            "isAccessibleForFree": true,
-            "hasPart": {
-              "@type": "WebPageElement",
-              "isAccessibleForFree": true
-            }
+            dateModified: article?.updatedAt || article?.publishedAt,
+            mainEntityOfPage: { "@type": "WebPage", "@id": seoUrl },
+            isAccessibleForFree: true
           } : {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
             name: settings.siteName,
             description: seoDescription,
             url: siteUrl,
-            logo: settings.logo || defaultImage,
+            logo: { "@type": "ImageObject", url: settings.logo || defaultImage },
+            image: processedImage,
+            telephone: settings.contactPhone,
+            email: settings.contactEmail,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Abakaliki",
+              addressRegion: "Ebonyi State",
+              addressCountry: "NG"
+            },
+            areaServed: "Worldwide",
+            priceRange: "$$",
+            openingHours: "Mo-Fr 09:00-18:00",
             contactPoint: {
               "@type": "ContactPoint",
               telephone: settings.contactPhone,
               contactType: "customer service",
-              email: settings.contactEmail
-            },
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Global",
-              addressCountry: "Worldwide"
+              email: settings.contactEmail,
+              availableLanguage: "English"
             },
             sameAs: [
               settings.socialLinks?.facebook,
@@ -175,9 +171,40 @@ const SEO = ({
               settings.socialLinks?.linkedin,
               settings.socialLinks?.github
             ].filter(Boolean)
-          })
-        })}
+          }
+        )}
       </script>
+
+      {/* Schema.org: WebSite with SearchAction */}
+      {!url && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: settings.siteName,
+            url: siteUrl,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: { "@type": "EntryPoint", urlTemplate: `${siteUrl}/blog?q={search_term_string}` },
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+      )}
+
+      {/* Schema.org: BreadcrumbList */}
+      {url && url !== '/' && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+              { "@type": "ListItem", position: 2, name: title || "Page", item: seoUrl }
+            ]
+          })}
+        </script>
+      )}
     </Helmet>
   );
 };

@@ -1,7 +1,7 @@
 {
-  "name": "KoreLynk Tech - Professional Web & Mobile Development",
-  "short_name": "KoreLynk Tech",
-  "description": "Professional web development, mobile app development, and digital solutions in Nigeria",
+  "name": "InnTechLabs - Professional Web & Mobile Development",
+  "short_name": "InnTechLabs",
+  "description": "Professional web development, mobile app development, and digital solutions globally",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#6366f1",
@@ -9,16 +9,20 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/icon-192x192.png",
+      "src": "/inntechlabs.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
-      "src": "/icon-512x512.png",
+      "src": "/inntechlabs.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "categories": ["business", "productivity", "technology"],
-  "lang": "en-US"
+  "categories": ["business", "productivity", "technology", "education"],
+  "lang": "en-US",
+  "scope": "/",
+  "id": "/"
 }
