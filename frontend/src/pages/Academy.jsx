@@ -67,39 +67,39 @@ const Academy = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-midnight">
+    <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO 
         title="Korelynk Academy - Free Programming Tutorials"
         description="Learn web development for free with Korelynk Academy. Master HTML, CSS, JavaScript, React, Node.js, and more with hands-on tutorials."
       />
 
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden border-b border-white/10">
+      <section className="relative py-20 overflow-hidden border-b border-gray-200 dark:border-white/10">
         <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
         
         <div className="relative container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full mb-6">
               <BookOpen className="w-4 h-4 text-electric-cyan mr-2" />
-              <span className="text-sm font-medium text-gray-300">Free Learning Platform</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Free Learning Platform</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold font-display text-white mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold font-display text-gray-900 dark:text-white mb-6">
               Learn to Code,
               <span className="block mt-2 bg-gradient-electric bg-clip-text text-transparent">
                 Completely Free
               </span>
             </h1>
             
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
               Master web development with our comprehensive tutorials. From HTML basics to advanced React, learn at your own pace.
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mb-12">
               {stats.map((stat, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl px-6 py-4">
-                  <div className="text-2xl font-bold text-white">{stat.number}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                <div key={index} className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-6 py-4">
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.number}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -113,8 +113,8 @@ const Academy = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar */}
             <aside className="lg:w-80 flex-shrink-0">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sticky top-24">
-                <h2 className="text-xl font-bold font-display text-white mb-6">Tutorial Categories</h2>
+              <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6 sticky top-24">
+                <h2 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-6">Tutorial Categories</h2>
                 
                 <nav className="space-y-2">
                   {categories.map((category) => (
@@ -124,7 +124,7 @@ const Academy = () => {
                       className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-300 ${
                         activeCategory === category.id
                           ? 'bg-gradient-electric text-white shadow-lg shadow-electric-blue/30'
-                          : 'bg-white/5 text-gray-300 hover:bg-white/10'
+                          : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-transparent'
                       }`}
                     >
                       <div className="flex items-center">
@@ -139,12 +139,12 @@ const Academy = () => {
                   ))}
                 </nav>
 
-                <div className="mt-8 p-4 bg-gradient-to-br from-electric-blue/20 to-electric-violet/20 rounded-xl border border-white/10">
-                  <h3 className="font-bold text-white mb-2">🎯 Learning Path</h3>
-                  <p className="text-sm text-gray-300 mb-3">Follow our structured curriculum</p>
+                <div className="mt-8 p-4 bg-gradient-to-br from-electric-blue/10 to-electric-violet/10 rounded-xl border border-gray-200 dark:border-white/10">
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2">🎯 Learning Path</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Follow our structured curriculum</p>
                   <Link
                     to="/courses"
-                    className="block text-center px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-medium text-white transition-colors"
+                    className="block text-center px-4 py-2 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 rounded-lg text-sm font-medium text-gray-900 dark:text-white transition-colors"
                   >
                     View All Courses
                   </Link>
@@ -155,36 +155,36 @@ const Academy = () => {
             {/* Main Content Area */}
             <main className="flex-1">
               {/* Tutorial Header */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8">
+              <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 mb-8">
                 <div className="flex items-center mb-4">
                   <span className="text-4xl mr-4">
                     {categories.find(c => c.id === activeCategory)?.icon}
                   </span>
                   <div>
-                    <h2 className="text-3xl font-bold font-display text-white">
+                    <h2 className="text-3xl font-bold font-display text-gray-900 dark:text-white">
                       {categories.find(c => c.id === activeCategory)?.name} Tutorial
                     </h2>
-                    <p className="text-gray-400">
+                    <p className="text-gray-500 dark:text-gray-400">
                       {getCategoryCount(activeCategory)} comprehensive lessons
                     </p>
                   </div>
                 </div>
                 
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-600 dark:text-gray-300 mb-6">
                   Learn {categories.find(c => c.id === activeCategory)?.name} from scratch with our easy-to-follow tutorials. 
                   Perfect for beginners and experienced developers alike.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
-                  <div className="flex items-center text-gray-300">
+                  <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Clock className="w-5 h-5 mr-2 text-electric-cyan" />
                     <span>Self-paced learning</span>
                   </div>
-                  <div className="flex items-center text-gray-300">
+                  <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <Users className="w-5 h-5 mr-2 text-electric-cyan" />
                     <span>10K+ students</span>
                   </div>
-                  <div className="flex items-center text-gray-300">
+                  <div className="flex items-center text-gray-600 dark:text-gray-300">
                     <CheckCircle className="w-5 h-5 mr-2 text-electric-cyan" />
                     <span>100% Free</span>
                   </div>
@@ -192,8 +192,8 @@ const Academy = () => {
               </div>
 
               {/* Lessons List */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8">
-                <h3 className="text-2xl font-bold font-display text-white mb-6">Lessons</h3>
+              <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 mb-8">
+                <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white mb-6">Lessons</h3>
                 
                 {loading ? (
                   <div className="flex items-center justify-center py-12">
@@ -209,15 +209,15 @@ const Academy = () => {
                       <Link
                         key={tutorial._id}
                         to={`/academy/${activeCategory}/${tutorial.slug}`}
-                        className="flex items-center justify-between p-4 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 group"
+                        className="flex items-center justify-between p-4 bg-white dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 rounded-xl border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 group"
                       >
                         <div className="flex items-center flex-1">
                           <Play className="w-5 h-5 text-electric-cyan mr-4 flex-shrink-0" />
                           <div>
-                            <div className="font-semibold text-white group-hover:text-electric-cyan transition-colors">
+                            <div className="font-semibold text-gray-900 dark:text-white group-hover:text-electric-cyan transition-colors">
                               {tutorial.title}
                             </div>
-                            <div className="text-sm text-gray-400">
+                            <div className="text-sm text-gray-500 dark:text-gray-400">
                               {tutorial.duration} min • {tutorial.difficulty}
                             </div>
                           </div>
@@ -230,11 +230,11 @@ const Academy = () => {
               </div>
 
               {/* Code Example */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
-                <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden">
+                <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-white/10">
                   <div className="flex items-center">
                     <Code2 className="w-5 h-5 text-electric-cyan mr-3" />
-                    <h3 className="text-xl font-bold font-display text-white">Try It Yourself</h3>
+                    <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white">Try It Yourself</h3>
                   </div>
                   <button className="px-4 py-2 bg-gradient-electric text-white rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-electric-blue/50 transition-all">
                     Run Code
@@ -253,9 +253,9 @@ const Academy = () => {
                   )}
                 </div>
 
-                <div className="p-6 border-t border-white/10 bg-white/5">
-                  <h4 className="font-semibold text-white mb-2">💡 Pro Tip</h4>
-                  <p className="text-gray-300 text-sm">
+                <div className="p-6 border-t border-gray-200 dark:border-white/10 bg-gray-100 dark:bg-white/5">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">💡 Pro Tip</h4>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
                     Practice makes perfect! Try modifying the code above and see what happens. 
                     Experiment with different values and learn by doing.
                   </p>
@@ -267,12 +267,12 @@ const Academy = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 border-t border-white/10">
+      <section className="py-24 bg-gray-900 dark:bg-midnight border-t border-white/10">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">
             Ready to Start Learning?
           </h2>
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
             Join thousands of developers learning to code with Korelynk Academy
           </p>
           <Link

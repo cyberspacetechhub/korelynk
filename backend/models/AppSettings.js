@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const appSettingsSchema = new mongoose.Schema({
   siteName: {
     type: String,
-    default: 'KoreLynk Tech'
+    default: 'InnTechLabs'
   },
   siteDescription: {
     type: String,
@@ -17,9 +17,13 @@ const appSettingsSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  darkIcon: {
+    type: String,
+    default: ''
+  },
   contactEmail: {
     type: String,
-    default: 'korelynk@gmail.com'
+    default: 'inntechlabs@gmail.com'
   },
   contactPhone: {
     type: String,
@@ -46,7 +50,8 @@ const appSettingsSchema = new mongoose.Schema({
     default: true
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  strict: false
 })
 
 module.exports = mongoose.model('AppSettings', appSettingsSchema)

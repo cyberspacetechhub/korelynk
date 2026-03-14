@@ -84,14 +84,14 @@ const Portfolio = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <div className="min-h-screen bg-midnight">
+    <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO 
         title="Portfolio - Mkpuma Shedrach | Full-Stack Developer"
         description="Explore the portfolio of Mkpuma Shedrach, Founder/CEO of Korelynk Tech. Specializing in React, Node.js, Express.js, MongoDB, Next.js, and Graphics Design."
       />
 
       {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gray-900 dark:bg-midnight">
         <div className="absolute inset-0 bg-gradient-glow opacity-50"></div>
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-72 h-72 bg-electric-blue/20 rounded-full blur-3xl animate-pulse"></div>
@@ -99,7 +99,7 @@ const Portfolio = () => {
         </div>
 
         <div className="relative container mx-auto px-6 py-20 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8">
+          <div className="inline-flex items-center px-4 py-2 bg-white/5 border border-white/10 rounded-full mb-8">
             <Briefcase className="w-4 h-4 text-electric-cyan mr-2" />
             <span className="text-sm font-medium text-gray-300">Founder & CEO</span>
           </div>
@@ -112,7 +112,7 @@ const Portfolio = () => {
             Full-Stack Developer & Creative Designer
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 text-gray-400">
+          <div className="flex flex-wrap justify-center gap-4 text-gray-300">
             <div className="flex items-center">
               <MapPin className="w-5 h-5 mr-2 text-electric-cyan" />
               <span>Nigeria</span>
@@ -126,32 +126,32 @@ const Portfolio = () => {
       </section>
 
       {/* Biography Section */}
-      <section className="py-24 bg-white/5">
+      <section className="py-24 bg-gray-50 dark:bg-midnight-100">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-8 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-8 text-center">
               About Me
             </h2>
             
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12">
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+            <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 md:p-12">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                 I'm Mkpuma Shedrach, the Founder and CEO of Korelynk Tech Group. With a passion for building innovative digital solutions, 
                 I specialize in full-stack web development and creative design, transforming ideas into powerful, scalable applications.
               </p>
               
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                 My journey in technology began with a curiosity about how things work on the web. Over the years, I've honed my skills 
                 in modern web technologies including React, Node.js, Express.js, MongoDB, and Next.js. I believe in writing clean, 
                 maintainable code and creating user experiences that are both beautiful and functional.
               </p>
               
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                 Beyond development, I'm also passionate about graphic design and visual communication. I use tools like Figma, Photoshop, 
                 and Illustrator to bring creative visions to life, ensuring that every project I work on is not just technically sound 
                 but also visually compelling.
               </p>
               
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 Through Korelynk Tech, I'm building a platform that empowers developers, businesses, and creators across Africa and beyond. 
                 My mission is to bridge the gap between technology and innovation, creating tools and education that make a real difference.
               </p>
@@ -161,18 +161,18 @@ const Portfolio = () => {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="py-24">
+      <section className="py-24 bg-white dark:bg-midnight">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full mb-6">
               <Code2 className="w-4 h-4 text-electric-cyan mr-2" />
-              <span className="text-sm font-medium text-gray-300">Technologies I Use</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Technologies I Use</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
               My Tech Stack
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
               Specialized in modern web technologies and creative design tools
             </p>
           </div>
@@ -181,9 +181,9 @@ const Portfolio = () => {
             {techStack.map((tech, index) => (
               <div
                 key={index}
-                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 group"
+                className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-6 hover:bg-gray-50 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300 hover:scale-105 group"
               >
-                <div className="w-16 h-16 bg-white/5 rounded-xl p-3 mb-4 group-hover:bg-white/10 transition-colors">
+                <div className="w-16 h-16 bg-gray-100 dark:bg-white/5 rounded-xl p-3 mb-4 group-hover:bg-gray-200 dark:group-hover:bg-white/10 transition-colors">
                   <img
                     src={optimizeCloudinaryUrl(tech.logo, 64, 64)}
                     alt={`${tech.name} logo`}
@@ -194,8 +194,8 @@ const Portfolio = () => {
                     decoding="async"
                   />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-1">{tech.name}</h3>
-                <p className="text-sm text-gray-400">{tech.category}</p>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{tech.name}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{tech.category}</p>
               </div>
             ))}
           </div>
@@ -203,58 +203,58 @@ const Portfolio = () => {
       </section>
 
       {/* Graphics & Design Section */}
-      <section className="py-24 bg-white/5">
+      <section className="py-24 bg-gray-50 dark:bg-midnight-100">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-6">
+            <div className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-full mb-6">
               <Palette className="w-4 h-4 text-electric-cyan mr-2" />
-              <span className="text-sm font-medium text-gray-300">Creative Design</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Creative Design</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
               Graphics & Design
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
               Creating visually stunning designs that communicate and inspire
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+            <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 text-center hover:bg-gray-50 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300">
               <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Palette className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Brand Identity</h3>
-              <p className="text-gray-400">Logo design, color schemes, and visual branding</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Brand Identity</h3>
+              <p className="text-gray-500 dark:text-gray-400">Logo design, color schemes, and visual branding</p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+            <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 text-center hover:bg-gray-50 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300">
               <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Code2 className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">UI/UX Design</h3>
-              <p className="text-gray-400">User interfaces and experience design</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">UI/UX Design</h3>
+              <p className="text-gray-500 dark:text-gray-400">User interfaces and experience design</p>
             </div>
 
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+            <div className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 text-center hover:bg-gray-50 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300">
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Briefcase className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Marketing Materials</h3>
-              <p className="text-gray-400">Social media graphics and promotional content</p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Marketing Materials</h3>
+              <p className="text-gray-500 dark:text-gray-400">Social media graphics and promotional content</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section className="py-24">
+      <section className="py-24 bg-white dark:bg-midnight">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
               My Projects
             </h2>
-            <p className="text-xl text-gray-400 mb-8">
+            <p className="text-xl text-gray-500 dark:text-gray-400 mb-8">
               A showcase of my work across web development and design
             </p>
 
@@ -266,7 +266,7 @@ const Portfolio = () => {
                   className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                     activeFilter === category.id
                       ? 'bg-gradient-electric text-white shadow-lg shadow-electric-blue/50'
-                      : 'bg-white/5 backdrop-blur-sm text-gray-300 border border-white/10 hover:bg-white/10 hover:border-white/20'
+                      : 'bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10'
                   }`}
                 >
                   {category.name}
@@ -282,7 +282,7 @@ const Portfolio = () => {
           ) : filteredProjects.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <div key={project._id} className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                <div key={project._id} className="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden hover:border-gray-300 dark:hover:border-white/20 transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
                       src={optimizeCloudinaryUrl(project.image, 400, 300)}
@@ -321,8 +321,8 @@ const Portfolio = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-                    <p className="text-gray-400 mb-4 line-clamp-2">{project.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
+                    <p className="text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 4).map((tech, idx) => (
                         <span key={idx} className="px-3 py-1 bg-electric-blue/20 text-electric-cyan rounded-full text-sm font-medium">
@@ -343,12 +343,12 @@ const Portfolio = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white/5">
+      <section className="py-24 bg-gray-900 dark:bg-midnight">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">
             Let's Work Together
           </h2>
-          <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
             Have a project in mind? Let's create something amazing together.
           </p>
           <a

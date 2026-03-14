@@ -58,9 +58,11 @@ const BlogDetail = () => {
     });
   };
 
+  const inputClass = "px-3 py-2 bg-white dark:bg-white/5 border border-gray-300 dark:border-white/10 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent transition-all";
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-16">
+      <div className="min-h-screen bg-white dark:bg-midnight transition-colors py-16">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <DetailSkeleton />
@@ -72,10 +74,10 @@ const BlogDetail = () => {
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-gray-50 py-16">
+      <div className="min-h-screen bg-white dark:bg-midnight transition-colors py-16">
         <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog Post Not Found</h1>
-          <p className="text-gray-600">The blog post you're looking for doesn't exist.</p>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Blog Post Not Found</h1>
+          <p className="text-gray-500 dark:text-gray-400">The blog post you're looking for doesn't exist.</p>
         </div>
       </div>
     );
@@ -83,7 +85,7 @@ const BlogDetail = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title={blog.title}
         description={blog.excerpt || blog.content.substring(0, 160)}
         keywords={blog.tags || []}
@@ -98,170 +100,172 @@ const BlogDetail = () => {
           tags: blog.tags
         }}
       />
-      <div className="min-h-screen bg-midnight py-16">
+      <div className="min-h-screen bg-white dark:bg-midnight transition-colors py-16">
         <div className="container mx-auto px-6">
           <article className="max-w-4xl mx-auto">
-          {/* Navigation */}
-          <div className="mb-6">
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center text-gray-400 hover:text-electric-cyan transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to previous page
-            </button>
-          </div>
-          
-          {/* Header */}
-          <header className="mb-8">
-            {blog.category && (
-              <span 
-                className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white mb-4"
-                style={{ backgroundColor: blog.category.color }}
+
+            {/* Navigation */}
+            <div className="mb-8">
+              <button
+                onClick={() => navigate(-1)}
+                className="inline-flex items-center text-gray-500 dark:text-gray-400 hover:text-electric-cyan dark:hover:text-electric-cyan transition-colors"
               >
-                {blog.category.name}
-              </span>
-            )}
-            
-            <h1 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">
-              {blog.title}
-            </h1>
-            
-            <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-6">
-              <div className="flex items-center">
-                <User className="w-5 h-5 mr-2" />
-                {blog.author?.fullname}
-              </div>
-              <div className="flex items-center">
-                <Calendar className="w-5 h-5 mr-2" />
-                {formatDate(blog.publishedAt)}
-              </div>
-              <div className="flex items-center">
-                <Eye className="w-5 h-5 mr-2" />
-                {blog.views} views
-              </div>
-              <div className="flex items-center">
-                <MessageCircle className="w-5 h-5 mr-2" />
-                {blog.comments?.length || 0} comments
-              </div>
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                Back to previous page
+              </button>
             </div>
-            
-            <div className="mb-6">
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-gray-400">Share this article:</span>
-                <ShareButton 
+
+            {/* Header */}
+            <header className="mb-8">
+              {blog.category && (
+                <span
+                  className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white mb-4"
+                  style={{ backgroundColor: blog.category.color }}
+                >
+                  {blog.category.name}
+                </span>
+              )}
+
+              <h1 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-6">
+                {blog.title}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-6 text-gray-500 dark:text-gray-400 mb-6">
+                <div className="flex items-center">
+                  <User className="w-4 h-4 mr-2" />
+                  {blog.author?.fullname}
+                </div>
+                <div className="flex items-center">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  {formatDate(blog.publishedAt)}
+                </div>
+                <div className="flex items-center">
+                  <Eye className="w-4 h-4 mr-2" />
+                  {blog.views} views
+                </div>
+                <div className="flex items-center">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  {blog.comments?.length || 0} comments
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-200 dark:border-white/10">
+                <span className="text-sm text-gray-500 dark:text-gray-400">Share this article:</span>
+                <ShareButton
                   url={window.location.href}
                   title={blog.title}
                   description={blog.excerpt || blog.title}
                   image={blog.featuredImage}
                 />
               </div>
-            </div>
 
-            {blog.featuredImage && (
-              <img
-                src={blog.featuredImage}
-                alt={blog.title}
-                className="w-full h-64 md:h-96 object-cover rounded-xl mb-8"
-              />
-            )}
-          </header>
+              {blog.featuredImage && (
+                <img
+                  src={blog.featuredImage}
+                  alt={blog.title}
+                  className="w-full h-64 md:h-96 object-cover rounded-2xl mb-8"
+                />
+              )}
+            </header>
 
-          {/* Content */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8">
-            <div className="prose prose-lg max-w-none">
-              {blog.content.split('\n').map((paragraph, index) => (
-                <p key={index} className="mb-4 text-gray-300 leading-relaxed text-lg">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+            {/* Content */}
+            <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 mb-8">
+              <div className="prose prose-lg max-w-none">
+                {blog.content.split('\n').map((paragraph, index) => (
+                  paragraph.trim() ? (
+                    <p key={index} className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed text-lg">
+                      {paragraph}
+                    </p>
+                  ) : <br key={index} />
+                ))}
+              </div>
 
-            {/* Tags */}
-            {blog.tags && blog.tags.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-white/10">
-                <div className="flex flex-wrap gap-2">
-                  {blog.tags.map((tag, index) => (
-                    <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-white/5 text-gray-400">
-                      <Tag className="w-3 h-3 mr-1" />
-                      {tag}
-                    </span>
-                  ))}
+              {blog.tags && blog.tags.length > 0 && (
+                <div className="mt-8 pt-8 border-t border-gray-200 dark:border-white/10">
+                  <div className="flex flex-wrap gap-2">
+                    {blog.tags.map((tag, index) => (
+                      <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/10">
+                        <Tag className="w-3 h-3 mr-1" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          {/* Comments Section */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-            <h3 className="text-2xl font-bold font-display text-white mb-6">
-              Comments ({blog.comments?.length || 0})
-            </h3>
+            {/* Comments Section */}
+            <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white mb-6">
+                Comments ({blog.comments?.length || 0})
+              </h3>
 
-            {/* Comment Form */}
-            <form onSubmit={handleCommentSubmit} className="mb-8 p-6 bg-white/5 border border-white/10 rounded-xl">
-              <h4 className="text-lg font-semibold text-white mb-4">Leave a Comment</h4>
-              <div className="grid md:grid-cols-3 gap-4 mb-4">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={commentForm.fullName}
-                  onChange={(e) => setCommentForm({...commentForm, fullName: e.target.value})}
-                  className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
+              {/* Comment Form */}
+              <form onSubmit={handleCommentSubmit} className="mb-8 p-6 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Leave a Comment</h4>
+                <div className="grid md:grid-cols-3 gap-4 mb-4">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={commentForm.fullName}
+                    onChange={(e) => setCommentForm({...commentForm, fullName: e.target.value})}
+                    className={inputClass}
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={commentForm.email}
+                    onChange={(e) => setCommentForm({...commentForm, email: e.target.value})}
+                    className={inputClass}
+                    required
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone"
+                    value={commentForm.phone}
+                    onChange={(e) => setCommentForm({...commentForm, phone: e.target.value})}
+                    className={inputClass}
+                    required
+                  />
+                </div>
+                <textarea
+                  placeholder="Your comment..."
+                  value={commentForm.content}
+                  onChange={(e) => setCommentForm({...commentForm, content: e.target.value})}
+                  className={`w-full h-24 mb-4 resize-none ${inputClass}`}
                   required
                 />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={commentForm.email}
-                  onChange={(e) => setCommentForm({...commentForm, email: e.target.value})}
-                  className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
-                  required
-                />
-                <input
-                  type="tel"
-                  placeholder="Phone"
-                  value={commentForm.phone}
-                  onChange={(e) => setCommentForm({...commentForm, phone: e.target.value})}
-                  className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
-                  required
-                />
-              </div>
-              <textarea
-                placeholder="Your comment..."
-                value={commentForm.content}
-                onChange={(e) => setCommentForm({...commentForm, content: e.target.value})}
-                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent h-24 mb-4"
-                required
-              />
-              <button
-                type="submit"
-                className="bg-gradient-electric text-white px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-electric-blue/50 transition-all"
-              >
-                Post Comment
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  className="bg-gradient-electric text-white px-6 py-2 rounded-lg hover:shadow-lg hover:shadow-electric-blue/50 transition-all font-medium"
+                >
+                  Post Comment
+                </button>
+              </form>
 
-            {/* Comments List */}
-            <div className="space-y-6">
-              {blog.comments?.map((comment, index) => (
-                <div key={index} className="border-b border-white/10 pb-6 last:border-b-0">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 bg-electric-blue/20 rounded-full flex items-center justify-center mr-3">
+              {/* Comments List */}
+              <div className="space-y-6">
+                {blog.comments?.length === 0 && (
+                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">No comments yet. Be the first to comment!</p>
+                )}
+                {blog.comments?.map((comment, index) => (
+                  <div key={index} className="border-b border-gray-200 dark:border-white/10 pb-6 last:border-b-0">
+                    <div className="flex items-center mb-3">
+                      <div className="w-10 h-10 bg-electric-blue/10 dark:bg-electric-blue/20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                         <User className="w-5 h-5 text-electric-cyan" />
                       </div>
                       <div>
-                        <h5 className="font-semibold text-white">{comment.fullName}</h5>
-                        <p className="text-sm text-gray-400">{formatDate(comment.createdAt)}</p>
+                        <h5 className="font-semibold text-gray-900 dark:text-white">{comment.fullName}</h5>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{formatDate(comment.createdAt)}</p>
                       </div>
                     </div>
+                    <p className="text-gray-600 dark:text-gray-300 ml-13 pl-1">{comment.content}</p>
                   </div>
-                  <p className="text-gray-300 ml-13">{comment.content}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+
           </article>
         </div>
       </div>

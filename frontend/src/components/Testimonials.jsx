@@ -51,11 +51,11 @@ const Testimonials = () => {
 
   if (isLoading) {
     return (
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
+      <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center">
             <h2 className="text-4xl lg:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">What Our Clients Say</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">Loading testimonials...</p>
+            <p className="text-xl text-gray-600 dark:text-gray-400">Loading testimonials...</p>
           </div>
         </div>
       </section>
@@ -63,20 +63,20 @@ const Testimonials = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             Don't just take our word for it
           </p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {displayTestimonials.slice(0, 3).map((testimonial, index) => (
-            <div key={testimonial._id} className="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift transition-colors">
+            <div key={testimonial._id} className="bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 p-8 rounded-xl shadow-lg dark:shadow-black/40 hover-lift transition-colors">
               <div className="flex items-center mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className={`w-5 h-5 ${
@@ -84,7 +84,7 @@ const Testimonials = () => {
                   }`} />
                 ))}
               </div>
-              <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg italic">
+              <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg italic">
                 "{testimonial.message}"
               </p>
               <div className="flex items-center">
@@ -103,7 +103,7 @@ const Testimonials = () => {
         <div className="text-center mt-12">
           <Link
             to="/feedback"
-            className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center"
+            className="bg-gradient-electric text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/40 transition-all duration-300 inline-flex items-center"
           >
             Share Your Feedback
             <ArrowRight className="ml-2 w-5 h-5" />

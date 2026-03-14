@@ -52,85 +52,48 @@ const Careers = () => {
   ];
 
   const benefits = [
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: 'Health & Wellness',
-      description: 'Comprehensive health insurance and wellness programs'
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: 'Flexible Hours',
-      description: 'Work-life balance with flexible working hours'
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: 'Team Culture',
-      description: 'Collaborative and inclusive work environment'
-    },
-    {
-      icon: <Briefcase className="w-8 h-8" />,
-      title: 'Career Growth',
-      description: 'Professional development and learning opportunities'
-    }
+    { icon: <Heart className="w-8 h-8" />, title: 'Health & Wellness', description: 'Comprehensive health insurance and wellness programs' },
+    { icon: <Clock className="w-8 h-8" />, title: 'Flexible Hours', description: 'Work-life balance with flexible working hours' },
+    { icon: <Users className="w-8 h-8" />, title: 'Team Culture', description: 'Collaborative and inclusive work environment' },
+    { icon: <Briefcase className="w-8 h-8" />, title: 'Career Growth', description: 'Professional development and learning opportunities' }
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <SEO 
+    <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
+      <SEO
         title="Careers - Join Our Tech Team"
         description="Join KoreLynk Tech and build the future of technology. We're hiring web developers, mobile app developers, UI/UX designers, and digital marketing specialists globally with remote opportunities."
-        keywords={[
-          'tech jobs',
-          'web developer jobs',
-          'React developer careers',
-          'mobile app developer jobs',
-          'UI UX designer jobs',
-          'software engineer careers',
-          'tech company jobs',
-          'remote developer jobs',
-          'programming jobs',
-          'digital marketing jobs',
-          'global tech careers',
-          'remote work opportunities',
-          'international tech jobs'
-        ]}
+        keywords={['tech jobs', 'web developer jobs', 'React developer careers', 'remote developer jobs']}
         url="/careers"
       />
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white py-20">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Team</h1>
-          <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
-            Build the future of technology with us. We're looking for passionate individuals 
+
+      {/* Hero */}
+      <section className="relative py-20 overflow-hidden bg-gray-900 dark:bg-midnight">
+        <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
+        <div className="relative container mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold font-display text-white mb-6">Join Our Team</h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            Build the future of technology with us. We're looking for passionate individuals
             who want to make a difference in the digital world.
           </p>
         </div>
       </section>
 
-      {/* Why Work With Us */}
-      <section className="py-20 bg-white">
+      {/* Benefits */}
+      <section className="py-20 bg-white dark:bg-midnight">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Work With Us?
-            </h2>
-            <p className="text-xl text-gray-600">
-              We believe in creating an environment where talent thrives
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">Why Work With Us?</h2>
+            <p className="text-xl text-gray-500 dark:text-gray-400">We believe in creating an environment where talent thrives</p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {benefits.map((benefit, index) => (
-              <div key={index} className="text-center p-6 rounded-xl bg-gray-50 hover-lift">
-                <div className="text-indigo-600 mb-4 flex justify-center">
+              <div key={index} className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 text-center hover:border-gray-300 dark:hover:border-white/20 transition-all">
+                <div className="w-16 h-16 bg-gradient-electric rounded-xl flex items-center justify-center mx-auto mb-6 text-white">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">
-                  {benefit.description}
-                </p>
+                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-3">{benefit.title}</h3>
+                <p className="text-gray-500 dark:text-gray-400">{benefit.description}</p>
               </div>
             ))}
           </div>
@@ -138,58 +101,38 @@ const Careers = () => {
       </section>
 
       {/* Open Positions */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-midnight-100">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Open Positions
-            </h2>
-            <p className="text-xl text-gray-600">
-              Find your next career opportunity with us
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">Open Positions</h2>
+            <p className="text-xl text-gray-500 dark:text-gray-400">Find your next career opportunity with us</p>
           </div>
-
-          <div className="space-y-6">
+          <div className="space-y-6 max-w-5xl mx-auto">
             {openPositions.map((position) => (
-              <div key={position.id} className="bg-white rounded-xl shadow-lg p-8 hover-lift">
+              <div key={position.id} className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-gray-300 dark:hover:border-white/20 transition-all">
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {position.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                      <div className="flex items-center">
-                        <Briefcase className="w-4 h-4 mr-1" />
-                        {position.department}
-                      </div>
-                      <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-1" />
-                        {position.location}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {position.type}
-                      </div>
-                      <div className="flex items-center">
-                        <DollarSign className="w-4 h-4 mr-1" />
-                        {position.salary}
-                      </div>
+                    <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white mb-2">{position.title}</h3>
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex items-center"><Briefcase className="w-4 h-4 mr-1" />{position.department}</div>
+                      <div className="flex items-center"><MapPin className="w-4 h-4 mr-1" />{position.location}</div>
+                      <div className="flex items-center"><Clock className="w-4 h-4 mr-1" />{position.type}</div>
+                      <div className="flex items-center"><DollarSign className="w-4 h-4 mr-1" />{position.salary}</div>
                     </div>
                   </div>
-                  <button className="mt-4 lg:mt-0 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                  <button className="mt-4 lg:mt-0 bg-gradient-electric text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all">
                     Apply Now
                   </button>
                 </div>
-
-                <p className="text-gray-600 mb-6">
-                  {position.description}
-                </p>
-
+                <p className="text-gray-600 dark:text-gray-300 mb-6">{position.description}</p>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-3">Requirements:</h4>
-                  <ul className="list-disc list-inside space-y-2 text-gray-600">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Requirements:</h4>
+                  <ul className="space-y-2">
                     {position.requirements.map((req, index) => (
-                      <li key={index}>{req}</li>
+                      <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
+                        <span className="w-1.5 h-1.5 bg-electric-cyan rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        {req}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -199,19 +142,17 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-indigo-600 text-white">
+      {/* CTA */}
+      <section className="py-24 bg-gray-900 dark:bg-midnight">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Don't See Your Role?
-          </h2>
-          <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
-            We're always looking for talented individuals. Send us your resume and 
+          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">Don't See Your Role?</h2>
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            We're always looking for talented individuals. Send us your resume and
             let us know how you'd like to contribute to our team.
           </p>
           <a
             href="mailto:careers@korelynk.vercel.app"
-            className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-colors inline-block"
+            className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-2xl hover:shadow-electric-blue/50 transition-all"
           >
             Send Your Resume
           </a>

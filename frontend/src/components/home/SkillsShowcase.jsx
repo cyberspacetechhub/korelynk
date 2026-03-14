@@ -118,7 +118,7 @@ const SkillsShowcase = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
+    <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">
@@ -133,7 +133,7 @@ const SkillsShowcase = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {loading ? (
             Array.from({ length: 10 }).map((_, index) => (
-              <div key={index} className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg dark:shadow-gray-900/50 transition-colors">
+              <div key={index} className="bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl p-6 shadow-lg dark:shadow-black/40 transition-colors">
                 <div className="w-12 h-12 bg-gray-200 rounded-lg mb-4 animate-pulse"></div>
                 <div className="h-5 bg-gray-200 rounded animate-pulse mb-2"></div>
                 <div className="h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
@@ -150,7 +150,7 @@ const SkillsShowcase = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg dark:shadow-gray-900/50 hover:shadow-xl dark:hover:shadow-gray-900/70 transition-all duration-300 hover:-translate-y-2 group">
+                  className="bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl p-6 shadow-lg dark:shadow-black/40 hover:shadow-xl dark:hover:shadow-black/60 transition-all duration-300 hover:-translate-y-2 group">
                   <div className={`w-12 h-12 ${skill.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                     <IconComponent className="w-6 h-6 text-white" />
                   </div>
@@ -164,12 +164,12 @@ const SkillsShowcase = () => {
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-indigo-600 font-medium text-sm">
+                    <span className="text-electric-blue dark:text-electric-cyan font-medium text-sm">
                       {courseCounts[skill.title] || 0} Courses
                     </span>
                     <Link 
                       to={`/courses?category=${encodeURIComponent(skill.category)}`}
-                      className="text-indigo-600 hover:text-indigo-800 text-sm font-medium group-hover:translate-x-1 transition-transform"
+                      className="text-electric-blue dark:text-electric-cyan hover:text-electric-violet text-sm font-medium group-hover:translate-x-1 transition-transform"
                     >
                       Explore →
                     </Link>
@@ -181,20 +181,20 @@ const SkillsShowcase = () => {
         </div>
 
         <div className="text-center mt-12">
-          <div className="inline-flex items-center gap-8 bg-white dark:bg-gray-700 rounded-full px-8 py-4 shadow-lg dark:shadow-gray-900/50 transition-colors">
+          <div className="inline-flex items-center gap-8 bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-full px-8 py-4 shadow-lg dark:shadow-black/40 transition-colors">
             <div className="text-center">
-              <div className="text-2xl font-bold text-indigo-600">500+</div>
-              <div className="text-sm text-gray-600">Students Trained</div>
+              <div className="text-2xl font-bold text-electric-blue">500+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Students Trained</div>
             </div>
-            <div className="w-px h-8 bg-gray-300"></div>
+            <div className="w-px h-8 bg-gray-200 dark:bg-white/10"></div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">95%</div>
-              <div className="text-sm text-gray-600">Success Rate</div>
+              <div className="text-2xl font-bold text-electric-cyan">95%</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Success Rate</div>
             </div>
-            <div className="w-px h-8 bg-gray-300"></div>
+            <div className="w-px h-8 bg-gray-200 dark:bg-white/10"></div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600">50+</div>
-              <div className="text-sm text-gray-600">Expert Instructors</div>
+              <div className="text-2xl font-bold text-electric-violet">50+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Expert Instructors</div>
             </div>
           </div>
         </div>

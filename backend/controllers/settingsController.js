@@ -2,15 +2,21 @@ const AppSettings = require('../models/AppSettings')
 const uploadService = require('../services/uploadService')
 const APIResponse = require('../utils/APIResponse')
 
-// Get app settings
 const getSettings = async (req, res) => {
   try {
-    let settings = await AppSettings.findOne({ isActive: true })
+    let settings = await AppSettings.findOne()
     
     if (!settings) {
-      // Create default settings if none exist
-      settings = new AppSettings()
-      await settings.save()
+      settings = await AppSettings.create({ isActive: true })
+    } else {
+      if (settings.darkIcon === undefined) {
+        await AppSettings.updateOne({ _id: settings._id }, { $set: { darkIcon: '' } })
+        settings = await AppSettings.findById(settings._id)
+      }
+      if (!settings.favicon && settings.logo) {
+        await AppSettings.updateOne({ _id: settings._id }, { $set: { favicon: settings.logo } })
+        settings = await AppSettings.findById(settings._id)
+      }
     }
     
     APIResponse.success(res, settings, 'Settings retrieved successfully')
@@ -20,12 +26,10 @@ const getSettings = async (req, res) => {
   }
 }
 
-// Update app settings
 const updateSettings = async (req, res) => {
   try {
     let updateData = { ...req.body }
     
-    // Parse JSON fields
     if (updateData.socialLinks && typeof updateData.socialLinks === 'string') {
       updateData.socialLinks = JSON.parse(updateData.socialLinks)
     }
@@ -33,25 +37,21 @@ const updateSettings = async (req, res) => {
       updateData.seoSettings = JSON.parse(updateData.seoSettings)
     }
     
-    // Handle logo upload
     if (req.files && req.files.logo) {
       updateData.logo = req.files.logo[0].path
     }
-    
-    // Handle favicon upload
     if (req.files && req.files.favicon) {
       updateData.favicon = req.files.favicon[0].path
     }
     
-    let settings = await AppSettings.findOne({ isActive: true })
-    
+    let settings = await AppSettings.findOne()
     if (!settings) {
-      settings = new AppSettings(updateData)
+      settings = await AppSettings.create({ isActive: true, ...updateData })
     } else {
-      Object.assign(settings, updateData)
+      await AppSettings.updateOne({ _id: settings._id }, { $set: updateData }, { strict: false })
+      settings = await AppSettings.findById(settings._id)
     }
-    
-    await settings.save()
+
     APIResponse.success(res, settings, 'Settings updated successfully')
   } catch (error) {
     console.error('Error updating settings:', error)

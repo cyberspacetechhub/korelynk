@@ -12,7 +12,7 @@ export const optimizeCloudinaryUrl = (url, width = 400, height = null) => {
   let transformations = `f_auto,q_auto,w_${width}`;
   
   if (height) {
-    transformations += `,h_${height},c_fill`;
+    transformations += `,h_${height},c_fit`;
   } else {
     transformations += ',c_scale';
   }

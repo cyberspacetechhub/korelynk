@@ -124,10 +124,10 @@ const Home = () => {
       {/* Welcome Popup */}
       {showWelcomePopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 dark:bg-black/40">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6 transform animate-fade-in transition-colors">
+          <div className="bg-white dark:bg-midnight-50 rounded-2xl shadow-2xl max-w-md w-full p-6 transform animate-fade-in transition-colors border dark:border-white/10">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center">
-                <MessageCircle className="w-6 h-6 text-indigo-600 mr-2" />
+                <MessageCircle className="w-6 h-6 text-electric-blue mr-2" />
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Welcome to KoreLynk!</h3>
               </div>
               <button 
@@ -144,7 +144,7 @@ const Home = () => {
               <Link 
                 to="/contact" 
                 onClick={() => setShowWelcomePopup(false)}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium"
+                className="bg-gradient-electric text-white px-4 py-2 rounded-lg hover:shadow-lg hover:shadow-electric-blue/30 transition-all text-sm font-medium"
               >
                 Get Started
               </Link>
@@ -209,7 +209,7 @@ const Home = () => {
         url="/"
       />
       {/* Hero Section */}
-      <section className="relative text-white overflow-hidden dark:bg-gray-900">
+      <section className="relative text-white overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src="/korelynk-workspace.png" 
@@ -220,7 +220,7 @@ const Home = () => {
             fetchpriority="high"
           />
         </div>
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 dark:bg-black/60 bg-midnight/75"></div>
         <div className="relative container mx-auto px-6 py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
@@ -239,14 +239,14 @@ const Home = () => {
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link
                   to={heroSlides[currentSlide].ctaLink}
-                  className="bg-white text-indigo-900 px-10 py-5 rounded-xl font-bold text-lg hover:bg-indigo-50 transition-all duration-300 hover-lift inline-flex items-center justify-center shadow-2xl"
+                  className="bg-white text-midnight px-10 py-5 rounded-xl font-bold text-lg hover:bg-electric-cyan hover:text-white transition-all duration-300 hover-lift inline-flex items-center justify-center shadow-2xl"
                 >
                   {heroSlides[currentSlide].cta}
                   <ArrowRight className="ml-3 w-6 h-6" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="border-3 border-white text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white hover:text-indigo-900 transition-all duration-300 backdrop-blur-sm"
+                  className="border-2 border-white text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white hover:text-midnight transition-all duration-300 backdrop-blur-sm"
                 >
                   Get Free Quote
                 </Link>
@@ -285,20 +285,20 @@ const Home = () => {
       <TrustedBy />
 
       {/* Services Section */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
+      <section className="py-20 bg-white dark:bg-midnight transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Our Services
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               We offer comprehensive digital solutions tailored to your business needs
             </p>
           </div>
           
           {loading ? (
             <div className="flex justify-center items-center h-32">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-blue"></div>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -317,7 +317,7 @@ const Home = () => {
                 return (
                   <div
                     key={service.id}
-                    className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift overflow-hidden transition-colors"
+                    className="bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl shadow-lg dark:shadow-black/50 hover-lift overflow-hidden transition-colors"
                   >
                     <div className="h-48 overflow-hidden">
                       <img
@@ -329,7 +329,7 @@ const Home = () => {
                       />
                     </div>
                     <div className="p-6 text-center">
-                      <div className="text-indigo-600 mb-4 flex justify-center">
+                      <div className="text-electric-blue mb-4 flex justify-center">
                         {getServiceIcon(service.title)}
                       </div>
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
@@ -348,25 +348,25 @@ const Home = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
+      <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Featured Projects
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               Some of our recent work that we're proud of
             </p>
           </div>
           
           {loading ? (
             <div className="flex justify-center items-center h-32">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-blue"></div>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredProjects.length > 0 ? featuredProjects.map((project) => (
-                <div key={project._id} className="group hover-lift bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 overflow-hidden transition-colors">
+                <div key={project._id} className="group hover-lift bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl shadow-lg dark:shadow-black/50 overflow-hidden transition-colors">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
@@ -405,12 +405,12 @@ const Home = () => {
                     <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description.substring(0, 100)}...</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.technologies.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">{tech}</span>
+                        <span key={idx} className="bg-electric-blue/10 text-electric-blue dark:text-electric-cyan px-3 py-1 rounded-full text-sm font-medium">{tech}</span>
                       ))}
                     </div>
                     <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
                       <span>Role: Full-Stack Developer</span>
-                      <span className="text-indigo-600 dark:text-indigo-400 font-medium">Featured Project</span>
+                      <span className="text-electric-blue dark:text-electric-cyan font-medium">Featured Project</span>
                     </div>
                   </div>
                 </div>
@@ -426,14 +426,14 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/portfolio"
-                className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center justify-center"
+                className="bg-gradient-electric text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/40 transition-all duration-300 inline-flex items-center justify-center"
               >
                 View All Projects
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <Link
                 to="/coding-demo"
-                className="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 inline-flex items-center justify-center"
+                className="bg-electric-violet text-white px-8 py-4 rounded-lg font-semibold hover:bg-electric-violet/80 transition-all duration-300 inline-flex items-center justify-center"
               >
                 Watch Live Demo
                 <Code className="ml-2 w-5 h-5" />
@@ -444,13 +444,13 @@ const Home = () => {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="py-16 bg-white dark:bg-gray-900 transition-colors">
+      <section className="py-16 bg-white dark:bg-midnight transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Our Technology Stack
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               We use cutting-edge technologies to build scalable solutions
             </p>
           </div>
@@ -519,7 +519,7 @@ const Home = () => {
               }
             ].map((tech, index) => (
               <div key={index} className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 mb-3 group-hover:bg-gray-100 dark:group-hover:bg-gray-700 transition-colors">
+                <div className="bg-gray-50 dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl p-4 mb-3 group-hover:bg-gray-100 dark:group-hover:bg-midnight-100 transition-colors">
                   <img 
                     src={tech.logo} 
                     alt={`${tech.name} logo`}
@@ -535,7 +535,7 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-indigo-600 text-white">
+      <section className="py-20 bg-gradient-electric text-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -543,7 +543,7 @@ const Home = () => {
                 <div className="text-4xl lg:text-6xl font-bold mb-2">
                   {stat.number}
                 </div>
-                <div className="text-indigo-200 text-lg">
+                <div className="text-white/70 text-lg">
                   {stat.label}
                 </div>
               </div>
@@ -553,13 +553,13 @@ const Home = () => {
       </section>
 
       {/* Development Process Demo */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
+      <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               How We Build Your Vision
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               From concept to deployment, see our development process in action
             </p>
           </div>
@@ -609,7 +609,7 @@ const Home = () => {
             <div className="order-1 lg:order-2">
               <div className="relative">
                 {/* Main Developer */}
-                <div className="bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl p-8 mb-6">
+                <div className="bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-electric-blue/10 dark:to-electric-violet/10 dark:border dark:border-white/10 rounded-2xl p-8 mb-6">
                   <div className="flex items-center mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
                       <Code className="w-8 h-8 text-white" />
@@ -619,8 +619,8 @@ const Home = () => {
                       <p className="text-indigo-600">Architecting your solution</p>
                     </div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <div className="flex items-center text-sm text-gray-600">
+                  <div className="bg-white dark:bg-midnight-50 rounded-lg p-4 shadow-sm">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
                       Writing clean, scalable code...
                     </div>
@@ -628,7 +628,7 @@ const Home = () => {
                 </div>
 
                 {/* UI/UX Designer */}
-                <div className="bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl p-8 mb-6">
+                <div className="bg-gradient-to-br from-pink-100 to-rose-100 dark:from-electric-violet/10 dark:to-pink-900/20 dark:border dark:border-white/10 rounded-2xl p-8 mb-6">
                   <div className="flex items-center mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mr-4">
                       <Smartphone className="w-8 h-8 text-white" />
@@ -638,8 +638,8 @@ const Home = () => {
                       <p className="text-pink-600">Crafting user experience</p>
                     </div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <div className="flex items-center text-sm text-gray-600">
+                  <div className="bg-white dark:bg-midnight-50 rounded-lg p-4 shadow-sm">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-2 h-2 bg-pink-400 rounded-full mr-2 animate-pulse"></div>
                       Designing intuitive interfaces...
                     </div>
@@ -647,7 +647,7 @@ const Home = () => {
                 </div>
 
                 {/* DevOps Engineer */}
-                <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl p-8">
+                <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-electric-cyan/10 dark:to-green-900/20 dark:border dark:border-white/10 rounded-2xl p-8">
                   <div className="flex items-center mb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mr-4">
                       <Cloud className="w-8 h-8 text-white" />
@@ -657,8 +657,8 @@ const Home = () => {
                       <p className="text-green-600">Deploying to production</p>
                     </div>
                   </div>
-                  <div className="bg-white rounded-lg p-4 shadow-sm">
-                    <div className="flex items-center text-sm text-gray-600">
+                  <div className="bg-white dark:bg-midnight-50 rounded-lg p-4 shadow-sm">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                       <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
                       Optimizing performance...
                     </div>
@@ -676,35 +676,35 @@ const Home = () => {
           {/* Process Steps */}
           <div className="mt-16 grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-indigo-600">1</span>
+              <div className="w-16 h-16 bg-electric-blue/10 dark:bg-electric-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-electric-blue">1</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Planning</h3>
-              <p className="text-gray-600 dark:text-gray-300">We analyze your requirements and create a detailed roadmap</p>
+              <p className="text-gray-600 dark:text-gray-400">We analyze your requirements and create a detailed roadmap</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-purple-600">2</span>
+              <div className="w-16 h-16 bg-electric-violet/10 dark:bg-electric-violet/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-electric-violet">2</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Design</h3>
-              <p className="text-gray-600 dark:text-gray-300">Our designers create beautiful, user-friendly interfaces</p>
+              <p className="text-gray-600 dark:text-gray-400">Our designers create beautiful, user-friendly interfaces</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-green-600">3</span>
+              <div className="w-16 h-16 bg-electric-cyan/10 dark:bg-electric-cyan/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-electric-cyan">3</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Development</h3>
-              <p className="text-gray-600 dark:text-gray-300">We build robust, scalable solutions using modern technologies</p>
+              <p className="text-gray-600 dark:text-gray-400">We build robust, scalable solutions using modern technologies</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-orange-600">4</span>
+              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-orange-500">4</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Launch</h3>
-              <p className="text-gray-600 dark:text-gray-300">We deploy your project and provide ongoing support</p>
+              <p className="text-gray-600 dark:text-gray-400">We deploy your project and provide ongoing support</p>
             </div>
           </div>
         </div>
@@ -748,13 +748,13 @@ const Home = () => {
       </section>
 
       {/* Latest Blog Posts */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
+      <section className="py-20 bg-white dark:bg-midnight transition-colors">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               Latest from Our Blog
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               Stay updated with the latest tech insights and tutorials
             </p>
           </div>
@@ -764,7 +764,7 @@ const Home = () => {
           <div className="text-center mt-12">
             <Link
               to="/blog"
-              className="bg-indigo-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-indigo-700 transition-all duration-300 inline-flex items-center"
+              className="bg-gradient-electric text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/40 transition-all duration-300 inline-flex items-center"
             >
               Read All Articles
               <ArrowRight className="ml-2 w-5 h-5" />

@@ -1,30 +1,31 @@
 import { useEffect } from 'react';
 import { useSettings } from '../context/SettingsContext';
+import { useTheme } from '../context/ThemeContext';
 
 const DynamicFavicon = () => {
   const { settings } = useSettings();
+  const { isDark } = useTheme();
 
   useEffect(() => {
-    if (settings.favicon) {
-      // Remove existing favicon
-      const existingFavicon = document.querySelector('link[rel="icon"]');
-      if (existingFavicon) {
-        existingFavicon.remove();
-      }
+    const iconUrl = isDark
+      ? (settings.darkIcon || settings.favicon || settings.logo)
+      : (settings.favicon || settings.logo || settings.darkIcon);
 
-      // Add new favicon
-      const link = document.createElement('link');
-      link.rel = 'icon';
+    if (iconUrl) {
+      let link = document.querySelector('link[rel="icon"]');
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
       link.type = 'image/x-icon';
-      link.href = settings.favicon;
-      document.head.appendChild(link);
+      link.href = iconUrl;
     }
 
-    // Update title if available
     if (settings.siteName) {
       document.title = settings.siteName;
     }
-  }, [settings.favicon, settings.siteName]);
+  }, [settings.favicon, settings.darkIcon, settings.siteName, isDark]);
 
   return null;
 };

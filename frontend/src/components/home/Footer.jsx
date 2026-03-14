@@ -4,10 +4,15 @@ import { Code2, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Github, Instag
 import { useSettings } from '../../context/SettingsContext';
 import { toast } from 'react-toastify';
 import axios from '../../api/axios';
+import { useTheme } from '../../context/ThemeContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { settings } = useSettings();
+  const { isDark } = useTheme();
+  const logoSrc = isDark
+    ? (settings.darkIcon || settings.favicon || settings.logo)
+    : (settings.favicon || settings.logo || settings.darkIcon);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
 
@@ -46,30 +51,30 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-midnight border-t border-white/10">
+    <footer className="border-t border-gray-200 dark:bg-midnight bg-gray-50 dark:border-white/10">
       {/* Newsletter Section */}
-      <div className="border-b border-white/10">
-        <div className="container mx-auto px-6 py-16">
+      <div className="border-b border-gray-200 dark:border-b dark:border-white/10">
+        <div className="container px-6 py-16 mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <h3 className="text-3xl md:text-4xl font-bold font-display text-white mb-4">
+            <h3 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl font-display dark:text-white">
               Stay in the Loop
             </h3>
-            <p className="text-xl text-gray-400 mb-8">
+            <p className="mb-8 text-xl text-gray-600 dark:text-gray-400">
               Subscribe to our newsletter for the latest updates, tutorials, and tech insights
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col max-w-xl gap-4 mx-auto sm:flex-row">
               <input
                 type="email"
                 placeholder="Enter your email"
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 required
-                className="flex-1 px-6 py-4 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-electric-cyan focus:border-transparent transition-all"
+                className="flex-1 px-6 py-4 text-gray-900 placeholder-gray-400 transition-all bg-white border border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10 dark:text-white focus:ring-2 focus:ring-electric-cyan focus:border-transparent"
               />
               <button 
                 type="submit"
                 disabled={isSubscribing}
-                className="px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all duration-300 disabled:opacity-50 inline-flex items-center justify-center"
+                className="inline-flex items-center justify-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50 disabled:opacity-50"
               >
                 {isSubscribing ? 'Subscribing...' : 'Subscribe'}
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -80,21 +85,21 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div className="container px-6 py-16 mx-auto">
+        <div className="grid gap-12 mb-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-6 space-x-3">
-              {settings.favicon ? (
+              {logoSrc ? (
                 <>
-                  <img 
-                    src={settings.favicon} 
-                    alt={settings.siteName || 'KoreLynk Tech'} 
-                    className="w-10 h-10 object-contain" 
+                  <img
+                    src={logoSrc}
+                    alt={settings.siteName || 'InnTechLabs'}
+                    className="object-contain w-10 h-10"
                   />
                   <div className="flex flex-col">
-                    <span className="text-xl font-bold font-display text-white">{settings.siteName?.split(' ')[0] || 'KoreLynk'}</span>
-                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
+                    <span className="text-xl font-bold text-gray-900 font-display dark:text-white">{settings.siteName?.split(' ')[0] || 'InnTechLabs'}</span>
+                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || ''}</span>
                   </div>
                 </>
               ) : (
@@ -103,38 +108,38 @@ const Footer = () => {
                     <Code2 className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xl font-bold font-display text-white">{settings.siteName?.split(' ')[0] || 'KoreLynk'}</span>
-                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || 'Tech Group'}</span>
+                    <span className="text-xl font-bold text-gray-900 font-display dark:text-white">{settings.siteName?.split(' ')[0] || 'InnTechLabs'}</span>
+                    <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || ''}</span>
                   </div>
                 </>
               )}
             </div>
-            <p className="text-gray-400 leading-relaxed mb-6">
+            <p className="mb-6 leading-relaxed text-gray-600 dark:text-gray-400">
               Building the future of digital innovation through education, tools, and infrastructure.
             </p>
             <div className="flex space-x-4">
               {settings.socialLinks?.facebook && (
-                <a href={settings.socialLinks.facebook} className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                <a href={settings.socialLinks.facebook} className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-gray-100 border border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10 dark:text-gray-400 hover:text-white hover:bg-electric-blue hover:border-electric-blue">
                   <Facebook className="w-5 h-5" />
                 </a>
               )}
               {settings.socialLinks?.twitter && (
-                <a href={settings.socialLinks.twitter} className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                <a href={settings.socialLinks.twitter} className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-gray-100 border border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10 dark:text-gray-400 hover:text-white hover:bg-electric-blue hover:border-electric-blue">
                   <Twitter className="w-5 h-5" />
                 </a>
               )}
               {settings.socialLinks?.linkedin && (
-                <a href={settings.socialLinks.linkedin} className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                <a href={settings.socialLinks.linkedin} className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-gray-100 border border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10 dark:text-gray-400 hover:text-white hover:bg-electric-blue hover:border-electric-blue">
                   <Linkedin className="w-5 h-5" />
                 </a>
               )}
               {settings.socialLinks?.github && (
-                <a href={settings.socialLinks.github} className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                <a href={settings.socialLinks.github} className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-gray-100 border border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10 dark:text-gray-400 hover:text-white hover:bg-electric-blue hover:border-electric-blue">
                   <Github className="w-5 h-5" />
                 </a>
               )}
               {settings.socialLinks?.instagram && (
-                <a href={settings.socialLinks.instagram} className="w-10 h-10 bg-white/5 border border-white/10 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all">
+                <a href={settings.socialLinks.instagram} className="flex items-center justify-center w-10 h-10 text-gray-500 transition-all bg-gray-100 border border-gray-200 rounded-lg dark:bg-white/5 dark:border-white/10 dark:text-gray-400 hover:text-white hover:bg-electric-blue hover:border-electric-blue">
                   <Instagram className="w-5 h-5" />
                 </a>
               )}
@@ -143,13 +148,13 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold font-display text-white mb-6">Quick Links</h3>
+            <h3 className="mb-6 text-lg font-bold text-gray-900 font-display dark:text-white">Quick Links</h3>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link 
                     to={link.href} 
-                    className="text-gray-400 hover:text-electric-cyan transition-colors inline-flex items-center group"
+                    className="inline-flex items-center text-gray-400 transition-colors hover:text-electric-cyan group"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-electric-cyan transition-all mr-0 group-hover:mr-2"></span>
                     {link.name}
@@ -161,13 +166,13 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="text-lg font-bold font-display text-white mb-6">Resources</h3>
+            <h3 className="mb-6 text-lg font-bold text-gray-900 font-display dark:text-white">Resources</h3>
             <ul className="space-y-3">
               {resources.map((link, index) => (
                 <li key={index}>
                   <Link 
                     to={link.href} 
-                    className="text-gray-400 hover:text-electric-cyan transition-colors inline-flex items-center group"
+                    className="inline-flex items-center text-gray-400 transition-colors hover:text-electric-cyan group"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-electric-cyan transition-all mr-0 group-hover:mr-2"></span>
                     {link.name}
@@ -179,35 +184,35 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-bold font-display text-white mb-6">Contact</h3>
+            <h3 className="mb-6 text-lg font-bold text-gray-900 font-display dark:text-white">Contact</h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <Mail className="w-5 h-5 text-electric-cyan mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">{settings.contactEmail}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{settings.contactEmail}</span>
               </div>
               <div className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-electric-cyan mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">{settings.contactPhone}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{settings.contactPhone}</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-electric-cyan mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">{settings.address}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{settings.address}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
+        <div className="pt-8 border-t border-gray-200 dark:border-white/10">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               © {currentYear} {settings.siteName}. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link to="/privacy" className="text-gray-400 hover:text-electric-cyan transition-colors">
+              <Link to="/privacy" className="text-gray-400 transition-colors hover:text-electric-cyan">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-gray-400 hover:text-electric-cyan transition-colors">
+              <Link to="/terms" className="text-gray-400 transition-colors hover:text-electric-cyan">
                 Terms of Service
               </Link>
             </div>

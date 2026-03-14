@@ -22,7 +22,9 @@ const Services = React.lazy(() => import('./pages/Services'));
 const Portfolio = React.lazy(() => import('./pages/Portfolio'));
 const About = React.lazy(() => import('./pages/About'));
 const Contact = React.lazy(() => import('./pages/Contact'));
-const Feedback = React.lazy(() => import('./components/home/Feedback'));
+const Feedback = React.lazy(() => import('./pages/Feedback'));
+const Privacy = React.lazy(() => import('./pages/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms'));
 const Blog = React.lazy(() => import('./pages/Blog'));
 const BlogDetail = React.lazy(() => import('./pages/BlogDetail'));
 const SearchResults = React.lazy(() => import('./pages/SearchResults'));
@@ -157,6 +159,8 @@ function App() {
                     <Route path="ai" element={<AI />} />
                     <Route path="courses/:id" element={<CourseDetail />} />
                     <Route path="careers" element={<Careers />} />
+                    <Route path="privacy" element={<Privacy />} />
+                    <Route path="terms" element={<Terms />} />
                   </Route>
                   <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
           
