@@ -118,13 +118,13 @@ const AdminBlogForm = () => {
   };
 
   return (
-    <AdminLayout>
+    <div>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <button
               onClick={() => navigate('/admin/blog')}
-              className="mr-4 p-2 text-gray-600 hover:text-gray-900"
+              className="p-2 mr-4 text-gray-600 hover:text-gray-900"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
@@ -140,13 +140,13 @@ const AdminBlogForm = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid gap-6 lg:grid-cols-3">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="space-y-6 lg:col-span-2">
+              <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-700">Title</label>
                     <input
                       type="text"
                       value={form.title}
@@ -157,17 +157,17 @@ const AdminBlogForm = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Excerpt</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-700">Excerpt</label>
                     <textarea
                       value={form.excerpt}
                       onChange={(e) => setForm({...form, excerpt: e.target.value})}
-                      className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent h-20"
+                      className="w-full h-20 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                       placeholder="Brief description of the post..."
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-700">Content</label>
                     <textarea
                       value={form.content}
                       onChange={(e) => setForm({...form, content: e.target.value})}
@@ -182,11 +182,11 @@ const AdminBlogForm = () => {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Publish */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Publish</h3>
+              <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+                <h3 className="mb-4 text-lg font-semibold text-gray-900">Publish</h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <label className="block mb-2 text-sm font-medium text-gray-700">Status</label>
                     <select
                       value={form.status}
                       onChange={(e) => setForm({...form, status: e.target.value})}
@@ -201,7 +201,7 @@ const AdminBlogForm = () => {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50 flex items-center justify-center"
+                    className="flex items-center justify-center w-full px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
                   >
                     <Save className="w-4 h-4 mr-2" />
                     {loading ? 'Saving...' : (isEdit ? 'Update' : 'Create')} Post
@@ -210,8 +210,8 @@ const AdminBlogForm = () => {
               </div>
 
               {/* Category */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Category</h3>
+              <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+                <h3 className="mb-4 text-lg font-semibold text-gray-900">Category</h3>
                 <select
                   value={form.category}
                   onChange={(e) => setForm({...form, category: e.target.value})}
@@ -227,11 +227,11 @@ const AdminBlogForm = () => {
               </div>
 
               {/* Tags */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
+              <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+                <h3 className="mb-4 text-lg font-semibold text-gray-900">Tags</h3>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {form.tags.split(',').filter(tag => tag.trim()).map((tag, index) => (
-                    <span key={index} className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm flex items-center">
+                    <span key={index} className="flex items-center px-3 py-1 text-sm text-indigo-800 bg-indigo-100 rounded-full">
                       {tag.trim()}
                       <button
                         type="button"
@@ -264,27 +264,27 @@ const AdminBlogForm = () => {
               </div>
 
               {/* Featured Image */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Featured Image</h3>
+              <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+                <h3 className="mb-4 text-lg font-semibold text-gray-900">Featured Image</h3>
                 <div className="space-y-4">
                   {form.featuredImage && (
                     <img
                       src={form.featuredImage}
                       alt="Featured"
-                      className="w-full h-32 object-cover rounded-lg"
+                      className="object-cover w-full h-32 rounded-lg"
                     />
                   )}
                   
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+                  <div className="p-4 text-center border-2 border-gray-300 border-dashed rounded-lg">
                     {imageUploading ? (
                       <div className="flex flex-col items-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mb-2"></div>
+                        <div className="w-8 h-8 mb-2 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
                         <p className="text-sm text-gray-600">Uploading...</p>
                       </div>
                     ) : (
                       <>
-                        <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600 mb-2">Upload featured image</p>
+                        <Upload className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                        <p className="mb-2 text-sm text-gray-600">Upload featured image</p>
                         <input
                           type="file"
                           accept="image/*"
@@ -300,7 +300,7 @@ const AdminBlogForm = () => {
           </div>
         </form>
       </div>
-    </AdminLayout>
+    </div>
   );
 };
 

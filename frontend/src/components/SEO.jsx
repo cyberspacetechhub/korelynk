@@ -44,14 +44,20 @@ const SEO = ({
     'diaspora tech services'
   ].join(', ');
   
-  const seoImage = image ? 
-    (image.startsWith('http') ? image : `${siteUrl}${image}`) : 
+  const seoImage = image ?
+    (image.startsWith('http') ? image : `${siteUrl}${image}`) :
     (settings.logo || defaultImage);
-  
-  // Ensure image has proper dimensions for social sharing
-  const processedImage = seoImage.includes('cloudinary.com') && !seoImage.includes('w_') ? 
-    seoImage.replace('/upload/', '/upload/w_1200,h_630,c_fill/') : 
-    seoImage;
+
+  // For Cloudinary: resize to 1200x630 using c_pad (no cropping) with white bg
+  // For non-Cloudinary: use as-is — must be absolute https URL
+  const processedImage = seoImage.includes('cloudinary.com')
+    ? seoImage.replace('/upload/', '/upload/w_1200,h_630,c_pad,b_white,f_jpg,q_auto/')
+    : seoImage;
+
+  // Detect image type from URL for og:image:type
+  const imageType = processedImage.includes('.png') ? 'image/png'
+    : processedImage.includes('.gif') ? 'image/gif'
+    : 'image/jpeg';
   const seoUrl = url ? `${siteUrl}${url}` : siteUrl;
 
   return (
@@ -76,9 +82,11 @@ const SEO = ({
       <meta property="og:title" content={seoTitle} />
       <meta property="og:description" content={seoDescription} />
       <meta property="og:image" content={processedImage} />
+      <meta property="og:image:secure_url" content={processedImage} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:type" content={imageType} />
+      <meta property="og:image:alt" content={seoTitle} />
       <meta property="og:url" content={seoUrl} />
       <meta property="og:site_name" content={settings.siteName} />
       <meta property="og:locale" content="en_US" />
@@ -88,6 +96,7 @@ const SEO = ({
       <meta name="twitter:title" content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={processedImage} />
+      <meta name="twitter:image:alt" content={seoTitle} />
       <meta name="twitter:site" content="@inntechlabs" />
       <meta name="twitter:creator" content="@inntechlabs" />
       
