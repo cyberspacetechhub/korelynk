@@ -42,7 +42,7 @@ const Home = () => {
   const platformPillars = [
     {
       icon: <BookOpen className="w-8 h-8 text-white" />,
-      title: 'Korelynk Academy',
+      title: 'InnTechLabs Academy',
       description: 'Free programming tutorials similar to W3Schools',
       link: '/academy',
       gradient: 'from-blue-500 to-cyan-500',
@@ -50,7 +50,7 @@ const Home = () => {
     },
     {
       icon: <Briefcase className="w-8 h-8 text-white" />,
-      title: 'Korelynk Portfolio',
+      title: 'InnTechLabs Portfolio',
       description: 'Founder projects and professional portfolio',
       link: '/portfolio',
       gradient: 'from-purple-500 to-pink-500',
@@ -58,7 +58,7 @@ const Home = () => {
     },
     {
       icon: <ShoppingBag className="w-8 h-8 text-white" />,
-      title: 'Korelynk Store',
+      title: 'InnTechLabs Store',
       description: 'Online digital store launching soon',
       link: '/store',
       gradient: 'from-orange-500 to-red-500',
@@ -66,7 +66,7 @@ const Home = () => {
     },
     {
       icon: <Sparkles className="w-8 h-8 text-white" />,
-      title: 'Korelynk AI',
+      title: 'InnTechLabs AI',
       description: 'Future AI tools and automation platform',
       link: '/ai',
       gradient: 'from-indigo-500 to-purple-500',
@@ -86,7 +86,7 @@ const Home = () => {
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO
         title="Building the future of digital innovation"
-        description="Korelynk Tech Group builds tools, education, and infrastructure that empower developers, businesses, and creators."
+        description="InnTechLabs builds tools, education, and infrastructure that empower developers, businesses, and creators."
       />
 
       {/* Hero Section */}
@@ -114,7 +114,7 @@ const Home = () => {
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-            Korelynk Tech Group builds tools, education, and infrastructure that empower developers, businesses, and creators.
+            InnTechLabs builds tools, education, and infrastructure that empower developers, businesses, and creators.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -383,7 +383,7 @@ const Home = () => {
             </h2>
 
             <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
-              Korelynk's long-term mission is to build technology that bridges the gap between businesses and developers,
+              InnTechLabs's long-term mission is to build technology that bridges the gap between businesses and developers,
               creating an ecosystem where innovation thrives. We're building the infrastructure for the next generation
               of digital solutions across Africa and beyond.
             </p>
@@ -429,7 +429,7 @@ const Home = () => {
             Ready to build the future?
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-            Join thousands of developers and businesses already using Korelynk
+            Join thousands of developers and businesses already using InnTechLabs
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link

@@ -61,7 +61,7 @@ const Contact = () => {
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO
         title="Contact Us - Get In Touch"
-        description="Have a project in mind? Contact Korelynk Tech to discuss your requirements and get a free consultation."
+        description="Have a project in mind? Contact InnTechLabs to discuss your requirements and get a free consultation."
       />
 
       {/* Hero Section */}

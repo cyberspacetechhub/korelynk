@@ -14,15 +14,15 @@ const SEO = ({
 }) => {
   const { settings } = useSettings();
   
-  const siteUrl = 'https://korelynk.vercel.app';
-  const defaultImage = `${siteUrl}/kore-lynk.png`;
+  const siteUrl = 'https://inntechlabs.vercel.app';
+  const defaultImage = `${siteUrl}/inntechlabs.png`;
   
   const seoTitle = title 
     ? `${title} | ${settings.siteName}` 
     : settings.seoSettings?.metaTitle || `${settings.siteName} - Professional Web & Mobile Development`;
     
   const seoDescription = description || settings.seoSettings?.metaDescription || 
-    'KoreLynk Tech provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Transform your business with cutting-edge technology and remote development services.';
+    'InnTechLabs provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Transform your business with cutting-edge technology.';
     
   const seoKeywords = [
     ...keywords,
@@ -88,8 +88,8 @@ const SEO = ({
       <meta name="twitter:title" content={seoTitle} />
       <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={processedImage} />
-      <meta name="twitter:site" content="@korelynk" />
-      <meta name="twitter:creator" content="@korelynk" />
+      <meta name="twitter:site" content="@inntechlabs" />
+      <meta name="twitter:creator" content="@inntechlabs" />
       
       {/* Article specific tags */}
       {article && (

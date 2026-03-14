@@ -20,8 +20,8 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO
-        title="About Us - Korelynk Tech Group"
-        description="Learn about Korelynk Tech Group's mission to build the future of digital innovation through education, tools, and infrastructure."
+        title="About Us - InnTechLabs"
+        description="Learn about InnTechLabs's mission to build the future of digital innovation through education, tools, and infrastructure."
       />
 
       {/* Hero */}
@@ -29,7 +29,7 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
         <div className="relative container mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-bold font-display text-white mb-6">
-            About Korelynk Tech
+            About InnTechLabs
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Building the future of digital innovation through education, tools, and infrastructure
@@ -45,7 +45,7 @@ const About = () => {
               <h2 className="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-6">Our Story</h2>
               <div className="space-y-4 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 <p>
-                  Korelynk Tech Group was founded with a vision to bridge the gap between technology and innovation across Africa and beyond.
+                  InnTechLabs was founded with a vision to bridge the gap between technology and innovation across Africa and beyond.
                   What started as a passion project has evolved into a comprehensive technology ecosystem serving developers, businesses, and creators.
                 </p>
                 <p>
@@ -53,7 +53,7 @@ const About = () => {
                   Our mission is to empower the next generation of developers while providing businesses with cutting-edge digital solutions.
                 </p>
                 <p>
-                  Today, Korelynk Tech Group stands as a testament to what's possible when passion meets purpose. We're not just building websites
+                  Today, InnTechLabs stands as a testament to what's possible when passion meets purpose. We're not just building websites
                   and applications—we're building the infrastructure for Africa's digital future.
                 </p>
               </div>

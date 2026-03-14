@@ -53,8 +53,8 @@ const sections = [
     title: '7. Contact Us',
     content: `If you have any questions about this Privacy Policy, please contact us at:
 
-Email: korelynk@gmail.com
-Address: Lagos, Nigeria`
+Email: inntechlabs@gmail.com
+Address: Abakaliki, Ebonyi State, Nigeria`
   }
 ];
 
@@ -62,8 +62,8 @@ const Privacy = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO
-        title="Privacy Policy - Korelynk Tech"
-        description="Learn how Korelynk Tech collects, uses, and protects your personal information."
+        title="Privacy Policy - InnTechLabs"
+        description="Learn how InnTechLabs collects, uses, and protects your personal information."
       />
 
       {/* Hero */}
@@ -83,7 +83,7 @@ const Privacy = () => {
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 md:p-12 mb-8">
             <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-              At Korelynk Tech Group, we are committed to protecting your privacy. This Privacy Policy explains how we collect,
+              At InnTechLabs, we are committed to protecting your privacy. This Privacy Policy explains how we collect,
               use, disclose, and safeguard your information when you visit our website or use our services.
             </p>
           </div>

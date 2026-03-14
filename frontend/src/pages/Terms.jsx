@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 const sections = [
   {
     title: '1. Acceptance of Terms',
-    content: `By accessing and using Korelynk Tech's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use our services.`
+    content: `By accessing and using InnTechLabs's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use our services.`
   },
   {
     title: '2. Use of Services',
@@ -19,7 +19,7 @@ const sections = [
   },
   {
     title: '3. Intellectual Property',
-    content: `All content on this website, including but not limited to text, graphics, logos, images, and software, is the property of Korelynk Tech Group and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.`
+    content: `All content on this website, including but not limited to text, graphics, logos, images, and software, is the property of InnTechLabs and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.`
   },
   {
     title: '4. User Accounts',
@@ -40,7 +40,7 @@ const sections = [
   },
   {
     title: '7. Limitation of Liability',
-    content: `To the maximum extent permitted by law, Korelynk Tech Group shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services.`
+    content: `To the maximum extent permitted by law, InnTechLabs shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services.`
   },
   {
     title: '8. Termination',
@@ -54,8 +54,8 @@ const sections = [
     title: '10. Contact Information',
     content: `For questions about these Terms of Service, please contact us at:
 
-Email: korelynk@gmail.com
-Address: Lagos, Nigeria`
+Email: inntechlabs@gmail.com
+Address: Abakaliki, Ebonyi State, Nigeria`
   }
 ];
 
@@ -63,8 +63,8 @@ const Terms = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO
-        title="Terms of Service - Korelynk Tech"
-        description="Read the Terms of Service for Korelynk Tech Group's website and services."
+        title="Terms of Service - InnTechLabs"
+        description="Read the Terms of Service for InnTechLabs's website and services."
       />
 
       {/* Hero */}
@@ -84,7 +84,7 @@ const Terms = () => {
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 md:p-12 mb-8">
             <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-              Please read these Terms of Service carefully before using Korelynk Tech Group's website and services.
+              Please read these Terms of Service carefully before using InnTechLabs's website and services.
               These terms govern your access to and use of our platform.
             </p>
           </div>

@@ -62,7 +62,7 @@ const Careers = () => {
     <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
       <SEO
         title="Careers - Join Our Tech Team"
-        description="Join KoreLynk Tech and build the future of technology. We're hiring web developers, mobile app developers, UI/UX designers, and digital marketing specialists globally with remote opportunities."
+        description="Join InnTechLabs and build the future of technology. We're hiring web developers, mobile app developers, UI/UX designers, and digital marketing specialists globally with remote opportunities."
         keywords={['tech jobs', 'web developer jobs', 'React developer careers', 'remote developer jobs']}
         url="/careers"
       />
@@ -151,7 +151,7 @@ const Careers = () => {
             let us know how you'd like to contribute to our team.
           </p>
           <a
-            href="mailto:careers@korelynk.vercel.app"
+            href="mailto:careers@inntechlabs.com"
             className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-2xl hover:shadow-electric-blue/50 transition-all"
           >
             Send Your Resume

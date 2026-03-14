@@ -1,10 +1,10 @@
 export const seoConfig = {
-  defaultTitle: 'KoreLynk Tech - Professional Web & Mobile Development Services',
-  titleTemplate: '%s | KoreLynk Tech',
-  defaultDescription: 'Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide for global clients and diaspora.',
-  siteUrl: 'https://korelynk.vercel.app',
+  defaultTitle: 'InnTechLabs - Professional Web & Mobile Development Services',
+  titleTemplate: '%s | InnTechLabs',
+  defaultDescription: 'Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide.',
+  siteUrl: 'https://inntechlabs.vercel.app',
   defaultImage: '/og-image.jpg',
-  twitterHandle: '@korelynk',
+  twitterHandle: '@inntechlabs',
   
   // Core keywords for the business
   coreKeywords: [
