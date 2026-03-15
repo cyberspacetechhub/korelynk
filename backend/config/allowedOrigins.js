@@ -1,8 +1,8 @@
 let allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:3700',
-    'https://inntechlabs.vercel.app',
-    'https://www.inntechlabs.vercel.app',
+    'https://inntechlab.vercel.app',
+    'https://www.inntechlab.vercel.app',
     'https://korelynk.onrender.com',
     'https://flyerforge-design.vercel.app'
 ]

@@ -34,22 +34,22 @@ const Feedback = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 transition-colors">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-16 transition-colors bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">We Value Your Feedback</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Help us improve our services by sharing your thoughts, suggestions, and experiences with InnTechLabs.
+        <div className="mb-12 text-center">
+          <h1 className="mb-6 text-4xl font-bold text-gray-900 md:text-5xl dark:text-white">We Value Your Feedback</h1>
+          <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300">
+            Help us improve our services by sharing your thoughts, suggestions, and experiences with InnTechLab.
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/50 p-8 md:p-12 transition-colors">
+        <div className="p-8 transition-colors bg-white shadow-lg dark:bg-gray-800 rounded-2xl dark:shadow-gray-900/50 md:p-12">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             {/* Personal Information */}
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid gap-6 md:grid-cols-3">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-700">
                   Name *
                 </label>
                 <input
@@ -67,7 +67,7 @@ const Feedback = () => {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
                   Email *
                 </label>
                 <input
@@ -91,14 +91,14 @@ const Feedback = () => {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-700">
                   Phone
                 </label>
                 <input
                   type="tel"
                   id="phone"
                   {...register('phone')}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-900"
+                  className="w-full px-4 py-3 text-gray-900 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   placeholder="Your phone number"
                 />
               </div>
@@ -106,7 +106,7 @@ const Feedback = () => {
 
             {/* Rating */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block mb-3 text-sm font-medium text-gray-700">
                 Overall Rating *
               </label>
               <div className="flex items-center space-x-2">
@@ -120,7 +120,7 @@ const Feedback = () => {
                     {star <= rating ? (
                       <Star className="w-8 h-8 text-yellow-400" />
                     ) : (
-                      <StarBorder className="w-8 h-8 text-gray-300 hover:text-yellow-400 transition-colors" />
+                      <StarBorder className="w-8 h-8 text-gray-300 transition-colors hover:text-yellow-400" />
                     )}
                   </button>
                 ))}
@@ -135,7 +135,7 @@ const Feedback = () => {
 
             {/* Subject */}
             <div>
-              <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="subject" className="block mb-2 text-sm font-medium text-gray-700">
                 Subject *
               </label>
               <input
@@ -154,7 +154,7 @@ const Feedback = () => {
 
             {/* Message */}
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-700">
                 Your Feedback
               </label>
               <textarea
@@ -176,7 +176,7 @@ const Feedback = () => {
               <button
                 type="submit"
                 disabled={feedbackMutation.isLoading}
-                className="bg-indigo-600 text-white py-3 px-8 rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-3 font-semibold text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {feedbackMutation.isLoading ? 'Submitting...' : 'Submit Feedback'}
               </button>
@@ -185,39 +185,39 @@ const Feedback = () => {
         </div>
 
         {/* Additional Information */}
-        <div className="mt-12 grid md:grid-cols-3 gap-8">
-          <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="grid gap-8 mt-12 md:grid-cols-3">
+          <div className="p-6 text-center bg-white shadow-lg rounded-xl">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full">
               <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Quick Response</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="mb-2 text-lg font-bold text-gray-900">Quick Response</h3>
+            <p className="text-sm text-gray-600">
               We typically respond to feedback within 24-48 hours.
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="p-6 text-center bg-white shadow-lg rounded-xl">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full">
               <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Privacy Protected</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="mb-2 text-lg font-bold text-gray-900">Privacy Protected</h3>
+            <p className="text-sm text-gray-600">
               Your feedback is confidential and used only for improvement.
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-6 text-center">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div className="p-6 text-center bg-white shadow-lg rounded-xl">
+            <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-full">
               <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Continuous Improvement</h3>
-            <p className="text-gray-600 text-sm">
+            <h3 className="mb-2 text-lg font-bold text-gray-900">Continuous Improvement</h3>
+            <p className="text-sm text-gray-600">
               Your input directly influences our services and development process.
             </p>
           </div>

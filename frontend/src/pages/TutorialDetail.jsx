@@ -31,7 +31,7 @@ const TutorialDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-midnight flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen bg-midnight">
         <Loader2 className="w-12 h-12 text-electric-cyan animate-spin" />
       </div>
     );
@@ -39,12 +39,12 @@ const TutorialDetail = () => {
 
   if (error || !tutorial) {
     return (
-      <div className="min-h-screen bg-midnight flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen bg-midnight">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Tutorial Not Found</h1>
+          <h1 className="mb-4 text-2xl font-bold text-white">Tutorial Not Found</h1>
           <Link
             to="/academy"
-            className="text-electric-cyan hover:text-electric-blue transition-colors"
+            className="transition-colors text-electric-cyan hover:text-electric-blue"
           >
             Back to Academy
           </Link>
@@ -62,16 +62,16 @@ const TutorialDetail = () => {
   return (
     <div className="min-h-screen bg-midnight">
       <SEO 
-        title={`${tutorial.title} - InnTechLabs Academy`}
+        title={`${tutorial.title} - InnTechLab Academy`}
         description={tutorial.description}
       />
 
       {/* Header */}
       <section className="py-12 border-b border-white/10">
-        <div className="container mx-auto px-6">
+        <div className="container px-6 mx-auto">
           <button
             onClick={() => navigate('/academy')}
-            className="flex items-center text-gray-400 hover:text-white transition-colors mb-6"
+            className="flex items-center mb-6 text-gray-400 transition-colors hover:text-white"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Academy
@@ -79,7 +79,7 @@ const TutorialDetail = () => {
 
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 bg-white/10 rounded-full text-sm text-electric-cyan">
+              <span className="px-3 py-1 text-sm rounded-full bg-white/10 text-electric-cyan">
                 {tutorial.category.toUpperCase()}
               </span>
               <span className={`text-sm font-medium ${difficultyColors[tutorial.difficulty]}`}>
@@ -87,11 +87,11 @@ const TutorialDetail = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold font-display text-white mb-4">
+            <h1 className="mb-4 text-4xl font-bold text-white md:text-5xl font-display">
               {tutorial.title}
             </h1>
 
-            <p className="text-xl text-gray-300 mb-6">
+            <p className="mb-6 text-xl text-gray-300">
               {tutorial.description}
             </p>
 
@@ -115,13 +115,13 @@ const TutorialDetail = () => {
 
       {/* Content */}
       <section className="py-12">
-        <div className="container mx-auto px-6">
+        <div className="container px-6 mx-auto">
           <div className="max-w-4xl mx-auto">
             {/* Tutorial Content */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 mb-8">
-              <h2 className="text-2xl font-bold font-display text-white mb-6">What You'll Learn</h2>
+            <div className="p-8 mb-8 border bg-white/5 backdrop-blur-sm border-white/10 rounded-2xl">
+              <h2 className="mb-6 text-2xl font-bold text-white font-display">What You'll Learn</h2>
               <div className="prose prose-invert max-w-none">
-                <p className="text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+                <p className="text-lg leading-relaxed text-gray-300 whitespace-pre-line">
                   {tutorial.content}
                 </p>
               </div>
@@ -129,19 +129,19 @@ const TutorialDetail = () => {
 
             {/* Code Example */}
             {tutorial.codeExample && (
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden mb-8">
+              <div className="mb-8 overflow-hidden border bg-white/5 backdrop-blur-sm border-white/10 rounded-2xl">
                 <div className="flex items-center justify-between p-6 border-b border-white/10">
-                  <h3 className="text-xl font-bold font-display text-white">Code Example</h3>
+                  <h3 className="text-xl font-bold text-white font-display">Code Example</h3>
                   <button
                     onClick={() => navigator.clipboard.writeText(tutorial.codeExample)}
-                    className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm transition-colors"
+                    className="px-4 py-2 text-sm text-white transition-colors rounded-lg bg-white/10 hover:bg-white/20"
                   >
                     Copy Code
                   </button>
                 </div>
                 <div className="p-6 bg-black/50">
                   <pre className="overflow-x-auto">
-                    <code className="text-sm font-mono text-gray-300">
+                    <code className="font-mono text-sm text-gray-300">
                       {tutorial.codeExample}
                     </code>
                   </pre>
@@ -150,10 +150,10 @@ const TutorialDetail = () => {
             )}
 
             {/* Navigation */}
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <Link
                 to={`/academy?category=${category}`}
-                className="flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+                className="flex items-center px-6 py-3 text-white transition-colors rounded-lg bg-white/10 hover:bg-white/20"
               >
                 <ArrowLeft className="w-5 h-5 mr-2" />
                 All {category.toUpperCase()} Lessons
@@ -161,7 +161,7 @@ const TutorialDetail = () => {
 
               <Link
                 to="/academy"
-                className="flex items-center px-6 py-3 bg-gradient-electric text-white rounded-lg hover:shadow-lg hover:shadow-electric-blue/50 transition-all"
+                className="flex items-center px-6 py-3 text-white transition-all rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
               >
                 Browse More Tutorials
                 <ChevronRight className="w-5 h-5 ml-2" />

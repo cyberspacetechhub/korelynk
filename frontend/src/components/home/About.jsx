@@ -104,21 +104,21 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors bg-white dark:bg-gray-900">
       {/* Hero Section */}
-      <section className="text-white py-20 relative" style={{
-        backgroundImage: 'url(/inntechlabs-workspace.png)',
+      <section className="relative py-20 text-white" style={{
+        backgroundImage: 'url(/inntechlab-workspace.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}>
         <div className="absolute inset-0 bg-black/60"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              About InnTechLabs
+        <div className="container relative z-10 px-6 mx-auto">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="mb-6 text-5xl font-bold lg:text-6xl">
+              About InnTechLab
             </h1>
-            <p className="text-xl lg:text-2xl text-indigo-100 leading-relaxed">
+            <p className="text-xl leading-relaxed text-indigo-100 lg:text-2xl">
               We are a passionate team of developers and designers dedicated to creating 
               innovative digital solutions that transform businesses and enhance user experiences.
             </p>
@@ -127,19 +127,19 @@ const About = () => {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="py-20 transition-colors bg-white dark:bg-gray-900">
+        <div className="container px-6 mx-auto">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              <h2 className="mb-6 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
                 Our Story
               </h2>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+              <p className="mb-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                 Founded with a vision to bridge the gap between innovative technology and 
-                practical business solutions, InnTechLabs has been at the forefront 
+                practical business solutions, InnTechLab has been at the forefront 
                 of digital transformation since our inception.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+              <p className="mb-8 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                 We believe that great software is not just about code – it's about understanding 
                 your business, your users, and your goals. Every project we undertake is a 
                 partnership aimed at delivering exceptional results that drive growth.
@@ -147,31 +147,31 @@ const About = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">3+ Years of Excellence</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">3+ Years of Excellence</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">50+ Successful Projects</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">50+ Successful Projects</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">30+ Happy Clients</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">30+ Happy Clients</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">99% Client Satisfaction Rate</span>
+                  <span className="font-medium text-gray-700 dark:text-gray-300">99% Client Satisfaction Rate</span>
                 </div>
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl p-8">
+              <div className="p-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
                   alt="Team collaboration"
-                  className="w-full h-80 object-cover rounded-lg"
+                  className="object-cover w-full rounded-lg h-80"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition-colors">
+              <div className="absolute p-6 transition-colors bg-white shadow-lg -bottom-6 -right-6 dark:bg-gray-800 rounded-xl">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">99%</div>
                   <div className="text-gray-600 dark:text-gray-300">Client Satisfaction</div>
@@ -183,30 +183,30 @@ const About = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-20 transition-colors bg-gray-50 dark:bg-gray-800">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
               Our Core Values
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300">
               These principles guide everything we do and shape how we work with our clients
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift text-center transition-colors"
+                className="p-8 text-center transition-colors bg-white shadow-lg dark:bg-gray-700 rounded-xl dark:shadow-gray-900/50 hover-lift"
               >
-                <div className="text-indigo-600 mb-4 flex justify-center">
+                <div className="flex justify-center mb-4 text-indigo-600">
                   {value.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {value.description}
                 </p>
               </div>
@@ -216,48 +216,48 @@ const About = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 bg-white dark:bg-gray-900 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-20 transition-colors bg-white dark:bg-gray-900">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
               Meet Our Team
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-300">
               Passionate professionals dedicated to delivering exceptional results
             </p>
           </div>
           
           {loading ? (
-            <div className="flex justify-center items-center h-32">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+            <div className="flex items-center justify-center h-32">
+              <div className="w-8 h-8 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {teamMembers.map((member) => (
                 <div
                   key={member._id}
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg dark:shadow-gray-900/50 hover-lift overflow-hidden transition-colors"
+                  className="overflow-hidden transition-colors bg-white shadow-lg dark:bg-gray-800 rounded-xl dark:shadow-gray-900/50 hover-lift"
                 >
                   <img
                     src={member.avatar}
                     alt={member.name}
-                    className="w-full h-64 object-cover"
+                    className="object-cover w-full h-64"
                   />
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                    <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
                       {member.name}
                     </h3>
-                    <p className="text-indigo-600 dark:text-indigo-400 font-medium mb-4">
+                    <p className="mb-4 font-medium text-indigo-600 dark:text-indigo-400">
                       {member.role}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                    <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300">
                       {member.bio}
                     </p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {member.skills?.slice(0, 4).map((skill, idx) => (
                         <span
                           key={idx}
-                          className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs"
+                          className="px-3 py-1 text-xs text-indigo-800 bg-indigo-100 rounded-full"
                         >
                           {skill}
                         </span>
@@ -269,7 +269,7 @@ const About = () => {
                           <a
                             key={platform}
                             href={url}
-                            className="text-gray-400 hover:text-indigo-600 transition-colors"
+                            className="text-gray-400 transition-colors hover:text-indigo-600"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -287,23 +287,23 @@ const About = () => {
       </section>
 
       {/* Achievements Section */}
-      <section className="py-20 bg-indigo-600 text-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+      <section className="py-20 text-white bg-indigo-600">
+        <div className="container px-6 mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-4xl font-bold lg:text-5xl">
               Our Achievements
             </h2>
             <p className="text-xl text-indigo-100">
               Numbers that speak for our commitment to excellence
             </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
             {achievements.map((achievement, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl lg:text-6xl font-bold mb-2">
+                <div className="mb-2 text-4xl font-bold lg:text-6xl">
                   {achievement.number}
                 </div>
-                <div className="text-indigo-200 text-lg">
+                <div className="text-lg text-indigo-200">
                   {achievement.label}
                 </div>
               </div>

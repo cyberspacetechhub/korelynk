@@ -8,7 +8,7 @@ export const useSettings = () => {
   if (!context) {
     return {
       settings: {
-        siteName: 'InnTechLabs', logo: '', favicon: '', darkIcon: '',
+        siteName: 'InnTechLab', logo: '', favicon: '', darkIcon: '',
         contactEmail: '', contactPhone: '', address: '',
         socialLinks: { facebook: '', twitter: '', linkedin: '', github: '', instagram: '' },
         seoSettings: { metaTitle: '', metaDescription: '', keywords: [] }
@@ -22,12 +22,12 @@ export const useSettings = () => {
 
 export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState({
-    siteName: 'InnTechLabs',
+    siteName: 'InnTechLab',
     siteDescription: 'Professional web and mobile development services',
     logo: '',
     favicon: '',
     darkIcon: '',
-    contactEmail: 'inntechlabs@gmail.com',
+    contactEmail: 'inntechlab@gmail.com',
     contactPhone: '+234-916-140-3450',
     address: 'Abakaliki, Ebonyi State, Nigeria',
     socialLinks: {
@@ -38,7 +38,7 @@ export const SettingsProvider = ({ children }) => {
       instagram: ''
     },
     seoSettings: {
-      metaTitle: 'InnTechLabs - Professional Development Services',
+      metaTitle: 'InnTechLab - Professional Development Services',
       metaDescription: 'We create innovative web and mobile solutions that drive business growth',
       keywords: ['web development', 'mobile apps', 'tech solutions']
     }

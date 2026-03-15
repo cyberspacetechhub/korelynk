@@ -12,7 +12,7 @@ const SEOHead = ({
 }) => {
   const siteUrl = window.location.origin;
   const fullUrl = url ? `${siteUrl}${url}` : window.location.href;
-  const fullImageUrl = image && image.startsWith('http') ? image : `${siteUrl}/inntechlabs.png`;
+  const fullImageUrl = image && image.startsWith('http') ? image : `${siteUrl}/inntechlab.png`;
 
   return (
     <Helmet>
@@ -25,7 +25,7 @@ const SEOHead = ({
       <meta property="og:image" content={fullImageUrl} />
       <meta property="og:url" content={fullUrl} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="InnTechLabs" />
+      <meta property="og:site_name" content="InnTechLab" />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

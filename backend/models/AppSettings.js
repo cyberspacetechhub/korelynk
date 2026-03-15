@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const appSettingsSchema = new mongoose.Schema({
   siteName: {
     type: String,
-    default: 'InnTechLabs'
+    default: ''
   },
   siteDescription: {
     type: String,
@@ -23,7 +23,7 @@ const appSettingsSchema = new mongoose.Schema({
   },
   contactEmail: {
     type: String,
-    default: 'inntechlabs@gmail.com'
+    default: 'inntechlab@gmail.com'
   },
   contactPhone: {
     type: String,

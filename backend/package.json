@@ -1,7 +1,7 @@
 {
-  "name": "inntechlabs-backend",
+  "name": "-backend",
   "version": "1.0.0",
-  "description": "Backend for InnTechLabs portfolio website",
+  "description": "Backend for InnTechLab portfolio website",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -16,7 +16,7 @@
     "express",
     "mongodb"
   ],
-  "author": "InnTechLabs",
+  "author": "InnTechLab",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

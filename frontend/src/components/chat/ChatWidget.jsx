@@ -232,13 +232,13 @@ const ChatWidget = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed z-50 bottom-4 right-4">
       {/* Chat Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
           data-chat-trigger
-          className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+          className="p-4 text-white transition-all duration-300 bg-blue-600 rounded-full shadow-lg hover:bg-blue-700 hover:scale-110"
           aria-label="Open chat support"
         >
           <MessageCircle size={24} />
@@ -253,7 +253,7 @@ const ChatWidget = () => {
             : 'w-80 h-96'
         }`}>
           {/* Header */}
-          <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+          <div className="flex items-center justify-between p-4 text-white bg-blue-600 rounded-t-lg">
             <div>
               <h3 className="font-semibold">Chat Support</h3>
               <p className="text-xs opacity-90">
@@ -263,14 +263,14 @@ const ChatWidget = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="hover:bg-blue-700 p-1 rounded"
+                className="p-1 rounded hover:bg-blue-700"
                 aria-label={isExpanded ? 'Minimize chat' : 'Expand chat'}
               >
                 {isExpanded ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="hover:bg-blue-700 p-1 rounded"
+                className="p-1 rounded hover:bg-blue-700"
                 aria-label="Close chat"
               >
                 <X size={20} />
@@ -279,36 +279,36 @@ const ChatWidget = () => {
           </div>
 
           {/* Messages or Info Form */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3">
+          <div className="flex-1 p-4 space-y-3 overflow-y-auto">
             {showInfoForm ? (
               <form onSubmit={handleInfoSubmit} className="space-y-4">
-                <div className="text-center text-gray-700 text-sm mb-4">
+                <div className="mb-4 text-sm text-center text-gray-700">
                   <p>👋 Welcome! Please tell us a bit about yourself to get started.</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                  <label className="block mb-1 text-sm font-medium text-gray-700">Name *</label>
                   <input
                     type="text"
                     value={visitorName}
                     onChange={(e) => setVisitorName(e.target.value)}
                     placeholder="Your name"
-                    className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email (optional)</label>
+                  <label className="block mb-1 text-sm font-medium text-gray-700">Email (optional)</label>
                   <input
                     type="email"
                     value={visitorEmail}
                     onChange={(e) => setVisitorEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-sm font-medium transition-colors"
+                  className="w-full py-2 text-sm font-medium text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700"
                 >
                   Start Chat
                 </button>
@@ -316,7 +316,7 @@ const ChatWidget = () => {
             ) : (
               <>
                 {messages.length === 0 && (
-                  <div className="text-center text-gray-500 text-sm">
+                  <div className="text-sm text-center text-gray-500">
                     <p>👋 Welcome! How can we help you today?</p>
                   </div>
                 )}
@@ -336,7 +336,7 @@ const ChatWidget = () => {
                   }`}
                 >
                   <p>{message.content.text}</p>
-                  <p className="text-xs opacity-70 mt-1">
+                  <p className="mt-1 text-xs opacity-70">
                     {formatTime(message.createdAt)}
                   </p>
                 </div>
@@ -345,7 +345,7 @@ const ChatWidget = () => {
             
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 px-3 py-2 rounded-lg text-sm">
+                <div className="px-3 py-2 text-sm bg-gray-100 rounded-lg">
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -370,21 +370,21 @@ const ChatWidget = () => {
                   onChange={handleTyping}
                   onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
                   placeholder="Type your message..."
-                  className="flex-1 border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!newMessage.trim()}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white p-2 rounded-lg transition-colors"
+                  className="p-2 text-white transition-colors bg-blue-600 rounded-lg hover:bg-blue-700 disabled:bg-gray-300"
                   aria-label="Send message"
                 >
                   <Send size={16} />
                 </button>
               </div>
               
-              <div className="text-center mt-2">
+              <div className="mt-2 text-center">
                 <p className="text-xs text-gray-400">
-                  Powered by <span className="font-semibold text-blue-600">InnTechLabs</span>
+                  Powered by <span className="font-semibold text-blue-600">InnTechLab</span>
                 </p>
               </div>
             </div>

@@ -43,8 +43,8 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full space-y-8">
+    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50">
+      <div className="w-full max-w-md space-y-8">
         {/* Header */}
         <div className="text-center">
           <div className="flex justify-center mb-4">
@@ -58,48 +58,48 @@ const AdminLogin = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+          <div className="p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
             {/* Email */}
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <Mail className="absolute w-5 h-5 text-gray-400 left-3 top-3" />
                 <input
                   id="email"
                   type="email"
                   required
                   value={credentials.email}
                   onChange={(e) => setCredentials({...credentials, email: e.target.value})}
-                  className="pl-10 w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                  placeholder="admin@inntechlabs.vercel.app"
+                  className="w-full px-3 py-3 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  placeholder="admin@inntechlab.vercel.app"
                 />
               </div>
             </div>
 
             {/* Password */}
             <div className="mb-6">
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <Lock className="absolute w-5 h-5 text-gray-400 left-3 top-3" />
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={credentials.password}
                   onChange={(e) => setCredentials({...credentials, password: e.target.value})}
-                  className="pl-10 pr-12 w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="w-full px-3 py-3 pl-10 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                  className="absolute text-gray-400 right-3 top-3 hover:text-gray-600"
                 >
-                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
             </div>
@@ -131,20 +131,20 @@ const AdminLogin = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full px-4 py-3 font-semibold text-white transition-colors bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </div>
 
           {/* Demo Credentials */}
-          <div className="text-center text-sm text-gray-600">
-            Demo: admin@inntechlabs.vercel.app / admin123
+          <div className="text-sm text-center text-gray-600">
+            Demo: admin@inntechlab.vercel.app / admin123
           </div>
         </form>
 
         {/* Security Notice */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+        <div className="p-4 border border-yellow-200 rounded-lg bg-yellow-50">
           <div className="flex items-start space-x-3">
             <Shield className="w-5 h-5 text-yellow-600 mt-0.5" />
             <div>

@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 const sections = [
   {
     title: '1. Acceptance of Terms',
-    content: `By accessing and using InnTechLabs's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use our services.`
+    content: `By accessing and using InnTechLab's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use our services.`
   },
   {
     title: '2. Use of Services',
@@ -19,7 +19,7 @@ const sections = [
   },
   {
     title: '3. Intellectual Property',
-    content: `All content on this website, including but not limited to text, graphics, logos, images, and software, is the property of InnTechLabs and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.`
+    content: `All content on this website, including but not limited to text, graphics, logos, images, and software, is the property of InnTechLab and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.`
   },
   {
     title: '4. User Accounts',
@@ -40,7 +40,7 @@ const sections = [
   },
   {
     title: '7. Limitation of Liability',
-    content: `To the maximum extent permitted by law, InnTechLabs shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services.`
+    content: `To the maximum extent permitted by law, InnTechLab shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of or inability to use our services.`
   },
   {
     title: '8. Termination',
@@ -54,46 +54,46 @@ const sections = [
     title: '10. Contact Information',
     content: `For questions about these Terms of Service, please contact us at:
 
-Email: inntechlabs@gmail.com
+Email: inntechlab@gmail.com
 Address: Abakaliki, Ebonyi State, Nigeria`
   }
 ];
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
+    <div className="min-h-screen transition-colors bg-white dark:bg-midnight">
       <SEO
-        title="Terms of Service - InnTechLabs"
-        description="Read the Terms of Service for InnTechLabs's website and services."
+        title="Terms of Service - InnTechLab"
+        description="Read the Terms of Service for InnTechLab's website and services."
       />
 
       {/* Hero */}
-      <section className="relative py-20 bg-gray-900 dark:bg-midnight overflow-hidden">
+      <section className="relative py-20 overflow-hidden bg-gray-900 dark:bg-midnight">
         <div className="absolute inset-0 bg-gradient-glow opacity-20"></div>
-        <div className="relative container mx-auto px-6 text-center">
-          <div className="w-16 h-16 bg-gradient-electric rounded-xl flex items-center justify-center mx-auto mb-6">
+        <div className="container relative px-6 mx-auto text-center">
+          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-gradient-electric rounded-xl">
             <FileText className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold font-display text-white mb-4">Terms of Service</h1>
-          <p className="text-gray-300 text-lg">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <h1 className="mb-4 text-5xl font-bold text-white md:text-6xl font-display">Terms of Service</h1>
+          <p className="text-lg text-gray-300">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </div>
       </section>
 
       {/* Content */}
       <section className="py-20">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 md:p-12 mb-8">
-            <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-              Please read these Terms of Service carefully before using InnTechLabs's website and services.
+        <div className="container max-w-4xl px-6 mx-auto">
+          <div className="p-8 mb-8 border border-gray-200 bg-gray-50 dark:bg-white/5 dark:border-white/10 rounded-2xl md:p-12">
+            <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+              Please read these Terms of Service carefully before using InnTechLab's website and services.
               These terms govern your access to and use of our platform.
             </p>
           </div>
 
           <div className="space-y-6">
             {sections.map((section, index) => (
-              <div key={index} className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-gray-300 dark:hover:border-white/20 transition-all">
-                <h2 className="text-2xl font-bold font-display text-gray-900 dark:text-white mb-4">{section.title}</h2>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">{section.content}</p>
+              <div key={index} className="p-8 transition-all bg-white border border-gray-200 dark:bg-white/5 dark:border-white/10 rounded-2xl hover:border-gray-300 dark:hover:border-white/20">
+                <h2 className="mb-4 text-2xl font-bold text-gray-900 font-display dark:text-white">{section.title}</h2>
+                <p className="leading-relaxed text-gray-600 whitespace-pre-line dark:text-gray-300">{section.content}</p>
               </div>
             ))}
           </div>

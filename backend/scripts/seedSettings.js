@@ -17,12 +17,12 @@ const seedSettings = async () => {
 
   // Create fresh document with all fields explicitly set
   const settings = await AppSettings.create({
-    siteName: 'InnTechLabs',
+    siteName: 'InnTechLab',
     siteDescription: 'Professional web and mobile development services',
     logo: '',
     favicon: '',
     darkIcon: '',
-    contactEmail: 'inntechlabs@gmail.com',
+    contactEmail: 'inntechlab@gmail.com',
     contactPhone: '+234-916-140-3450',
     address: 'Abakaliki, Ebonyi State, Nigeria',
     socialLinks: {
@@ -33,7 +33,7 @@ const seedSettings = async () => {
       instagram: ''
     },
     seoSettings: {
-      metaTitle: 'InnTechLabs - Professional Development Services',
+      metaTitle: 'InnTechLab - Professional Development Services',
       metaDescription: 'We create innovative web and mobile solutions that drive business growth',
       keywords: ['web development', 'mobile apps', 'tech solutions']
     },

@@ -1,10 +1,10 @@
 export const seoConfig = {
-  defaultTitle: 'InnTechLabs - Professional Web & Mobile Development Services',
-  titleTemplate: '%s | InnTechLabs',
+  defaultTitle: 'InnTechLab - Professional Web & Mobile Development Services',
+  titleTemplate: '%s | InnTechLab',
   defaultDescription: 'Transform your business with cutting-edge web development, mobile apps, and digital solutions. Expert React, Node.js, and full-stack development services worldwide.',
-  siteUrl: 'https://inntechlabs.vercel.app',
+  siteUrl: 'https://inntechlab.vercel.app',
   defaultImage: '/og-image.jpg',
-  twitterHandle: '@inntechlabs',
+  twitterHandle: '@inntechlab',
   
   // Core keywords for the business
   coreKeywords: [

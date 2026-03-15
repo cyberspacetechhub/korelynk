@@ -6,12 +6,12 @@ const BrandedLoader = () => {
       {/* Logo and Brand */}
       <div className="flex items-center mb-8">
         <img 
-          src="/inntechlabs.png" 
-          alt="InnTechLabs" 
+          src="/inntechlabbg.png" 
+          alt="InnTechLabbg" 
           className="h-40 mr-3 w-"
         />
         {/* <div>
-          <h1 className="text-2xl font-bold text-gray-900">InnTechLabs</h1>
+          <h1 className="text-2xl font-bold text-gray-900">InnTechLab</h1>
           <p className="text-sm text-gray-600">Innovation in Technology</p>
         </div> */}
       </div>
@@ -20,7 +20,7 @@ const BrandedLoader = () => {
       <div className="w-12 h-12 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
       
       {/* Loading Text */}
-      <p className="mt-4 text-gray-600 animate-pulse">Loading InnTechLabs...</p>
+      <p className="mt-4 text-gray-600 animate-pulse">Loading InnTechLab...</p>
     </div>
   );
 };

@@ -41,7 +41,7 @@ const AdminCodeSampleDetail = () => {
         content: replyData.content,
         author: {
           name: 'Admin',
-          email: 'admin@inntechlabs.com'
+          email: 'admin@inntechlab.com'
         }
       });
       
@@ -68,15 +68,15 @@ const AdminCodeSampleDetail = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="w-12 h-12 border-b-2 border-indigo-600 rounded-full animate-spin"></div>
       </div>
     );
   }
 
   if (!codeSample) {
     return (
-      <div className="text-center py-12">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Code Tutorial Not Found</h3>
+      <div className="py-12 text-center">
+        <h3 className="mb-2 text-xl font-semibold text-gray-900">Code Tutorial Not Found</h3>
         <Link to="/admin/code-samples" className="text-indigo-600 hover:text-indigo-700">
           ← Back to Code Tutorials
         </Link>
@@ -90,7 +90,7 @@ const AdminCodeSampleDetail = () => {
         <div className="flex items-center">
           <Link
             to="/admin/code-samples"
-            className="mr-4 p-2 text-gray-600 hover:text-gray-900"
+            className="p-2 mr-4 text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
@@ -101,7 +101,7 @@ const AdminCodeSampleDetail = () => {
         </div>
         <Link
           to={`/admin/code-samples/edit/${id}`}
-          className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center"
+          className="flex items-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
         >
           <Edit className="w-4 h-4 mr-2" />
           Edit Tutorial
@@ -109,20 +109,20 @@ const AdminCodeSampleDetail = () => {
       </div>
 
       {/* Tutorial Info */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <div className="grid md:grid-cols-3 gap-6">
+      <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+        <div className="grid gap-6 md:grid-cols-3">
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Language</h3>
-            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+            <h3 className="mb-2 text-sm font-medium text-gray-500">Language</h3>
+            <span className="px-3 py-1 text-sm font-semibold text-blue-800 bg-blue-100 rounded-full">
               {codeSample.language.toUpperCase()}
             </span>
           </div>
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Difficulty</h3>
+            <h3 className="mb-2 text-sm font-medium text-gray-500">Difficulty</h3>
             <span className="text-sm text-gray-900 capitalize">{codeSample.difficulty}</span>
           </div>
           <div>
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Status</h3>
+            <h3 className="mb-2 text-sm font-medium text-gray-500">Status</h3>
             <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
               codeSample.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
             }`}>
@@ -131,32 +131,32 @@ const AdminCodeSampleDetail = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid md:grid-cols-3 gap-6">
+        <div className="grid gap-6 mt-6 md:grid-cols-3">
           <div className="flex items-center">
-            <Eye className="w-5 h-5 text-gray-400 mr-2" />
+            <Eye className="w-5 h-5 mr-2 text-gray-400" />
             <span className="text-sm text-gray-600">{codeSample.views} views</span>
           </div>
           <div className="flex items-center">
-            <Heart className="w-5 h-5 text-gray-400 mr-2" />
+            <Heart className="w-5 h-5 mr-2 text-gray-400" />
             <span className="text-sm text-gray-600">{codeSample.likes} likes</span>
           </div>
           <div className="flex items-center">
-            <MessageCircle className="w-5 h-5 text-gray-400 mr-2" />
+            <MessageCircle className="w-5 h-5 mr-2 text-gray-400" />
             <span className="text-sm text-gray-600">{codeSample.comments?.length || 0} comments</span>
           </div>
         </div>
 
         <div className="mt-6">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Description</h3>
+          <h3 className="mb-2 text-sm font-medium text-gray-500">Description</h3>
           <p className="text-gray-700">{codeSample.description}</p>
         </div>
 
         {codeSample.tags?.length > 0 && (
           <div className="mt-6">
-            <h3 className="text-sm font-medium text-gray-500 mb-2">Tags</h3>
+            <h3 className="mb-2 text-sm font-medium text-gray-500">Tags</h3>
             <div className="flex flex-wrap gap-2">
               {codeSample.tags.map((tag, index) => (
-                <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">
+                <span key={index} className="px-2 py-1 text-sm text-gray-700 bg-gray-100 rounded">
                   {tag}
                 </span>
               ))}
@@ -166,21 +166,21 @@ const AdminCodeSampleDetail = () => {
       </div>
 
       {/* Comments Management */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">
+      <div className="p-6 bg-white border border-gray-200 shadow-sm rounded-xl">
+        <h3 className="mb-6 text-lg font-semibold text-gray-900">
           Comments Management ({codeSample.comments?.length || 0})
         </h3>
 
         {codeSample.comments?.length === 0 ? (
-          <p className="text-gray-500 text-center py-8">No comments yet.</p>
+          <p className="py-8 text-center text-gray-500">No comments yet.</p>
         ) : (
           <div className="space-y-6">
             {codeSample.comments.map((comment, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg p-4">
+              <div key={index} className="p-4 border border-gray-200 rounded-lg">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-white font-semibold">
+                    <div className="flex items-center justify-center w-10 h-10 mr-3 bg-indigo-600 rounded-full">
+                      <span className="font-semibold text-white">
                         {comment.author.name.charAt(0).toUpperCase()}
                       </span>
                     </div>
@@ -200,27 +200,27 @@ const AdminCodeSampleDetail = () => {
                   </button>
                 </div>
 
-                <p className="text-gray-700 mb-4">{comment.content}</p>
+                <p className="mb-4 text-gray-700">{comment.content}</p>
 
                 {/* Replies */}
                 {comment.replies?.length > 0 && (
-                  <div className="ml-6 space-y-3 mb-4">
+                  <div className="mb-4 ml-6 space-y-3">
                     {comment.replies.map((reply, replyIndex) => (
-                      <div key={replyIndex} className="bg-gray-50 rounded-lg p-3">
+                      <div key={replyIndex} className="p-3 rounded-lg bg-gray-50">
                         <div className="flex items-center mb-2">
-                          <div className="w-6 h-6 bg-gray-500 rounded-full flex items-center justify-center mr-2">
-                            <span className="text-white text-xs font-semibold">
+                          <div className="flex items-center justify-center w-6 h-6 mr-2 bg-gray-500 rounded-full">
+                            <span className="text-xs font-semibold text-white">
                               {reply.author.name.charAt(0).toUpperCase()}
                             </span>
                           </div>
                           <div>
-                            <div className="font-semibold text-gray-900 text-sm">{reply.author.name}</div>
+                            <div className="text-sm font-semibold text-gray-900">{reply.author.name}</div>
                             <div className="text-xs text-gray-500">
                               {new Date(reply.createdAt).toLocaleString()}
                             </div>
                           </div>
                         </div>
-                        <p className="text-gray-700 text-sm ml-8">{reply.content}</p>
+                        <p className="ml-8 text-sm text-gray-700">{reply.content}</p>
                       </div>
                     ))}
                   </div>
@@ -237,12 +237,12 @@ const AdminCodeSampleDetail = () => {
                         [comment._id]: { content: e.target.value } 
                       })}
                       rows={2}
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+                      className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                       required
                     />
                     <button
                       type="submit"
-                      className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 flex items-center"
+                      className="flex items-center px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
                     >
                       <Send className="w-4 h-4" />
                     </button>

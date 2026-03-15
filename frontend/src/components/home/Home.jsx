@@ -35,7 +35,7 @@ const Home = () => {
       highlight: "Made Simple",
       description: "From concept to deployment - we handle frontend, backend, and everything in between.",
       image: "/kore.png",
-      alt: "InnTechLabs Technology",
+      alt: "InnTechLab Technology",
       cta: "Start Your Project",
       ctaLink: "/contact"
     },
@@ -43,8 +43,8 @@ const Home = () => {
       title: "Remote Team,",
       highlight: "Global Solutions",
       description: "Based in Nigeria, delivering world-class digital solutions to clients worldwide.",
-      image: "/inntechlabs-workspace.png",
-      alt: "InnTechLabs Workspace",
+      image: "/inntechlab-workspace.png",
+      alt: "InnTechLab Workspace",
       cta: "Hire Our Team",
       ctaLink: "/contact"
     }
@@ -124,33 +124,33 @@ const Home = () => {
       {/* Welcome Popup */}
       {showWelcomePopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 dark:bg-black/40">
-          <div className="bg-white dark:bg-midnight-50 rounded-2xl shadow-2xl max-w-md w-full p-6 transform animate-fade-in transition-colors border dark:border-white/10">
-            <div className="flex justify-between items-start mb-4">
+          <div className="w-full max-w-md p-6 transition-colors transform bg-white border shadow-2xl dark:bg-midnight-50 rounded-2xl animate-fade-in dark:border-white/10">
+            <div className="flex items-start justify-between mb-4">
               <div className="flex items-center">
-                <MessageCircle className="w-6 h-6 text-electric-blue mr-2" />
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Welcome to InnTechLabs!</h3>
+                <MessageCircle className="w-6 h-6 mr-2 text-electric-blue" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Welcome to InnTechLab!</h3>
               </div>
               <button 
                 onClick={() => setShowWelcomePopup(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 transition-colors hover:text-gray-600"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">
+            <p className="mb-4 text-gray-600 dark:text-gray-300">
               Ready to transform your business with cutting-edge technology? Let's build something amazing together!
             </p>
             <div className="flex gap-3">
               <Link 
                 to="/contact" 
                 onClick={() => setShowWelcomePopup(false)}
-                className="bg-gradient-electric text-white px-4 py-2 rounded-lg hover:shadow-lg hover:shadow-electric-blue/30 transition-all text-sm font-medium"
+                className="px-4 py-2 text-sm font-medium text-white transition-all rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/30"
               >
                 Get Started
               </Link>
               <button 
                 onClick={() => setShowWelcomePopup(false)}
-                className="text-gray-500 hover:text-gray-700 transition-colors text-sm"
+                className="text-sm text-gray-500 transition-colors hover:text-gray-700"
               >
                 Maybe later
               </button>
@@ -161,27 +161,27 @@ const Home = () => {
       
       {/* Special Offer Popup */}
       {showOfferPopup && (
-        <div className="fixed bottom-4 right-4 z-50 max-w-sm">
-          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl shadow-2xl p-4 transform animate-slide-up">
-            <div className="flex justify-between items-start mb-2">
+        <div className="fixed z-50 max-w-sm bottom-4 right-4">
+          <div className="p-4 text-white transform shadow-2xl bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl animate-slide-up">
+            <div className="flex items-start justify-between mb-2">
               <div className="flex items-center">
                 <Gift className="w-5 h-5 mr-2" />
-                <span className="font-semibold text-sm">Limited Time Offer!</span>
+                <span className="text-sm font-semibold">Limited Time Offer!</span>
               </div>
               <button 
                 onClick={() => setShowOfferPopup(false)}
-                className="text-white/80 hover:text-white transition-colors"
+                className="transition-colors text-white/80 hover:text-white"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <p className="text-sm text-purple-100 mb-3">
+            <p className="mb-3 text-sm text-purple-100">
               Get 15% off your first project. Free consultation included!
             </p>
             <Link 
               to="/contact" 
               onClick={() => setShowOfferPopup(false)}
-              className="bg-white text-purple-600 px-3 py-2 rounded-lg hover:bg-purple-50 transition-colors text-sm font-medium inline-block"
+              className="inline-block px-3 py-2 text-sm font-medium text-purple-600 transition-colors bg-white rounded-lg hover:bg-purple-50"
             >
               Claim Offer
             </Link>
@@ -209,51 +209,51 @@ const Home = () => {
         url="/"
       />
       {/* Hero Section */}
-      <section className="relative text-white overflow-hidden">
+      <section className="relative overflow-hidden text-white">
         <div className="absolute inset-0">
           <img 
-            src="/inntechlabs-workspace.png" 
-            alt="InnTechLabs Workspace" 
-            className="w-full h-full object-cover"
+            src="/inntechlab-workspace.png" 
+            alt="InnTechLab Workspace" 
+            className="object-cover w-full h-full"
             loading="eager"
             decoding="sync"
             fetchpriority="high"
           />
         </div>
         <div className="absolute inset-0 dark:bg-black/60 bg-midnight/75"></div>
-        <div className="relative container mx-auto px-6 py-24 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container relative px-6 py-24 mx-auto lg:py-32">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="animate-fade-in">
               <div className="mb-4">
-                <span className="inline-block bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/20">
+                <span className="inline-block px-4 py-2 text-sm font-medium text-white border rounded-full bg-white/10 backdrop-blur-sm border-white/20">
                   #Pioneering Africa's Digital Transformation
                 </span>
               </div>
-              <h1 className="text-6xl lg:text-8xl font-bold mb-8 leading-tight">
+              <h1 className="mb-8 text-6xl font-bold leading-tight lg:text-8xl">
                 {heroSlides[currentSlide].title}
-                <span className="gradient-text block">{heroSlides[currentSlide].highlight}</span>
+                <span className="block gradient-text">{heroSlides[currentSlide].highlight}</span>
               </h1>
-              <p className="text-2xl lg:text-3xl mb-10 text-indigo-100 leading-relaxed font-medium">
+              <p className="mb-10 text-2xl font-medium leading-relaxed text-indigo-100 lg:text-3xl">
                 {heroSlides[currentSlide].description}
               </p>
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col gap-6 sm:flex-row">
                 <Link
                   to={heroSlides[currentSlide].ctaLink}
-                  className="bg-white text-midnight px-10 py-5 rounded-xl font-bold text-lg hover:bg-electric-cyan hover:text-white transition-all duration-300 hover-lift inline-flex items-center justify-center shadow-2xl"
+                  className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold transition-all duration-300 bg-white shadow-2xl text-midnight rounded-xl hover:bg-electric-cyan hover:text-white hover-lift"
                 >
                   {heroSlides[currentSlide].cta}
-                  <ArrowRight className="ml-3 w-6 h-6" />
+                  <ArrowRight className="w-6 h-6 ml-3" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="border-2 border-white text-white px-10 py-5 rounded-xl font-bold text-lg hover:bg-white hover:text-midnight transition-all duration-300 backdrop-blur-sm"
+                  className="px-10 py-5 text-lg font-bold text-white transition-all duration-300 border-2 border-white rounded-xl hover:bg-white hover:text-midnight backdrop-blur-sm"
                 >
                   Get Free Quote
                 </Link>
               </div>
               
               {/* Slide indicators */}
-              <div className="flex space-x-2 mt-8">
+              <div className="flex mt-8 space-x-2">
                 {heroSlides.map((_, index) => (
                   <button
                     key={index}
@@ -266,11 +266,11 @@ const Home = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+              <div className="p-8 border bg-white/10 backdrop-blur-sm rounded-2xl border-white/20">
                 <img
                   src={heroSlides[currentSlide].image}
                   alt={heroSlides[currentSlide].alt}
-                  className="w-full h-80 object-cover rounded-lg transition-all duration-500"
+                  className="object-cover w-full transition-all duration-500 rounded-lg h-80"
                 />
               </div>
             </div>
@@ -285,23 +285,23 @@ const Home = () => {
       <TrustedBy />
 
       {/* Services Section */}
-      <section className="py-20 bg-white dark:bg-midnight transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-20 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
               Our Services
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
               We offer comprehensive digital solutions tailored to your business needs
             </p>
           </div>
           
           {loading ? (
-            <div className="flex justify-center items-center h-32">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-blue"></div>
+            <div className="flex items-center justify-center h-32">
+              <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-electric-blue"></div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
               {services.map((service, index) => {
                 const getServiceImage = (title) => {
                   const baseImages = {
@@ -317,22 +317,22 @@ const Home = () => {
                 return (
                   <div
                     key={service.id}
-                    className="bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl shadow-lg dark:shadow-black/50 hover-lift overflow-hidden transition-colors"
+                    className="overflow-hidden transition-colors bg-white border border-gray-100 shadow-lg dark:bg-midnight-50 dark:border-white/10 rounded-xl dark:shadow-black/50 hover-lift"
                   >
                     <div className="h-48 overflow-hidden">
                       <img
                         src={getServiceImage(service.title)}
                         alt={service.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
                         loading="lazy"
                         decoding="async"
                       />
                     </div>
                     <div className="p-6 text-center">
-                      <div className="text-electric-blue mb-4 flex justify-center">
+                      <div className="flex justify-center mb-4 text-electric-blue">
                         {getServiceIcon(service.title)}
                       </div>
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                      <h3 className="mb-3 text-xl font-semibold text-gray-900 dark:text-white">
                         {service.title}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-300">
@@ -348,10 +348,10 @@ const Home = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-20 transition-colors bg-gray-50 dark:bg-midnight-100">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
               Featured Projects
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
@@ -360,29 +360,29 @@ const Home = () => {
           </div>
           
           {loading ? (
-            <div className="flex justify-center items-center h-32">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-blue"></div>
+            <div className="flex items-center justify-center h-32">
+              <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-electric-blue"></div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredProjects.length > 0 ? featuredProjects.map((project) => (
-                <div key={project._id} className="group hover-lift bg-white dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl shadow-lg dark:shadow-black/50 overflow-hidden transition-colors">
+                <div key={project._id} className="overflow-hidden transition-colors bg-white border border-gray-100 shadow-lg group hover-lift dark:bg-midnight-50 dark:border-white/10 rounded-xl dark:shadow-black/50">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover w-full h-48 transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 to-transparent group-hover:opacity-100">
+                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
                         {project.liveUrl && (
                           <a
                             href={project.liveUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors"
+                            className="px-3 py-1 text-sm font-medium text-gray-900 transition-colors bg-white rounded-full hover:bg-gray-100"
                           >
                             Live Demo
                           </a>
@@ -392,7 +392,7 @@ const Home = () => {
                             href={project.githubUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-gray-900 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
+                            className="px-3 py-1 text-sm font-medium text-white transition-colors bg-gray-900 rounded-full hover:bg-gray-800"
                           >
                             GitHub
                           </a>
@@ -401,16 +401,16 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description.substring(0, 100)}...</p>
+                    <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">{project.title}</h3>
+                    <p className="mb-4 text-gray-600 dark:text-gray-300">{project.description.substring(0, 100)}...</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.technologies.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="bg-electric-blue/10 text-electric-blue dark:text-electric-cyan px-3 py-1 rounded-full text-sm font-medium">{tech}</span>
+                        <span key={idx} className="px-3 py-1 text-sm font-medium rounded-full bg-electric-blue/10 text-electric-blue dark:text-electric-cyan">{tech}</span>
                       ))}
                     </div>
                     <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
                       <span>Role: Full-Stack Developer</span>
-                      <span className="text-electric-blue dark:text-electric-cyan font-medium">Featured Project</span>
+                      <span className="font-medium text-electric-blue dark:text-electric-cyan">Featured Project</span>
                     </div>
                   </div>
                 </div>
@@ -422,21 +422,21 @@ const Home = () => {
             </div>
           )}
           
-          <div className="text-center mt-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-12 text-center">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 to="/portfolio"
-                className="bg-gradient-electric text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/40 transition-all duration-300 inline-flex items-center justify-center"
+                className="inline-flex items-center justify-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/40"
               >
                 View All Projects
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
                 to="/coding-demo"
-                className="bg-electric-violet text-white px-8 py-4 rounded-lg font-semibold hover:bg-electric-violet/80 transition-all duration-300 inline-flex items-center justify-center"
+                className="inline-flex items-center justify-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-electric-violet hover:bg-electric-violet/80"
               >
                 Watch Live Demo
-                <Code className="ml-2 w-5 h-5" />
+                <Code className="w-5 h-5 ml-2" />
               </Link>
             </div>
           </div>
@@ -444,10 +444,10 @@ const Home = () => {
       </section>
 
       {/* Tech Stack Section */}
-      <section className="py-16 bg-white dark:bg-midnight transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-16 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-gray-900 lg:text-4xl dark:text-white">
               Our Technology Stack
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
@@ -455,7 +455,7 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 max-w-6xl mx-auto">
+          <div className="grid max-w-6xl grid-cols-2 gap-6 mx-auto md:grid-cols-4 lg:grid-cols-8">
             {[
               { 
                 name: 'React', 
@@ -518,8 +518,8 @@ const Home = () => {
                 color: 'text-purple-500' 
               }
             ].map((tech, index) => (
-              <div key={index} className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="bg-gray-50 dark:bg-midnight-50 border border-gray-100 dark:border-white/10 rounded-xl p-4 mb-3 group-hover:bg-gray-100 dark:group-hover:bg-midnight-100 transition-colors">
+              <div key={index} className="text-center transition-transform duration-300 group hover:scale-110">
+                <div className="p-4 mb-3 transition-colors border border-gray-100 bg-gray-50 dark:bg-midnight-50 dark:border-white/10 rounded-xl group-hover:bg-gray-100 dark:group-hover:bg-midnight-100">
                   <img 
                     src={tech.logo} 
                     alt={`${tech.name} logo`}
@@ -535,15 +535,15 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-electric text-white">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="py-20 text-white bg-gradient-electric">
+        <div className="container px-6 mx-auto">
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl lg:text-6xl font-bold mb-2">
+                <div className="mb-2 text-4xl font-bold lg:text-6xl">
                   {stat.number}
                 </div>
-                <div className="text-white/70 text-lg">
+                <div className="text-lg text-white/70">
                   {stat.label}
                 </div>
               </div>
@@ -553,54 +553,54 @@ const Home = () => {
       </section>
 
       {/* Development Process Demo */}
-      <section className="py-20 bg-gray-50 dark:bg-midnight-100 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-20 transition-colors bg-gray-50 dark:bg-midnight-100">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
               How We Build Your Vision
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
               From concept to deployment, see our development process in action
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Code Demo */}
             <div className="order-2 lg:order-1">
-              <div className="bg-gray-900 rounded-xl p-6 shadow-2xl">
+              <div className="p-6 bg-gray-900 shadow-2xl rounded-xl">
                 <div className="flex items-center mb-4">
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   </div>
-                  <span className="ml-4 text-gray-400 text-sm">app.jsx</span>
+                  <span className="ml-4 text-sm text-gray-400">app.jsx</span>
                 </div>
-                <div className="text-sm font-mono">
+                <div className="font-mono text-sm">
                   <div className="text-purple-400">import</div>
-                  <div className="text-blue-400 ml-2">React</div>
-                  <div className="text-white ml-2">from</div>
-                  <div className="text-green-400 ml-2">'react';</div>
+                  <div className="ml-2 text-blue-400">React</div>
+                  <div className="ml-2 text-white">from</div>
+                  <div className="ml-2 text-green-400">'react';</div>
                   <br />
                   <div className="text-purple-400">const</div>
-                  <div className="text-yellow-400 ml-2">App</div>
-                  <div className="text-white ml-2">=</div>
-                  <div className="text-blue-400 ml-2">()</div>
-                  <div className="text-white ml-2">=&gt;</div>
-                  <div className="text-white ml-2">{'{'}</div>
-                  <div className="text-purple-400 ml-4">return</div>
-                  <div className="text-white ml-2">(</div>
-                  <div className="text-green-400 ml-6">&lt;div</div>
-                  <div className="text-blue-400 ml-2">className</div>
+                  <div className="ml-2 text-yellow-400">App</div>
+                  <div className="ml-2 text-white">=</div>
+                  <div className="ml-2 text-blue-400">()</div>
+                  <div className="ml-2 text-white">=&gt;</div>
+                  <div className="ml-2 text-white">{'{'}</div>
+                  <div className="ml-4 text-purple-400">return</div>
+                  <div className="ml-2 text-white">(</div>
+                  <div className="ml-6 text-green-400">&lt;div</div>
+                  <div className="ml-2 text-blue-400">className</div>
                   <div className="text-white">=</div>
                   <div className="text-green-400">{'"app"'}</div>
                   <div className="text-green-400">&gt;</div>
-                  <div className="text-green-400 ml-8">&lt;h1&gt;</div>
+                  <div className="ml-8 text-green-400">&lt;h1&gt;</div>
                   <div className="text-white">Your Vision</div>
                   <div className="text-green-400">&lt;/h1&gt;</div>
-                  <div className="text-green-400 ml-6">&lt;/div&gt;</div>
-                  <div className="text-white ml-4">);</div>
-                  <div className="text-white ml-2">{'};'}</div>
+                  <div className="ml-6 text-green-400">&lt;/div&gt;</div>
+                  <div className="ml-4 text-white">);</div>
+                  <div className="ml-2 text-white">{'};'}</div>
                 </div>
               </div>
             </div>
@@ -609,9 +609,9 @@ const Home = () => {
             <div className="order-1 lg:order-2">
               <div className="relative">
                 {/* Main Developer */}
-                <div className="bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-electric-blue/10 dark:to-electric-violet/10 dark:border dark:border-white/10 rounded-2xl p-8 mb-6">
+                <div className="p-8 mb-6 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-electric-blue/10 dark:to-electric-violet/10 dark:border dark:border-white/10 rounded-2xl">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                    <div className="flex items-center justify-center w-16 h-16 mr-4 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600">
                       <Code className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -619,18 +619,18 @@ const Home = () => {
                       <p className="text-indigo-600">Architecting your solution</p>
                     </div>
                   </div>
-                  <div className="bg-white dark:bg-midnight-50 rounded-lg p-4 shadow-sm">
+                  <div className="p-4 bg-white rounded-lg shadow-sm dark:bg-midnight-50">
                     <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                      <div className="w-2 h-2 mr-2 bg-green-400 rounded-full animate-pulse"></div>
                       Writing clean, scalable code...
                     </div>
                   </div>
                 </div>
 
                 {/* UI/UX Designer */}
-                <div className="bg-gradient-to-br from-pink-100 to-rose-100 dark:from-electric-violet/10 dark:to-pink-900/20 dark:border dark:border-white/10 rounded-2xl p-8 mb-6">
+                <div className="p-8 mb-6 bg-gradient-to-br from-pink-100 to-rose-100 dark:from-electric-violet/10 dark:to-pink-900/20 dark:border dark:border-white/10 rounded-2xl">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center mr-4">
+                    <div className="flex items-center justify-center w-16 h-16 mr-4 rounded-full bg-gradient-to-br from-pink-500 to-rose-600">
                       <Smartphone className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -638,18 +638,18 @@ const Home = () => {
                       <p className="text-pink-600">Crafting user experience</p>
                     </div>
                   </div>
-                  <div className="bg-white dark:bg-midnight-50 rounded-lg p-4 shadow-sm">
+                  <div className="p-4 bg-white rounded-lg shadow-sm dark:bg-midnight-50">
                     <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <div className="w-2 h-2 bg-pink-400 rounded-full mr-2 animate-pulse"></div>
+                      <div className="w-2 h-2 mr-2 bg-pink-400 rounded-full animate-pulse"></div>
                       Designing intuitive interfaces...
                     </div>
                   </div>
                 </div>
 
                 {/* DevOps Engineer */}
-                <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-electric-cyan/10 dark:to-green-900/20 dark:border dark:border-white/10 rounded-2xl p-8">
+                <div className="p-8 bg-gradient-to-br from-green-100 to-emerald-100 dark:from-electric-cyan/10 dark:to-green-900/20 dark:border dark:border-white/10 rounded-2xl">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mr-4">
+                    <div className="flex items-center justify-center w-16 h-16 mr-4 rounded-full bg-gradient-to-br from-green-500 to-emerald-600">
                       <Cloud className="w-8 h-8 text-white" />
                     </div>
                     <div>
@@ -657,53 +657,53 @@ const Home = () => {
                       <p className="text-green-600">Deploying to production</p>
                     </div>
                   </div>
-                  <div className="bg-white dark:bg-midnight-50 rounded-lg p-4 shadow-sm">
+                  <div className="p-4 bg-white rounded-lg shadow-sm dark:bg-midnight-50">
                     <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                      <div className="w-2 h-2 mr-2 bg-green-400 rounded-full animate-pulse"></div>
                       Optimizing performance...
                     </div>
                   </div>
                 </div>
 
                 {/* Floating Elements */}
-                <div className="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full animate-bounce"></div>
-                <div className="absolute top-1/2 -left-4 w-6 h-6 bg-blue-400 rounded-full animate-pulse"></div>
-                <div className="absolute -bottom-4 right-1/3 w-4 h-4 bg-purple-400 rounded-full animate-ping"></div>
+                <div className="absolute w-8 h-8 bg-yellow-400 rounded-full -top-4 -right-4 animate-bounce"></div>
+                <div className="absolute w-6 h-6 bg-blue-400 rounded-full top-1/2 -left-4 animate-pulse"></div>
+                <div className="absolute w-4 h-4 bg-purple-400 rounded-full -bottom-4 right-1/3 animate-ping"></div>
               </div>
             </div>
           </div>
 
           {/* Process Steps */}
-          <div className="mt-16 grid md:grid-cols-4 gap-8">
+          <div className="grid gap-8 mt-16 md:grid-cols-4">
             <div className="text-center">
-              <div className="w-16 h-16 bg-electric-blue/10 dark:bg-electric-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-electric-blue/10 dark:bg-electric-blue/20">
                 <span className="text-2xl font-bold text-electric-blue">1</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Planning</h3>
+              <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Planning</h3>
               <p className="text-gray-600 dark:text-gray-400">We analyze your requirements and create a detailed roadmap</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-electric-violet/10 dark:bg-electric-violet/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-electric-violet/10 dark:bg-electric-violet/20">
                 <span className="text-2xl font-bold text-electric-violet">2</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Design</h3>
+              <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Design</h3>
               <p className="text-gray-600 dark:text-gray-400">Our designers create beautiful, user-friendly interfaces</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-electric-cyan/10 dark:bg-electric-cyan/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-electric-cyan/10 dark:bg-electric-cyan/20">
                 <span className="text-2xl font-bold text-electric-cyan">3</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Development</h3>
+              <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Development</h3>
               <p className="text-gray-600 dark:text-gray-400">We build robust, scalable solutions using modern technologies</p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full dark:bg-orange-500/20">
                 <span className="text-2xl font-bold text-orange-500">4</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Launch</h3>
+              <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Launch</h3>
               <p className="text-gray-600 dark:text-gray-400">We deploy your project and provide ongoing support</p>
             </div>
           </div>
@@ -711,47 +711,47 @@ const Home = () => {
       </section>
 
       {/* Interactive Code Playground */}
-      <section className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 text-white relative overflow-hidden">
+      <section className="relative py-20 overflow-hidden text-white bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800">
         <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative container mx-auto px-6">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+        <div className="container relative px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <div className="inline-flex items-center px-4 py-2 mb-6 text-sm font-medium rounded-full bg-white/10 backdrop-blur-sm">
               <Code className="w-4 h-4 mr-2" />
               Interactive Learning
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="mb-6 text-4xl font-bold lg:text-5xl">
               🚀 Code. Learn. Build.
             </h2>
-            <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-indigo-100">
               Master programming with hands-on code samples. From HTML basics to advanced React - 
-              <span className="text-yellow-300 font-semibold">see it, code it, understand it!</span>
+              <span className="font-semibold text-yellow-300">see it, code it, understand it!</span>
             </p>
           </div>
           
           <CodeSamplesPreview />
           
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Link
               to="/code-samples"
-              className="bg-white text-indigo-900 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 inline-flex items-center text-lg shadow-xl"
+              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-indigo-900 transition-all duration-300 bg-white rounded-lg shadow-xl hover:bg-indigo-50"
             >
               🎯 Explore All Code Tutorials
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
         
         {/* Floating Code Elements */}
-        <div className="absolute top-20 left-10 w-16 h-16 bg-yellow-400/20 rounded-lg rotate-12 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-12 h-12 bg-cyan-400/20 rounded-full animate-bounce"></div>
-        <div className="absolute top-1/2 right-20 w-8 h-8 bg-pink-400/20 rounded rotate-45 animate-ping"></div>
+        <div className="absolute w-16 h-16 rounded-lg top-20 left-10 bg-yellow-400/20 rotate-12 animate-pulse"></div>
+        <div className="absolute w-12 h-12 rounded-full bottom-20 right-10 bg-cyan-400/20 animate-bounce"></div>
+        <div className="absolute w-8 h-8 rotate-45 rounded top-1/2 right-20 bg-pink-400/20 animate-ping"></div>
       </section>
 
       {/* Latest Blog Posts */}
-      <section className="py-20 bg-white dark:bg-midnight transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+      <section className="py-20 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 lg:text-5xl dark:text-white">
               Latest from Our Blog
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
@@ -761,13 +761,13 @@ const Home = () => {
           
           <BlogPreview />
           
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Link
               to="/blog"
-              className="bg-gradient-electric text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/40 transition-all duration-300 inline-flex items-center"
+              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/40"
             >
               Read All Articles
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
@@ -777,61 +777,61 @@ const Home = () => {
       <Testimonials />
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section className="py-20 text-white bg-gradient-to-r from-indigo-600 to-purple-600">
+        <div className="container px-6 mx-auto">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              <h2 className="mb-6 text-4xl font-bold lg:text-5xl">
                 Let's Build Something Great Together
               </h2>
-              <p className="text-xl mb-6 text-indigo-100">
+              <p className="mb-6 text-xl text-indigo-100">
                 Ready to transform your business with cutting-edge technology? We're here to help.
               </p>
-              <div className="space-y-3 mb-8">
+              <div className="mb-8 space-y-3">
                 <div className="flex items-center text-indigo-100">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <div className="w-2 h-2 mr-3 bg-yellow-400 rounded-full"></div>
                   <span>Available for freelance, contract, and full-time opportunities</span>
                 </div>
                 <div className="flex items-center text-indigo-100">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <div className="w-2 h-2 mr-3 bg-yellow-400 rounded-full"></div>
                   <span>Based in Nigeria, serving clients globally</span>
                 </div>
                 <div className="flex items-center text-indigo-100">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <div className="w-2 h-2 mr-3 bg-yellow-400 rounded-full"></div>
                   <span>Remote-first team with flexible time zones</span>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
                   to="/contact"
-                  className="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 inline-flex items-center justify-center text-lg"
+                  className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-indigo-600 transition-all duration-300 bg-white rounded-lg hover:bg-indigo-50"
                 >
                   Get Free Consultation
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
                 <a
-                  href="mailto:inntechlabs@gmail.com"
-                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-all duration-300 inline-flex items-center justify-center"
+                  href="mailto:inntechlab@gmail.com"
+                  className="inline-flex items-center justify-center px-8 py-4 font-semibold text-white transition-all duration-300 border-2 border-white rounded-lg hover:bg-white hover:text-indigo-600"
                 >
                   Email Us Directly
                 </a>
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                <h3 className="text-2xl font-bold mb-6">Quick Contact</h3>
+              <div className="p-8 border bg-white/10 backdrop-blur-sm rounded-2xl border-white/20">
+                <h3 className="mb-6 text-2xl font-bold">Quick Contact</h3>
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                    <div className="flex items-center justify-center w-12 h-12 mr-4 rounded-lg bg-white/20">
                       <span className="text-2xl">📧</span>
                     </div>
                     <div>
                       <div className="font-semibold">Email</div>
-                      <div className="text-indigo-200">inntechlabs@gmail.com</div>
+                      <div className="text-indigo-200">inntechlab@gmail.com</div>
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                    <div className="flex items-center justify-center w-12 h-12 mr-4 rounded-lg bg-white/20">
                       <span className="text-2xl">📱</span>
                     </div>
                     <div>
@@ -840,7 +840,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                    <div className="flex items-center justify-center w-12 h-12 mr-4 rounded-lg bg-white/20">
                       <span className="text-2xl">🌍</span>
                     </div>
                     <div>

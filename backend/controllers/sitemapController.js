@@ -3,7 +3,7 @@ const Project = require('../models/Project');
 
 const generateSitemap = async (req, res) => {
     try {
-        const baseUrl = 'https://inntechlabs.vercel.app';
+        const baseUrl = 'https://inntechlab.vercel.app';
         
         // Static pages
         const staticPages = [

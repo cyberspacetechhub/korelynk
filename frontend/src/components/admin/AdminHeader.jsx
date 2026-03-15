@@ -33,18 +33,18 @@ const AdminHeader = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-white shadow-sm border-b border-gray-200">
-      <div className="px-4 py-4 flex justify-between items-center lg:px-6">
+    <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+      <div className="flex items-center justify-between px-4 py-4 lg:px-6">
         <div className="flex items-center">
           <button
             onClick={onMenuClick}
-            className="p-2 rounded-md text-gray-600 hover:bg-gray-100 lg:hidden"
+            className="p-2 text-gray-600 rounded-md hover:bg-gray-100 lg:hidden"
           >
             <Menu className="w-6 h-6" />
           </button>
           <div className="ml-2 lg:ml-0">
-            <h1 className="text-lg sm:text-xl font-bold text-gray-900 lg:text-2xl">Admin Dashboard</h1>
-            <p className="hidden sm:block text-sm text-gray-600">InnTechLabs</p>
+            <h1 className="text-lg font-bold text-gray-900 sm:text-xl lg:text-2xl">Admin Dashboard</h1>
+            <p className="hidden text-sm text-gray-600 sm:block">InnTechLab</p>
           </div>
         </div>
         <div className="flex items-center space-x-2 sm:space-x-4">
@@ -52,19 +52,19 @@ const AdminHeader = ({ onMenuClick }) => {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setShowDropdown(!showDropdown)}
-              className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="flex items-center px-3 py-2 space-x-2 transition-colors rounded-lg hover:bg-gray-100"
             >
-              <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
+              <div className="flex items-center justify-center w-8 h-8 bg-indigo-600 rounded-full">
                 <User className="w-5 h-5 text-white" />
               </div>
-              <span className="hidden sm:block text-sm font-medium text-gray-700">
+              <span className="hidden text-sm font-medium text-gray-700 sm:block">
                 {user?.fullname || 'Administrator'}
               </span>
               <ChevronDown className="w-4 h-4 text-gray-500" />
             </button>
 
             {showDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+              <div className="absolute right-0 z-50 w-48 py-1 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg">
                 <Link
                   to="/admin/profile"
                   className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

@@ -109,7 +109,7 @@ app.use(errorHandler);
 // Setup Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: [process.env.FRONTEND_URL || "https://inntechlabs.vercel.app", "http://localhost:5173"],
+    origin: [process.env.FRONTEND_URL || "https://.vercel.app", "http://localhost:5173"],
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -133,7 +133,7 @@ setInterval(async () => {
 
 // Start server
 server.listen(PORT, () => {
-  console.log(`InnTechLabs server running on port ${PORT}`)
+  console.log(`InnTechLab server running on port ${PORT}`)
 })
 
 // MongoDB connection events

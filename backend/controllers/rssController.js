@@ -2,7 +2,7 @@ const Blog = require('../models/Blog');
 
 const generateRSSFeed = async (req, res) => {
     try {
-        const baseUrl = 'https://inntechlabs.vercel.app';
+        const baseUrl = 'https://inntechlab.vercel.app';
         
         // Get latest published blogs
         const blogs = await Blog.find({ status: 'published' })
@@ -15,16 +15,16 @@ const generateRSSFeed = async (req, res) => {
         let rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>InnTechLabs Blog</title>
-        <description>Latest programming tutorials, web development insights, and technology trends from InnTechLabs</description>
+        <title>InnTechLab Blog</title>
+        <description>Latest programming tutorials, web development insights, and technology trends from InnTechLab</description>
         <link>${baseUrl}/blog</link>
         <atom:link href="${baseUrl}/rss.xml" rel="self" type="application/rss+xml"/>
         <language>en-us</language>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-        <generator>InnTechLabs</generator>
+        <generator>InnTechLab</generator>
         <image>
-            <url>${baseUrl}/inntechlabs.png</url>
-            <title>InnTechLabs</title>
+            <url>${baseUrl}/inntechlab.png</url>
+            <title>InnTechLab</title>
             <link>${baseUrl}</link>
         </image>`;
 
@@ -40,7 +40,7 @@ const generateRSSFeed = async (req, res) => {
             <link>${baseUrl}/blog/${blog.slug}</link>
             <guid isPermaLink="true">${baseUrl}/blog/${blog.slug}</guid>
             <pubDate>${pubDate}</pubDate>
-            <author>${blog.author?.fullname || 'InnTechLabs'}</author>
+            <author>${blog.author?.fullname || 'InnTechLab'}</author>
             ${blog.category ? `<category><![CDATA[${blog.category.name}]]></category>` : ''}
             ${blog.tags ? blog.tags.map(tag => `<category><![CDATA[${tag}]]></category>`).join('') : ''}
         </item>`;

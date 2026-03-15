@@ -59,10 +59,10 @@ const Careers = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
+    <div className="min-h-screen transition-colors bg-white dark:bg-midnight">
       <SEO
         title="Careers - Join Our Tech Team"
-        description="Join InnTechLabs and build the future of technology. We're hiring web developers, mobile app developers, UI/UX designers, and digital marketing specialists globally with remote opportunities."
+        description="Join InnTechLab and build the future of technology. We're hiring web developers, mobile app developers, UI/UX designers, and digital marketing specialists globally with remote opportunities."
         keywords={['tech jobs', 'web developer jobs', 'React developer careers', 'remote developer jobs']}
         url="/careers"
       />
@@ -70,9 +70,9 @@ const Careers = () => {
       {/* Hero */}
       <section className="relative py-20 overflow-hidden bg-gray-900 dark:bg-midnight">
         <div className="absolute inset-0 bg-gradient-glow opacity-30"></div>
-        <div className="relative container mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold font-display text-white mb-6">Join Our Team</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+        <div className="container relative px-6 mx-auto text-center">
+          <h1 className="mb-6 text-5xl font-bold text-white md:text-6xl font-display">Join Our Team</h1>
+          <p className="max-w-3xl mx-auto text-xl text-gray-300">
             Build the future of technology with us. We're looking for passionate individuals
             who want to make a difference in the digital world.
           </p>
@@ -81,18 +81,18 @@ const Careers = () => {
 
       {/* Benefits */}
       <section className="py-20 bg-white dark:bg-midnight">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">Why Work With Us?</h2>
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Why Work With Us?</h2>
             <p className="text-xl text-gray-500 dark:text-gray-400">We believe in creating an environment where talent thrives</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid max-w-6xl gap-8 mx-auto md:grid-cols-2 lg:grid-cols-4">
             {benefits.map((benefit, index) => (
-              <div key={index} className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 text-center hover:border-gray-300 dark:hover:border-white/20 transition-all">
-                <div className="w-16 h-16 bg-gradient-electric rounded-xl flex items-center justify-center mx-auto mb-6 text-white">
+              <div key={index} className="p-8 text-center transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:border-white/10 rounded-2xl hover:border-gray-300 dark:hover:border-white/20">
+                <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 text-white bg-gradient-electric rounded-xl">
                   {benefit.icon}
                 </div>
-                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-3">{benefit.title}</h3>
+                <h3 className="mb-3 text-xl font-bold text-gray-900 font-display dark:text-white">{benefit.title}</h3>
                 <p className="text-gray-500 dark:text-gray-400">{benefit.description}</p>
               </div>
             ))}
@@ -102,17 +102,17 @@ const Careers = () => {
 
       {/* Open Positions */}
       <section className="py-20 bg-gray-50 dark:bg-midnight-100">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">Open Positions</h2>
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Open Positions</h2>
             <p className="text-xl text-gray-500 dark:text-gray-400">Find your next career opportunity with us</p>
           </div>
-          <div className="space-y-6 max-w-5xl mx-auto">
+          <div className="max-w-5xl mx-auto space-y-6">
             {openPositions.map((position) => (
-              <div key={position.id} className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-gray-300 dark:hover:border-white/20 transition-all">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
+              <div key={position.id} className="p-8 transition-all bg-white border border-gray-200 dark:bg-white/5 dark:border-white/10 rounded-2xl hover:border-gray-300 dark:hover:border-white/20">
+                <div className="flex flex-col mb-6 lg:flex-row lg:items-center lg:justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold font-display text-gray-900 dark:text-white mb-2">{position.title}</h3>
+                    <h3 className="mb-2 text-2xl font-bold text-gray-900 font-display dark:text-white">{position.title}</h3>
                     <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
                       <div className="flex items-center"><Briefcase className="w-4 h-4 mr-1" />{position.department}</div>
                       <div className="flex items-center"><MapPin className="w-4 h-4 mr-1" />{position.location}</div>
@@ -120,13 +120,13 @@ const Careers = () => {
                       <div className="flex items-center"><DollarSign className="w-4 h-4 mr-1" />{position.salary}</div>
                     </div>
                   </div>
-                  <button className="mt-4 lg:mt-0 bg-gradient-electric text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all">
+                  <button className="px-6 py-3 mt-4 font-semibold text-white transition-all rounded-lg lg:mt-0 bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50">
                     Apply Now
                   </button>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 mb-6">{position.description}</p>
+                <p className="mb-6 text-gray-600 dark:text-gray-300">{position.description}</p>
                 <div>
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Requirements:</h4>
+                  <h4 className="mb-3 font-semibold text-gray-900 dark:text-white">Requirements:</h4>
                   <ul className="space-y-2">
                     {position.requirements.map((req, index) => (
                       <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
@@ -144,15 +144,15 @@ const Careers = () => {
 
       {/* CTA */}
       <section className="py-24 bg-gray-900 dark:bg-midnight">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">Don't See Your Role?</h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+        <div className="container px-6 mx-auto text-center">
+          <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl font-display">Don't See Your Role?</h2>
+          <p className="max-w-2xl mx-auto mb-12 text-xl text-gray-300">
             We're always looking for talented individuals. Send us your resume and
             let us know how you'd like to contribute to our team.
           </p>
           <a
-            href="mailto:careers@inntechlabs.com"
-            className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-2xl hover:shadow-electric-blue/50 transition-all"
+            href="mailto:careers@inntechlab.com"
+            className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all rounded-lg bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
           >
             Send Your Resume
           </a>

@@ -14,15 +14,15 @@ const SEO = ({
 }) => {
   const { settings } = useSettings();
   
-  const siteUrl = 'https://inntechlabs.vercel.app';
-  const defaultImage = `${siteUrl}/inntechlabs.png`;
+  const siteUrl = 'https://inntechlab.vercel.app';
+  const defaultImage = `${siteUrl}/inntechlab.png`;
   
   const seoTitle = title 
     ? `${title} | ${settings.siteName}` 
     : settings.seoSettings?.metaTitle || `${settings.siteName} - Professional Web & Mobile Development`;
     
   const seoDescription = description || settings.seoSettings?.metaDescription || 
-    'InnTechLabs provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Transform your business with cutting-edge technology.';
+    'InnTechLab provides professional web development, mobile app development, UI/UX design, and digital solutions globally. Transform your business with cutting-edge technology.';
     
   const seoKeywords = [
     ...keywords,
@@ -97,8 +97,8 @@ const SEO = ({
       <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={processedImage} />
       <meta name="twitter:image:alt" content={seoTitle} />
-      <meta name="twitter:site" content="@inntechlabs" />
-      <meta name="twitter:creator" content="@inntechlabs" />
+      <meta name="twitter:site" content="@inntechlab" />
+      <meta name="twitter:creator" content="@inntechlab" />
       
       {/* Article specific tags */}
       {article && (

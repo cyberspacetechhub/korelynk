@@ -94,11 +94,11 @@ const Footer = () => {
                 <>
                   <img
                     src={logoSrc}
-                    alt={settings.siteName || 'InnTechLabs'}
+                    alt={settings.siteName || 'InnTechLab'}
                     className="object-contain w-10 h-10"
                   />
                   <div className="flex flex-col">
-                    <span className="text-xl font-bold text-gray-900 font-display dark:text-white">{settings.siteName?.split(' ')[0] || 'InnTechLabs'}</span>
+                    <span className="text-xl font-bold text-gray-900 font-display dark:text-white">{settings.siteName?.split(' ')[0] || 'InnTechLab'}</span>
                     <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || ''}</span>
                   </div>
                 </>
@@ -108,7 +108,7 @@ const Footer = () => {
                     <Code2 className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xl font-bold text-gray-900 font-display dark:text-white">{settings.siteName?.split(' ')[0] || 'InnTechLabs'}</span>
+                    <span className="text-xl font-bold text-gray-900 font-display dark:text-white">{settings.siteName?.split(' ')[0] || 'InnTechLab'}</span>
                     <span className="-mt-1 text-sm text-electric-cyan">{settings.siteName?.split(' ').slice(1).join(' ') || ''}</span>
                   </div>
                 </>

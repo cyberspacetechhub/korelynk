@@ -42,7 +42,7 @@ const Home = () => {
   const platformPillars = [
     {
       icon: <BookOpen className="w-8 h-8 text-white" />,
-      title: 'InnTechLabs Academy',
+      title: 'InnTechLab Academy',
       description: 'Free programming tutorials similar to W3Schools',
       link: '/academy',
       gradient: 'from-blue-500 to-cyan-500',
@@ -50,7 +50,7 @@ const Home = () => {
     },
     {
       icon: <Briefcase className="w-8 h-8 text-white" />,
-      title: 'InnTechLabs Portfolio',
+      title: 'InnTechLab Portfolio',
       description: 'Founder projects and professional portfolio',
       link: '/portfolio',
       gradient: 'from-purple-500 to-pink-500',
@@ -58,7 +58,7 @@ const Home = () => {
     },
     {
       icon: <ShoppingBag className="w-8 h-8 text-white" />,
-      title: 'InnTechLabs Store',
+      title: 'InnTechLab Store',
       description: 'Online digital store launching soon',
       link: '/store',
       gradient: 'from-orange-500 to-red-500',
@@ -66,7 +66,7 @@ const Home = () => {
     },
     {
       icon: <Sparkles className="w-8 h-8 text-white" />,
-      title: 'InnTechLabs AI',
+      title: 'InnTechLab AI',
       description: 'Future AI tools and automation platform',
       link: '/ai',
       gradient: 'from-indigo-500 to-purple-500',
@@ -83,54 +83,54 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-midnight transition-colors">
+    <div className="min-h-screen transition-colors bg-white dark:bg-midnight">
       <SEO
         title="Building the future of digital innovation"
-        description="InnTechLabs builds tools, education, and infrastructure that empower developers, businesses, and creators."
+        description="InnTechLab builds tools, education, and infrastructure that empower developers, businesses, and creators."
       />
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-midnight transition-colors">
         {/* Dark mode animated blobs */}
         <div className="absolute inset-0 hidden dark:block">
-          <div className="absolute inset-0 bg-gradient-glow opacity-50"></div>
-          <div className="absolute top-20 left-10 w-72 h-72 bg-electric-blue/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-electric-violet/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-electric-cyan/20 rounded-full blur-3xl animate-pulse delay-500"></div>
+          <div className="absolute inset-0 opacity-50 bg-gradient-glow"></div>
+          <div className="absolute rounded-full top-20 left-10 w-72 h-72 bg-electric-blue/20 blur-3xl animate-pulse"></div>
+          <div className="absolute delay-1000 rounded-full bottom-20 right-10 w-96 h-96 bg-electric-violet/20 blur-3xl animate-pulse"></div>
+          <div className="absolute delay-500 rounded-full top-1/2 left-1/2 w-80 h-80 bg-electric-cyan/20 blur-3xl animate-pulse"></div>
         </div>
         {/* Light mode subtle gradient */}
         <div className="absolute inset-0 dark:hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-electric-blue/5 via-transparent to-electric-violet/5"></div>
-          <div className="absolute top-20 left-10 w-72 h-72 bg-electric-blue/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-electric-violet/10 rounded-full blur-3xl"></div>
+          <div className="absolute rounded-full top-20 left-10 w-72 h-72 bg-electric-blue/10 blur-3xl"></div>
+          <div className="absolute rounded-full bottom-20 right-10 w-96 h-96 bg-electric-violet/10 blur-3xl"></div>
         </div>
 
-        <div className="relative container mx-auto px-6 py-20 text-center">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display text-gray-900 dark:text-white mb-8 leading-tight">
+        <div className="container relative px-6 py-20 mx-auto text-center">
+          <h1 className="mb-8 text-5xl font-bold leading-tight text-gray-900 md:text-7xl lg:text-8xl font-display dark:text-white">
             Building the future of
-            <span className="block mt-2 bg-gradient-electric bg-clip-text text-transparent">
+            <span className="block mt-2 text-transparent bg-gradient-electric bg-clip-text">
               digital innovation.
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-            InnTechLabs builds tools, education, and infrastructure that empower developers, businesses, and creators.
+          <p className="max-w-4xl mx-auto mb-12 text-xl leading-relaxed text-gray-600 md:text-2xl dark:text-gray-300">
+            InnTechLab builds tools, education, and infrastructure that empower developers, businesses, and creators.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Link
               to="/academy"
-              className="group px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold text-lg hover:shadow-2xl hover:shadow-electric-blue/50 transition-all duration-300 inline-flex items-center"
+              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-lg group bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
             >
               Explore Academy
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               to="/portfolio"
-              className="px-8 py-4 bg-midnight/10 dark:bg-white/10 backdrop-blur-sm text-gray-900 dark:text-white border border-gray-300 dark:border-white/20 rounded-lg font-semibold text-lg hover:bg-midnight/20 dark:hover:bg-white/20 transition-all duration-300 inline-flex items-center"
+              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-gray-900 transition-all duration-300 border border-gray-300 rounded-lg bg-midnight/10 dark:bg-white/10 backdrop-blur-sm dark:text-white dark:border-white/20 hover:bg-midnight/20 dark:hover:bg-white/20"
             >
               View Portfolio
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
@@ -146,41 +146,41 @@ const Home = () => {
       <TechStackMarquee />
 
       {/* Platform Ecosystem */}
-      <section className="py-24 bg-gray-50 dark:bg-midnight-100 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
+      <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
               Platform Ecosystem
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
               Four pillars powering the future of technology
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {platformPillars.map((pillar, index) => (
               <Link
                 key={index}
                 to={pillar.link}
-                className="group relative bg-white dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl p-8 hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10 transition-all duration-300 hover:scale-105"
+                className="relative p-8 transition-all duration-300 bg-white border border-gray-200 group dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-2xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10 hover:scale-105"
               >
                 {!pillar.available && (
-                  <span className="absolute top-4 right-4 px-3 py-1 bg-electric-violet/20 text-electric-violet text-xs font-semibold rounded-full">
+                  <span className="absolute px-3 py-1 text-xs font-semibold rounded-full top-4 right-4 bg-electric-violet/20 text-electric-violet">
                     Soon
                   </span>
                 )}
                 <div className={`w-16 h-16 bg-gradient-to-br ${pillar.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   {pillar.icon}
                 </div>
-                <h3 className="text-xl font-bold font-display text-gray-900 dark:text-white mb-3">
+                <h3 className="mb-3 text-xl font-bold text-gray-900 font-display dark:text-white">
                   {pillar.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                <p className="mb-4 text-gray-600 dark:text-gray-400">
                   {pillar.description}
                 </p>
-                <div className="flex items-center text-electric-cyan group-hover:translate-x-2 transition-transform">
+                <div className="flex items-center transition-transform text-electric-cyan group-hover:translate-x-2">
                   <span className="text-sm font-medium">Learn more</span>
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
               </Link>
             ))}
@@ -189,10 +189,10 @@ const Home = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-24 bg-white dark:bg-midnight transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
+      <section className="py-24 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
               Featured Projects
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
@@ -201,31 +201,31 @@ const Home = () => {
           </div>
 
           {loading ? (
-            <div className="flex justify-center items-center h-32">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-electric-cyan"></div>
+            <div className="flex items-center justify-center h-32">
+              <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-electric-cyan"></div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {featuredProjects.map((project) => (
-                <div key={project._id} className="group bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10 transition-all duration-300">
+                <div key={project._id} className="overflow-hidden transition-all duration-300 border border-gray-200 group bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-2xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10">
                   <div className="relative overflow-hidden">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="object-cover w-full h-48 transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 to-transparent group-hover:opacity-100">
+                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
                         {project.liveUrl && (
                           <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                            className="bg-white text-gray-900 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">
+                            className="px-3 py-1 text-sm font-medium text-gray-900 transition-colors bg-white rounded-full hover:bg-gray-100">
                             Live Demo
                           </a>
                         )}
                         {project.githubUrl && (
                           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-                            className="bg-gray-900 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+                            className="px-3 py-1 text-sm font-medium text-white transition-colors bg-gray-900 rounded-full hover:bg-gray-800">
                             GitHub
                           </a>
                         )}
@@ -233,11 +233,11 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{project.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description.substring(0, 100)}...</p>
+                    <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
+                    <p className="mb-4 text-gray-600 dark:text-gray-400">{project.description.substring(0, 100)}...</p>
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-electric-blue/10 text-electric-blue dark:text-electric-cyan border border-electric-blue/20 dark:border-electric-cyan/20 rounded-full text-sm font-medium">{tech}</span>
+                        <span key={idx} className="px-3 py-1 text-sm font-medium border rounded-full bg-electric-blue/10 text-electric-blue dark:text-electric-cyan border-electric-blue/20 dark:border-electric-cyan/20">{tech}</span>
                       ))}
                     </div>
                   </div>
@@ -246,13 +246,13 @@ const Home = () => {
             </div>
           )}
 
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Link
               to="/portfolio"
-              className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
             >
               View All Projects
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
@@ -260,14 +260,14 @@ const Home = () => {
 
       {/* Stats Section */}
       <section className="py-24 bg-gradient-electric">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="container px-6 mx-auto">
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-5xl lg:text-6xl font-bold font-display text-white mb-2">
+                <div className="mb-2 text-5xl font-bold text-white lg:text-6xl font-display">
                   {stat.number}
                 </div>
-                <div className="text-white/70 text-lg">
+                <div className="text-lg text-white/70">
                   {stat.label}
                 </div>
               </div>
@@ -277,36 +277,36 @@ const Home = () => {
       </section>
 
       {/* Interactive Code Learning */}
-      <section className="py-24 bg-gray-50 dark:bg-midnight-100 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
+      <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
               Interactive Code Learning
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
               Master programming with hands-on code samples from HTML basics to advanced React
             </p>
           </div>
 
           <CodeSamplesPreview />
 
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Link
               to="/code-samples"
-              className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
             >
               Explore All Code Tutorials
-              <Code2 className="ml-2 w-5 h-5" />
+              <Code2 className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Latest Blog Posts */}
-      <section className="py-24 bg-white dark:bg-midnight transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
+      <section className="py-24 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
               Latest from Our Blog
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
@@ -316,13 +316,13 @@ const Home = () => {
 
           <BlogPreview />
 
-          <div className="text-center mt-12">
+          <div className="mt-12 text-center">
             <Link
               to="/blog"
-              className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
             >
               Read All Articles
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
@@ -332,13 +332,13 @@ const Home = () => {
       <Testimonials />
 
       {/* Free Learning */}
-      <section className="py-24 bg-gray-50 dark:bg-midnight-100 transition-colors">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-4">
+      <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
+        <div className="container px-6 mx-auto">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
               Free Learning
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
               Master web development with our comprehensive tutorials
             </p>
           </div>
@@ -348,11 +348,11 @@ const Home = () => {
               <Link
                 key={index}
                 to="/academy"
-                className="group px-6 py-4 bg-white dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-md dark:hover:bg-white/10 transition-all duration-300 flex items-center space-x-3"
+                className="flex items-center px-6 py-4 space-x-3 transition-all duration-300 bg-white border border-gray-200 group dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-md dark:hover:bg-white/10"
               >
                 <span className="text-3xl">{tutorial.icon}</span>
                 <span className="text-lg font-semibold text-gray-900 dark:text-white">{tutorial.name}</span>
-                <span className="text-gray-500 dark:text-gray-400 text-sm">fundamentals</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">fundamentals</span>
               </Link>
             ))}
           </div>
@@ -360,57 +360,57 @@ const Home = () => {
           <div className="text-center">
             <Link
               to="/academy"
-              className="inline-flex items-center px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-electric-blue/50 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
             >
               Start Learning Free
-              <Code2 className="ml-2 w-5 h-5" />
+              <Code2 className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Vision — Connecting businesses */}
-      <section className="py-24 bg-white dark:bg-midnight transition-colors">
-        <div className="container mx-auto px-6">
+      <section className="py-24 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-full mb-8">
-              <Layers className="w-4 h-4 text-electric-cyan mr-2" />
+            <div className="inline-flex items-center px-4 py-2 mb-8 bg-gray-100 border border-gray-200 rounded-full dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10">
+              <Layers className="w-4 h-4 mr-2 text-electric-cyan" />
               <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Our Vision</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold font-display text-gray-900 dark:text-white mb-8">
+            <h2 className="mb-8 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
               Connecting businesses, developers, and innovation
             </h2>
 
-            <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-12">
-              InnTechLabs's long-term mission is to build technology that bridges the gap between businesses and developers,
+            <p className="mb-12 text-xl leading-relaxed text-gray-600 dark:text-gray-400">
+              InnTechLab's long-term mission is to build technology that bridges the gap between businesses and developers,
               creating an ecosystem where innovation thrives. We're building the infrastructure for the next generation
               of digital solutions across Africa and beyond.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="p-6 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md transition-all">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <div className="grid gap-8 md:grid-cols-3">
+              <div className="p-6 transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md">
+                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
                   <Code2 className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">For Developers</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Tools and education to build better</p>
+                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">For Developers</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Tools and education to build better</p>
               </div>
 
-              <div className="p-6 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md transition-all">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <div className="p-6 transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md">
+                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
                   <Briefcase className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">For Businesses</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Infrastructure to scale faster</p>
+                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">For Businesses</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Infrastructure to scale faster</p>
               </div>
 
-              <div className="p-6 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md transition-all">
-                <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <div className="p-6 transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md">
+                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500">
                   <Zap className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">For Innovation</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">Platform for the future</p>
+                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">For Innovation</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Platform for the future</p>
               </div>
             </div>
           </div>
@@ -420,27 +420,27 @@ const Home = () => {
       <FloatingSocial />
 
       {/* CTA — Ready to build the future */}
-      <section className="py-24 bg-gray-900 dark:bg-midnight relative overflow-hidden transition-colors">
+      <section className="relative py-24 overflow-hidden transition-colors bg-gray-900 dark:bg-midnight">
         <div className="absolute inset-0 bg-gradient-electric opacity-10"></div>
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-electric-blue/15 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-electric-violet/15 rounded-full blur-3xl"></div>
-        <div className="relative container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-white mb-6">
+        <div className="absolute top-0 rounded-full left-1/4 w-96 h-96 bg-electric-blue/15 blur-3xl"></div>
+        <div className="absolute bottom-0 rounded-full right-1/4 w-96 h-96 bg-electric-violet/15 blur-3xl"></div>
+        <div className="container relative px-6 mx-auto text-center">
+          <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl font-display">
             Ready to build the future?
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-            Join thousands of developers and businesses already using InnTechLabs
+          <p className="max-w-2xl mx-auto mb-12 text-xl text-gray-300">
+            Join thousands of developers and businesses already using InnTechLab
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col justify-center gap-6 sm:flex-row">
             <Link
               to="/contact"
-              className="px-8 py-4 bg-gradient-electric text-white rounded-lg font-semibold text-lg hover:shadow-2xl hover:shadow-electric-blue/50 transition-all duration-300"
+              className="px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
             >
               Get Started Today
             </Link>
             <Link
               to="/about"
-              className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/30 rounded-lg font-semibold text-lg hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              className="px-8 py-4 text-lg font-semibold text-white transition-all duration-300 border rounded-lg bg-white/10 backdrop-blur-sm border-white/30 hover:bg-white/20 hover:border-white/50"
             >
               Learn More About Us
             </Link>

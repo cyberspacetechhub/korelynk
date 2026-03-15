@@ -21,7 +21,7 @@ const seedInstructors = async () => {
   const instructors = [
     {
       fullName: 'John Smith',
-      email: 'john.smith@inntechlabs.com',
+      email: 'john.smith@inntechlab.com',
       password: 'password123',
       phone: '+234-801-234-5678',
       bio: 'Full-stack developer with 8+ years experience in web development and teaching.',
@@ -32,7 +32,7 @@ const seedInstructors = async () => {
     },
     {
       fullName: 'Sarah Johnson',
-      email: 'sarah.johnson@inntechlabs.com',
+      email: 'sarah.johnson@inntechlab.com',
       password: 'password123',
       phone: '+234-802-345-6789',
       bio: 'Mobile app developer specializing in React Native and Flutter.',
@@ -43,7 +43,7 @@ const seedInstructors = async () => {
     },
     {
       fullName: 'Michael Brown',
-      email: 'michael.brown@inntechlabs.com',
+      email: 'michael.brown@inntechlab.com',
       password: 'password123',
       phone: '+234-803-456-7890',
       bio: 'Backend specialist with expertise in Node.js, Python, and cloud technologies.',
