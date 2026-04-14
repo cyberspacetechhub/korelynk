@@ -2,8 +2,8 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://inntechlab.vercel.app/sitemap.xml
-Sitemap: https://inntechlab.vercel.app/rss.xml
+Sitemap: https://academy.inntechlab.online/sitemap.xml
+Sitemap: https://academy.inntechlab.online/rss.xml
 
 # Crawl-delay
 Crawl-delay: 1
