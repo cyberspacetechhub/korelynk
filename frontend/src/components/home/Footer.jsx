@@ -34,12 +34,12 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Academy', href: '/academy' },
-    { name: 'Portfolio', href: '/portfolio' },
-    { name: 'Store', href: '/store' },
-    { name: 'AI', href: '/ai' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Home', href: '/', external: false },
+    { name: 'Academy', href: 'https://academy.inntechlab.online', external: true },
+    { name: 'Portfolio', href: '/portfolio', external: false },
+    { name: 'Store', href: '/store', external: false },
+    { name: 'AI', href: '/ai', external: false },
+    { name: 'Contact', href: '/contact', external: false }
   ];
 
   const resources = [
@@ -152,6 +152,17 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
+                  {link.external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center text-gray-400 transition-colors hover:text-electric-cyan group"
+                    >
+                      <span className="w-0 group-hover:w-2 h-0.5 bg-electric-cyan transition-all mr-0 group-hover:mr-2"></span>
+                      {link.name}
+                    </a>
+                  ) : (
                   <Link 
                     to={link.href} 
                     className="inline-flex items-center text-gray-400 transition-colors hover:text-electric-cyan group"
@@ -159,6 +170,7 @@ const Footer = () => {
                     <span className="w-0 group-hover:w-2 h-0.5 bg-electric-cyan transition-all mr-0 group-hover:mr-2"></span>
                     {link.name}
                   </Link>
+                  )}
                 </li>
               ))}
             </ul>

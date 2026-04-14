@@ -109,7 +109,7 @@ app.use(errorHandler);
 // Setup Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: [process.env.FRONTEND_URL || "https://.vercel.app", "http://localhost:5173"],
+    origin: [process.env.FRONTEND_URL || "https://inntechlab.online", "https://www.inntechlab.online", "http://localhost:5173", "https://academy.inntechlab.online"],
     methods: ["GET", "POST"],
     credentials: true
   }

@@ -37,7 +37,6 @@ const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Academy', href: '/academy' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Store', href: '/store', badge: 'Soon' },
     { name: 'AI', href: '/ai', badge: 'Soon' },
@@ -87,6 +86,17 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="items-center hidden space-x-4 md:flex">
             {navigation.map((item) => (
+              item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 text-sm font-medium text-gray-600 transition-all rounded-md dark:text-gray-300 hover:text-electric-cyan dark:hover:text-white"
+                >
+                  {item.name}
+                </a>
+              ) : (
               <Link
                 key={item.name}
                 to={item.href}
@@ -106,6 +116,7 @@ const Header = () => {
                   <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-electric"></span>
                 )}
               </Link>
+              )
             ))}
             
             {/* Search Button */}
@@ -168,6 +179,17 @@ const Header = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 dark:bg-midnight-50 dark:border-electric-blue/20">
               {navigation.map((item) => (
+                item.external ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md dark:text-gray-300 hover:text-electric-cyan hover:bg-electric-blue/5"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
                 <Link
                   key={item.name}
                   to={item.href}
@@ -180,6 +202,7 @@ const Header = () => {
                 >
                   {item.name}
                 </Link>
+                )
               ))}
               
               {/* Mobile Search Button */}

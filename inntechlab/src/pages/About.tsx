@@ -31,39 +31,41 @@ export default function About() {
         {/* Header */}
         <div className="mb-16">
           <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">Who we are</p>
-          <h1 className="mb-4 text-4xl font-bold text-gray-900">About InnTechLab</h1>
+          <h1 className="mb-4 text-4xl font-bold font-display text-gray-900">About InnTechLab</h1>
           <p className="max-w-2xl leading-relaxed text-gray-500">
-            We're a small, focused development studio based in Nigeria — building digital products
-            for clients across Africa and beyond. We believe great software is the result of
-            clear thinking, good design, and disciplined engineering.
+            InnTechLab is a software development company based in Abakaliki, Nigeria.
+            We build web apps, mobile apps, and digital products for businesses across
+            Africa and beyond. We believe great software comes from clear thinking,
+            honest communication, and disciplined execution.
           </p>
         </div>
 
         {/* Story */}
         <div className="p-10 mb-12 border border-gray-100 rounded-2xl">
-          <h2 className="mb-5 text-xl font-bold text-gray-900">Our story</h2>
+          <h2 className="mb-5 text-xl font-bold font-display text-gray-900">Our story</h2>
           <div className="space-y-4 text-sm leading-relaxed text-gray-500">
             <p>
-              InnTechLab was founded with a simple belief: that businesses in Africa deserve
-              the same quality of digital products as anywhere else in the world. Too often,
-              local businesses are underserved by generic templates or overcharged by agencies
-              that don't understand their context.
+              InnTechLab was started with one goal: to build software that actually works for
+              the people using it. We saw too many businesses in Nigeria and across Africa
+              stuck with poor-quality websites, broken apps, and developers who disappeared
+              after delivery.
             </p>
             <p>
-              We started by building for small businesses and startups — helping them launch
-              faster, look professional, and compete digitally. Over time, we've grown into a
-              studio that handles everything from brand identity to complex full-stack platforms.
+              We started small — taking on projects for local businesses and startups, helping
+              them launch faster and look credible online. Word spread, and we grew into a
+              full-service development company handling everything from brand identity to
+              complex full-stack platforms.
             </p>
             <p>
-              Today, we work with clients globally, with a remote-first team that values
-              autonomy, craftsmanship, and honest communication.
+              Today we work with clients in Nigeria, the UK, the US, and across Africa.
+              We're remote-first, deadline-driven, and genuinely invested in every project we take on.
             </p>
           </div>
         </div>
 
         {/* Milestones */}
         <div className="mb-12">
-          <h2 className="mb-8 text-xl font-bold text-gray-900">Timeline</h2>
+          <h2 className="mb-8 text-xl font-bold font-display text-gray-900">Timeline</h2>
           <div className="space-y-0">
             {milestones.map(({ year, event }, i) => (
               <div key={year} className="flex gap-6">
@@ -84,7 +86,7 @@ export default function About() {
 
         {/* Values */}
         <div className="mb-12">
-          <h2 className="mb-8 text-xl font-bold text-gray-900">What we stand for</h2>
+          <h2 className="mb-8 text-xl font-bold font-display text-gray-900">What we stand for</h2>
           <div className="grid gap-5 sm:grid-cols-2">
             {values.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex gap-4 p-6 border border-gray-100 rounded-2xl">
@@ -102,7 +104,7 @@ export default function About() {
 
         {/* Team */}
         <div className="mb-12">
-          <h2 className="mb-8 text-xl font-bold text-gray-900">The team</h2>
+          <h2 className="mb-8 text-xl font-bold font-display text-gray-900">The team</h2>
           <div className="flex justify-start">
             {team.map(({ name, role, bio, initials }) => (
               <div key={name} className="w-full max-w-sm p-8 border border-gray-100 rounded-2xl">
@@ -119,7 +121,7 @@ export default function About() {
 
         {/* Contact */}
         <div className="p-10 border border-gray-100 rounded-2xl bg-gray-50">
-          <h2 className="mb-2 text-xl font-bold text-gray-900">Work with us</h2>
+          <h2 className="mb-2 text-xl font-bold font-display text-gray-900">Work with us</h2>
           <p className="max-w-md mb-6 text-sm text-gray-500">
             We're always open to interesting projects. Reach out and let's see if we're a good fit.
           </p>

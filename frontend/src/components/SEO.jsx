@@ -14,8 +14,8 @@ const SEO = ({
 }) => {
   const { settings } = useSettings();
   
-  const siteUrl = 'https://inntechlab.vercel.app';
-  const defaultImage = `${siteUrl}/inntechlab.png`;
+  const siteUrl = 'https://academy.inntechlab.online';
+  const defaultImage = `${siteUrl}/inntechlabbg.png`;
   
   const seoTitle = title 
     ? `${title} | ${settings.siteName}` 

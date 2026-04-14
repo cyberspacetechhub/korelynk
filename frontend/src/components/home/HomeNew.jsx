@@ -44,7 +44,7 @@ const Home = () => {
       icon: <BookOpen className="w-8 h-8 text-white" />,
       title: 'InnTechLab Academy',
       description: 'Free programming tutorials similar to W3Schools',
-      link: '/academy',
+      link: 'https://academy.inntechlab.online',
       gradient: 'from-blue-500 to-cyan-500',
       available: true
     },
@@ -119,10 +119,10 @@ const Home = () => {
 
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Link
-              to="/academy"
+              to="/contact"
               className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-lg group bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
             >
-              Explore Academy
+              Contact Us
               <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link

@@ -49,13 +49,14 @@ export default function Home() {
                 <Globe className="w-3.5 h-3.5" />
                 Web · Mobile · Design
               </span>
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
+              <h1 className="text-5xl md:text-6xl font-bold font-display text-gray-900 leading-[1.1] tracking-tight">
                 We build software<br />
                 <span className="text-brand-600">people love to use.</span>
               </h1>
               <p className="max-w-xl mt-6 text-lg leading-relaxed text-gray-500">
-                InnTechLab is a product-focused development studio. We design and build
-                web apps, mobile apps, and digital experiences for startups and growing businesses.
+                InnTechLab is a software development company based in Nigeria. We design
+                and build web apps, mobile apps, and digital products that help startups
+                and businesses grow.
               </p>
               <div className="flex flex-col gap-4 mt-10 sm:flex-row">
                 <Link
@@ -65,7 +66,7 @@ export default function Home() {
                   View our work <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a
-                  href="mailto:inntechlab@gmail.com"
+                  href="mailto:inntechlaabhq@gmail.com"
                   className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-50"
                 >
                   Start a project
@@ -110,7 +111,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">What we do</p>
-            <h2 className="text-3xl font-bold text-gray-900">Services</h2>
+            <h2 className="text-3xl font-bold font-display text-gray-900">Services</h2>
             <p className="max-w-lg mt-3 text-gray-500">
               End-to-end digital product development — from idea to deployment.
             </p>
@@ -140,7 +141,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">Our work</p>
-              <h2 className="text-3xl font-bold text-gray-900">Featured projects</h2>
+              <h2 className="text-3xl font-bold font-display text-gray-900">Featured projects</h2>
             </div>
             <Link to="/projects" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700">
               All projects <ArrowRight className="w-4 h-4" />
@@ -236,7 +237,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">How we work</p>
-            <h2 className="text-3xl font-bold text-gray-900">Our process</h2>
+            <h2 className="text-3xl font-bold font-display text-gray-900">Our process</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map(({ step, title, desc }) => (
@@ -255,10 +256,11 @@ export default function Home() {
         <div className="grid items-center max-w-6xl gap-16 mx-auto md:grid-cols-2">
           <div>
             <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">Why InnTechLab</p>
-            <h2 className="mb-6 text-3xl font-bold text-gray-900">Built for teams that care about quality</h2>
+            <h2 className="mb-6 text-3xl font-bold font-display text-gray-900">We deliver results, not just code</h2>
             <p className="mb-8 leading-relaxed text-gray-500">
-              We're not a body-shop. We're a small, focused studio that takes on a limited number
-              of projects at a time — so every client gets our full attention.
+              We take on a limited number of projects at a time so every client gets
+              our full focus. You work directly with the people building your product —
+              no account managers, no handoffs.
             </p>
             <ul className="space-y-4">
               {[
@@ -293,13 +295,13 @@ export default function Home() {
       {/* CTA */}
       <section className="px-6 py-24 bg-brand-600">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white">Ready to build something great?</h2>
+          <h2 className="text-3xl font-bold font-display text-white">Ready to build something great?</h2>
           <p className="max-w-xl mx-auto mt-4 text-brand-100">
             Tell us about your project and we'll get back to you within 24 hours.
           </p>
           <div className="flex flex-col justify-center gap-4 mt-8 sm:flex-row">
             <a
-              href="mailto:inntechlab@gmail.com"
+              href="mailto:inntechlaabhq@gmail.com"
               className="px-8 py-3 text-sm font-semibold transition-colors bg-white rounded-lg text-brand-600 hover:bg-brand-50"
             >
               Start a conversation
