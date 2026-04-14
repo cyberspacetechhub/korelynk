@@ -9,6 +9,7 @@ import Projects from './pages/Projects'
 import About from './pages/About'
 
 import WhatsAppButton from './components/WhatsAppButton'
+import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen flex flex-col bg-white font-sans">
+        <ScrollToTop />
         <Navbar />
         <div className="flex-1">
           <Routes>
