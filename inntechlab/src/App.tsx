@@ -8,6 +8,9 @@ import Services from './pages/Services'
 import Projects from './pages/Projects'
 import About from './pages/About'
 
+import WhatsAppButton from './components/WhatsAppButton'
+import NotFound from './pages/NotFound'
+
 export default function App() {
   const [loading, setLoading] = useState(true)
   const [fadeOut, setFadeOut] = useState(false)
@@ -39,9 +42,11 @@ export default function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />
+        <WhatsAppButton />
       </div>
     </BrowserRouter>
   )

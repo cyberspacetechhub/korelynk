@@ -8,7 +8,7 @@ const links = [
   { to: '/about', label: 'About' },
 ]
 
-const ACADEMY_URL = 'https://academy.inntechlab.com'
+const ACADEMY_URL = 'https://academy.inntechlab.online'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
