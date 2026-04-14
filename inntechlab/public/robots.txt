@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inntechlab.online/sitemap.xml
+
+Disallow: /admin/
