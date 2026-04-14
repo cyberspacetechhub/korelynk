@@ -23,7 +23,7 @@ const appSettingsSchema = new mongoose.Schema({
   },
   contactEmail: {
     type: String,
-    default: 'inntechlab@gmail.com'
+    default: 'inntechlabhq@gmail.com'
   },
   contactPhone: {
     type: String,

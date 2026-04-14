@@ -27,7 +27,7 @@ export const SettingsProvider = ({ children }) => {
     logo: '',
     favicon: '',
     darkIcon: '',
-    contactEmail: 'inntechlab@gmail.com',
+    contactEmail: 'inntechlabhq@gmail.com',
     contactPhone: '+234-916-140-3450',
     address: 'Abakaliki, Ebonyi State, Nigeria',
     socialLinks: {

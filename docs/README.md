@@ -215,7 +215,7 @@ This project is licensed under the MIT License.
 
 ## 📞 Support
 
-For support, email inntechlab@gmail.com or create an issue in the repository.
+For support, email inntechlabhq@gmail.com or create an issue in the repository.
 
 ---
 

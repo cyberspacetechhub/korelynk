@@ -143,7 +143,7 @@ export default function Projects() {
           <h2 className="text-xl font-bold text-gray-900">Have a project in mind?</h2>
           <p className="mt-2 text-sm text-gray-500">Let's build it together.</p>
           <a
-            href="mailto:inntechlab@gmail.com"
+            href="mailto:inntechlabhq@gmail.com"
             className="inline-block px-6 py-3 mt-6 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700"
           >
             Get in touch

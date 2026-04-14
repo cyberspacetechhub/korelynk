@@ -104,7 +104,7 @@ export default function Services() {
             Let's talk. We'll help you figure out the right approach for your project.
           </p>
           <a
-            href="mailto:inntechlab@gmail.com"
+            href="mailto:inntechlabhq@gmail.com"
             className="inline-block px-6 py-3 mt-6 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700"
           >
             Book a free consultation

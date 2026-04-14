@@ -53,7 +53,7 @@ const sections = [
     title: '7. Contact Us',
     content: `If you have any questions about this Privacy Policy, please contact us at:
 
-Email: inntechlab@gmail.com
+Email: inntechlabhq@gmail.com
 Address: Abakaliki, Ebonyi State, Nigeria`
   }
 ];

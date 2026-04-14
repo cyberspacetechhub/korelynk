@@ -810,7 +810,7 @@ const Home = () => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
                 <a
-                  href="mailto:inntechlab@gmail.com"
+                  href="mailto:inntechlabhq@gmail.com"
                   className="inline-flex items-center justify-center px-8 py-4 font-semibold text-white transition-all duration-300 border-2 border-white rounded-lg hover:bg-white hover:text-indigo-600"
                 >
                   Email Us Directly
@@ -827,7 +827,7 @@ const Home = () => {
                     </div>
                     <div>
                       <div className="font-semibold">Email</div>
-                      <div className="text-indigo-200">inntechlab@gmail.com</div>
+                      <div className="text-indigo-200">inntechlabhq@gmail.com</div>
                     </div>
                   </div>
                   <div className="flex items-center">

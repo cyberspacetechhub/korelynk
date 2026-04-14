@@ -54,7 +54,7 @@ const sections = [
     title: '10. Contact Information',
     content: `For questions about these Terms of Service, please contact us at:
 
-Email: inntechlab@gmail.com
+Email: inntechlabhq@gmail.com
 Address: Abakaliki, Ebonyi State, Nigeria`
   }
 ];
