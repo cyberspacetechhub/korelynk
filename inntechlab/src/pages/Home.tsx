@@ -85,7 +85,7 @@ export default function Home() {
                 />
               </div>
               {/* Floating badge */}
-              <div className="absolute flex items-center gap-3 px-4 py-2.5 bg-white border border-gray-100 shadow-lg bottom-2 left-4 lg:-bottom-1 lg:-left-5 rounded-xl">
+              <div className="absolute flex items-center gap-3 px-4 py-2.5 bg-white border border-gray-100 shadow-lg bottom-2 left-4 lg:bottom-16 lg:-left-5 rounded-xl">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-sm font-semibold text-gray-800">Available for new projects</span>
               </div>
