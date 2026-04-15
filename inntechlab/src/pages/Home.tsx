@@ -66,7 +66,7 @@ export default function Home() {
                   View our work <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a
-                  href="mailto:inntechlaabhq@gmail.com"
+                  href="mailto:inntechlabhq@gmail.com"
                   className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-50"
                 >
                   Start a project
@@ -301,7 +301,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col justify-center gap-4 mt-8 sm:flex-row">
             <a
-              href="mailto:inntechlaabhq@gmail.com"
+              href="mailto:inntechlabhq@gmail.com"
               className="px-8 py-3 text-sm font-semibold transition-colors bg-white rounded-lg text-brand-600 hover:bg-brand-50"
             >
               Start a conversation

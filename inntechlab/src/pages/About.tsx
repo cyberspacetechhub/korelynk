@@ -127,10 +127,10 @@ export default function About() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <a
-              href="mailto:inntechlaabhq@gmail.com"
+              href="mailto:inntechlabhq@gmail.com"
               className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700"
             >
-              <Mail className="w-4 h-4" /> inntechlaabhq@gmail.com
+              <Mail className="w-4 h-4" /> inntechlabhq@gmail.com
             </a>
             <a
               href="tel:+2349167071094"

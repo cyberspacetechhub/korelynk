@@ -55,7 +55,7 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="mailto:inntechlaabhq@gmail.com"
+          href="mailto:inntechlabhq@gmail.com"
           className="hidden px-4 py-2 text-sm font-medium text-white transition-colors rounded-lg md:inline-flex bg-brand-600 hover:bg-brand-700"
         >
           Get in touch
@@ -102,7 +102,7 @@ export default function Navbar() {
             Academy ↗
           </a>
           <a
-            href="mailto:inntechlaabhq@gmail.com"
+            href="mailto:inntechlabhq@gmail.com"
             className="block px-4 py-2 mt-2 text-sm font-medium text-center text-white rounded-lg bg-brand-600"
           >
             Get in touch
