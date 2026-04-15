@@ -39,7 +39,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2.5">
-              <img src="/ITL-LOGO1-dark.svg" alt="InnTechLab" className="w-auto h-7" />
+              <img src="/ITL-LOGO1-dark.svg" alt="InnTechLab" className="w-8 h-8" />
               <span className="text-base font-bold tracking-tight text-gray-900">
                 Inn<span className="text-brand-600">Tech</span>Lab
               </span>

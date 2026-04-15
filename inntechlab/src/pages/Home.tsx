@@ -78,7 +78,7 @@ export default function Home() {
             <div className="relative pb-10 lg:pb-16">
               <div className="overflow-hidden border border-gray-100 shadow-2xl rounded-2xl shadow-gray-200">
                 <img
-                  src="/hero-image-coding-screen.jpg"
+                  src="/hero-image-coding-screen.webp"
                   alt="InnTechLab development workspace"
                   className="w-full h-56 sm:h-72 lg:h-[480px] object-cover"
                   loading="eager"

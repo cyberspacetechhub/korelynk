@@ -50,9 +50,11 @@ const SEO = ({
 
   // For Cloudinary: resize to 1200x630 using c_pad (no cropping) with white bg
   // For non-Cloudinary: use as-is — must be absolute https URL
-  const processedImage = seoImage.includes('cloudinary.com')
-    ? seoImage.replace('/upload/', '/upload/w_1200,h_630,c_pad,b_white,f_jpg,q_auto/')
-    : seoImage;
+  const processedImage = (() => {
+    if (!seoImage.includes('cloudinary.com')) return seoImage;
+    if (seoImage.includes('/upload/w_') || seoImage.includes('/upload/c_')) return seoImage;
+    return seoImage.replace('/upload/', '/upload/w_1200,h_630,c_pad,b_white,f_jpg,q_auto/');
+  })();
 
   // Detect image type from URL for og:image:type
   const imageType = processedImage.includes('.png') ? 'image/png'
