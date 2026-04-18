@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PageSEO from '../components/PageSEO'
+import BrandedPlaceholder from '../components/BrandedPlaceholder'
 import { ExternalLink, GitBranch } from 'lucide-react'
 import { useProjects } from '../lib/useProjects'
 
@@ -49,8 +50,8 @@ export default function Projects() {
 
           <p className="max-w-xl mt-3 text-gray-500">
             A selection of web and mobile app development projects we've built for startups 
-            and businesses. Learn more <a href="/services" className="text-brand-600 underline">about our services</a> 
-            or <a href="/about" className="text-brand-600 underline">about us</a>.
+            and businesses. Learn more <a href="/services" className="underline text-brand-600">about our services</a> 
+            or <a href="/about" className="underline text-brand-600">about us</a>.
           </p>
         </div>
 
@@ -59,7 +60,7 @@ export default function Projects() {
           <h2 className="mb-4 text-xl font-bold text-gray-900">
             Our Software Development Portfolio
           </h2>
-          <p className="text-sm text-gray-500 leading-relaxed">
+          <p className="text-sm leading-relaxed text-gray-500">
             InnTechLab is a software development company in Nigeria delivering web applications,
             mobile apps, and custom software solutions. Our portfolio showcases scalable,
             high-performance digital products built for real-world use across Africa and globally.
@@ -85,14 +86,14 @@ export default function Projects() {
 
         {/* Loading */}
         {isLoading && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="rounded-2xl border border-gray-100 overflow-hidden animate-pulse">
+              <div key={i} className="overflow-hidden border border-gray-100 rounded-2xl animate-pulse">
                 <div className="h-48 bg-gray-100" />
                 <div className="p-6 space-y-3">
-                  <div className="h-3 w-16 bg-gray-100 rounded-full" />
-                  <div className="h-4 w-3/4 bg-gray-100 rounded-full" />
-                  <div className="h-3 w-full bg-gray-100 rounded-full" />
+                  <div className="w-16 h-3 bg-gray-100 rounded-full" />
+                  <div className="w-3/4 h-4 bg-gray-100 rounded-full" />
+                  <div className="w-full h-3 bg-gray-100 rounded-full" />
                 </div>
               </div>
             ))}
@@ -121,12 +122,12 @@ export default function Projects() {
                     className="flex flex-col overflow-hidden bg-white border border-gray-100 rounded-2xl hover:shadow-sm"
                   >
                     <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={`${project.title} - web or mobile app development project by InnTechLab`}
-                        className="object-cover w-full h-full"
-                        loading="lazy"
-                      />
+                        <BrandedPlaceholder
+                          title={project.title}
+                          subtitle={project.category}
+                          className="h-48"
+                          aspectRatio="16/9"
+                        />
                     </div>
 
                     <div className="flex flex-col flex-1 p-6">

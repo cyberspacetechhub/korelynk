@@ -6,6 +6,7 @@ import {
 import { useProjects } from '../lib/useProjects'
 import Testimonials from '../components/Testimonials'
 import PageSEO from '../components/PageSEO'
+import BrandedPlaceholder from '../components/BrandedPlaceholder'
 
 const stats = [
   { value: '50+', label: 'Projects delivered' },
@@ -65,7 +66,7 @@ export default function Home() {
                 and businesses grow.
               </p>
               <p className="mt-4 text-sm text-gray-500">
-                Explore our <Link to="/projects" className="text-brand-600 underline">projects</Link> or view our <Link to="/services" className="text-brand-600 underline">services</Link>.
+                Explore our <Link to="/projects" className="underline text-brand-600">projects</Link> or view our <Link to="/services" className="underline text-brand-600">services</Link>.
               </p>
               <div className="flex flex-col gap-4 mt-10 sm:flex-row">
                 <Link
@@ -120,7 +121,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">What we do</p>
-            <h2 className="text-3xl font-bold font-display text-gray-900">Services</h2>
+            <h2 className="text-3xl font-bold text-gray-900 font-display">Services</h2>
             <p className="max-w-lg mt-3 text-gray-500">
               End-to-end digital product development — from idea to deployment.
             </p>
@@ -150,7 +151,7 @@ export default function Home() {
           <div className="flex items-end justify-between mb-12">
             <div>
               <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">Our work</p>
-              <h2 className="text-3xl font-bold font-display text-gray-900">Featured projects</h2>
+              <h2 className="text-3xl font-bold text-gray-900 font-display">Featured projects</h2>
             </div>
             <Link to="/projects" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700">
               All projects <ArrowRight className="w-4 h-4" />
@@ -175,11 +176,9 @@ export default function Home() {
               {featured.map(project => (
                 <div key={project._id} className="flex flex-col overflow-hidden transition-all bg-white border border-gray-100 rounded-2xl hover:shadow-sm hover:border-gray-200">
                   <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
-                    />
+                    
+                      <BrandedPlaceholder title={project.title} subtitle={project.category} aspectRatio="16/9" />
+                    
                   </div>
                   <div className="flex flex-col flex-1 p-6">
                     <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${categoryColors[project.category] ?? 'bg-gray-100 text-gray-600'}`}>
@@ -214,9 +213,7 @@ export default function Home() {
                 { title: 'Healthcare Portal', category: 'web', desc: 'Patient management system with appointment booking and records.', stack: ['React', 'Express', 'MongoDB'] },
               ].map(p => (
                 <div key={p.title} className="flex flex-col overflow-hidden bg-white border border-gray-100 rounded-2xl">
-                  <div className={`h-48 flex items-center justify-center ${categoryColors[p.category]?.split(' ')[0] ?? 'bg-gray-50'}`}>
-                    <Code2 className="w-12 h-12 text-gray-400 opacity-20" />
-                  </div>
+                  <BrandedPlaceholder title={p.title} subtitle={p.category} aspectRatio="16/9" />
                   <div className="flex flex-col flex-1 p-6">
                     <span className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${categoryColors[p.category] ?? 'bg-gray-100 text-gray-600'}`}>{p.category}</span>
                     <h3 className="mb-2 text-base font-semibold text-gray-900">{p.title}</h3>
@@ -246,7 +243,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">How we work</p>
-            <h2 className="text-3xl font-bold font-display text-gray-900">Our process</h2>
+            <h2 className="text-3xl font-bold text-gray-900 font-display">Our process</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map(({ step, title, desc }) => (
@@ -265,7 +262,7 @@ export default function Home() {
         <div className="grid items-center max-w-6xl gap-16 mx-auto md:grid-cols-2">
           <div>
             <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-brand-600">Why InnTechLab</p>
-            <h2 className="mb-6 text-3xl font-bold font-display text-gray-900">We deliver results, not just code</h2>
+            <h2 className="mb-6 text-3xl font-bold text-gray-900 font-display">We deliver results, not just code</h2>
             <p className="mb-8 leading-relaxed text-gray-500">
               We take on a limited number of projects at a time so every client gets
               our full focus. You work directly with the people building your product —
@@ -304,7 +301,7 @@ export default function Home() {
       {/* CTA */}
       <section className="px-6 py-24 bg-brand-600">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold font-display text-white">Ready to build your web or mobile app?</h2>
+          <h2 className="text-3xl font-bold text-white font-display">Ready to build your web or mobile app?</h2>
           <p className="max-w-xl mx-auto mt-4 text-brand-100">
             Tell us about your project and we'll get back to you within 24 hours.
           </p>

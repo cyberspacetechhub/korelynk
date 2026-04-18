@@ -10,6 +10,7 @@ import BlogPreview from '../BlogPreview';
 import CodeSamplesPreview from '../CodeSamplesPreview';
 import TechStackMarquee from '../TechStackMarquee';
 import FloatingSocial from './FloatingSocial';
+import BrandedPlaceholder from '../BrandedPlaceholder';
 
 const Home = () => {
   const [featuredProjects, setFeaturedProjects] = useState([]);
@@ -209,12 +210,12 @@ const Home = () => {
               {featuredProjects.map((project) => (
                 <div key={project._id} className="overflow-hidden transition-all duration-300 border border-gray-200 group bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-2xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10">
                   <div className="relative overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="object-cover w-full h-48 transition-transform duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
+                    <BrandedPlaceholder
+                          title={project.title}
+                          subtitle={project.category}
+                          className="h-48"
+                          aspectRatio="16/9"
+                        />
                     <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 to-transparent group-hover:opacity-100">
                       <div className="absolute flex gap-2 bottom-4 left-4 right-4">
                         {project.liveUrl && (

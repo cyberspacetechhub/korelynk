@@ -3,6 +3,7 @@ import { ExternalLink, Github, Filter, Mail, MapPin, Briefcase, Code2, Palette }
 import axios from '../api/axios';
 import SEO from '../components/SEO';
 import { optimizeCloudinaryUrl } from '../utils/imageOptimizer';
+import BrandedPlaceholder from '../components/BrandedPlaceholder';
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -284,7 +285,7 @@ const Portfolio = () => {
               {filteredProjects.map((project) => (
                 <div key={project._id} className="overflow-hidden transition-all duration-300 bg-white border border-gray-200 group dark:bg-white/5 dark:border-white/10 rounded-2xl hover:border-gray-300 dark:hover:border-white/20">
                   <div className="relative overflow-hidden">
-                    <img
+                    {/* <img
                       src={optimizeCloudinaryUrl(project.image, 400, 300)}
                       alt={project.title}
                       width="400"
@@ -292,7 +293,13 @@ const Portfolio = () => {
                       className="object-cover w-full h-56 transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
-                    />
+                    /> */}
+                    <BrandedPlaceholder
+                          title={project.title}
+                          subtitle={project.category}
+                          className="h-48"
+                          aspectRatio="16/9"
+                        />
                     <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 to-transparent group-hover:opacity-100">
                       <div className="absolute flex gap-2 bottom-4 left-4 right-4">
                         {project.liveUrl && (
