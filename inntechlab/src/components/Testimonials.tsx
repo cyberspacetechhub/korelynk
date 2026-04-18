@@ -131,8 +131,8 @@ export default function Testimonials() {
                   onClick={() => go(i)}
                   className={`rounded-full transition-all duration-300 ${
                     i === current
-                      ? 'w-6 h-2 bg-brand-600'
-                      : 'w-2 h-2 bg-gray-200 hover:bg-gray-300'
+                      ? 'w-6 h-3 bg-brand-600'
+                      : 'w-3 h-3 bg-gray-200 hover:bg-gray-300'
                   }`}
                   aria-label={`Go to review ${i + 1}`}
                 />

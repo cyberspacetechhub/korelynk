@@ -88,10 +88,14 @@ export default function Home() {
             <div className="relative pb-10 lg:pb-16">
               <div className="overflow-hidden border border-gray-100 shadow-2xl rounded-2xl shadow-gray-200">
                 <img
-                  src="/hero-image-coding-screen.webp"
+                  src="/hero-image-coding-screen.jpg"
+                  srcSet="/hero-image-coding-screen.jpg 1666w"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 634px"
                   alt="Web and mobile app development workspace at InnTechLab"
                   className="w-full h-56 sm:h-72 lg:h-[480px] object-cover"
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="sync"
                 />
               </div>
               {/* Floating badge */}
@@ -248,7 +252,7 @@ export default function Home() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {process.map(({ step, title, desc }) => (
               <div key={step} className="relative">
-                <p className="mb-4 text-5xl font-black leading-none text-gray-100">{step}</p>
+                <p className="mb-4 text-5xl font-black leading-none text-gray-200" aria-hidden="true">{step}</p>
                 <h3 className="mb-2 text-sm font-semibold text-gray-900">{title}</h3>
                 <p className="text-sm leading-relaxed text-gray-500">{desc}</p>
               </div>

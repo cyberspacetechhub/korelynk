@@ -34,25 +34,21 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-6 py-14">
-
-        {/* GRID LAYOUT */}
         <div className="grid gap-10 md:grid-cols-4">
 
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2.5">
-              <img src="/ITL-LOGO1-dark.svg" alt="InnTechLab logo" className="w-8 h-8" />
+              {/* alt="" because adjacent text already identifies the brand */}
+              <img src="/ITL-LOGO1-dark.svg" alt="" className="w-8 h-8" aria-hidden="true" />
               <span className="text-base font-bold text-gray-900">
                 Inn<span className="text-brand-600">Tech</span>Lab
               </span>
             </Link>
-
             <p className="mt-3 text-sm text-gray-500 leading-relaxed">
               Software development company in Nigeria building web apps,
               mobile apps, and custom digital products for startups and businesses worldwide.
             </p>
-
-            {/* SOCIALS (FIXED + UPGRADED) */}
             <div className="flex items-center gap-3 mt-5">
               {socials.map(({ label, href, icon }) => (
                 <a
@@ -61,10 +57,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 bg-white
-                  hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50
-                  hover:shadow-lg hover:-translate-y-0.5 hover:scale-105
-                  transition-all duration-200"
+                  className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 bg-white hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
                 >
                   {icon}
                 </a>
@@ -74,18 +67,12 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Services</h4>
+            {/* p instead of h4 to avoid skipping heading levels (page uses h1/h2/h3) */}
+            <p className="text-sm font-semibold text-gray-900 mb-4">Services</p>
             <ul className="space-y-2 text-sm text-gray-500">
-              {[
-                'Web Development',
-                'Mobile App Development',
-                'UI/UX Design',
-                'Custom Software',
-              ].map(item => (
+              {['Web Development', 'Mobile App Development', 'UI/UX Design', 'Custom Software'].map(item => (
                 <li key={item}>
-                  <Link to="/services" className="hover:text-gray-900 transition-colors">
-                    {item}
-                  </Link>
+                  <Link to="/services" className="hover:text-gray-900 transition-colors">{item}</Link>
                 </li>
               ))}
             </ul>
@@ -93,7 +80,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Company</h4>
+            <p className="text-sm font-semibold text-gray-900 mb-4">Company</p>
             <ul className="space-y-2 text-sm text-gray-500">
               <li><Link to="/about" className="hover:text-gray-900">About</Link></li>
               <li><Link to="/projects" className="hover:text-gray-900">Projects</Link></li>
@@ -108,7 +95,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm font-semibold text-gray-900 mb-4">Contact</h4>
+            <p className="text-sm font-semibold text-gray-900 mb-4">Contact</p>
             <ul className="space-y-2 text-sm text-gray-500">
               <li>
                 <a href="mailto:inntechlabhq@gmail.com" className="hover:text-gray-900">
@@ -126,12 +113,10 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom */}
-        <div className="mt-12 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-3">
+        <div className="mt-12 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-3">
           <p>© {new Date().getFullYear()} InnTechLab. All rights reserved.</p>
           <p>Built with ❤️ in Nigeria</p>
         </div>
-
       </div>
     </footer>
   )

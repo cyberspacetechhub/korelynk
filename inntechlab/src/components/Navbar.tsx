@@ -17,7 +17,7 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur">
       <nav className="flex items-center justify-between max-w-6xl px-4 py-4 mx-auto">
         <NavLink to="/" className="flex items-center gap-2.5">
-          <img src="/ITL-LOGO1-dark.svg" alt="InnTechLab" className="w-8 h-8" />
+          <img src="/ITL-LOGO1-dark.svg" alt="" aria-hidden="true" className="w-8 h-8" />
           <span className="text-base font-bold tracking-tight text-gray-900">
             Inn<span className="text-brand-600">Tech</span>Lab
           </span>
