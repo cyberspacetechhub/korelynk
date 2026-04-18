@@ -22,7 +22,7 @@
     <meta property="og:site_name" content="InnTechLab" />
     <meta property="og:title" content="InnTechLab — Web & Mobile Development Company in Nigeria" />
     <meta property="og:description" content="We build high-quality web apps, mobile apps, and digital products for startups and businesses. Based in Nigeria, serving clients worldwide." />
-    <meta property="og:image" content="https://inntechlab.online/ITL-LOGO3_dark.webp" />
+    <meta property="og:image" content="https://inntechlab.online/ITL-LOGO3_dark.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="InnTechLab — Web & Mobile Development" />
@@ -34,8 +34,28 @@
     <meta name="twitter:creator" content="@inntechlab" />
     <meta name="twitter:title" content="InnTechLab — Web & Mobile Development Company in Nigeria" />
     <meta name="twitter:description" content="We build high-quality web apps, mobile apps, and digital products for startups and businesses worldwide." />
-    <meta name="twitter:image" content="https://inntechlab.online/ITL-LOGO3_dark.webp" />
+    <meta name="twitter:image" content="https://inntechlab.online/ITL-LOGO3_dark.png" />
     <meta name="twitter:image:alt" content="InnTechLab" />
+
+    <!-- Preconnect for fonts and API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.inntechlab.online" />
+    <link rel="dns-prefetch" href="https://api.inntechlab.online" />
+
+    <!-- Preload hero image (LCP element) -->
+    <link rel="preload" as="image" href="/hero-image-coding-screen.jpg" fetchpriority="high" />
+
+    <!-- Non-blocking Google Fonts load -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" />
+    </noscript>
 
     <!-- Structured Data: Organization -->
     <script type="application/ld+json">
@@ -45,7 +65,7 @@
       "name": "InnTechLab",
       "url": "https://inntechlab.online",
       "logo": "https://inntechlab.online/ITL-LOGO1-dark.svg",
-      "image": "https://inntechlab.online/ITL-LOGO3_dark.webp",
+      "image": "https://inntechlab.online/ITL-LOGO3_dark.png",
       "description": "InnTechLab builds high-quality web apps, mobile apps, and digital products for startups and businesses. Based in Nigeria, serving clients worldwide.",
       "foundingDate": "2022",
       "founders": [{ "@type": "Person", "name": "Mkpuma Shedrach" }],
@@ -80,7 +100,6 @@
     }
     </script>
 
-    <!-- Structured Data: WebSite -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -90,11 +109,6 @@
       "description": "Web and mobile app development company based in Nigeria"
     }
     </script>
-
-    <!-- Fonts: Inter (body) + Plus Jakarta Sans (headings) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

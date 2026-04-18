@@ -20,9 +20,15 @@
       ]
     },
     {
-      "source": "/(.*\\.png|.*\\.jpg|.*\\.svg|.*\\.ico|.*\\.webp)",
+      "source": "/(.*\\.jpg|.*\\.jpeg|.*\\.webp|.*\\.avif)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*\\.png|.*\\.svg|.*\\.ico)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
     }
   ],

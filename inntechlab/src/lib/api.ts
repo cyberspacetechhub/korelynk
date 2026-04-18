@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://korelynk.onrender.com/api/',
+  baseURL: 'https://api.inntechlab.online/api/',
   withCredentials: true,
 })
 
