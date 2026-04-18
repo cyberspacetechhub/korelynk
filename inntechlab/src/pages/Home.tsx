@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import { useProjects } from '../lib/useProjects'
 import Testimonials from '../components/Testimonials'
+import PageSEO from '../components/PageSEO'
 
 const stats = [
   { value: '50+', label: 'Projects delivered' },
@@ -40,6 +41,11 @@ export default function Home() {
 
   return (
     <main>
+      <PageSEO
+        title="InnTechLab | Web & Mobile App Development Company in Nigeria"
+        description="InnTechLab builds high-quality web apps, mobile apps, and digital products for startups and businesses. Based in Nigeria, serving clients worldwide."
+        canonical="/"
+      />
       {/* Hero */}
       <section className="px-6 pb-0 bg-white pt-36">
         <div className="max-w-6xl mx-auto">

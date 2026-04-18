@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PageSEO from '../components/PageSEO'
 import { ExternalLink, GitBranch } from 'lucide-react'
 import { useProjects } from '../lib/useProjects'
 
@@ -27,6 +28,11 @@ export default function Projects() {
 
   return (
     <main className="px-6 pb-24 pt-28">
+      <PageSEO
+        title="Projects | Web & Mobile App Development Portfolio - InnTechLab"
+        description="View InnTechLab’s web and mobile app development projects. We build custom software solutions for startups and businesses across Nigeria, Africa, and globally."
+        canonical="/projects"
+      />
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}

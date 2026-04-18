@@ -1,4 +1,5 @@
 import { Search, Handshake, PenTool, Zap, Mail, Phone } from 'lucide-react'
+import PageSEO from '../components/PageSEO'
 
 const values = [
   { icon: Search, title: 'Clarity', desc: 'We ask the right questions before writing a single line of code.' },
@@ -26,6 +27,11 @@ const milestones = [
 export default function About() {
   return (
     <main className="px-6 pb-24 pt-28">
+      <PageSEO
+        title="About InnTechLab | Software Development Company in Nigeria"
+        description="InnTechLab is a software development company based in Abakaliki, Nigeria. We build web apps, mobile apps, and custom software for startups and businesses worldwide."
+        canonical="/about"
+      />
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
@@ -34,8 +40,8 @@ export default function About() {
           <h1 className="mb-4 text-4xl font-bold font-display text-gray-900">About InnTechLab</h1>
           <p className="max-w-2xl leading-relaxed text-gray-500">
             InnTechLab is a software development company based in Abakaliki, Nigeria.
-            We build web apps, mobile apps, and digital products for businesses across
-            Africa and beyond. We believe great software comes from clear thinking,
+            We build web apps, mobile apps, and custom software solutions for businesses 
+            across Nigeria, Africa, and global markets. We believe great software comes from clear thinking,
             honest communication, and disciplined execution.
           </p>
         </div>
@@ -61,6 +67,37 @@ export default function About() {
               We're remote-first, deadline-driven, and genuinely invested in every project we take on.
             </p>
           </div>
+        </div>
+
+        {/* Expertise */}
+        <div className="p-10 mb-12 border border-gray-100 rounded-2xl">
+          <h2 className="mb-4 text-xl font-bold font-display text-gray-900">Our Expertise</h2>
+          <p className="mb-5 text-sm leading-relaxed text-gray-500">
+            InnTechLab provides professional software development{' '}
+            <a href="/services" className="text-brand-600 hover:text-brand-700 font-medium underline underline-offset-2">services</a>{' '}
+            including:
+          </p>
+          <ul className="space-y-3 mb-6">
+            {[
+              { label: 'Web application development', to: '/services' },
+              { label: 'Mobile app development (Android & iOS)', to: '/services' },
+              { label: 'UI/UX design', to: '/services' },
+              { label: 'Custom business software solutions', to: '/services' },
+            ].map(({ label, to }) => (
+              <li key={label} className="flex items-start gap-3">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-600 flex-shrink-0" />
+                <a href={to} className="text-sm text-gray-600 hover:text-brand-600 transition-colors">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm leading-relaxed text-gray-500">
+            We work with startups, small businesses, and growing companies looking to build
+            reliable digital products. View our{' '}
+            <a href="/projects" className="text-brand-600 hover:text-brand-700 font-medium underline underline-offset-2">projects</a>{' '}
+            to see what we've built.
+          </p>
         </div>
 
         {/* Milestones */}
@@ -119,6 +156,15 @@ export default function About() {
           </div>
         </div>
 
+        <div className="p-10 mb-12 border border-gray-100 rounded-2xl">
+          <h2 className="mb-4 text-xl font-bold">Why choose InnTechLab?</h2>
+          <p className="text-sm text-gray-500 leading-relaxed">
+            As a software development company in Nigeria, InnTechLab focuses on delivering
+            scalable, high-quality web and mobile applications. Our team combines technical
+            expertise with real-world business understanding to help companies build reliable
+            digital products that grow with their users.
+          </p>
+        </div>
         {/* Contact */}
         <div className="p-10 border border-gray-100 rounded-2xl bg-gray-50">
           <h2 className="mb-2 text-xl font-bold font-display text-gray-900">Work with us</h2>

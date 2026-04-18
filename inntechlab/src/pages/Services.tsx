@@ -1,4 +1,5 @@
 import { Code2, Smartphone, Palette, ShoppingCart, Server, Wrench } from 'lucide-react'
+import PageSEO from '../components/PageSEO'
 
 const services = [
   {
@@ -49,6 +50,11 @@ const process = [
 export default function Services() {
   return (
     <main className="px-6 pb-24 pt-28">
+      <PageSEO
+        title="Services | Web & Mobile Development - InnTechLab"
+        description="InnTechLab offers web development, mobile app development, UI/UX design, API development, e-commerce, and software maintenance services in Nigeria and worldwide."
+        canonical="/services"
+      />
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}
