@@ -33,50 +33,105 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100">
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+      <div className="max-w-6xl mx-auto px-6 py-14">
+
+        {/* GRID LAYOUT */}
+        <div className="grid gap-10 md:grid-cols-4">
 
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2.5">
-              <img src="/ITL-LOGO1-dark.svg" alt="InnTechLab" className="w-8 h-8" />
-              <span className="text-base font-bold tracking-tight text-gray-900">
+              <img src="/ITL-LOGO1-dark.svg" alt="InnTechLab logo" className="w-8 h-8" />
+              <span className="text-base font-bold text-gray-900">
                 Inn<span className="text-brand-600">Tech</span>Lab
               </span>
             </Link>
-            <p className="mt-1 text-sm text-gray-400">Building digital products that matter.</p>
+
+            <p className="mt-3 text-sm text-gray-500 leading-relaxed">
+              Software development company in Nigeria building web apps,
+              mobile apps, and custom digital products for startups and businesses worldwide.
+            </p>
+
+            {/* SOCIALS (FIXED + UPGRADED) */}
+            <div className="flex items-center gap-3 mt-5">
+              {socials.map(({ label, href, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 bg-white
+                  hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50
+                  hover:shadow-lg hover:-translate-y-0.5 hover:scale-105
+                  transition-all duration-200"
+                >
+                  {icon}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Nav */}
-          <nav className="flex flex-wrap gap-6 text-sm text-gray-500">
-            <Link to="/" className="transition-colors hover:text-gray-900">Home</Link>
-            <Link to="/services" className="transition-colors hover:text-gray-900">Services</Link>
-            <Link to="/projects" className="transition-colors hover:text-gray-900">Projects</Link>
-            <Link to="/about" className="transition-colors hover:text-gray-900">About</Link>
-            <a href="https://academy.inntechlab.online" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-gray-900">Academy</a>
-          </nav>
-
-          {/* Socials */}
-          <div className="flex items-center gap-3">
-            {socials.map(({ label, href, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                className="w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-brand-300 hover:text-brand-600 transition-colors"
-              >
-                {icon}
-              </a>
-            ))}
+          {/* Services */}
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-4">Services</h4>
+            <ul className="space-y-2 text-sm text-gray-500">
+              {[
+                'Web Development',
+                'Mobile App Development',
+                'UI/UX Design',
+                'Custom Software',
+              ].map(item => (
+                <li key={item}>
+                  <Link to="/services" className="hover:text-gray-900 transition-colors">
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-4">Company</h4>
+            <ul className="space-y-2 text-sm text-gray-500">
+              <li><Link to="/about" className="hover:text-gray-900">About</Link></li>
+              <li><Link to="/projects" className="hover:text-gray-900">Projects</Link></li>
+              <li><Link to="/services" className="hover:text-gray-900">Services</Link></li>
+              <li>
+                <a href="https://academy.inntechlab.online" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900">
+                  Academy
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-sm font-semibold text-gray-900 mb-4">Contact</h4>
+            <ul className="space-y-2 text-sm text-gray-500">
+              <li>
+                <a href="mailto:inntechlabhq@gmail.com" className="hover:text-gray-900">
+                  inntechlabhq@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="tel:+2349167071094" className="hover:text-gray-900">
+                  +234 916 707 1094
+                </a>
+              </li>
+              <li>Abakaliki, Nigeria</li>
+            </ul>
+          </div>
+
         </div>
 
-        <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
+        {/* Bottom */}
+        <div className="mt-12 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400 gap-3">
           <p>© {new Date().getFullYear()} InnTechLab. All rights reserved.</p>
           <p>Built with ❤️ in Nigeria</p>
         </div>
+
       </div>
     </footer>
   )

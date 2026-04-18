@@ -55,14 +55,17 @@ export default function Home() {
                 <Globe className="w-3.5 h-3.5" />
                 Web · Mobile · Design
               </span>
-              <h1 className="text-5xl md:text-6xl font-bold font-display text-gray-900 leading-[1.1] tracking-tight">
-                We build software<br />
-                <span className="text-brand-600">people love to use.</span>
+              <h1 className="text-4xl md:text-6xl font-bold font-display text-gray-900 leading-[1.1] tracking-tight">
+                We build web & mobile apps<br />
+                <span className="text-brand-600">that drive business growth.</span>
               </h1>
               <p className="max-w-xl mt-6 text-lg leading-relaxed text-gray-500">
                 InnTechLab is a software development company based in Nigeria. We design
                 and build web apps, mobile apps, and digital products that help startups
                 and businesses grow.
+              </p>
+              <p className="mt-4 text-sm text-gray-500">
+                Explore our <Link to="/projects" className="text-brand-600 underline">projects</Link> or view our <Link to="/services" className="text-brand-600 underline">services</Link>.
               </p>
               <div className="flex flex-col gap-4 mt-10 sm:flex-row">
                 <Link
@@ -85,7 +88,7 @@ export default function Home() {
               <div className="overflow-hidden border border-gray-100 shadow-2xl rounded-2xl shadow-gray-200">
                 <img
                   src="/hero-image-coding-screen.webp"
-                  alt="InnTechLab development workspace"
+                  alt="Web and mobile app development workspace at InnTechLab"
                   className="w-full h-56 sm:h-72 lg:h-[480px] object-cover"
                   loading="eager"
                 />
@@ -301,7 +304,7 @@ export default function Home() {
       {/* CTA */}
       <section className="px-6 py-24 bg-brand-600">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold font-display text-white">Ready to build something great?</h2>
+          <h2 className="text-3xl font-bold font-display text-white">Ready to build your web or mobile app?</h2>
           <p className="max-w-xl mx-auto mt-4 text-brand-100">
             Tell us about your project and we'll get back to you within 24 hours.
           </p>
