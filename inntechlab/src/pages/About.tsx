@@ -30,7 +30,7 @@ export default function About() {
       <PageSEO
         title="About InnTechLab | Software Development Company in Nigeria"
         description="InnTechLab is a software development company based in Abakaliki, Nigeria. We build web apps, mobile apps, and custom software for startups and businesses worldwide."
-        canonical="/about"
+        canonical="https://inntechlab.online/about"
       />
       <div className="max-w-6xl mx-auto">
 
@@ -143,14 +143,19 @@ export default function About() {
         <div className="mb-12">
           <h2 className="mb-8 text-xl font-bold font-display text-gray-900">The team</h2>
           <div className="flex justify-start">
-            {team.map(({ name, role, bio, initials }) => (
-              <div key={name} className="w-full max-w-sm p-8 border border-gray-100 rounded-2xl">
-                <div className="flex items-center justify-center mb-4 text-lg font-bold rounded-full w-14 h-14 bg-brand-100 text-brand-700">
-                  {initials}
+            {team.map(({ name, role, bio }) => (
+              <div key={name} className="w-full max-w-sm border border-gray-100 rounded-2xl overflow-hidden">
+                <img
+                  src="/founder.jpeg"
+                  alt="Mkpuma Shedrach — Founder & Lead Developer at InnTechLab"
+                  className="w-full h-64 object-cover object-top"
+                  loading="lazy"
+                />
+                <div className="p-6">
+                  <h3 className="text-base font-semibold text-gray-900">{name}</h3>
+                  <p className="text-sm text-brand-600 font-medium mt-0.5 mb-3">{role}</p>
+                  <p className="text-sm leading-relaxed text-gray-500">{bio}</p>
                 </div>
-                <h3 className="text-base font-semibold text-gray-900">{name}</h3>
-                <p className="text-sm text-brand-600 font-medium mt-0.5 mb-3">{role}</p>
-                <p className="text-sm leading-relaxed text-gray-500">{bio}</p>
               </div>
             ))}
           </div>

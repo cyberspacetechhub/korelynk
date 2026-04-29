@@ -88,8 +88,8 @@ export default function Home() {
             <div className="relative pb-10 lg:pb-16">
               <div className="overflow-hidden border border-gray-100 shadow-2xl rounded-2xl shadow-gray-200">
                 <img
-                  src="/hero-image-coding-screen.jpg"
-                  srcSet="/hero-image-coding-screen.jpg 1666w"
+                  src="/officialhero.webp"
+                  srcSet="/officialhero.webp 1666w"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 634px"
                   alt="Web and mobile app development workspace at InnTechLab"
                   className="w-full h-56 sm:h-72 lg:h-[480px] object-cover"
@@ -287,6 +287,14 @@ export default function Home() {
             </ul>
           </div>
           <div className="grid grid-cols-2 gap-4">
+            <div className="col-span-2 rounded-2xl overflow-hidden">
+              <img
+                src="/founder.jpeg"
+                alt="Mkpuma Shedrach — Founder of InnTechLab"
+                className="w-full h-48 object-cover object-top"
+                loading="lazy"
+              />
+            </div>
             {[
               { label: 'Avg. project delivery', value: '6 weeks' },
               { label: 'Client retention rate', value: '94%' },
