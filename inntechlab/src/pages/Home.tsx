@@ -289,7 +289,7 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2 rounded-2xl overflow-hidden">
               <img
-                src="/founder.jpeg"
+                src="/personell.webp"
                 alt="Mkpuma Shedrach — Founder of InnTechLab"
                 className="w-full h-48 object-cover object-top"
                 loading="lazy"
