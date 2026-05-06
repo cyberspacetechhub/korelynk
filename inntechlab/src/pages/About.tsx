@@ -146,7 +146,7 @@ export default function About() {
             {team.map(({ name, role, bio }) => (
               <div key={name} className="w-full max-w-sm border border-gray-100 rounded-2xl overflow-hidden">
                 <img
-                  src="/founder.jpeg"
+                  src="/founder.webp"
                   alt="Mkpuma Shedrach — Founder & Lead Developer at InnTechLab"
                   className="w-full h-64 object-cover object-top"
                   loading="lazy"

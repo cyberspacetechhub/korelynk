@@ -83,6 +83,7 @@ export default function Footer() {
             <p className="text-sm font-semibold text-gray-900 mb-4">Company</p>
             <ul className="space-y-2 text-sm text-gray-500">
               <li><Link to="/about" className="hover:text-gray-900">About</Link></li>
+              <li><Link to="/blog" className="hover:text-gray-900">Blog</Link></li>
               <li><Link to="/projects" className="hover:text-gray-900">Projects</Link></li>
               <li><Link to="/services" className="hover:text-gray-900">Services</Link></li>
               <li>
