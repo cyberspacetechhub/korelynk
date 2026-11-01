@@ -1,20 +1,12 @@
 import { Search, Handshake, PenTool, Zap, Mail, Phone } from 'lucide-react'
 import PageSEO from '../components/PageSEO'
+import { useTeam } from '../lib/useTeam'
 
 const values = [
-  { icon: Search, title: 'Clarity', desc: 'We ask the right questions before writing a single line of code.' },
+  { icon: Search,    title: 'Clarity',     desc: 'We ask the right questions before writing a single line of code.' },
   { icon: Handshake, title: 'Partnership', desc: 'We treat every client project as if it were our own product.' },
-  { icon: PenTool, title: 'Craft', desc: 'We care deeply about code quality, design detail, and user experience.' },
-  { icon: Zap, title: 'Momentum', desc: 'We move fast, communicate clearly, and ship on time.' },
-]
-
-const team = [
-  {
-    name: 'Mkpuma Shedrach',
-    role: 'Founder & Lead Developer',
-    bio: 'Full-stack developer specialising in React, Node.js, and scalable web architecture. Passionate about building tools that empower people across Africa and beyond.',
-    initials: 'MS',
-  },
+  { icon: PenTool,   title: 'Craft',       desc: 'We care deeply about code quality, design detail, and user experience.' },
+  { icon: Zap,       title: 'Momentum',    desc: 'We move fast, communicate clearly, and ship on time.' },
 ]
 
 const milestones = [
@@ -24,13 +16,28 @@ const milestones = [
   { year: '2025', event: 'Serving clients across 8+ countries globally.' },
 ]
 
+// Fallback if API returns no team members
+const FALLBACK_TEAM = [
+  {
+    _id: 'fallback',
+    name: 'Mkpuma Shedrach',
+    role: 'Founder & Lead Developer',
+    bio: 'Full-stack developer specialising in React, Node.js, and scalable web architecture. Passionate about building tools that empower people across Africa and beyond.',
+    avatar: '/founder.jpeg',
+    skills: ['React', 'Node.js', 'MongoDB', 'React Native'] as string[],
+  },
+]
+
 export default function About() {
+  const { data: teamMembers = [], isLoading } = useTeam()
+  const displayTeam = teamMembers.length > 0 ? teamMembers : FALLBACK_TEAM
+
   return (
     <main className="px-6 pb-24 pt-28">
       <PageSEO
         title="About InnTechLab | Software Development Company in Nigeria"
         description="InnTechLab is a software development company based in Abakaliki, Nigeria. We build web apps, mobile apps, and custom software for startups and businesses worldwide."
-        canonical="https://inntechlab.online/about"
+        canonical="/about"
       />
       <div className="max-w-6xl mx-auto">
 
@@ -40,7 +47,7 @@ export default function About() {
           <h1 className="mb-4 text-4xl font-bold font-display text-gray-900">About InnTechLab</h1>
           <p className="max-w-2xl leading-relaxed text-gray-500">
             InnTechLab is a software development company based in Abakaliki, Nigeria.
-            We build web apps, mobile apps, and custom software solutions for businesses 
+            We build web apps, mobile apps, and custom software solutions for businesses
             across Nigeria, Africa, and global markets. We believe great software comes from clear thinking,
             honest communication, and disciplined execution.
           </p>
@@ -79,16 +86,14 @@ export default function About() {
           </p>
           <ul className="space-y-3 mb-6">
             {[
-              { label: 'Web application development', to: '/services' },
-              { label: 'Mobile app development (Android & iOS)', to: '/services' },
-              { label: 'UI/UX design', to: '/services' },
-              { label: 'Custom business software solutions', to: '/services' },
-            ].map(({ label, to }) => (
+              'Web application development',
+              'Mobile app development (Android & iOS)',
+              'UI/UX design',
+              'Custom business software solutions',
+            ].map(label => (
               <li key={label} className="flex items-start gap-3">
                 <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-600 flex-shrink-0" />
-                <a href={to} className="text-sm text-gray-600 hover:text-brand-600 transition-colors">
-                  {label}
-                </a>
+                <a href="/services" className="text-sm text-gray-600 hover:text-brand-600 transition-colors">{label}</a>
               </li>
             ))}
           </ul>
@@ -128,7 +133,7 @@ export default function About() {
             {values.map(({ icon: Icon, title, desc }) => (
               <div key={title} className="flex gap-4 p-6 border border-gray-100 rounded-2xl">
                 <div className="flex items-center justify-center flex-shrink-0 rounded-lg w-9 h-9 bg-brand-50">
-                  <Icon className="w-4.5 h-4.5 text-brand-600 w-5 h-5" />
+                  <Icon className="w-5 h-5 text-brand-600" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
@@ -142,27 +147,67 @@ export default function About() {
         {/* Team */}
         <div className="mb-12">
           <h2 className="mb-8 text-xl font-bold font-display text-gray-900">The team</h2>
-          <div className="flex justify-start">
-            {team.map(({ name, role, bio }) => (
-              <div key={name} className="w-full max-w-sm border border-gray-100 rounded-2xl overflow-hidden">
-                <img
-                  src="/founder.webp"
-                  alt="Mkpuma Shedrach — Founder & Lead Developer at InnTechLab"
-                  className="w-full h-64 object-cover object-top"
-                  loading="lazy"
-                />
-                <div className="p-6">
-                  <h3 className="text-base font-semibold text-gray-900">{name}</h3>
-                  <p className="text-sm text-brand-600 font-medium mt-0.5 mb-3">{role}</p>
-                  <p className="text-sm leading-relaxed text-gray-500">{bio}</p>
+
+          {isLoading ? (
+            <div className="flex gap-6">
+              <div className="w-full max-w-sm rounded-2xl border border-gray-100 overflow-hidden animate-pulse">
+                <div className="h-64 bg-gray-100" />
+                <div className="p-6 space-y-3">
+                  <div className="h-4 w-2/3 bg-gray-100 rounded-full" />
+                  <div className="h-3 w-1/2 bg-gray-100 rounded-full" />
+                  <div className="h-3 w-full bg-gray-100 rounded-full" />
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-6">
+              {displayTeam.map(member => (
+                <div key={member._id} className="w-full max-w-sm border border-gray-100 rounded-2xl overflow-hidden">
+                  {/* Avatar — API image with local fallback */}
+                  {member.avatar ? (
+                    <img
+                      src={member.avatar}
+                      alt={`${member.name} — ${member.role} at InnTechLab`}
+                      className="w-full h-80 object-cover object-center"
+                      loading="lazy"
+                      onError={(e) => {
+                        // If API image fails, fall back to local founder photo
+                        (e.target as HTMLImageElement).src = '/founder.jpeg'
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src="/founder.jpeg"
+                      alt={`${member.name} — ${member.role} at InnTechLab`}
+                      className="w-full h-64 object-cover object-top"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="p-6">
+                    <h3 className="text-base font-semibold text-gray-900">{member.name}</h3>
+                    <p className="text-sm text-brand-600 font-medium mt-0.5 mb-3">{member.role}</p>
+                    {member.bio && (
+                      <p className="text-sm leading-relaxed text-gray-500">{member.bio}</p>
+                    )}
+                    {member.skills && member.skills.length > 0 && (
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {member.skills.slice(0, 4).map(skill => (
+                          <span key={skill} className="text-xs bg-brand-50 text-brand-600 px-2.5 py-1 rounded-full">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
+        {/* Why choose */}
         <div className="p-10 mb-12 border border-gray-100 rounded-2xl">
-          <h2 className="mb-4 text-xl font-bold">Why choose InnTechLab?</h2>
+          <h2 className="mb-4 text-xl font-bold font-display text-gray-900">Why choose InnTechLab?</h2>
           <p className="text-sm text-gray-500 leading-relaxed">
             As a software development company in Nigeria, InnTechLab focuses on delivering
             scalable, high-quality web and mobile applications. Our team combines technical
@@ -170,6 +215,7 @@ export default function About() {
             digital products that grow with their users.
           </p>
         </div>
+
         {/* Contact */}
         <div className="p-10 border border-gray-100 rounded-2xl bg-gray-50">
           <h2 className="mb-2 text-xl font-bold font-display text-gray-900">Work with us</h2>
@@ -177,16 +223,12 @@ export default function About() {
             We're always open to interesting projects. Reach out and let's see if we're a good fit.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <a
-              href="mailto:inntechlabhq@gmail.com"
-              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700"
-            >
+            <a href="mailto:inntechlabhq@gmail.com"
+              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700">
               <Mail className="w-4 h-4" /> inntechlabhq@gmail.com
             </a>
-            <a
-              href="tel:+2349167071094"
-              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-100"
-            >
+            <a href="tel:+2349167071094"
+              className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-100">
               <Phone className="w-4 h-4" /> 09167071094
             </a>
           </div>
