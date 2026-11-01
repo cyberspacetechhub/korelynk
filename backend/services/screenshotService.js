@@ -1,19 +1,20 @@
-const { chromium } = require('playwright')
-
 const VIEWPORT = { width: 1440, height: 900 }
-const TIMEOUT   = 30_000   // 30s navigation timeout
-const MAX_CONCURRENT = 2   // max parallel browser jobs
+const TIMEOUT   = 30_000
+const MAX_CONCURRENT = 2
 
 let activeJobs = 0
 
-/**
- * Captures a screenshot of a URL and returns a Buffer (WebP).
- * @param {string} url  — validated, normalised URL
- * @returns {Promise<Buffer>}
- */
 async function captureScreenshot(url) {
   if (activeJobs >= MAX_CONCURRENT) {
     throw new Error('Screenshot queue is full. Try again shortly.')
+  }
+
+  // Lazy-require so a missing Playwright install doesn't crash the whole server at startup
+  let chromium
+  try {
+    chromium = require('playwright').chromium
+  } catch {
+    throw new Error('Playwright is not installed on this server')
   }
 
   activeJobs++
