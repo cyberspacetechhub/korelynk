@@ -2,25 +2,18 @@ const express = require('express')
 const router = express.Router()
 const projectController = require('../controllers/projectController')
 const uploadService = require('../services/uploadService')
+const { adminAuth } = require('../middleware/auth')
 
-// GET /api/projects - Get all projects
+const upload = uploadService.getUploadMiddleware()
+
+// Public
 router.get('/', projectController.getAllProjects)
-
-// GET /api/projects/:id - Get single project
 router.get('/:id', projectController.getProjectById)
 
-// GET /api/projects/:id - Get single project
-router.get('/:id', async (req, res) => {
-  try {
-    const project = await Project.findById(req.params.id)
-    if (!project) {
-      return APIResponse.error(res, 'Project not found', 404, 'PROJECT_NOT_FOUND')
-    }
-    APIResponse.success(res, project, 'Project retrieved successfully')
-  } catch (error) {
-    console.error('Error fetching project:', error)
-    APIResponse.error(res, 'Failed to fetch project', 500, 'FETCH_ERROR')
-  }
-})
+// Admin only
+router.post('/', adminAuth, upload, projectController.createProject)
+router.put('/:id', adminAuth, upload, projectController.updateProject)
+router.delete('/:id', adminAuth, projectController.deleteProject)
+router.post('/:id/regenerate-thumbnail', adminAuth, projectController.regenerateThumbnail)
 
 module.exports = router

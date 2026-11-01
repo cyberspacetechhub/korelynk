@@ -193,11 +193,22 @@ export default function Home() {
             <div className="grid gap-6 md:grid-cols-3">
               {featured.map(project => (
                 <div key={project._id} className="flex flex-col overflow-hidden transition-all bg-white border border-gray-100 rounded-2xl hover:shadow-sm hover:border-gray-200">
-                  <div className="relative h-48 overflow-hidden">
-                    {project.image ? (
-                      <img src={project.image} alt={project.title} className="object-cover w-full h-full transition-transform duration-500 hover:scale-105" loading="lazy" />
+                  <div className="relative h-48 overflow-hidden bg-gray-100">
+                    {project.resolvedImage ? (
+                      <img
+                        src={project.resolvedImage}
+                        alt={project.title}
+                        className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
+                        loading="lazy"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                      />
                     ) : (
                       <BrandedPlaceholder title={project.title} subtitle={project.category} aspectRatio="16/9" />
+                    )}
+                    {(project.thumbnail?.status === 'pending' || project.thumbnail?.status === 'generating') && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                        <span className="text-xs text-white bg-black/50 px-2.5 py-1 rounded-full animate-pulse">Generating preview…</span>
+                      </div>
                     )}
                   </div>
                   <div className="flex flex-col flex-1 p-6">

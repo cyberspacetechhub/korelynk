@@ -1,6 +1,6 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
-const { Admin } = require('../models/User')
+const Admin = require('../models/Admin')
 const connectDb = require('../config/dbConn')
 
 const seedAdmin = async () => {

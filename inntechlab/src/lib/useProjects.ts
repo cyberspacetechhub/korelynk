@@ -5,7 +5,14 @@ export interface Project {
   _id: string
   title: string
   description: string
-  image: string
+  image?: string
+  resolvedImage?: string
+  thumbnail?: {
+    type: 'automatic' | 'custom'
+    url?: string
+    status: 'pending' | 'generating' | 'ready' | 'failed'
+    error?: string
+  }
   technologies: string[]
   category: 'web' | 'mobile' | 'ecommerce' | 'saas'
   liveUrl?: string

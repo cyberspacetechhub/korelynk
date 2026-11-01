@@ -121,13 +121,27 @@ export default function Projects() {
                     key={project._id}
                     className="flex flex-col overflow-hidden bg-white border border-gray-100 rounded-2xl hover:shadow-sm"
                   >
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-48 overflow-hidden bg-gray-100">
+                      {project.resolvedImage ? (
+                        <img
+                          src={project.resolvedImage}
+                          alt={project.title}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                        />
+                      ) : (
                         <BrandedPlaceholder
                           title={project.title}
                           subtitle={project.category}
                           className="h-48"
                           aspectRatio="16/9"
                         />
+                      )}
+                      {project.thumbnail?.status === 'generating' && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                          <span className="text-xs text-white bg-black/50 px-2 py-1 rounded-full animate-pulse">Generating preview…</span>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex flex-col flex-1 p-6">
