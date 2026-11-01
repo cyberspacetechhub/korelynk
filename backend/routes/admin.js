@@ -6,7 +6,7 @@ const settingsController = require('../controllers/settingsController')
 const teamController = require('../controllers/teamController')
 const uploadService = require('../services/uploadService')
 const { getAllFeedback, updateFeedbackStatus } = require('../controllers/feedbackController')
-const { updateProfile } = require('../controllers/authController')
+
 const Newsletter = require('../models/Newsletter')
 const Project = require('../models/Project')
 const Feedback = require('../models/Feedback')
@@ -127,6 +127,7 @@ router.get('/projects', projectController.getAllProjects)
 router.post('/projects', uploadService.getUploadMiddleware(), projectController.createProject)
 router.put('/projects/:id', uploadService.getUploadMiddleware(), projectController.updateProject)
 router.delete('/projects/:id', projectController.deleteProject)
+router.post('/projects/:id/regenerate-thumbnail', projectController.regenerateThumbnail)
 
 // Settings routes
 
@@ -178,7 +179,20 @@ router.get('/feedback', getAllFeedback)
 router.put('/feedback/:id', updateFeedbackStatus)
 
 // Profile routes
-router.put('/profile', updateProfile)
+router.put('/profile', async (req, res) => {
+  try {
+    const { fullName, phone, profileImage } = req.body
+    const user = await require('../models/User').findByIdAndUpdate(
+      req.user._id,
+      { fullName, phone, profileImage },
+      { new: true }
+    ).select('-password')
+    APIResponse.success(res, user, 'Profile updated successfully')
+  } catch (error) {
+    console.error('Update profile error:', error)
+    APIResponse.error(res, 'Failed to update profile', 500, 'UPDATE_ERROR')
+  }
+})
 
 // Payment routes
 const paymentController = require('../controllers/paymentController')

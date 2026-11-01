@@ -45,7 +45,7 @@ const AdminProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const { data } = await axios.get('/projects');
+      const { data } = await axios.get('/admin/projects');
       if (data.success) setProjects(data.data);
     } catch {
       toast.error('Failed to load projects');
@@ -66,10 +66,10 @@ const AdminProjects = () => {
       if (imageFile) fd.append('image', imageFile);
 
       if (editingProject) {
-        await axios.put(`/projects/${editingProject._id}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+        await axios.put(`/admin/projects/${editingProject._id}`, fd, { headers: { 'Content-Type': 'multipart/form-data' } });
         toast.success('Project updated');
       } else {
-        await axios.post('/projects', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+        await axios.post('/admin/projects', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
         toast.success('Project created — thumbnail will generate automatically if a Live URL was provided');
       }
       resetForm();
@@ -84,7 +84,7 @@ const AdminProjects = () => {
   const handleRegenerate = async (project) => {
     setRegenerating(prev => ({ ...prev, [project._id]: true }));
     try {
-      await axios.post(`/projects/${project._id}/regenerate-thumbnail`);
+      await axios.post(`/admin/projects/${project._id}/regenerate-thumbnail`);
       toast.success('Thumbnail regeneration queued');
       // Optimistically update status
       setProjects(prev => prev.map(p =>
@@ -103,7 +103,7 @@ const AdminProjects = () => {
     if (attempts > 20) return; // max ~40s
     setTimeout(async () => {
       try {
-        const { data } = await axios.get(`/projects/${id}`);
+        const { data } = await axios.get(`/admin/projects/${id}`);
         if (data.success) {
           const status = data.data.thumbnail?.status;
           setProjects(prev => prev.map(p => p._id === id ? data.data : p));
@@ -149,7 +149,7 @@ const AdminProjects = () => {
   const handleDeleteConfirm = async () => {
     setDeleteModal(prev => ({ ...prev, loading: true }));
     try {
-      await axios.delete(`/projects/${deleteModal.project._id}`);
+      await axios.delete(`/admin/projects/${deleteModal.project._id}`);
       toast.success('Project deleted');
       setDeleteModal({ isOpen: false, project: null, loading: false });
       fetchProjects();
