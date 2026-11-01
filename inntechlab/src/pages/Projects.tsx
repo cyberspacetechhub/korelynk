@@ -19,6 +19,31 @@ const categoryColors = {
   saas: 'bg-violet-50 text-violet-600',
 }
 
+function ProjectImage({ project }: { project: any }) {
+  const src = project.resolvedImage || project.thumbnail?.url || project.image
+  const [failed, setFailed] = useState(false)
+
+  if (!src || failed) {
+    return (
+      <BrandedPlaceholder
+        title={project.title}
+        subtitle={project.category}
+        className="h-48"
+        aspectRatio="16/9"
+      />
+    )
+  }
+
+  return (
+    <img
+      src={src}
+      alt={project.title}
+      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      onError={() => setFailed(true)}
+    />
+  )
+}
+
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState('')
   const { data: allProjects = [], isLoading, isError } = useProjects()
@@ -119,25 +144,11 @@ export default function Projects() {
                 {filtered.map(project => (
                   <div
                     key={project._id}
-                    className="flex flex-col overflow-hidden bg-white border border-gray-100 rounded-2xl hover:shadow-sm"
+                    className="group flex flex-col overflow-hidden bg-white border border-gray-100 rounded-2xl hover:shadow-sm"
                   >
                     <div className="relative h-48 overflow-hidden bg-gray-100">
-                      {project.resolvedImage ? (
-                        <img
-                          src={project.resolvedImage}
-                          alt={project.title}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
-                        />
-                      ) : (
-                        <BrandedPlaceholder
-                          title={project.title}
-                          subtitle={project.category}
-                          className="h-48"
-                          aspectRatio="16/9"
-                        />
-                      )}
-                      {project.thumbnail?.status === 'generating' && (
+                      <ProjectImage project={project} />
+                      {(project.thumbnail?.status === 'pending' || project.thumbnail?.status === 'generating') && (
                         <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                           <span className="text-xs text-white bg-black/50 px-2 py-1 rounded-full animate-pulse">Generating preview…</span>
                         </div>

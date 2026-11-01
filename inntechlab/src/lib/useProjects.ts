@@ -8,7 +8,7 @@ export interface Project {
   image?: string
   resolvedImage?: string
   thumbnail?: {
-    type: 'automatic' | 'custom'
+    source: 'automatic' | 'custom'
     url?: string
     status: 'pending' | 'generating' | 'ready' | 'failed'
     error?: string
@@ -31,5 +31,5 @@ export const useProjects = (params?: { featured?: boolean; category?: string }) 
   useQuery({
     queryKey: ['projects', params],
     queryFn: () => fetchProjects(params),
-    staleTime: 1000 * 60 * 5,
+    staleTime: 0,
   })

@@ -85,7 +85,7 @@ const updateProject = async (req, res) => {
       
       updateData.image = req.file.path
       // Mark thumbnail as custom when manually uploading
-      updateData['thumbnail.type'] = 'custom'
+      updateData['thumbnail.source'] = 'custom'
       updateData['thumbnail.url'] = req.file.path
       updateData['thumbnail.status'] = 'ready'
     }

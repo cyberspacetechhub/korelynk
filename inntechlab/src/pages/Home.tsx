@@ -11,6 +11,23 @@ import Testimonials from '../components/Testimonials'
 import PageSEO from '../components/PageSEO'
 import BrandedPlaceholder from '../components/BrandedPlaceholder'
 
+function ProjectImage({ project }: { project: any }) {
+  const src = project.resolvedImage || project.thumbnail?.url || project.image
+  const [failed, setFailed] = useState(false)
+  if (!src || failed) {
+    return <BrandedPlaceholder title={project.title} subtitle={project.category} aspectRatio="16/9" />
+  }
+  return (
+    <img
+      src={src}
+      alt={project.title}
+      className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  )
+}
+
 const stats = [
   { value: '50+', label: 'Projects delivered' },
   { value: '30+', label: 'Happy clients' },
@@ -194,17 +211,7 @@ export default function Home() {
               {featured.map(project => (
                 <div key={project._id} className="flex flex-col overflow-hidden transition-all bg-white border border-gray-100 rounded-2xl hover:shadow-sm hover:border-gray-200">
                   <div className="relative h-48 overflow-hidden bg-gray-100">
-                    {project.resolvedImage ? (
-                      <img
-                        src={project.resolvedImage}
-                        alt={project.title}
-                        className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
-                        loading="lazy"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
-                      />
-                    ) : (
-                      <BrandedPlaceholder title={project.title} subtitle={project.category} aspectRatio="16/9" />
-                    )}
+                    <ProjectImage project={project} />
                     {(project.thumbnail?.status === 'pending' || project.thumbnail?.status === 'generating') && (
                       <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                         <span className="text-xs text-white bg-black/50 px-2.5 py-1 rounded-full animate-pulse">Generating preview…</span>
