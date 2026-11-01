@@ -34,20 +34,18 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: 'Home', href: '/', external: false },
-    { name: 'Academy', href: 'https://academy.inntechlab.online', external: true },
-    { name: 'Portfolio', href: '/portfolio', external: false },
-    { name: 'Store', href: '/store', external: false },
-    { name: 'AI', href: '/ai', external: false },
-    { name: 'Contact', href: '/contact', external: false }
+    { name: 'Home',           href: '/',             external: false },
+    { name: 'Courses',        href: '/courses',       external: false },
+    { name: 'Free Tutorials', href: '/academy',       external: false },
+    { name: 'Code Samples',   href: '/code-samples',  external: false },
+    { name: 'Blog',           href: '/blog',          external: false },
   ];
 
   const resources = [
-    { name: 'Blog', href: '/blog' },
-    { name: 'Code Samples', href: '/code-samples' },
-    { name: 'Courses', href: '/courses' },
-    { name: 'Services', href: '/services' },
-    { name: 'Careers', href: '/careers' }
+    { name: 'Student Portal',    href: '/student/login' },
+    { name: 'Instructor Portal', href: '/instructor/login' },
+    { name: 'Privacy Policy',    href: '/privacy' },
+    { name: 'Terms of Service',  href: '/terms' },
   ];
 
   return (

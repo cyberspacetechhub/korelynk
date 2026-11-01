@@ -4,6 +4,36 @@ import { BookOpen, Code2, ChevronRight, Play, CheckCircle, Clock, Users, Loader2
 import SEO from '../components/SEO';
 import { tutorialAPI } from '../api/tutorialAPI';
 
+const TechIcon = ({ name, className = 'w-8 h-8' }) => {
+  const icons = {
+    html: (
+      <svg viewBox="0 0 32 32" className={className}><path fill="#e44d26" d="M5 3l2.1 23.4L16 29l8.9-2.6L27 3z"/><path fill="#f16529" d="M16 27.1V5.1H25l-1.8 20z"/><path fill="#ebebeb" d="M16 13.5H11.5l-.3-3.5H16V6.6H7.8l.8 9h7.4zm0 8.4l-.1.1-3.7-1-.2-2.7H8.6l.5 5.5 6.9 1.9z"/><path fill="#fff" d="M16 13.5v3.4h4.2l-.4 4.6-3.8 1v3.4l6.9-1.9.1-.6 1-11.5.1-.9H16z"/></svg>
+    ),
+    css: (
+      <svg viewBox="0 0 32 32" className={className}><path fill="#1572b6" d="M5 3l2.1 23.4L16 29l8.9-2.6L27 3z"/><path fill="#33a9dc" d="M16 27.1V5.1H25l-1.8 20z"/><path fill="#fff" d="M16 13.5h4.5l.3-3.5H16V6.6h8.2l-.8 9H16zm0 8.4v-3.4l.1.1 3.7-1 .2-2.7h3.4l-.5 5.5-6.9 1.9z"/><path fill="#ebebeb" d="M16 13.5v3.4h-4.2l-.4-4.6 3.8 1V10l-6.9 1.9-.1.6-1 11.5-.1.9H16v-3.4l-3.7-1-.2-2.7H16z"/></svg>
+    ),
+    javascript: (
+      <svg viewBox="0 0 32 32" className={className}><rect width="32" height="32" rx="3" fill="#f7df1e"/><path d="M19.5 25.6c.6 1 1.4 1.7 2.8 1.7 1.2 0 1.9-.6 1.9-1.4 0-1-.8-1.3-2-1.9l-.7-.3c-2-.8-3.3-1.9-3.3-4.1 0-2 1.6-3.6 4-3.6 1.7 0 3 .6 3.9 2.2l-2.1 1.4c-.5-.9-1-1.2-1.8-1.2-.8 0-1.3.5-1.3 1.2 0 .8.5 1.2 1.7 1.7l.7.3c2.3 1 3.6 2 3.6 4.3 0 2.5-1.9 3.8-4.5 3.8-2.5 0-4.1-1.2-4.9-2.8l2-.1zM10.5 25.9c.4.7.8 1.3 1.7 1.3.9 0 1.4-.3 1.4-1.7v-9.1h2.6v9.2c0 2.8-1.6 4-4 4-2.1 0-3.4-1.1-4-2.5l2.3-1.2z"/></svg>
+    ),
+    react: (
+      <svg viewBox="0 0 32 32" className={className}><circle cx="16" cy="16" r="2.8" fill="#61dafb"/><g fill="none" stroke="#61dafb" strokeWidth="1.2"><ellipse cx="16" cy="16" rx="11" ry="4.2"/><ellipse cx="16" cy="16" rx="11" ry="4.2" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="11" ry="4.2" transform="rotate(120 16 16)"/></g></svg>
+    ),
+    nodejs: (
+      <svg viewBox="0 0 32 32" className={className}><path fill="#83cd29" d="M16 3L4 9.8v12.4L16 29l12-6.8V9.8z"/><path fill="#404137" d="M16 3L4 9.8v12.4L16 29V3z" opacity=".15"/><path fill="#fff" d="M16 8.5c-.4 0-.7.1-1 .3l-6.5 3.7c-.6.4-1 1-1 1.7v7.4c0 .7.4 1.4 1 1.7l1.7 1c.8.4 1.1.4 1.5.4 1.2 0 1.9-.7 1.9-2v-7.3h-1.9v7.3c0 .5-.5.9-1.4.5l-1.8-1V14c0-.2.1-.4.3-.5l6.5-3.7c.2-.1.4-.1.6 0l6.5 3.7c.2.1.3.3.3.5v7.4c0 .2-.1.4-.3.5l-6.5 3.7c-.2.1-.4.1-.6 0l-1.7-1c-.1-.1-.3-.1-.4 0-.5.3-.6.3-1.1.5.1.1.3.2.4.3l1.7 1c.3.2.6.3 1 .3s.7-.1 1-.3l6.5-3.7c.6-.4 1-1 1-1.7V14c0-.7-.4-1.4-1-1.7L17 8.8c-.3-.2-.6-.3-1-.3z"/></svg>
+    ),
+    python: (
+      <svg viewBox="0 0 32 32" className={className}><path fill="#3776ab" d="M15.9 3C11 3 11.3 5.1 11.3 5.1l.1 2.1h4.7v.6H8.8S6 7.5 6 12.5s2.4 4.8 2.4 4.8h1.5v-2.3s-.1-2.4 2.4-2.4h4.1s2.3 0 2.3-2.2V5.3S19.1 3 15.9 3zm-2.3 1.3c.4 0 .8.3.8.8s-.3.8-.8.8-.8-.3-.8-.8.4-.8.8-.8z"/><path fill="#ffd43b" d="M16.1 29c4.9 0 4.6-2.1 4.6-2.1l-.1-2.1h-4.7v-.6h7.3s2.8.3 2.8-4.7-2.4-4.8-2.4-4.8h-1.5v2.3s.1 2.4-2.4 2.4h-4.1s-2.3 0-2.3 2.2v4.1S12.9 29 16.1 29zm2.3-1.3c-.4 0-.8-.3-.8-.8s.3-.8.8-.8.8.3.8.8-.4.8-.8.8z"/></svg>
+    ),
+    mongodb: (
+      <svg viewBox="0 0 32 32" className={className}><path fill="#4db33d" d="M16 3c-1.5 5.5-4.5 7-4.5 12.5 0 2.5 2 4.5 4.5 4.5s4.5-2 4.5-4.5C20.5 10 17.5 8.5 16 3z"/><path fill="#3fa037" d="M16 3v17c2.5 0 4.5-2 4.5-4.5C20.5 10 17.5 8.5 16 3z"/><path fill="#4db33d" d="M16 20v9l-1-1.5V20h1z"/><path fill="#3fa037" d="M16 20v9l1-1.5V20h-1z"/></svg>
+    ),
+    git: (
+      <svg viewBox="0 0 32 32" className={className}><path fill="#f05032" d="M29.5 14.5l-12-12a2.1 2.1 0 00-3 0l-2.6 2.6 3.3 3.3a2.5 2.5 0 013.2 3.2l3.2 3.2a2.5 2.5 0 11-1.5 1.5l-3-3v7.8a2.5 2.5 0 11-2 0V13a2.5 2.5 0 01-1.3-3.3L7.5 6.4l-5 5a2.1 2.1 0 000 3l12 12a2.1 2.1 0 003 0l12-12a2.1 2.1 0 000-2.9z"/></svg>
+    ),
+  };
+  return icons[name] || null;
+};
+
 const Academy = () => {
   const [activeCategory, setActiveCategory] = useState('html');
   const [tutorials, setTutorials] = useState([]);
@@ -45,14 +75,14 @@ const Academy = () => {
   };
 
   const categories = [
-    { id: 'html', name: 'HTML', icon: '📄', color: 'from-orange-500 to-red-500' },
-    { id: 'css', name: 'CSS', icon: '🎨', color: 'from-blue-500 to-cyan-500' },
-    { id: 'javascript', name: 'JavaScript', icon: '⚡', color: 'from-yellow-500 to-orange-500' },
-    { id: 'react', name: 'React', icon: '⚛️', color: 'from-cyan-500 to-blue-500' },
-    { id: 'nodejs', name: 'Node.js', icon: '🟢', color: 'from-green-500 to-emerald-500' },
-    { id: 'python', name: 'Python', icon: '🐍', color: 'from-blue-600 to-yellow-500' },
-    { id: 'mongodb', name: 'MongoDB', icon: '🍃', color: 'from-green-600 to-green-400' },
-    { id: 'git', name: 'Git', icon: '📦', color: 'from-orange-600 to-red-600' }
+    { id: 'html',       name: 'HTML',       color: 'from-orange-500 to-red-500' },
+    { id: 'css',        name: 'CSS',        color: 'from-blue-500 to-cyan-500' },
+    { id: 'javascript', name: 'JavaScript', color: 'from-yellow-400 to-orange-500' },
+    { id: 'react',      name: 'React',      color: 'from-cyan-500 to-blue-500' },
+    { id: 'nodejs',     name: 'Node.js',    color: 'from-green-500 to-emerald-500' },
+    { id: 'python',     name: 'Python',     color: 'from-blue-600 to-yellow-500' },
+    { id: 'mongodb',    name: 'MongoDB',    color: 'from-green-600 to-green-400' },
+    { id: 'git',        name: 'Git',        color: 'from-orange-600 to-red-600' },
   ];
 
   const currentTutorial = tutorials[0] || null;
@@ -128,7 +158,9 @@ const Academy = () => {
                       }`}
                     >
                       <div className="flex items-center">
-                        <span className="mr-3 text-2xl">{category.icon}</span>
+                        <span className="mr-3 flex-shrink-0">
+                          <TechIcon name={category.id} />
+                        </span>
                         <div className="text-left">
                           <div className="font-semibold">{category.name}</div>
                           <div className="text-xs opacity-75">{getCategoryCount(category.id)} lessons</div>
@@ -157,8 +189,8 @@ const Academy = () => {
               {/* Tutorial Header */}
               <div className="p-8 mb-8 border border-gray-200 bg-gray-50 dark:bg-white/5 dark:border-white/10 rounded-2xl">
                 <div className="flex items-center mb-4">
-                  <span className="mr-4 text-4xl">
-                    {categories.find(c => c.id === activeCategory)?.icon}
+                  <span className="mr-4 flex-shrink-0">
+                    <TechIcon name={activeCategory} className="w-10 h-10" />
                   </span>
                   <div>
                     <h2 className="text-3xl font-bold text-gray-900 font-display dark:text-white">

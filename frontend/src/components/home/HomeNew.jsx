@@ -1,449 +1,318 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Briefcase, ShoppingBag, Sparkles, Code2, Layers, Zap } from 'lucide-react';
+import { ArrowRight, BookOpen, Code2, Users, Star, Play, CheckCircle, Zap } from 'lucide-react';
 import axios from '../../api/axios';
 import SEO from '../SEO';
-import SkillsShowcase from './SkillsShowcase';
-import TrustedBy from '../TrustedBy';
 import Testimonials from '../Testimonials';
 import BlogPreview from '../BlogPreview';
 import CodeSamplesPreview from '../CodeSamplesPreview';
 import TechStackMarquee from '../TechStackMarquee';
-import FloatingSocial from './FloatingSocial';
 import BrandedPlaceholder from '../BrandedPlaceholder';
 
+const STATS = [
+  { number: '500+', label: 'Students Enrolled' },
+  { number: '20+',  label: 'Courses Available' },
+  { number: '100+', label: 'Free Tutorials' },
+  { number: '99%',  label: 'Satisfaction Rate' },
+];
+
+const WHY_US = [
+  { icon: BookOpen,     title: 'Structured Learning',    desc: 'Carefully designed curricula that take you from zero to job-ready.' },
+  { icon: Code2,        title: 'Hands-on Projects',      desc: 'Build real projects you can add to your portfolio from day one.' },
+  { icon: Users,        title: 'Expert Instructors',     desc: 'Learn from practitioners who build real products every day.' },
+  { icon: Zap,          title: 'Self-paced & Live',      desc: 'Choose between self-paced tutorials or live instructor-led classes.' },
+  { icon: CheckCircle,  title: 'Free Tutorials',         desc: 'Hundreds of free lessons covering HTML, CSS, JS, React, Node and more.' },
+  { icon: Star,         title: 'Career Support',         desc: 'Resume reviews, mock interviews, and job placement assistance.' },
+];
+
+const TechIcon = ({ name }) => {
+  const icons = {
+    HTML: (
+      <svg viewBox="0 0 32 32" className="w-8 h-8"><path fill="#e44d26" d="M5 3l2.1 23.4L16 29l8.9-2.6L27 3z"/><path fill="#f16529" d="M16 27.1V5.1H25l-1.8 20z"/><path fill="#ebebeb" d="M16 13.5H11.5l-.3-3.5H16V6.6H7.8l.8 9h7.4zm0 8.4l-.1.1-3.7-1-.2-2.7H8.6l.5 5.5 6.9 1.9z"/><path fill="#fff" d="M16 13.5v3.4h4.2l-.4 4.6-3.8 1v3.4l6.9-1.9.1-.6 1-11.5.1-.9H16z"/></svg>
+    ),
+    CSS: (
+      <svg viewBox="0 0 32 32" className="w-8 h-8"><path fill="#1572b6" d="M5 3l2.1 23.4L16 29l8.9-2.6L27 3z"/><path fill="#33a9dc" d="M16 27.1V5.1H25l-1.8 20z"/><path fill="#fff" d="M16 13.5h4.5l.3-3.5H16V6.6h8.2l-.8 9H16zm0 8.4v-3.4l.1.1 3.7-1 .2-2.7h3.4l-.5 5.5-6.9 1.9z"/><path fill="#ebebeb" d="M16 13.5v3.4h-4.2l-.4-4.6 3.8 1V10l-6.9 1.9-.1.6-1 11.5-.1.9H16v-3.4l-3.7-1-.2-2.7H16z"/></svg>
+    ),
+    JavaScript: (
+      <svg viewBox="0 0 32 32" className="w-8 h-8"><rect width="32" height="32" rx="3" fill="#f7df1e"/><path d="M19.5 25.6c.6 1 1.4 1.7 2.8 1.7 1.2 0 1.9-.6 1.9-1.4 0-1-.8-1.3-2-1.9l-.7-.3c-2-.8-3.3-1.9-3.3-4.1 0-2 1.6-3.6 4-3.6 1.7 0 3 .6 3.9 2.2l-2.1 1.4c-.5-.9-1-1.2-1.8-1.2-.8 0-1.3.5-1.3 1.2 0 .8.5 1.2 1.7 1.7l.7.3c2.3 1 3.6 2 3.6 4.3 0 2.5-1.9 3.8-4.5 3.8-2.5 0-4.1-1.2-4.9-2.8l2-.1zM10.5 25.9c.4.7.8 1.3 1.7 1.3.9 0 1.4-.3 1.4-1.7v-9.1h2.6v9.2c0 2.8-1.6 4-4 4-2.1 0-3.4-1.1-4-2.5l2.3-1.2z"/></svg>
+    ),
+    React: (
+      <svg viewBox="0 0 32 32" className="w-8 h-8"><circle cx="16" cy="16" r="2.8" fill="#61dafb"/><g fill="none" stroke="#61dafb" strokeWidth="1.2"><ellipse cx="16" cy="16" rx="11" ry="4.2"/><ellipse cx="16" cy="16" rx="11" ry="4.2" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="11" ry="4.2" transform="rotate(120 16 16)"/></g></svg>
+    ),
+    'Node.js': (
+      <svg viewBox="0 0 32 32" className="w-8 h-8"><path fill="#83cd29" d="M16 3L4 9.8v12.4L16 29l12-6.8V9.8z"/><path fill="#404137" d="M16 3L4 9.8v12.4L16 29V3z" opacity=".15"/><path fill="#fff" d="M16 8.5c-.4 0-.7.1-1 .3l-6.5 3.7c-.6.4-1 1-1 1.7v7.4c0 .7.4 1.4 1 1.7l1.7 1c.8.4 1.1.4 1.5.4 1.2 0 1.9-.7 1.9-2v-7.3h-1.9v7.3c0 .5-.5.9-1.4.5l-1.8-1V14c0-.2.1-.4.3-.5l6.5-3.7c.2-.1.4-.1.6 0l6.5 3.7c.2.1.3.3.3.5v7.4c0 .2-.1.4-.3.5l-6.5 3.7c-.2.1-.4.1-.6 0l-1.7-1c-.1-.1-.3-.1-.4 0-.5.3-.6.3-1.1.5.1.1.3.2.4.3l1.7 1c.3.2.6.3 1 .3s.7-.1 1-.3l6.5-3.7c.6-.4 1-1 1-1.7V14c0-.7-.4-1.4-1-1.7L17 8.8c-.3-.2-.6-.3-1-.3z"/></svg>
+    ),
+    Python: (
+      <svg viewBox="0 0 32 32" className="w-8 h-8"><path fill="#3776ab" d="M15.9 3C11 3 11.3 5.1 11.3 5.1l.1 2.1h4.7v.6H8.8S6 7.5 6 12.5s2.4 4.8 2.4 4.8h1.5v-2.3s-.1-2.4 2.4-2.4h4.1s2.3 0 2.3-2.2V5.3S19.1 3 15.9 3zm-2.3 1.3c.4 0 .8.3.8.8s-.3.8-.8.8-.8-.3-.8-.8.4-.8.8-.8z"/><path fill="#ffd43b" d="M16.1 29c4.9 0 4.6-2.1 4.6-2.1l-.1-2.1h-4.7v-.6h7.3s2.8.3 2.8-4.7-2.4-4.8-2.4-4.8h-1.5v2.3s.1 2.4-2.4 2.4h-4.1s-2.3 0-2.3 2.2v4.1S12.9 29 16.1 29zm2.3-1.3c-.4 0-.8-.3-.8-.8s.3-.8.8-.8.8.3.8.8-.4.8-.8.8z"/></svg>
+    ),
+  };
+  return icons[name] || null;
+};
+
+const TECH_PATHS = [
+  { name: 'HTML',       href: '/academy', color: 'from-orange-500 to-red-500' },
+  { name: 'CSS',        href: '/academy', color: 'from-blue-500 to-cyan-500' },
+  { name: 'JavaScript', href: '/academy', color: 'from-yellow-400 to-orange-500' },
+  { name: 'React',      href: '/academy', color: 'from-cyan-500 to-blue-500' },
+  { name: 'Node.js',    href: '/academy', color: 'from-green-500 to-emerald-500' },
+  { name: 'Python',     href: '/academy', color: 'from-blue-600 to-yellow-500' },
+];
+
 const Home = () => {
-  const [featuredProjects, setFeaturedProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [featuredCourses, setFeaturedCourses] = useState([]);
+  const [loadingCourses, setLoadingCourses] = useState(true);
 
   useEffect(() => {
-    fetchProjects();
+    axios.get('/courses?limit=3')
+      .then(r => { if (r.data.success) setFeaturedCourses(r.data.data.slice(0, 3)); })
+      .catch(() => {})
+      .finally(() => setLoadingCourses(false));
   }, []);
-
-  const fetchProjects = async () => {
-    try {
-      const response = await axios.get('/projects?featured=true&limit=3');
-      if (response.data.success) {
-        setFeaturedProjects(response.data.data);
-      }
-    } catch (error) {
-      console.error('Error fetching projects:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const stats = [
-    { number: "50+", label: "Projects Completed" },
-    { number: "30+", label: "Happy Clients" },
-    { number: "3+", label: "Years Experience" },
-    { number: "99%", label: "Client Satisfaction" }
-  ];
-
-  const platformPillars = [
-    {
-      icon: <BookOpen className="w-8 h-8 text-white" />,
-      title: 'InnTechLab Academy',
-      description: 'Free programming tutorials similar to W3Schools',
-      link: 'https://academy.inntechlab.online',
-      gradient: 'from-blue-500 to-cyan-500',
-      available: true
-    },
-    {
-      icon: <Briefcase className="w-8 h-8 text-white" />,
-      title: 'InnTechLab Portfolio',
-      description: 'Founder projects and professional portfolio',
-      link: '/portfolio',
-      gradient: 'from-purple-500 to-pink-500',
-      available: true
-    },
-    {
-      icon: <ShoppingBag className="w-8 h-8 text-white" />,
-      title: 'InnTechLab Store',
-      description: 'Online digital store launching soon',
-      link: '/store',
-      gradient: 'from-orange-500 to-red-500',
-      available: false
-    },
-    {
-      icon: <Sparkles className="w-8 h-8 text-white" />,
-      title: 'InnTechLab AI',
-      description: 'Future AI tools and automation platform',
-      link: '/ai',
-      gradient: 'from-indigo-500 to-purple-500',
-      available: false
-    }
-  ];
-
-  const tutorials = [
-    { name: 'HTML', icon: '📄', color: 'from-orange-500 to-red-500' },
-    { name: 'CSS', icon: '🎨', color: 'from-blue-500 to-cyan-500' },
-    { name: 'JavaScript', icon: '⚡', color: 'from-yellow-500 to-orange-500' },
-    { name: 'React', icon: '⚛️', color: 'from-cyan-500 to-blue-500' },
-    { name: 'Node.js', icon: '🟢', color: 'from-green-500 to-emerald-500' },
-  ];
 
   return (
     <div className="min-h-screen transition-colors bg-white dark:bg-midnight">
       <SEO
-        title="Building the future of digital innovation"
-        description="InnTechLab builds tools, education, and infrastructure that empower developers, businesses, and creators."
+        title="InnTechLab Academy — Learn to Code & Build Real Projects"
+        description="Master web development, mobile apps, and software engineering with InnTechLab Academy. Structured courses, free tutorials, and live classes taught by industry experts."
       />
 
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-midnight transition-colors">
-        {/* Dark mode animated blobs */}
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden bg-gray-50 dark:bg-midnight transition-colors">
         <div className="absolute inset-0 hidden dark:block">
-          <div className="absolute inset-0 opacity-50 bg-gradient-glow"></div>
-          <div className="absolute rounded-full top-20 left-10 w-72 h-72 bg-electric-blue/20 blur-3xl animate-pulse"></div>
-          <div className="absolute delay-1000 rounded-full bottom-20 right-10 w-96 h-96 bg-electric-violet/20 blur-3xl animate-pulse"></div>
-          <div className="absolute delay-500 rounded-full top-1/2 left-1/2 w-80 h-80 bg-electric-cyan/20 blur-3xl animate-pulse"></div>
+          <div className="absolute inset-0 opacity-40 bg-gradient-glow" />
+          <div className="absolute rounded-full top-20 left-10 w-72 h-72 bg-electric-blue/20 blur-3xl animate-pulse" />
+          <div className="absolute delay-1000 rounded-full bottom-20 right-10 w-96 h-96 bg-electric-violet/20 blur-3xl animate-pulse" />
         </div>
-        {/* Light mode subtle gradient */}
         <div className="absolute inset-0 dark:hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-electric-blue/5 via-transparent to-electric-violet/5"></div>
-          <div className="absolute rounded-full top-20 left-10 w-72 h-72 bg-electric-blue/10 blur-3xl"></div>
-          <div className="absolute rounded-full bottom-20 right-10 w-96 h-96 bg-electric-violet/10 blur-3xl"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-electric-blue/5 via-transparent to-electric-violet/5" />
         </div>
 
         <div className="container relative px-6 py-20 mx-auto text-center">
-          <h1 className="mb-8 text-5xl font-bold leading-tight text-gray-900 md:text-7xl lg:text-8xl font-display dark:text-white">
-            Building the future of
-            <span className="block mt-2 text-transparent bg-gradient-electric bg-clip-text">
-              digital innovation.
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-8 text-xs font-semibold tracking-wide uppercase rounded-full bg-electric-blue/10 text-electric-cyan border border-electric-blue/20">
+            <BookOpen className="w-3.5 h-3.5" /> Learn · Build · Get Hired
+          </div>
+
+          <h1 className="mb-6 text-5xl font-bold leading-tight text-gray-900 md:text-7xl font-display dark:text-white">
+            Learn to code.<br />
+            <span className="text-transparent bg-gradient-electric bg-clip-text">
+              Build real projects.
             </span>
           </h1>
 
-          <p className="max-w-4xl mx-auto mb-12 text-xl leading-relaxed text-gray-600 md:text-2xl dark:text-gray-300">
-            InnTechLab builds tools, education, and infrastructure that empower developers, businesses, and creators.
+          <p className="max-w-2xl mx-auto mb-10 text-xl leading-relaxed text-gray-600 dark:text-gray-300">
+            InnTechLab Academy offers structured courses, free tutorials, and live classes
+            to take you from beginner to job-ready developer.
           </p>
 
-          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              to="/contact"
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-lg group bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
+              to="/courses"
+              className="inline-flex items-center px-8 py-4 text-base font-semibold text-white transition-all duration-300 rounded-lg group bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
             >
-              Contact Us
-              <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+              Browse Courses <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/portfolio"
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-gray-900 transition-all duration-300 border border-gray-300 rounded-lg bg-midnight/10 dark:bg-white/10 backdrop-blur-sm dark:text-white dark:border-white/20 hover:bg-midnight/20 dark:hover:bg-white/20"
+              to="/academy"
+              className="inline-flex items-center px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-300 border border-gray-300 rounded-lg dark:text-white dark:border-white/20 hover:bg-gray-100 dark:hover:bg-white/10"
             >
-              View Portfolio
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <Play className="w-4 h-4 mr-2" /> Free Tutorials
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Skills Showcase */}
-      <SkillsShowcase />
-
-      {/* Trusted By */}
-      <TrustedBy />
-
-      {/* Tech Stack Marquee */}
-      <TechStackMarquee />
-
-      {/* Platform Ecosystem */}
-      <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
+      {/* ── Stats ────────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-gradient-electric">
         <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
-              Platform Ecosystem
-            </h2>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
-              Four pillars powering the future of technology
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {platformPillars.map((pillar, index) => (
-              <Link
-                key={index}
-                to={pillar.link}
-                className="relative p-8 transition-all duration-300 bg-white border border-gray-200 group dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-2xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10 hover:scale-105"
-              >
-                {!pillar.available && (
-                  <span className="absolute px-3 py-1 text-xs font-semibold rounded-full top-4 right-4 bg-electric-violet/20 text-electric-violet">
-                    Soon
-                  </span>
-                )}
-                <div className={`w-16 h-16 bg-gradient-to-br ${pillar.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                  {pillar.icon}
-                </div>
-                <h3 className="mb-3 text-xl font-bold text-gray-900 font-display dark:text-white">
-                  {pillar.title}
-                </h3>
-                <p className="mb-4 text-gray-600 dark:text-gray-400">
-                  {pillar.description}
-                </p>
-                <div className="flex items-center transition-transform text-electric-cyan group-hover:translate-x-2">
-                  <span className="text-sm font-medium">Learn more</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </Link>
+          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+            {STATS.map(({ number, label }) => (
+              <div key={label} className="text-center">
+                <div className="mb-1 text-4xl font-bold text-white lg:text-5xl font-display">{number}</div>
+                <div className="text-white/70">{label}</div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* ── Tech Stack Marquee ───────────────────────────────────────────── */}
+      <TechStackMarquee />
+
+      {/* ── Featured Courses ─────────────────────────────────────────────── */}
       <section className="py-24 transition-colors bg-white dark:bg-midnight">
         <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
-              Featured Projects
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
-              Some of our recent work that we're proud of
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-electric-cyan">What we offer</p>
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Featured Courses</h2>
+            <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
+              Expert-led, project-based courses designed to get you hired.
             </p>
           </div>
 
-          {loading ? (
-            <div className="flex items-center justify-center h-32">
-              <div className="w-8 h-8 border-b-2 rounded-full animate-spin border-electric-cyan"></div>
+          {loadingCourses ? (
+            <div className="grid gap-8 md:grid-cols-3">
+              {[1,2,3].map(i => (
+                <div key={i} className="overflow-hidden border border-gray-200 dark:border-white/10 rounded-2xl animate-pulse">
+                  <div className="h-48 bg-gray-200 dark:bg-white/10" />
+                  <div className="p-6 space-y-3">
+                    <div className="h-4 bg-gray-200 dark:bg-white/10 rounded w-1/3" />
+                    <div className="h-5 bg-gray-200 dark:bg-white/10 rounded w-3/4" />
+                    <div className="h-4 bg-gray-200 dark:bg-white/10 rounded w-full" />
+                  </div>
+                </div>
+              ))}
             </div>
-          ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {featuredProjects.map((project) => (
-                <div key={project._id} className="overflow-hidden transition-all duration-300 border border-gray-200 group bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-2xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-lg dark:hover:bg-white/10">
-                  <div className="relative overflow-hidden">
-                    <BrandedPlaceholder
-                          title={project.title}
-                          subtitle={project.category}
-                          className="h-48"
-                          aspectRatio="16/9"
-                        />
-                    <div className="absolute inset-0 transition-opacity duration-300 opacity-0 bg-gradient-to-t from-black/60 to-transparent group-hover:opacity-100">
-                      <div className="absolute flex gap-2 bottom-4 left-4 right-4">
-                        {project.liveUrl && (
-                          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-                            className="px-3 py-1 text-sm font-medium text-gray-900 transition-colors bg-white rounded-full hover:bg-gray-100">
-                            Live Demo
-                          </a>
-                        )}
-                        {project.githubUrl && (
-                          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-                            className="px-3 py-1 text-sm font-medium text-white transition-colors bg-gray-900 rounded-full hover:bg-gray-800">
-                            GitHub
-                          </a>
-                        )}
-                      </div>
+          ) : featuredCourses.length > 0 ? (
+            <div className="grid gap-8 md:grid-cols-3">
+              {featuredCourses.map(course => (
+                <div key={course._id} className="overflow-hidden transition-all duration-300 border border-gray-200 group dark:bg-white/5 dark:border-white/10 rounded-2xl hover:border-electric-blue/40 hover:shadow-lg dark:hover:bg-white/10">
+                  <div className="relative h-48 overflow-hidden">
+                    {course.featuredImage ? (
+                      <img src={course.featuredImage} alt={course.title} className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" />
+                    ) : (
+                      <BrandedPlaceholder title={course.title} subtitle={course.category} className="h-48" aspectRatio="16/9" />
+                    )}
+                    <div className="absolute top-3 right-3">
+                      <span className="px-2 py-1 text-xs font-medium text-white rounded-full bg-black/60">{course.level}</span>
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
-                    <p className="mb-4 text-gray-600 dark:text-gray-400">{project.description.substring(0, 100)}...</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="px-3 py-1 text-sm font-medium border rounded-full bg-electric-blue/10 text-electric-blue dark:text-electric-cyan border-electric-blue/20 dark:border-electric-cyan/20">{tech}</span>
-                      ))}
+                    <span className="px-3 py-1 mb-3 inline-block text-xs font-medium rounded-full bg-electric-blue/10 text-electric-cyan">{course.category}</span>
+                    <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white group-hover:text-electric-cyan transition-colors">{course.title}</h3>
+                    <p className="mb-4 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{course.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-gray-900 dark:text-white">₦{course.price?.toLocaleString()}</span>
+                      <Link to={`/courses/${course._id}`} className="px-4 py-2 text-sm font-semibold text-white rounded-lg bg-gradient-electric hover:shadow-md">
+                        View Course
+                      </Link>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          )}
+          ) : null}
 
-          <div className="mt-12 text-center">
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
-            >
-              View All Projects
-              <ArrowRight className="w-5 h-5 ml-2" />
+          <div className="mt-10 text-center">
+            <Link to="/courses" className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50">
+              View All Courses <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-24 bg-gradient-electric">
-        <div className="container px-6 mx-auto">
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="mb-2 text-5xl font-bold text-white lg:text-6xl font-display">
-                  {stat.number}
-                </div>
-                <div className="text-lg text-white/70">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Code Learning */}
+      {/* ── Free Tutorials ───────────────────────────────────────────────── */}
       <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
         <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
-              Interactive Code Learning
-            </h2>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
-              Master programming with hands-on code samples from HTML basics to advanced React
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-electric-cyan">100% Free</p>
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Start Learning for Free</h2>
+            <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
+              Hundreds of free tutorials covering the full web development stack.
             </p>
           </div>
 
-          <CodeSamplesPreview />
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/code-samples"
-              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
-            >
-              Explore All Code Tutorials
-              <Code2 className="w-5 h-5 ml-2" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Blog Posts */}
-      <section className="py-24 transition-colors bg-white dark:bg-midnight">
-        <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
-              Latest from Our Blog
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400">
-              Stay updated with the latest tech insights and tutorials
-            </p>
-          </div>
-
-          <BlogPreview />
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/blog"
-              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
-            >
-              Read All Articles
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <Testimonials />
-
-      {/* Free Learning */}
-      <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
-        <div className="container px-6 mx-auto">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
-              Free Learning
-            </h2>
-            <p className="max-w-3xl mx-auto text-xl text-gray-600 dark:text-gray-400">
-              Master web development with our comprehensive tutorials
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            {tutorials.map((tutorial, index) => (
+          <div className="flex flex-wrap justify-center gap-4 mb-10">
+            {TECH_PATHS.map(({ name, href, color }) => (
               <Link
-                key={index}
-                to="/academy"
-                className="flex items-center px-6 py-4 space-x-3 transition-all duration-300 bg-white border border-gray-200 group dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/40 dark:hover:border-white/20 hover:shadow-md dark:hover:bg-white/10"
+                key={name}
+                to={href}
+                className="flex items-center gap-3 px-6 py-4 transition-all duration-300 bg-white border border-gray-200 dark:bg-white/5 dark:border-white/10 rounded-xl hover:border-electric-blue/40 hover:shadow-md dark:hover:bg-white/10 group"
               >
-                <span className="text-3xl">{tutorial.icon}</span>
-                <span className="text-lg font-semibold text-gray-900 dark:text-white">{tutorial.name}</span>
-                <span className="text-sm text-gray-500 dark:text-gray-400">fundamentals</span>
+                <TechIcon name={name} />
+                <div>
+                  <div className="font-semibold text-gray-900 dark:text-white group-hover:text-electric-cyan transition-colors">{name}</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400">Free tutorials</div>
+                </div>
               </Link>
             ))}
           </div>
 
           <div className="text-center">
-            <Link
-              to="/academy"
-              className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50"
-            >
-              Start Learning Free
-              <Code2 className="w-5 h-5 ml-2" />
+            <Link to="/academy" className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50">
+              Browse All Tutorials <Code2 className="w-5 h-5 ml-2" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Vision — Connecting businesses */}
+      {/* ── Why InnTechLab Academy ───────────────────────────────────────── */}
       <section className="py-24 transition-colors bg-white dark:bg-midnight">
         <div className="container px-6 mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center px-4 py-2 mb-8 bg-gray-100 border border-gray-200 rounded-full dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10">
-              <Layers className="w-4 h-4 mr-2 text-electric-cyan" />
-              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">Our Vision</span>
-            </div>
-
-            <h2 className="mb-8 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">
-              Connecting businesses, developers, and innovation
-            </h2>
-
-            <p className="mb-12 text-xl leading-relaxed text-gray-600 dark:text-gray-400">
-              InnTechLab's long-term mission is to build technology that bridges the gap between businesses and developers,
-              creating an ecosystem where innovation thrives. We're building the infrastructure for the next generation
-              of digital solutions across Africa and beyond.
-            </p>
-
-            <div className="grid gap-8 md:grid-cols-3">
-              <div className="p-6 transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500">
-                  <Code2 className="w-6 h-6 text-white" />
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-electric-cyan">Why us</p>
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Everything you need to succeed</h2>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {WHY_US.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="p-6 transition-all border border-gray-200 dark:bg-white/5 dark:border-white/10 rounded-2xl hover:border-electric-blue/40 hover:shadow-md dark:hover:bg-white/10">
+                <div className="flex items-center justify-center w-12 h-12 mb-4 rounded-xl bg-gradient-electric">
+                  <Icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">For Developers</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Tools and education to build better</p>
+                <h3 className="mb-2 font-bold text-gray-900 dark:text-white">{title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{desc}</p>
               </div>
-
-              <div className="p-6 transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
-                  <Briefcase className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">For Businesses</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Infrastructure to scale faster</p>
-              </div>
-
-              <div className="p-6 transition-all border border-gray-200 bg-gray-50 dark:bg-white/5 dark:backdrop-blur-sm dark:border-white/10 rounded-xl hover:border-electric-blue/30 dark:hover:border-white/20 hover:shadow-md">
-                <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500">
-                  <Zap className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">For Innovation</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Platform for the future</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <FloatingSocial />
-
-      {/* CTA — Ready to build the future */}
-      <section className="relative py-24 overflow-hidden transition-colors bg-gray-900 dark:bg-midnight">
-        <div className="absolute inset-0 bg-gradient-electric opacity-10"></div>
-        <div className="absolute top-0 rounded-full left-1/4 w-96 h-96 bg-electric-blue/15 blur-3xl"></div>
-        <div className="absolute bottom-0 rounded-full right-1/4 w-96 h-96 bg-electric-violet/15 blur-3xl"></div>
-        <div className="container relative px-6 mx-auto text-center">
-          <h2 className="mb-6 text-4xl font-bold text-white md:text-5xl font-display">
-            Ready to build the future?
-          </h2>
-          <p className="max-w-2xl mx-auto mb-12 text-xl text-gray-300">
-            Join thousands of developers and businesses already using InnTechLab
-          </p>
-          <div className="flex flex-col justify-center gap-6 sm:flex-row">
-            <Link
-              to="/contact"
-              className="px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50"
-            >
-              Get Started Today
+      {/* ── Interactive Code Samples ─────────────────────────────────────── */}
+      <section className="py-24 transition-colors bg-gray-50 dark:bg-midnight-100">
+        <div className="container px-6 mx-auto">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-electric-cyan">Hands-on learning</p>
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Interactive Code Samples</h2>
+            <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-400">
+              Learn by doing — browse real code examples from HTML basics to advanced React patterns.
+            </p>
+          </div>
+          <CodeSamplesPreview />
+          <div className="mt-10 text-center">
+            <Link to="/code-samples" className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50">
+              Explore Code Samples <Code2 className="w-5 h-5 ml-2" />
             </Link>
-            <Link
-              to="/about"
-              className="px-8 py-4 text-lg font-semibold text-white transition-all duration-300 border rounded-lg bg-white/10 backdrop-blur-sm border-white/30 hover:bg-white/20 hover:border-white/50"
-            >
-              Learn More About Us
+          </div>
+        </div>
+      </section>
+
+      {/* ── Blog ─────────────────────────────────────────────────────────── */}
+      <section className="py-24 transition-colors bg-white dark:bg-midnight">
+        <div className="container px-6 mx-auto">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold tracking-widest uppercase text-electric-cyan">Stay sharp</p>
+            <h2 className="mb-4 text-4xl font-bold text-gray-900 md:text-5xl font-display dark:text-white">Latest from the Blog</h2>
+            <p className="text-gray-600 dark:text-gray-400">Tutorials, tips, and tech insights from our instructors.</p>
+          </div>
+          <BlogPreview />
+          <div className="mt-10 text-center">
+            <Link to="/blog" className="inline-flex items-center px-8 py-4 font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-lg hover:shadow-electric-blue/50">
+              Read All Articles <ArrowRight className="w-5 h-5 ml-2" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Testimonials ─────────────────────────────────────────────────── */}
+      <Testimonials />
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section className="relative py-24 overflow-hidden bg-gray-900 dark:bg-midnight">
+        <div className="absolute inset-0 bg-gradient-electric opacity-10" />
+        <div className="absolute top-0 rounded-full left-1/4 w-96 h-96 bg-electric-blue/15 blur-3xl" />
+        <div className="absolute bottom-0 rounded-full right-1/4 w-96 h-96 bg-electric-violet/15 blur-3xl" />
+        <div className="container relative px-6 mx-auto text-center">
+          <h2 className="mb-4 text-4xl font-bold text-white md:text-5xl font-display">
+            Ready to start your journey?
+          </h2>
+          <p className="max-w-xl mx-auto mb-10 text-xl text-gray-300">
+            Join hundreds of students already learning and building with InnTechLab Academy.
+          </p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <Link to="/courses" className="px-8 py-4 text-lg font-semibold text-white transition-all duration-300 rounded-lg bg-gradient-electric hover:shadow-2xl hover:shadow-electric-blue/50">
+              Browse Courses
+            </Link>
+            <Link to="/student/login" className="px-8 py-4 text-lg font-semibold text-white transition-all duration-300 border rounded-lg bg-white/10 backdrop-blur-sm border-white/30 hover:bg-white/20">
+              Create Free Account
             </Link>
           </div>
         </div>

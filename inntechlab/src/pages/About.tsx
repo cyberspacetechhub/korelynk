@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Search, Handshake, PenTool, Zap, Mail, Phone } from 'lucide-react'
 import PageSEO from '../components/PageSEO'
 import { useTeam } from '../lib/useTeam'
@@ -205,17 +206,6 @@ export default function About() {
           )}
         </div>
 
-        {/* Why choose */}
-        <div className="p-10 mb-12 border border-gray-100 rounded-2xl">
-          <h2 className="mb-4 text-xl font-bold font-display text-gray-900">Why choose InnTechLab?</h2>
-          <p className="text-sm text-gray-500 leading-relaxed">
-            As a software development company in Nigeria, InnTechLab focuses on delivering
-            scalable, high-quality web and mobile applications. Our team combines technical
-            expertise with real-world business understanding to help companies build reliable
-            digital products that grow with their users.
-          </p>
-        </div>
-
         {/* Contact */}
         <div className="p-10 border border-gray-100 rounded-2xl bg-gray-50">
           <h2 className="mb-2 text-xl font-bold font-display text-gray-900">Work with us</h2>
@@ -223,10 +213,10 @@ export default function About() {
             We're always open to interesting projects. Reach out and let's see if we're a good fit.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <a href="mailto:inntechlabhq@gmail.com"
+            <Link to="/contact"
               className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700">
-              <Mail className="w-4 h-4" /> inntechlabhq@gmail.com
-            </a>
+              <Mail className="w-4 h-4" /> Start a project
+            </Link>
             <a href="tel:+2349167071094"
               className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-100">
               <Phone className="w-4 h-4" /> 09167071094

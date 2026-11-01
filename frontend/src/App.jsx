@@ -16,13 +16,9 @@ import AdminLogin from './pages/AdminLogin';
 import StudentLogin from './pages/StudentLogin';
 import InstructorLogin from './pages/InstructorLogin';
 import Unauthorized from './pages/Unauthorized';
+import Login from './pages/Login';
 
 // Lazy loaded pages
-const Services = React.lazy(() => import('./pages/Services'));
-const Portfolio = React.lazy(() => import('./pages/Portfolio'));
-const About = React.lazy(() => import('./pages/About'));
-const Contact = React.lazy(() => import('./pages/Contact'));
-const Feedback = React.lazy(() => import('./pages/Feedback'));
 const Privacy = React.lazy(() => import('./pages/Privacy'));
 const Terms = React.lazy(() => import('./pages/Terms'));
 const Blog = React.lazy(() => import('./pages/Blog'));
@@ -34,10 +30,7 @@ const CodeSampleDetail = React.lazy(() => import('./pages/CodeSampleDetail'));
 const Courses = React.lazy(() => import('./pages/Courses'));
 const Academy = React.lazy(() => import('./pages/Academy'));
 const TutorialDetail = React.lazy(() => import('./pages/TutorialDetail'));
-const Store = React.lazy(() => import('./pages/Store'));
-const AI = React.lazy(() => import('./pages/AI'));
 const CourseDetail = React.lazy(() => import('./pages/CourseDetail'));
-const Careers = React.lazy(() => import('./pages/Careers'));
 const Unsubscribe = React.lazy(() => import('./pages/Unsubscribe'));
 
 // Student pages
@@ -141,11 +134,6 @@ function App() {
                   {/* Public Routes */}
                   <Route path="/" element={<MainLayout />}>
                     <Route index element={<Home />} />
-                    <Route path="about" element={<About />} />
-                    <Route path="services" element={<Services />} />
-                    <Route path="portfolio" element={<Portfolio />} />
-                    <Route path="contact" element={<Contact />} />
-                    <Route path="feedback" element={<Feedback />} />
                     <Route path="blog" element={<Blog />} />
                     <Route path="blog/:slug" element={<BlogDetail />} />
                     <Route path="search" element={<SearchResults />} />
@@ -153,18 +141,16 @@ function App() {
                     <Route path="code-samples" element={<CodeSamples />} />
                     <Route path="code-samples/:slug" element={<CodeSampleDetail />} />
                     <Route path="courses" element={<Courses />} />
+                    <Route path="courses/:id" element={<CourseDetail />} />
                     <Route path="academy" element={<Academy />} />
                     <Route path="academy/:category/:slug" element={<TutorialDetail />} />
-                    <Route path="store" element={<Store />} />
-                    <Route path="ai" element={<AI />} />
-                    <Route path="courses/:id" element={<CourseDetail />} />
-                    <Route path="careers" element={<Careers />} />
                     <Route path="privacy" element={<Privacy />} />
                     <Route path="terms" element={<Terms />} />
                   </Route>
                   <Route path="/newsletter/unsubscribe" element={<Unsubscribe />} />
+                  <Route path="/login" element={<Login />} />
           
-                  {/* Student Routes */}
+                  {/* Auth — keep legacy routes redirecting to /login */}
                   <Route path="/student/login" element={<StudentLogin />} />
                   <Route path="/student/dashboard" element={<StudentProtectedRoute><StudentDashboard /></StudentProtectedRoute>} />
                   <Route path="/student/courses/:id/enroll" element={<StudentProtectedRoute><StudentCourseEnroll /></StudentProtectedRoute>} />

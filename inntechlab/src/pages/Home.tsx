@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import {
   ArrowRight, Code2, Smartphone, Palette, ShoppingCart,
   Globe, Users, Clock, CheckCircle, ExternalLink,
-  ChevronLeft, ChevronRight as ChevronRightIcon
 } from 'lucide-react'
 import { useProjects } from '../lib/useProjects'
 import { useBlogs } from '../lib/useBlogs'
@@ -60,25 +59,8 @@ export default function Home() {
   const { data: projects = [], isLoading } = useProjects({ featured: true })
   const featured = projects.slice(0, 3)
 
-  const { data: blogData } = useBlogs({ limit: 6 })
+  const { data: blogData } = useBlogs({ limit: 3 })
   const latestPosts = blogData?.data ?? []
-
-  // Blog slider state
-  const [blogIndex, setBlogIndex] = useState(0)
-  const nextPost = useCallback(
-    () => setBlogIndex(i => (i + 1) % Math.max(latestPosts.length, 1)),
-    [latestPosts.length]
-  )
-  const prevPost = () =>
-    setBlogIndex(i => (i - 1 + Math.max(latestPosts.length, 1)) % Math.max(latestPosts.length, 1))
-
-  useEffect(() => {
-    if (latestPosts.length < 2) return
-    const t = setInterval(nextPost, 6000)
-    return () => clearInterval(t)
-  }, [latestPosts.length, nextPost])
-
-  const currentPost = latestPosts[blogIndex]
 
   return (
     <main>
@@ -106,16 +88,13 @@ export default function Home() {
                 and build web apps, mobile apps, and digital products that help startups
                 and businesses grow.
               </p>
-              <p className="mt-4 text-sm text-gray-500">
-                Explore our <Link to="/projects" className="underline text-brand-600">projects</Link> or view our <Link to="/services" className="underline text-brand-600">services</Link>.
-              </p>
               <div className="flex flex-col gap-4 mt-10 sm:flex-row">
                 <Link to="/projects" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white transition-colors rounded-lg bg-brand-600 hover:bg-brand-700">
                   View our work <ArrowRight className="w-4 h-4" />
                 </Link>
-                <a href="mailto:inntechlabhq@gmail.com" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-50">
+                <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors border border-gray-200 rounded-lg hover:bg-gray-50">
                   Start a project
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -334,8 +313,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Latest Blog — single card slider */}
-      {latestPosts.length > 0 && currentPost && (
+      {/* Latest Blog — static grid */}
+      {latestPosts.length > 0 && (
         <section className="px-6 py-24">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-end justify-between mb-10">
@@ -348,89 +327,44 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Slider card */}
-            <div className="relative">
-              <Link
-                to={`/blog/${currentPost.slug}`}
-                className="group grid md:grid-cols-2 gap-0 rounded-2xl border border-gray-100 bg-white overflow-hidden hover:shadow-md hover:border-gray-200 transition-all"
-              >
-                {/* Image */}
-                <div className="h-56 md:h-72 overflow-hidden">
-                  {currentPost.featuredImage ? (
-                    <img
-                      src={currentPost.featuredImage}
-                      alt={currentPost.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <BrandedPlaceholder title={currentPost.title} subtitle={currentPost.category?.name} aspectRatio="4/3" className="h-full" />
-                  )}
-                </div>
-
-                {/* Content */}
-                <div className="p-8 flex flex-col justify-center">
-                  {currentPost.category && (
-                    <span
-                      className="self-start text-xs font-semibold px-2.5 py-1 rounded-full text-white mb-4"
-                      style={{ backgroundColor: currentPost.category.color || '#4f46e5' }}
-                    >
-                      {currentPost.category.name}
-                    </span>
-                  )}
-                  <h3 className="text-xl font-bold font-display text-gray-900 leading-snug mb-3 group-hover:text-brand-600 transition-colors line-clamp-3">
-                    {currentPost.title}
-                  </h3>
-                  {currentPost.excerpt && (
-                    <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-4">{currentPost.excerpt}</p>
-                  )}
-                  <p className="text-xs text-gray-400">
-                    {currentPost.publishedAt
-                      ? new Date(currentPost.publishedAt).toLocaleDateString('en-NG', { year: 'numeric', month: 'short', day: 'numeric' })
-                      : ''}
-                  </p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600">
-                    Read article <ArrowRight className="w-4 h-4" />
-                  </span>
-                </div>
-              </Link>
-
-              {/* Prev / Next arrows */}
-              {latestPosts.length > 1 && (
-                <>
-                  <button
-                    onClick={prevPost}
-                    aria-label="Previous article"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center text-gray-500 hover:text-brand-600 hover:border-brand-300 transition-colors"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={nextPost}
-                    aria-label="Next article"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white border border-gray-200 shadow flex items-center justify-center text-gray-500 hover:text-brand-600 hover:border-brand-300 transition-colors"
-                  >
-                    <ChevronRightIcon className="w-4 h-4" />
-                  </button>
-                </>
-              )}
+            <div className="grid gap-6 md:grid-cols-3">
+              {latestPosts.map(post => (
+                <Link
+                  key={post._id}
+                  to={`/blog/${post.slug}`}
+                  className="group flex flex-col overflow-hidden border border-gray-100 rounded-2xl bg-white hover:shadow-sm hover:border-gray-200 transition-all"
+                >
+                  <div className="h-44 overflow-hidden">
+                    {post.featuredImage ? (
+                      <img
+                        src={post.featuredImage}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <BrandedPlaceholder title={post.title} subtitle={post.category?.name} aspectRatio="16/9" className="h-44" />
+                    )}
+                  </div>
+                  <div className="flex flex-col flex-1 p-5">
+                    {post.category && (
+                      <span
+                        className="self-start text-xs font-semibold px-2.5 py-1 rounded-full text-white mb-3"
+                        style={{ backgroundColor: post.category.color || '#4f46e5' }}
+                      >
+                        {post.category.name}
+                      </span>
+                    )}
+                    <h3 className="flex-1 text-sm font-semibold text-gray-900 leading-snug mb-3 group-hover:text-brand-600 transition-colors line-clamp-3">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-gray-400">
+                      {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-NG', { year: 'numeric', month: 'short', day: 'numeric' }) : ''}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
-
-            {/* Dot indicators */}
-            {latestPosts.length > 1 && (
-              <div className="flex justify-center gap-2 mt-5">
-                {latestPosts.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setBlogIndex(i)}
-                    aria-label={`Go to article ${i + 1}`}
-                    className={`rounded-full transition-all duration-300 ${
-                      i === blogIndex ? 'w-6 h-2 bg-brand-600' : 'w-2 h-2 bg-gray-200 hover:bg-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
 
             <div className="mt-6 sm:hidden">
               <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:text-brand-700">
@@ -449,12 +383,17 @@ export default function Home() {
             Tell us about your project and we'll get back to you within 24 hours.
           </p>
           <div className="flex flex-col justify-center gap-4 mt-8 sm:flex-row">
-            <a href="mailto:inntechlabhq@gmail.com" className="px-8 py-3 text-sm font-semibold transition-colors bg-white rounded-lg text-brand-600 hover:bg-brand-50">
+            <Link to="/contact" className="px-8 py-3 text-sm font-semibold transition-colors bg-white rounded-lg text-brand-600 hover:bg-brand-50">
               Start a conversation
-            </a>
-            <Link to="/about" className="px-8 py-3 text-sm font-semibold text-white transition-colors border rounded-lg border-white/30 hover:bg-white/10">
-              Learn about us
             </Link>
+            <a
+              href={`https://wa.me/2347067659889?text=${encodeURIComponent('Hi InnTechLab, I would like to discuss a project.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 text-sm font-semibold text-white transition-colors border rounded-lg border-white/30 hover:bg-white/10"
+            >
+              WhatsApp us
+            </a>
           </div>
         </div>
       </section>

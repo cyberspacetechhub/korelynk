@@ -80,18 +80,6 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* SEO Section */}
-        <div className="p-10 mb-12 border border-gray-100 rounded-2xl">
-          <h2 className="mb-4 text-xl font-bold text-gray-900">
-            Our Software Development Portfolio
-          </h2>
-          <p className="text-sm leading-relaxed text-gray-500">
-            InnTechLab is a software development company in Nigeria delivering web applications,
-            mobile apps, and custom software solutions. Our portfolio showcases scalable,
-            high-performance digital products built for real-world use across Africa and globally.
-          </p>
-        </div>
-
         {/* Filters */}
         <div className="flex flex-wrap gap-2 mb-10">
           {categories.map(({ id, label }) => (

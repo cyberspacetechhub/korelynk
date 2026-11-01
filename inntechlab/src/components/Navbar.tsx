@@ -7,6 +7,7 @@ const links = [
   { to: '/projects', label: 'Projects' },
   { to: '/blog', label: 'Blog' },
   { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 const ACADEMY_URL = 'https://academy.inntechlab.online'
@@ -55,12 +56,12 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <a
-          href="mailto:inntechlabhq@gmail.com"
+        <NavLink
+          to="/contact"
           className="hidden px-4 py-2 text-sm font-medium text-white transition-colors rounded-lg md:inline-flex bg-brand-600 hover:bg-brand-700"
         >
           Get in touch
-        </a>
+        </NavLink>
 
         <button
           onClick={() => setOpen(!open)}
@@ -102,12 +103,13 @@ export default function Navbar() {
           >
             Academy ↗
           </a>
-          <a
-            href="mailto:inntechlabhq@gmail.com"
+          <NavLink
+            to="/contact"
+            onClick={() => setOpen(false)}
             className="block px-4 py-2 mt-2 text-sm font-medium text-center text-white rounded-lg bg-brand-600"
           >
             Get in touch
-          </a>
+          </NavLink>
         </div>
       )}
     </header>

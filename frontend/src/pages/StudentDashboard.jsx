@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BookOpen, Calendar, Clock, Video, FileText, LogOut, User, ArrowRight, Play } from 'lucide-react';
 import axios from '../api/axios';
 import { toast } from 'react-toastify';
 import DashboardSkeleton from '../components/skeletons/DashboardSkeleton';
 
+const getStudentToken = () => localStorage.getItem('studentToken');
+
 const StudentDashboard = () => {
+  const navigate = useNavigate();
   const [student, setStudent] = useState(null);
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [recommendedCourses, setRecommendedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('studentToken');
-    if (!token) {
-      window.location.href = '/student/login';
+    if (!getStudentToken()) {
+      navigate('/login', { replace: true });
       return;
     }
     fetchProfile();
@@ -22,10 +24,7 @@ const StudentDashboard = () => {
 
   const fetchProfile = async () => {
     try {
-      const token = localStorage.getItem('studentToken');
-      const studentData = JSON.parse(localStorage.getItem('studentData'));
-      
-      // Fetch student profile first
+      const token = getStudentToken();
       const profileRes = await axios.get('/students/profile', {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -78,11 +77,9 @@ const StudentDashboard = () => {
       console.error('Error fetching profile:', error);
       if (error.response?.status === 401) {
         handleLogout();
-      }
-      // Set student data from localStorage as fallback
-      const studentData = JSON.parse(localStorage.getItem('studentData'));
-      if (studentData) {
-        setStudent(studentData);
+      } else {
+        const cached = localStorage.getItem('studentData');
+        if (cached) setStudent(JSON.parse(cached));
       }
     } finally {
       setLoading(false);
@@ -92,7 +89,7 @@ const StudentDashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem('studentToken');
     localStorage.removeItem('studentData');
-    window.location.href = '/student/login';
+    navigate('/login', { replace: true });
   };
 
   if (loading) {
